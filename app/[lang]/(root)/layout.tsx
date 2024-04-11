@@ -1,3 +1,4 @@
+import Header from "@/components/shared/header";
 import { FC, ReactNode } from "react";
 
 interface Props {
@@ -7,7 +8,8 @@ interface Props {
 const Layout: FC<Props> = ({ children }): JSX.Element => {
   return (
     <>
-      {/* navbar */}
+      {/* header */}
+      <Header />
       <main>{children}</main>
       {/* footer */}
     </>

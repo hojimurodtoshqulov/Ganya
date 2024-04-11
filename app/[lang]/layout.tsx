@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import { i18n } from "@/lib/i18n-config";
+import { comfortaa, roboto } from "@/lib/fonts";
 import "../globals.css";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
-});
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -26,7 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang={lang}>
-      <body className={roboto.className}>{children}</body>
+      <body className={`${roboto.variable} ${comfortaa.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }
