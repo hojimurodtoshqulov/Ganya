@@ -22,6 +22,13 @@ export default function Home() {
         >
           text
         </div>
+        <div
+          className={buttonVariants({
+            variant: "filled",
+          })}
+        >
+          text
+        </div>
         <Button variant={"main"}>main</Button>
         <Button variant={"filled"}>filled</Button>
       </div>
