@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -15,6 +15,13 @@ export default function Home() {
         >
           outline neutral
         </Button>
+        <div
+          className={buttonVariants({
+            variant: "main",
+          })}
+        >
+          text
+        </div>
         <Button variant={"main"}>main</Button>
         <Button variant={"filled"}>filled</Button>
       </div>
