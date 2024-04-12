@@ -1,4 +1,3 @@
-'use client'
 import Info from "@/components/shared/info/info";
 const data = {
     title: "О нас",
