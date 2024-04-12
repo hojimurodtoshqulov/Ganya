@@ -30,6 +30,8 @@ const config = {
         },
         csneutral: {
           100: "#F4F5F5",
+          200: "#EBEBEC",
+          400: "#ABAEB2",
           500: "#585D65",
           600: "#28282B",
         },

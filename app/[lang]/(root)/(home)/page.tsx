@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
   return (
@@ -15,8 +16,23 @@ export default function Home() {
         >
           outline neutral
         </Button>
+        <div
+          className={buttonVariants({
+            variant: "main",
+          })}
+        >
+          text
+        </div>
+        <div
+          className={buttonVariants({
+            variant: "filled",
+          })}
+        >
+          text
+        </div>
         <Button variant={"main"}>main</Button>
         <Button variant={"filled"}>filled</Button>
+        <Input placeholder="hello input" />
       </div>
     </div>
   );
