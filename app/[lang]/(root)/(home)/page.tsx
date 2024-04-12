@@ -1,4 +1,5 @@
 import { Button, buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
         </div>
         <Button variant={"main"}>main</Button>
         <Button variant={"filled"}>filled</Button>
+        <Input placeholder="hello input" />
       </div>
     </div>
   );
