@@ -1,9 +1,15 @@
+import Showcase from "@/components/shared/showcase";
+import SubscribtionForm from "@/components/shared/subscribtion-form/subscribtionForm";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function Home() {
   return (
     <div className="flex items-center justify-center p-10 flex-col gap-10">
+      <Showcase />
+
+      <SubscribtionForm />
+
       <h2 className="text-3xl text-main-300 font-bold">Template Buttons</h2>
       <div className="flex flex-col justify-center gap-5">
         <Button>default</Button>
