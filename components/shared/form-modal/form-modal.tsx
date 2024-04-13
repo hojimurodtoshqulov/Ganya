@@ -5,9 +5,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -17,19 +14,11 @@ import { useState } from "react";
 
 import successIcon from "@/images/success.png";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FormSchema, FormSchemaType } from "@/lib/types";
+import { fetchSendMessage } from "@/lib/utils";
 
-const FormSchema = z.object({
-  fullName: z.string().min(2, {
-    message: "Please use your real name",
-  }),
-  number: z.string().min(10, {
-    message: "Please use your real phone number ",
-  }),
-});
 
-type FormSchemaType = z.infer<typeof FormSchema>;
 
 function FormModal() {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -43,14 +32,23 @@ function FormModal() {
     resolver: zodResolver(FormSchema),
   });
 
-  const onSubmit = (data: FormSchemaType) => {
-    console.log(data);
+  const onSubmit = async (data: FormSchemaType) => {
+    fetchSendMessage(data)
+      .then((d) => {
+        if (d.ok) setIsSuccess(d.ok);
+      })
+      .catch((e) => console.log(e));
+
     reset();
   };
 
   if (isSuccess)
     return (
-      <Dialog>
+      <Dialog
+        onOpenChange={(e) => {
+          if (isSuccess && !e) setIsSuccess(false);
+        }}
+      >
         <DialogTrigger asChild>
           <Button className="text-lg font-normal mt-8" variant={"main"}>
             Оставить заявку
@@ -104,7 +102,7 @@ function FormModal() {
               Номер телфона
             </Label>
             <Input
-              type="number"
+              type="tel"
               id="username"
               className="col-span-3"
               placeholder="+998__"
