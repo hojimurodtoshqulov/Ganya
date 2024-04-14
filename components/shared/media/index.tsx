@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import Youtube from "/public/icons/you-tube.svg";
-import Instagram from "/public/icons/Telegram.svg";
-import Telegram from "/public/icons/Instagram.svg";
+import Youtube from "@/icons/you-tube.svg";
+import Instagram from "@/icons/Telegram.svg";
+import Telegram from "@/icons/Instagram.svg";
 import Image from "next/image";
 import Link from "next/link";
 

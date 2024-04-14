@@ -5,9 +5,9 @@ import Link from "next/link";
 import { FC } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import Logo from "/public/icons/Logo.svg";
-import Search from "/public/icons/search.svg";
-import Globo from "/public/icons/lang.svg";
+import Logo from "@/icons/Logo.svg";
+import Search from "@/icons/search.svg";
+import Globo from "@/icons/lang.svg";
 import Arow from "/public/icons/btn-arrow.svg";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -21,7 +21,7 @@ const HomeNavbar: FC = (): JSX.Element => {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed top-2 left-0 w-full">
+    <nav className="fixed top-2 left-0 w-full z-50">
       <div className="container flex justify-between items-center">
         <div>
           <Link href={"/"}>
