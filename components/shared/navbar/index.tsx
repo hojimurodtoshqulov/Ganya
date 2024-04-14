@@ -28,11 +28,11 @@ const HomeNavbar: FC = (): JSX.Element => {
             <Image width={38} height={47} alt="Logo" src={Logo} />
           </Link>
         </div>
-        <div className="flex gap-[20px] bg-white p-1 rounded-[30px]">
+        <div className="flex gap-5 bg-white p-1 rounded-[30px]">
           {navlink.map((element: navlinktype) => {
             return (
               <Link
-                className="text-[#5A7A2E] text-[16px] leading-6 font-normal px-[24px] py-[12px] rounded-[24px]  bg-main-100"
+                className="text-[#5A7A2E] text-[16px] leading-6 font-normal px-[24px] py-3 rounded-3xl bg-main-100"
                 key={element.id}
                 href={`#${element.path}`}
               >
@@ -41,11 +41,11 @@ const HomeNavbar: FC = (): JSX.Element => {
             );
           })}
         </div>
-        <div className="flex items-center gap-[20px]">
-          <div className="p-3 bg-white rounded-[12px] cursor-pointer">
+        <div className="flex items-center gap-5">
+          <div className="p-3 bg-white rounded-xl cursor-pointer">
             <Image src={Search} width={20} height={20} alt="search" />
           </div>
-          <div className="p-3 bg-white rounded-[12px] cursor-pointer">
+          <div className="p-3 bg-white rounded-xl cursor-pointer">
             <Image src={Globo} width={20} height={20} alt="lang icon" />
           </div>
           <div>
