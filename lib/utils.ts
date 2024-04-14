@@ -1,11 +1,22 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+import { ZodIssue } from "zod";
 import { FormSchemaType } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
+export const getActionErrors = (
+  fieldName: string,
+  errors: ZodIssue[] | undefined,
+) => {
+  return errors
+    ?.filter((item) => {
+      return item.path.includes(fieldName);
+    })
+    .map((item) => item.message);
+};
 
 export async function fetchSendMessage(data: FormSchemaType) {
   const BASE_URL = "https://api.telegram.org";
@@ -20,11 +31,10 @@ export async function fetchSendMessage(data: FormSchemaType) {
         chat_id: chatId,
         text: `Name: ${data.fullName}. \nPhone: ${data.number}`,
       }),
-    })
-    const res = await req.json()
-    return res
+    });
+    const res = await req.json();
+    return res;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
 }
