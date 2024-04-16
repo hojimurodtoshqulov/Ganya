@@ -2,28 +2,25 @@ import Image from "next/image";
 
 import SocialMediaLink from "../social-media/social-media";
 import FormModal from "../form-modal/form-modal";
-import showcaseHero from '@/images/showcase-hero1.png'
+import showcaseHero from "@/images/showcase-hero1.png";
+import Media from "../media";
 
 export default function Showcase() {
   return (
-    <div className="w-full h-screen ">
-      <Image src={showcaseHero} className="z-0 absolute inset-0 w-full h-screen object-cover " alt={"showcase hero image"} />
-
-      <div className="w-full h-screen absolute z-10 inset-0 p-10 flex flex-col justify-center">
+    <div className="w-full showcase-image">
+      <div className="container mt-[200px]">
         <div className="w-1/2">
-          <h1 className=" font-bold lg:text-[67px] font-comfortaa text-csneutral-500 lg:leading-[90px]">
+          <h1 className=" font-bold md:text-[67px] font-comfortaa text-csneutral-500 text-[40px] md:leading-[100px] leading-[48px]">
             Академия <span className="text-main-300"> Oсознанного </span>
             Pодительства
           </h1>
 
           <FormModal />
-          <div className="mt-20 pt-10">
-            <SocialMediaLink />
+          <div className="md:mt-[118px] md:mb-[60px] mt-[400px] mb-[20px]">
+            <Media />
           </div>
         </div>
       </div>
-
-
     </div>
-  )
+  );
 }

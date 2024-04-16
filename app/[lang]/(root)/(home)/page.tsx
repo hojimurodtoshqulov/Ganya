@@ -1,3 +1,4 @@
+import FAQ from "@/components/shared/faq";
 import CourceCard from "@/components/shared/cource-card/courceCard";
 import Showcase from "@/components/shared/showcase";
 import SubscribtionForm from "@/components/shared/subscribtion-form/subscribtionForm";
@@ -43,9 +44,8 @@ export function AccordionDemo() {
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center p-10 flex-col gap-10">
+    <div className="flex items-center justify-center flex-col gap-10 w-full">
       <Showcase />
-
       <SubscribtionForm />
 
 
