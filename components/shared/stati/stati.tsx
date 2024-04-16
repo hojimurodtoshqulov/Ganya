@@ -4,7 +4,7 @@ import Card from './card-stati'
 function Stati() {
   return (
       <div className="flex gap-6 px-6 pb-5 flex-col bg-csneutral-100 min-h-[748px] justify-center">
-          <h2 className="title text-h2  leading-[56px]">Тарифы</h2>
+      <h2 className="title text-h2  leading-[56px]">Статьи</h2>
           <div className="flex flex-wrap gap-6 justify-center ">
               <Card title='Роды в Lapino. Как это было?' text="Описание" time="Mar 25, 2024" minut={9} />
               <Card title='Роды в Lapino. Как это было?' text="Описание" time="Mar 25, 2024" minut={9} />
