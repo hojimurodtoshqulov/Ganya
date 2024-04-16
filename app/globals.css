@@ -80,10 +80,35 @@
   .text-h1 {
     @apply font-bold text-3xl md:text-5xl lg:text-[56px] text-main-300 font-comfortaa;
   }
+  
 }
 .container {
   @apply mx-auto;
 }
+
+
+.card:hover .card-title{
+color:#F4F1C6
+}
+.card:hover span {
+color:#F4F5F5
+}
+.card:hover .price {
+color:#F4F1C6
+}
+.card:hover button{
+color:#647937;
+border: none;
+background-color: #F4F1C6;
+}
+.card:hover .icon{
+display:inline-block;
+}
+
+.card:hover .icon2{
+display:none
+}
+
 
 .showcase-image {
   background-image: url("../public/images/showcase-hero1.png");
@@ -106,3 +131,4 @@
     background-position: bottom, top;
   }
 }
+
