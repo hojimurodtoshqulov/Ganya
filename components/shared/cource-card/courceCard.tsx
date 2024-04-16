@@ -5,16 +5,13 @@ import Image from "next/image";
 import siblingsHero from "@/images/siblings-hero.png";
 import childrensSchedule from "@/images/childrens-schedule.png";
 import arrowCorner from "@/icons/arrowleftCorner.svg";
-import arrowBottom from "@/icons/bottom-arrow.png";
 import { buttonVariants } from "@/components/ui/button";
 import { useState } from "react";
 import {
-    Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "@/components/ui/accordion"
-import clsx from "clsx";
+} from "./accordian-card"
 
 
 export default function CourceCard({ courceCardData, index }: any) {
@@ -23,13 +20,13 @@ export default function CourceCard({ courceCardData, index }: any) {
 
     return (
 
-        <AccordionItem value={index} className="border-none w-full">
-            <div className="w-full rounded-[20px] md:rounded-[40px] overflow-hidden  bg-csneutral-100">
-                <div className={` ${toggle ? 'bg-main-100' : 'bg-csneutral-100'} transition-colors h-80  flex flex-col md:flex-row w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px]`}>
+        <AccordionItem value={index} className="border-none ">
+            <div className=" rounded-[20px] md:rounded-[40px] overflow-hidden  bg-csneutral-100">
+                <div className={` ${toggle ? 'bg-main-100' : 'bg-csneutral-100'} transition-colors   flex flex-col md:flex-row w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px]`}>
                     <Image
                         src={siblingsHero}
                         alt="title"
-                        className="rounded-[20px] xl:rounded-[40px]  w-full md:w-auto overflow-hidden"
+                        className="rounded-[20px] xl:rounded-[40px] h-auto w-full md:w-auto overflow-hidden"
                     />
 
                     <div className="grow flex flex-col justify-between space-y-4">
