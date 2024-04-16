@@ -5,12 +5,12 @@ import SubscribtionForm from "@/components/shared/subscribtion-form/subscribtion
 
 export default function Home() {
   return (
-    <>
+    <div className="flex items-center justify-center flex-col gap-10 w-full">
       <Showcase />
 
       <Carousel title="heloo">hello</Carousel>
       <FAQ />
       <SubscribtionForm />
-    </>
+    </div>
   );
 }

@@ -22,6 +22,7 @@ const config = {
         roboto: ["var(--font-roboto)"],
         comfortaa: ["var(--font-comfortaa)"],
       },
+
       colors: {
         main: {
           100: "#F4F1C6",
