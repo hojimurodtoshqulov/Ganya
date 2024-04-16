@@ -2,8 +2,7 @@
 
 import { navlink } from "@/constants";
 import Link from "next/link";
-import { FC } from "react";
-import { usePathname } from "next/navigation";
+import { FC, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Logo from "@/icons/Logo.svg";
 import Search from "@/icons/search.svg";
@@ -11,14 +10,35 @@ import Globo from "@/icons/lang.svg";
 import Arow from "/public/icons/btn-arrow.svg";
 import { buttonVariants } from "@/components/ui/button";
 
-interface navlinktype {
+interface NavLinkType {
   id: number;
   label: string;
   path: string;
 }
 
-const HomeNavbar: FC = (): JSX.Element => {
-  const pathname = usePathname();
+const HomeNavbar: FC = () => {
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+  const prevHashRef = useRef(currentHash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (currentHash !== prevHashRef.current) {
+      prevHashRef.current = currentHash;
+    }
+  }, [currentHash]);
+
+  // Boshqa useEffect lar mavjudmi mumkin
 
   return (
     <nav className="fixed top-2 left-0 w-full z-50">
@@ -28,19 +48,24 @@ const HomeNavbar: FC = (): JSX.Element => {
             <Image width={38} height={47} alt="Logo" src={Logo} />
           </Link>
         </div>
-        <div className="flex gap-5 bg-white p-1 rounded-[30px]">
-          {navlink.map((element: navlinktype) => {
+        <div className="hidden gap-5 bg-white p-1 rounded-[30px] md:flex">
+          {navlink.map((element: NavLinkType) => {
+            const isActive = currentHash.replace("#", "") === element.path;
+
             return (
-              <Link
-                className="text-[#5A7A2E] text-[16px] leading-6 font-normal px-[24px] py-3 rounded-3xl bg-main-100"
+              <a
+                onClick={() => setCurrentHash(window.location.hash)}
                 key={element.id}
                 href={`#${element.path}`}
+                className={`text-[#5A7A2E] text-[16px] leading-6 font-normal px-[24px] py-3 rounded-3xl 
+                          ${isActive ? "bg-main-100" : ""} hover:bg-gray-200`} // Add hover effect
               >
                 {element.label}
-              </Link>
+              </a>
             );
           })}
         </div>
+
         <div className="flex items-center gap-5">
           <div className="p-3 bg-white rounded-xl cursor-pointer">
             <Image src={Search} width={20} height={20} alt="search" />
@@ -51,7 +76,7 @@ const HomeNavbar: FC = (): JSX.Element => {
           <div>
             <Link
               className={`${buttonVariants({ variant: "main" })} flex gap-1`}
-              href={"#"}
+              href="#"
             >
               Войти
               <Image src={Arow} alt="arrow" />
