@@ -72,7 +72,6 @@
   }
   body {
     @apply bg-background text-csneutral-500 font-roboto mx-auto;
-      max-width: 1400px;
   }
 
   .text-h2 {
@@ -84,4 +83,26 @@
 }
 .container {
   @apply mx-auto;
+}
+
+.showcase-image {
+  background-image: url("../public/images/showcase-hero1.png");
+  background-position: top, center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media screen and (max-width: 780px) {
+  .showcase-image {
+    background-position: right, center;
+    background-size: auto;
+  }
+}
+
+@media screen and (max-width: 583px) {
+  .showcase-image {
+    background-image: url("../public/images/mobile-baner.png");
+    background-size: cover;
+    background-position: bottom, top;
+  }
 }

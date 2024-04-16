@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center p-10 flex-col gap-10">
+    <div className="flex items-center justify-center flex-col gap-10 w-full">
       <Showcase />
 
       <SubscribtionForm />
