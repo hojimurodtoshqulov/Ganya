@@ -133,7 +133,7 @@ export const smsValidateAction = async (formData: FormData) => {
           httpOnly: true,
           secure: true,
         });
-        cookies().delete("sms");
+        // cookies().delete("sms")
         return {
           successMessage: "Code successfuly posted",
         };
