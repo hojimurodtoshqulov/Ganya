@@ -10,8 +10,9 @@ const Fits = () => {
       <Heading text="Кому подходит курс" />
       <div className="mt-10">
         <div className="grid grid-cols-12 gap-6">
-          {fitsdata.map((e: any) => (
+          {fitsdata.map((e: any, i) => (
             <div
+              key={i}
               className={`bg-csneutral-200 p-10 rounded-[40px] col-span-4 ${e.id > 3 ? "col-span-6 " : ""}`}
             >
               <div className="p-4 bg-main-200 rounded-xl w-14 h-14">
