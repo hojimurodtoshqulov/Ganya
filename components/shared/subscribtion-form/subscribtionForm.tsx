@@ -2,20 +2,15 @@
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useForm, } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-} from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent } from "@/components/ui/dialog";
 
 import successIcon from "@/images/success.png";
 import Image from "next/image";
 import { useState } from "react";
 import { fetchSendMessage } from "@/lib/utils";
 import { FormSchema, FormSchemaType } from "@/lib/types";
-
 
 export default function SubscriptionForm() {
   const [show, setShow] = useState(false);
@@ -41,7 +36,7 @@ export default function SubscriptionForm() {
   };
 
   return (
-    <div className="w-100 p-8 lg:p-20 rounded-[40px] bg-[#F4F1C6] flex flex-col items-center">
+    <div className="container p-8 lg:p-20 rounded-[40px] bg-[#F4F1C6] flex flex-col items-center justify-center">
       <h1 className="text-h1 lg:leading-[70px] text-center">
         Запишитесь на курс прямо сейчас и начните свой путь в осознанное
         родительство вместе с нами!
@@ -75,7 +70,7 @@ export default function SubscriptionForm() {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="md:w-11/12 lg:w-4/5 w-[98%] flex  flex-col md:flex-row gap-6 mt-10"
+        className="flex flex-col md:flex-row gap-6 mt-10"
       >
         <div className="flex flex-col gap-1 items-center">
           <Input
@@ -89,7 +84,7 @@ export default function SubscriptionForm() {
         <div className="flex flex-col gap-1 items-center">
           <Input
             type="tel"
-            placeholder="+998|___ - __ - __"
+            placeholder="+998 | ___ - __ - __"
             {...register("number", { required: true })}
           />
           {errors.number && (

@@ -18,8 +18,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSchema, FormSchemaType } from "@/lib/types";
 import { fetchSendMessage } from "@/lib/utils";
 
-
-
 function FormModal() {
   const [isSuccess, setIsSuccess] = useState(false);
 

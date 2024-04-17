@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -8,15 +8,14 @@ import arrowCorner from "@/icons/arrowleftCorner.svg";
 import { buttonVariants } from "@/components/ui/button";
 import { useState } from "react";
 import {
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "./accordian-card"
-
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./accordian-card";
 
 export default function CourceCard({ courceCardData, index }: any) {
-    const lengthOfModals = courceCardData.moduls.length;
-    const [toggle, setToggle] = useState(false)
+  const lengthOfModals = courceCardData.moduls.length;
+  const [toggle, setToggle] = useState(false);
 
     return (
 
@@ -56,34 +55,68 @@ export default function CourceCard({ courceCardData, index }: any) {
                 </div>
 
 
-                <AccordionContent>
-                    <div className="p-4 lg:p-8 xl:p-10  w-full  overflow-hidden ">
-                        <div className="flex flex-col md:grid md:grid-cols-2  space-y-3 gap-5 ">
-                            <div className="space-y-4 md:space-y-5 border-b-2  border-gray-300">
-                                <h3 className="text-[24px] md:text[32px] text-csneutral-600 font-bold font-comfortaa">Модуль 1</h3>
-                                <p className="text-base md:text-lg text-csneutral-500 font-normal">Приглашает вас погрузиться в тему введения первого прикорма для вашего малыша и узнать основные принципы BLW (Baby-Led Weaning – введение прикорма под руководством ребенка)</p>
-                            </div>
-                            <div className="space-y-4 md:space-y-5 border-b-2 border-gray-300">
-                                <h3 className="text-[24px] md:text[32px] text-csneutral-600 font-bold font-comfortaa">Модуль 2</h3>
-                                <p className="text-base md:text-lg text-csneutral-500 font-normal">Посвящен формированию пищевого интереса у вашего малыша, помогая вам создать здоровые пищевые привычки.</p>
-                            </div>
-                            <div className="space-y-4 md:space-y-5 border-b-2 border-gray-300">
-                                <h3 className="text-[24px] md:text[32px] text-csneutral-600 font-bold font-comfortaa">Модуль 3</h3>
-                                <p className="text-base md:text-lg text-csneutral-500 font-normal">Предлагает всесторонний анализ аллергии и ценную информацию, предоставленную врачом-аллергологом.</p>
-                            </div>
-                            <div className="space-y-4 md:space-y-5 border-b-2 border-gray-300">
-                                <h3 className="text-[24px] md:text[32px] text-csneutral-600 font-bold font-comfortaa">Модуль 4</h3>
-                                <p className="text-base md:text-lg text-csneutral-500 font-normal">Разработанный совместно с детским психологом, поможет разобраться в вопросах, связанных с малышами, которые могут испытывать трудности с пищей.</p>
-                            </div>
-                            <div className="space-y-4 md:space-y-5 border-b-2 border-gray-300">
-                                <h3 className="text-[24px] md:text[32px] text-csneutral-600 font-bold font-comfortaa">Модуль 5</h3>
-                                <p className="text-base md:text-lg text-csneutral-500 font-normal">Приглашает вас отправиться на рынок вместе со мной, где я поделюсь советами о том, как выбирать лучшие продукты для вашего малыша.</p>
-                            </div>
-                            <div className="space-y-4 md:space-y-5 border-b-2 border-gray-300">
-                                <h3 className="text-[24px] md:text[32px] text-csneutral-600 font-bold font-comfortaa">Модуль 6</h3>
-                                <p className="text-base md:text-lg text-csneutral-500 ">Бонусное видео от детского психолога, дарит ценные советы по уходу за малышом и созданию благоприятной пищевой среды для него.</p>
-                            </div>
-                        </div>
+        <AccordionContent>
+          <div className="p-4 lg:p-10 xl:py-12 xl:px-10  w-full  overflow-hidden ">
+            <div className="flex flex-col md:grid md:grid-cols-2 gap-5">
+              <div className="py-4 border-b border-csneutral-200">
+                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
+                  Модуль 1
+                </h3>
+                <p className="text-base md:text-lg text-csneutral-500 font-normal">
+                  Приглашает вас погрузиться в тему введения первого прикорма
+                  для вашего малыша и узнать основные принципы BLW (Baby-Led
+                  Weaning – введение прикорма под руководством ребенка)
+                </p>
+              </div>
+              <div className="py-4 border-b border-csneutral-200">
+                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
+                  Модуль 2
+                </h3>
+                <p className="text-base md:text-lg text-csneutral-500 font-normal">
+                  Посвящен формированию пищевого интереса у вашего малыша,
+                  помогая вам создать здоровые пищевые привычки.
+                </p>
+              </div>
+              <div className="py-4 border-b border-csneutral-200">
+                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
+                  Модуль 3
+                </h3>
+                <p className="text-base md:text-lg text-csneutral-500 font-normal">
+                  Предлагает всесторонний анализ аллергии и ценную информацию,
+                  предоставленную врачом-аллергологом.
+                </p>
+              </div>
+              <div className="py-4 border-b border-csneutral-200">
+                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
+                  Модуль 4
+                </h3>
+                <p className="text-base md:text-lg text-csneutral-500 font-normal">
+                  Разработанный совместно с детским психологом, поможет
+                  разобраться в вопросах, связанных с малышами, которые могут
+                  испытывать трудности с пищей.
+                </p>
+              </div>
+              <div className="py-4 border-b border-csneutral-200">
+                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
+                  Модуль 5
+                </h3>
+                <p className="text-base md:text-lg text-csneutral-500 font-normal">
+                  Приглашает вас отправиться на рынок вместе со мной, где я
+                  поделюсь советами о том, как выбирать лучшие продукты для
+                  вашего малыша.
+                </p>
+              </div>
+              <div className="py-4 border-b border-csneutral-200">
+                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
+                  Модуль 6
+                </h3>
+                <p className="text-base md:text-lg text-csneutral-500 ">
+                  Бонусное видео от детского психолога, дарит ценные советы по
+                  уходу за малышом и созданию благоприятной пищевой среды для
+                  него.
+                </p>
+              </div>
+            </div>
 
                         <div className="bg-main-100 rounded-3xl p-3 md:p-5 grid md:grid-rows-2 grid-rows-2 md:mt-8 mt-5 grid-flow-col gap-2 md:gap-4 justify-start items-center md:items-center h-[202px] sm:h-auto">
                             <Image src={childrensSchedule} alt="salom" className="md:row-span-3 row-span-1 col-span-1" width={69} height={86} />

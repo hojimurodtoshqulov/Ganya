@@ -1,59 +1,63 @@
-import Image from "next/image"
+import Image from "next/image";
 import icon from "@/icons/Bolt.svg";
-import icon2  from "@/icons/Vector.svg";
+import icon2 from "@/icons/Vector.svg";
+import { Button } from "@/components/ui/button";
 interface CardProps {
-    title: string
-    price: string
-    content: string[]
+  title: string;
+  price: string;
+  content: string[];
+  pro?: boolean;
 }
 function Card(props: CardProps): JSX.Element {
-    console.log(props)
-    return props.title === "Стандартный" ? (
-          <div className="flex flex-col max-w-[424px] p-10 gap-10 bg-main-200 rounded-[32px] min-h-[440px] justify-between">
-              <div className="flex flex-col gap-3">
-                  <p className="title text-[32px] leading-[44px] font-comfortaa text-main-100">
-                      {props.title}
-                  </p>
-                  <ul className="flex flex-col gap-2">
-                      {props.content.map( item => (
-                          <li className="flex gap-2">
-                              <span> <Image className="min-w-5" src={icon} alt="Picture of the author" /></span>
-                              <span className="text-base font-roboto text-csneutral-100">{item}</span>
-                          </li>
-                      ) )}
-                  </ul>
-              </div>
+  return (
+    <div
+      className={`flex flex-col w-full py-4 px-5 sm:p-6 lg:p-10 gap-10 ${props.pro ? "bg-main-200" : "bg-csneutral-100"}  rounded-[20px] md:rounded-[32px] h-full justify-between`}
+    >
+      <div className="flex flex-col gap-3">
+        <p
+          className={`title text-2xl md:text-[32px] leading-[44px] font-comfortaa ${props.pro ? "text-main-100" : "text-csneutral-600"}`}
+        >
+          {props.title}
+        </p>
+        <ul className="flex flex-col gap-2">
+          {props.content.map((item, i) => (
+            <li className="flex gap-2 items-start" key={i}>
+              <span className="w-5 h-5 relative flex-shrink-0">
+                <Image
+                  fill
+                  src={props.pro ? icon : icon2}
+                  alt="Picture of the author"
+                />
+              </span>
 
-              <div className="flex flex-col gap-2">
-                  <p className="price text-[32px] leading-[44px] text-main-100">{props.price}</p>
-                  <button type="button" className=" rounded-[14px] py-5 text-lg bg-main-100 w-full ">Выбрать</button>
-              </div>
-
-        </div>
-    ) : (
-            <div className=" card flex flex-col max-w-[424px] p-10 gap-1 bg-csneutral-100  rounded-[32px] min-h-[440px] justify-between hover:bg-main-200">
-          <div className="flex flex-col gap-3">
-                    <p className="card-title text-[32px] leading-[44px] font-comfortaa text-csneutral-600">
-                  {props.title}
+              <p
+                className={`text-base font-roboto ${props.pro ? "text-csneutral-100" : ""}`}
+              >
+                {item}
               </p>
-              <ul className="flex flex-col gap-2">
-                  {props.content.map( item => (
-                      <li className="flex gap-2">
-                          <span> <Image className="icon2 min-w-4" src={icon2} alt="Picture of the author" /> <Image className="icon hidden min-w-5" src={icon} alt="Picture of the author" /></span>
-                          <span className="text-base font-roboto text-csneutral-500">{item}</span>
-                      </li>
-                  ) )}
+            </li>
+          ))}
+        </ul>
+      </div>
 
-              </ul>
-          </div>
-
-          <div className="flex flex-col gap-2">
-              <p className="price text-[32px] leading-[44px] text-main-300">{props.price}</p>
-              <button type="button" className=" rounded-[14px] py-5 text-lg  text-main-200 border">Выбрать</button>
-          </div>
-
+      <div className="flex flex-col gap-2 mt-8">
+        <p
+          className={`price text-[32px] leading-[44px] ${props.pro ? "text-main-100" : "text-main-300"}`}
+        >
+          {props.price}
+        </p>
+        <Button
+          type="button"
+          variant={props.pro ? "filled" : "outline"}
+          size={"lg"}
+          className="text-base md:text-lg"
+          //   className=" rounded-[14px] py-5 text-lg bg-main-100 w-full "
+        >
+          Выбрать
+        </Button>
+      </div>
     </div>
-    )
+  );
 }
 
-export default Card
+export default Card;
