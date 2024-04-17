@@ -72,6 +72,7 @@
   }
   body {
     @apply bg-background text-csneutral-500 font-roboto mx-auto;
+    max-width: 1400px;
   }
 
   .text-h2 {
@@ -85,7 +86,6 @@
 .container {
   @apply mx-auto;
 }
-
 
 .card:hover .card-title{
 color:#F4F1C6

@@ -11,7 +11,7 @@ function Card(props: CardProps): JSX.Element {
     return props.title === "Стандартный" ? (
           <div className="flex flex-col max-w-[424px] p-10 gap-10 bg-main-200 rounded-[32px] min-h-[440px] justify-between">
               <div className="flex flex-col gap-3">
-                  <p className="title text-[32px] leading-[44px] font-comfortaa text-main-100">
+                <p className="title text-[32px] leading-[44px] font-comfortaa text-main-100">
                       {props.title}
                   </p>
                   <ul className="flex flex-col gap-2">
