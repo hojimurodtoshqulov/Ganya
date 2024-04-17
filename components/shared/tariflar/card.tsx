@@ -20,8 +20,8 @@ function Card(props: CardProps): JSX.Element {
           {props.title}
         </p>
         <ul className="flex flex-col gap-2">
-          {props.content.map((item) => (
-            <li className="flex gap-2 items-start">
+          {props.content.map((item, i) => (
+            <li className="flex gap-2 items-start" key={i}>
               <span className="w-5 h-5 relative flex-shrink-0">
                 <Image
                   fill
