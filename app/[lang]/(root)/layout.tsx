@@ -1,3 +1,4 @@
+import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
 import { FC, ReactNode } from "react";
 
@@ -12,6 +13,7 @@ const Layout: FC<Props> = ({ children }): JSX.Element => {
       <Header />
       <main>{children}</main>
       {/* footer */}
+      <Footer />
     </div>
   );
 };

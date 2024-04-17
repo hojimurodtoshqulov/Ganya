@@ -1,6 +1,9 @@
 import Carousel from "@/components/shared/carousel";
 import FAQ from "@/components/shared/faq";
+import Fits from "@/components/shared/fits";
+
 import CourceCard from "@/components/shared/cource-card/courceCard";
+
 import Showcase from "@/components/shared/showcase";
 import SubscribtionForm from "@/components/shared/subscribtion-form/subscribtionForm";
 import { courceCardData, about, about1, reviews } from "@/constants";
@@ -12,11 +15,14 @@ import ReviewCard from "@/components/shared/review";
 import TeamCard from "@/components/shared/team";
 import Tariflar from "@/components/shared/tariflar/tariflar";
 import Stati from "@/components/shared/stati/stati";
+import CurseHelp from "@/components/shared/curs-helped";
 
 export default function Home() {
   return (
     <div>
-      <Showcase />
+      <div id="about">
+        <Showcase />
+      </div>
       <div className="container">
         <div className="my-10 md:my-32 bg-csneutral-100 rounded-2xl md:rounded-[40px] flex items-center justify-center w-full aspect-[3/2] md:aspect-[5/2]">
           <Play size={60} fill="#D5D6D8" className="text-csneutral-300" />
@@ -32,7 +38,15 @@ export default function Home() {
         <Info {...about1} sort={true} />
       </div>
 
-      <div className="container my-20">
+      <div className="mt-20">
+        <CurseHelp />
+      </div>
+      <div className="container">
+        <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
+      </div>
+      <Fits />
+
+      <div className="container my-20" id="courses">
         <Accordion type="single" collapsible>
           <CourceCard courceCardData={courceCardData} index="item-1" />
         </Accordion>
@@ -46,7 +60,7 @@ export default function Home() {
           ))}
         />
       </div>
-      <div className="container mb-16">
+      <div className="container mb-16" id="team">
         <Carousel
           title="Команда"
           data={[0, 1, 2, 3, 4, 5].map((r, i) => (
@@ -58,12 +72,18 @@ export default function Home() {
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
 
-      <Tariflar />
+      <div className="container">
+        <Tariflar />
+      </div>
       <FAQ />
 
-      <Stati />
+      <div id="articles">
+        <Stati />
+      </div>
 
-      <SubscribtionForm />
+      <div id="contacts">
+        <SubscribtionForm />
+      </div>
     </div>
   );
 }
