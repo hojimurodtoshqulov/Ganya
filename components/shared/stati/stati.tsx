@@ -31,7 +31,7 @@ function Stati() {
           <Button
             variant={"main"}
             size={"lg"}
-            className="rounded-[20px] text-lg px-8 mt-5"
+            className="rounded-[20px] text-lg px-8 mt-8"
           >
             Перейти к статьям
           </Button>
