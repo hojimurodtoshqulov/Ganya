@@ -1,6 +1,6 @@
 "use client";
 import { FC, JSX, ReactNode, useEffect, useRef, useState } from "react";
-// import { useWindowSize } from "@/hooks";
+import { useWindowSize } from "@/lib/hooks";
 import { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -8,29 +8,29 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Button } from "@/components/ui/button";
 
 interface Props {
-  children: ReactNode;
   title: string;
+  data: any[];
 }
 
-const Carousel: FC<Props> = ({ children, title }): JSX.Element => {
+const Carousel: FC<Props> = ({ title, data }): JSX.Element => {
   const swiperRef = useRef<SwiperType>();
   const [sliderPerView, setSliderPerView] = useState(3);
 
-  // const { width } = useWindowSize();
+  const { width } = useWindowSize();
 
-  // useEffect(() => {
-  //   if (width < 768) {
-  //     setSliderPerView(1);
-  //   } else if (width < 1268) {
-  //     setSliderPerView(2);
-  //   } else setSliderPerView(3);
-  // }, [width]);
+  useEffect(() => {
+    if (width < 660) {
+      setSliderPerView(1.2);
+    } else if (width < 1024) {
+      setSliderPerView(2.2);
+    } else setSliderPerView(3);
+  }, [width]);
 
   return (
-    <section className="container">
-      <div className="pb-3 border-b border-peach flex justify-between items-center">
+    <>
+      <div className="pb-3 flex justify-between items-center">
         <h2 className="text-h1">{title}</h2>
-        <div className="flex gap-2">
+        <div className="hidden sm:flex gap-2">
           <Button
             variant={"main"}
             size={"icon"}
@@ -59,17 +59,14 @@ const Carousel: FC<Props> = ({ children, title }): JSX.Element => {
           loop
           onSwiper={(swiper) => (swiperRef.current = swiper)}
         >
-          {/* {[1, 2, 3, 4, 5].map((item) => (
-            <SwiperSlide key={item}>
-              <div className="w-full aspect-square bg-csneutral-500">
-                {item}
-              </div>
+          {data.map((item, i) => (
+            <SwiperSlide className="h-full" key={i}>
+              {item}
             </SwiperSlide>
-          ))} */}
-          {children}
+          ))}
         </Swiper>
       </div>
-    </section>
+    </>
   );
 };
 

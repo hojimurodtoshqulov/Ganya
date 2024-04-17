@@ -12,7 +12,7 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1rem",
       screens: {
         "2xl": "1400px",
       },
@@ -32,6 +32,7 @@ const config = {
         csneutral: {
           100: "#F4F5F5",
           200: "#EBEBEC",
+          300: "#D5D6D8",
           400: "#ABAEB2",
           500: "#585D65",
           600: "#28282B",

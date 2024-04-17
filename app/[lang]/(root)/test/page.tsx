@@ -1,4 +1,6 @@
 import Info from "@/components/shared/info/info";
+import Stati from "@/components/shared/stati/stati";
+import Tariflar from "@/components/shared/tariflar/tariflar";
 const data = {
     title: "О нас",
     text: 'Платформа "Академия осознанного родительства" создана Ганей Усмановой – мамой, предпринимателем и инфлюенсером с реальным опытом воспитания двух детей. На платформе вы сможете получить знания и опыт, которые собраны не только на личном опыте воспитания двоих детей, но и подтверждены последними научными исследованиями.',
@@ -13,6 +15,8 @@ function Test() {
     return <>
         <Info {...data} />
         <Info {...data1} sort={true} />
+        <Tariflar />
+        <Stati/>
     </>
 }
 

@@ -82,8 +82,30 @@
   }
 }
 .container {
-  @apply mx-auto;
+  max-width: 1400px;
 }
+
+/* .card:hover .card-title {
+  color: #f4f1c6;
+}
+.card:hover span {
+  color: #f4f5f5;
+}
+.card:hover .price {
+  color: #f4f1c6;
+}
+.card:hover button {
+  color: #647937;
+  border: none;
+  background-color: #f4f1c6;
+}
+.card:hover .icon {
+  display: inline-block;
+}
+
+.card:hover .icon2 {
+  display: none;
+} */
 
 .showcase-image {
   background-image: url("../public/images/showcase-hero1.png");
