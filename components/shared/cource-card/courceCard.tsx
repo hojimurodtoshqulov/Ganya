@@ -17,59 +17,43 @@ export default function CourceCard({ courceCardData, index }: any) {
   const lengthOfModals = courceCardData.moduls.length;
   const [toggle, setToggle] = useState(false);
 
-  return (
-    <AccordionItem value={index} className="border-none ">
-      <div className="rounded-[20px] md:rounded-[40px] overflow-hidden  bg-csneutral-100">
-        <div
-          className={` ${toggle ? "bg-main-100" : "bg-csneutral-100"} transition-colors   flex flex-col md:flex-row w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px]`}
-        >
-          <Image
-            src={siblingsHero}
-            alt="title"
-            className="rounded-[20px] xl:rounded-[40px] h-auto w-full md:w-auto overflow-hidden"
-          />
+    return (
 
-          <div className="grow flex flex-col justify-between space-y-4 pt-3 ">
-            <div className="flex flex-row items-center justify-between gap-4">
-              <h2 className="text-h2">Прикорм без проблем</h2>
-              <Link
-                href={"/"}
-                className="flex flex-row items-center justify-between"
-              >
-                <Image
-                  src={arrowCorner}
-                  alt="salom"
-                  className="hidden md:block"
-                />
-              </Link>
+        <AccordionItem value={index} className="border-none ">
+            <div className=" rounded-[20px] md:rounded-[40px] overflow-hidden  bg-csneutral-100">
+                <div className={` ${toggle ? 'bg-main-100' : 'bg-csneutral-100'} transition-colors   flex flex-col md:flex-row w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px] lg:h-[320px]`}>
+                    <Image
+                        src={siblingsHero}
+                        alt="title"
+                        className="rounded-[20px] xl:rounded-[40px] h-auto w-full md:w-auto overflow-hidden"
+                    />
 
-              {/* <AccordionTrigger
-                onClick={() => setToggle((e) => !e)}
-                className={`${buttonVariants({ variant: "main" })}  md:hidden w-11 h-11 md:w-14 md:h-14`}
-              >
-                 <Image src={arrowBottom} alt="sa" /> 
-              </AccordionTrigger> */}
-            </div>
+                    <div className="grow flex flex-col justify-between space-y-8">
+                        <div className="flex flex-row items-center justify-between gap-4">
+                            <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">Прикорм без проблем</h2>
+                            <Link href={"/"} className="flex flex-row items-center justify-between">
+                                <Image src={arrowCorner} alt="salom" className="hidden md:block" />
+                            </Link>
 
-            <div className="flex flex-row items-center justify-between ">
-              <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
-                <p className=" border-main-300 border text-main-300 rounded-[30px] px-2 py-[4px]  md:px-4 md:py-2  text-base md:text-[22px]">
-                  31 видео уроков
-                </p>
-                <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">
-                  6 модулей
-                </p>
-              </div>
 
-              <AccordionTrigger
-                onClick={() => setToggle((e) => !e)}
-                className={`${buttonVariants({ variant: "main" })}  hidden md:flex w-11 h-11 md:w-14 md:h-14`}
-              >
-                {/* <Image src={arrowBottom} alt="sa" /> */}
-              </AccordionTrigger>
-            </div>
-          </div>
-        </div>
+
+                            <AccordionTrigger onClick={() => setToggle(e => !e)} className={`${buttonVariants({ variant: "main" })}  md:hidden w-11 h-11 md:w-14 md:h-14`}>
+                            </AccordionTrigger>
+
+                        </div>
+
+                        <div className="flex flex-row items-center justify-between gap-2">
+                            <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
+                                <p className=" border-main-300 border text-main-300 rounded-[30px] px-2 py-[4px]  md:px-4 md:py-2  text-base md:text-[22px]">31 видео уроков</p>
+                                <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">6 модулей</p>
+                            </div>
+
+                            <AccordionTrigger onClick={() => setToggle(e => !e)} className={`${buttonVariants({ variant: "main" })}  hidden md:flex w-11 h-11 md:w-14 md:h-14 `}>
+                            </AccordionTrigger>
+                        </div>
+                    </div>
+                </div>
+
 
         <AccordionContent>
           <div className="p-4 lg:p-10 xl:py-12 xl:px-10  w-full  overflow-hidden ">
@@ -134,24 +118,15 @@ export default function CourceCard({ courceCardData, index }: any) {
               </div>
             </div>
 
-            <div className="bg-main-100 rounded-3xl p-3 md:p-8 grid md:grid-rows-2 grid-rows-2 md:mt-8 mt-5 grid-flow-col gap-1 md:gap-5 justify-start items-center md:items-center h-[202px] sm:h-auto">
-              <Image
-                src={childrensSchedule}
-                alt="salom"
-                className="md:row-span-3 row-span-1 col-span-1"
-                width={69}
-                height={86}
-              />
-              <h4 className="text-lg font-normal text-main-300 row-span-1 col-start-2 col-span-4">
-                Подарок для каждой участницы курса:
-              </h4>
-              <h1 className="w-full font-comfortaa font-bold text-[20px] leading-6 sm:text-[22px] sm:leading-7 md:text-3xl text-main-300 row-span-2 col-start-1 col-span-4  md:row-span-2 md:col-span-2">
-                Книга рецептов для малышей до года и тд
-              </h1>
-            </div>
-          </div>
-        </AccordionContent>
-      </div>
-    </AccordionItem>
-  );
+                        <div className="bg-main-100 rounded-3xl p-3 md:p-5 grid md:grid-rows-2 grid-rows-2 md:mt-8 mt-5 grid-flow-col gap-2 md:gap-4 justify-start items-center md:items-center h-[202px] sm:h-auto">
+                            <Image src={childrensSchedule} alt="salom" className="md:row-span-3 row-span-1 col-span-1" width={69} height={86} />
+                            <h4 className="text-lg font-normal text-main-300 row-span-1 col-start-2 col-span-4">Подарок для каждой участницы курса:</h4>
+                            <h1 className="w-full font-comfortaa font-bold text-[20px] leading-6 sm:text-[22px] sm:leading-7 md:text-3xl text-main-300 row-span-2 col-start-1 col-span-4  md:row-span-2 md:col-span-2">Книга рецептов для малышей до года и тд</h1>
+                        </div>
+                    </div>
+                </AccordionContent>
+
+            </div >
+        </AccordionItem>
+    );
 }
