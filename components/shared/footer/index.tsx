@@ -6,7 +6,7 @@ import Media from "../media";
 
 const Footer: FC = (): JSX.Element => {
   return (
-    <div className="container flex justify-between items-center">
+    <div className="container flex justify-between items-center py-10">
       <Link href={"/"}>
         <Image width={38} height={47} alt="Logo" src={Logo} />
       </Link>
