@@ -20,9 +20,7 @@ const Header: FC<{ handleClick: () => void }> = ({
 }): JSX.Element => {
   const paths = useSelectedLayoutSegments();
 
-  const [{ label: activePath }] = sidebarLinks.filter((i) =>
-    paths.includes(i.path),
-  );
+  const activePath = sidebarLinks.find((i) => paths.includes(i.path));
 
   return (
     <header className="w-full bg-white border-b border-csneutral-200 px-8 h-[68px] flex items-center justify-between">
@@ -33,7 +31,7 @@ const Header: FC<{ handleClick: () => void }> = ({
           className="cursor-pointer flex-shrink-0"
           onClick={handleClick}
         />
-        {activePath}
+        {activePath?.label}
       </div>
       <UserButton />
     </header>
