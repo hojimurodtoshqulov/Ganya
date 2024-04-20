@@ -17,7 +17,7 @@ interface NavLinkType {
 }
 
 const HomeNavbar: FC = () => {
-  const [currentHash, setCurrentHash] = useState(window.location.hash);
+  const [currentHash, setCurrentHash] = useState("#about");
   const prevHashRef = useRef(currentHash);
 
   useEffect(() => {
@@ -57,8 +57,7 @@ const HomeNavbar: FC = () => {
                 onClick={() => setCurrentHash(window.location.hash)}
                 key={element.id}
                 href={`#${element.path}`}
-                className={`text-[#5A7A2E] text-[16px] leading-6 font-normal px-[24px] py-3 rounded-3xl 
-                          ${isActive ? "bg-main-100" : ""} hover:bg-gray-200`} // Add hover effect
+                className={`text-base leading-6 font-normal px-6 py-3 rounded-3xl ${isActive ? "text-main-300 bg-main-100 hover:bg-main-100" : ""} hover:bg-gray-200`} // Add hover effect
               >
                 {element.label}
               </a>

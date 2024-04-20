@@ -72,7 +72,6 @@
   }
   body {
     @apply bg-background text-csneutral-500 font-roboto mx-auto;
-    max-width: 1400px;
   }
 
   .text-h2 {
@@ -81,34 +80,32 @@
   .text-h1 {
     @apply font-bold text-3xl md:text-5xl lg:text-[56px] text-main-300 font-comfortaa;
   }
-  
 }
 .container {
-  @apply mx-auto;
+  max-width: 1400px;
 }
 
-.card:hover .card-title{
-color:#F4F1C6
+/* .card:hover .card-title {
+  color: #f4f1c6;
 }
 .card:hover span {
-color:#F4F5F5
+  color: #f4f5f5;
 }
 .card:hover .price {
-color:#F4F1C6
+  color: #f4f1c6;
 }
-.card:hover button{
-color:#647937;
-border: none;
-background-color: #F4F1C6;
+.card:hover button {
+  color: #647937;
+  border: none;
+  background-color: #f4f1c6;
 }
-.card:hover .icon{
-display:inline-block;
-}
-
-.card:hover .icon2{
-display:none
+.card:hover .icon {
+  display: inline-block;
 }
 
+.card:hover .icon2 {
+  display: none;
+} */
 
 .showcase-image {
   background-image: url("../public/images/showcase-hero1.png");
@@ -131,4 +128,3 @@ display:none
     background-position: bottom, top;
   }
 }
-
