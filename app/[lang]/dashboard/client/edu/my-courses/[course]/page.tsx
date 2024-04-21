@@ -1,5 +1,5 @@
 import { FC } from "react";
-import BackLink from "../../details/back-link";
+import BackLink from "@/components/dashboard/back-link";
 import LinkById from "@/components/dashboard/link-by-id";
 
 interface Props {
