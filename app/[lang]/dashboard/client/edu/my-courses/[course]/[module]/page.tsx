@@ -1,4 +1,5 @@
 import BackLink from "@/components/dashboard/back-link";
+import DarsList from "@/components/dashboard/dars-list";
 import LinkById from "@/components/dashboard/link-by-id";
 import { FC } from "react";
 
@@ -35,11 +36,13 @@ const SingleModule: FC<Props> = ({ params: { module } }): JSX.Element => {
         heading="1-modul: Kichkintoyingiz uchun birinchi qo'shimcha ovqatlarni kiritish"
       />
 
-      <>
+      <div className="space-y-5 mt-5">
         {lessons.map((lesson) => (
-          <LinkById href={lesson.lessonNumber}>hello</LinkById>
+          <LinkById href={lesson.lessonNumber} className="block">
+            <DarsList />
+          </LinkById>
         ))}
-      </>
+      </div>
     </div>
   );
 };
