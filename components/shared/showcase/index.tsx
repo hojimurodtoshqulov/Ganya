@@ -16,7 +16,7 @@ export default function Showcase() {
           </h1>
 
           <FormModal />
-          <div className="md:mt-32 mt-[400px]">
+          <div className="md:mt-32 mt-[400px] mb-[30px]">
             <Media />
           </div>
         </div>
