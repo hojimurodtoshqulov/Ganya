@@ -1,19 +1,17 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 import Images from "@/images/mobile-baner.png";
+import Link from "./link";
 
 const Trening = () => {
   return (
-    <div className="flex sm:flex-row justify-between items-center bg-white rounded-2xl sm:p-6 p-4 flex-col">
-      <div className="flex sm:items-center items-stretch gap-6 sm:flex-row flex-col">
-        <Image
-          className="bg-slate-500 rounded-xl sm:w-[68px] sm:h-[68px] w-full h-[120px]"
-          src={Images}
-          alt="Kimdur"
-        />
+    <div className="flex sm:flex-row justify-between bg-white rounded-2xl sm:p-6 p-4 flex-col gap-4">
+      <div className="w-full flex gap-6 sm:flex-row flex-col">
+        <div className="bg-slate-500 rounded-lg aspect-video sm:aspect-square flex-shrink-0 relative w-full sm:w-16 overflow-hidden">
+          <Image src={Images} alt="Kimdur" fill className="object-cover" />
+        </div>
         <div>
-          <h2 className="text-main-300 text-2xl font-normal mb-2 font-comfortaa">
+          <h2 className="text-main-300 text-2xl mb-2 font-comfortaa font-bold">
             Прикорм без проблем
           </h2>
           <p className="text-base font-normal font-comfortaa">
@@ -21,9 +19,7 @@ const Trening = () => {
           </p>
         </div>
       </div>
-      <Button className="sm:mt-0 mt-4 w-full sm:w-[180px]" variant={"main"}>
-        Перейти к обучению
-      </Button>
+      <Link />
     </div>
   );
 };
