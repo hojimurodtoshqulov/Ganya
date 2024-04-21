@@ -6,7 +6,7 @@ export default function Card() {
 
     return (
         <>
-            <Modules />
+            <Modules courceCard={courceCardData} />
             <div className="grid md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-6">
                 <ModuleCard title={""} />
                 <ModuleCard title={"Курс по грудному вскармливанию"} />
