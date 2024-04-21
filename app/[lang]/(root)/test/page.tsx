@@ -1,3 +1,5 @@
+import Dars from "@/components/dashboard/dars";
+import DarsList from "@/components/dashboard/dars-list";
 import Info from "@/components/shared/info/info";
 import Stati from "@/components/shared/stati/stati";
 import Tariflar from "@/components/shared/tariflar/tariflar";
@@ -16,7 +18,9 @@ function Test() {
         <Info {...data} />
         <Info {...data1} sort={true} />
         <Tariflar />
-        <Stati/>
+        <Stati />
+        <Dars />
+        <DarsList/>
     </>
 }
 
