@@ -8,7 +8,7 @@ const Dars = () => {
     <div className='bg-csneutral-100 py-8'>
       <div className=' h-screen max-h-[764px] w-full max-w-[1080px] p-6 rounded-2xl bg- flex gap-4 flex-col  mx-auto bg-white '>
         <div className=" w-full h-[580px] bg-csneutral-100 rounded-xl flex justify-center align-middle">
-          <Image src={Play} alt='' width={96} height={96}/>
+          <Image src={Play} alt='' width={96} height={96} priority/>
         </div>
         <div className="btn-container flex justify-end">
           <Button
