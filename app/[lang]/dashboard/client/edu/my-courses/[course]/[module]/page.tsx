@@ -38,7 +38,11 @@ const SingleModule: FC<Props> = ({ params: { module } }): JSX.Element => {
 
       <div className="space-y-5 mt-5">
         {lessons.map((lesson) => (
-          <LinkById href={lesson.lessonNumber} className="block">
+          <LinkById
+            href={lesson.lessonNumber}
+            className="block"
+            key={lesson.lessonNumber}
+          >
             <DarsList />
           </LinkById>
         ))}

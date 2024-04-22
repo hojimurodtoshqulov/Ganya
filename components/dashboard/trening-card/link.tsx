@@ -18,7 +18,7 @@ const Link: FC<Props> = ({}): JSX.Element => {
         "w-full sm:w-max px-8 text-sm md:text-base",
       )}
     >
-      Treningga o'tish
+      Treningga o&apos;tish
     </NextLink>
   );
 };

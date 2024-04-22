@@ -23,7 +23,7 @@ const OneOfMyCourses: FC<Props> = ({ params: { course } }): JSX.Element => {
           <LinkById href={i} key={i} className="px-5 py-4 bg-white rounded-2xl">
             <span className="block mb-2 text-base">{i}-modul</span>
             <h4 className="font-normal text-[22px] leading-8">
-              Kichkintoyingiz uchun birinchi qo'shimcha ovqatlarni kiritish
+              Kichkintoyingiz uchun birinchi qo&apos;shimcha ovqatlarni kiritish
             </h4>
           </LinkById>
         ))}
