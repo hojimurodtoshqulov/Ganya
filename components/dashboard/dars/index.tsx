@@ -10,9 +10,7 @@ const Dars = () => {
         <Image
           src={Play}
           alt="image"
-          className="w-8 h-8 md:w-24 md:h-24"
-          // width={96}
-          // height={96}
+          className="w-8 h-8 md:w-20 md:h-20"
           priority
         />
       </div>
