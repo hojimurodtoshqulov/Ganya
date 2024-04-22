@@ -1,6 +1,7 @@
 import Modules from "@/components/dashboard/module-card/module.card";
 import Card from "@/components/shared/tariflar/card";
 import { FC } from "react";
+import { courceCardData } from "@/constants";
 
 interface Props {
   params: {
@@ -11,7 +12,7 @@ interface Props {
 const OneOfAllCourses: FC<Props> = ({ params: { course } }): JSX.Element => {
   return (
     <div>
-      <Modules />
+      <Modules courceCard={courceCardData} />
       <div className="flex gap-6 flex-col justify-center p-6 bg-white mt-5 rounded-2xl">
         <h2 className="font-comfortaa text-main-300 font-semibold text-[26px]">
           Тарифы
