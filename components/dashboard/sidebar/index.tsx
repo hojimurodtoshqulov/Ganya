@@ -32,7 +32,7 @@ const SideBar: FC<SidebarProps> = ({ lang, handleClick }): JSX.Element => {
             size={"sm"}
             variant={"ghost"}
             onClick={handleClick}
-            className="md:hidden"
+            className="lg:hidden"
           >
             <X size={24} />
           </Button>
