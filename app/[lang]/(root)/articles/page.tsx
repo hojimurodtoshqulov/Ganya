@@ -18,8 +18,8 @@ const Articles: FC = (): JSX.Element => {
         <Input placeholder="Поиск статьей" className="max-w-[425px]" />
       </div>
       <div className="grid lg:grid-cols-3 gap-6 mt-10 md:grid-cols-2 grid-cols-1">
-        {articeldata.map((e) => (
-          <Link href={`/articles/${e}`}>
+        {articeldata.map((e, i) => (
+          <Link key={i} href={`/articles/${e}`}>
             <CardStatya
               key={e}
               title="Роды в Lapino. Как это было?"

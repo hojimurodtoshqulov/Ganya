@@ -1,6 +1,4 @@
 import Image from "next/image";
-
-import SocialMediaLink from "../social-media/social-media";
 import FormModal from "../form-modal/form-modal";
 import showcaseHero from "@/images/showcase-hero1.png";
 import Media from "../media";

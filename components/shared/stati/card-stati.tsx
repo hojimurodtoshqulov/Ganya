@@ -7,6 +7,7 @@ interface CardProps {
   bacraund?: boolean;
   width?: boolean;
 }
+
 function CardStatya(props: CardProps) {
   return (
     <div
