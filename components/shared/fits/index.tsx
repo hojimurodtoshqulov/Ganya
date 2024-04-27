@@ -13,7 +13,7 @@ const Fits = () => {
           {fitsdata.map((e: any, i) => (
             <div
               key={i}
-              className={`bg-csneutral-200 p-10 rounded-[40px] col-span-4 ${e.id > 3 ? "col-span-6 " : ""}`}
+              className={`bg-csneutral-200 p-10 rounded-[40px] lg:col-span-4 md:col-span-6 col-span-12 ${e.id > 3 ? "col-span-12 lg:col-span-6" : ""}`}
             >
               <div className="p-4 bg-main-200 rounded-xl w-14 h-14">
                 <Image width={24} height={24} src={Icon} alt="Icon" />
