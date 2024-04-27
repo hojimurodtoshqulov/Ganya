@@ -1,21 +1,19 @@
 import React, { FC } from "react";
-import Youtube from "@/icons/you-tube.svg";
-import Instagram from "@/icons/Telegram.svg";
-import Telegram from "@/icons/Instagram.svg";
-import Image from "next/image";
+import { FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaTelegram } from "react-icons/fa";
 import Link from "next/link";
 
 const Media: FC = () => {
   return (
     <div className="flex gap-5 items-center">
       <Link href={"#"}>
-        <Image src={Youtube} alt="You tube"></Image>
+        <FaYoutube size={35} className="text-main-300" />
       </Link>
       <Link href={"#"}>
-        <Image src={Instagram} alt="Instagram"></Image>
+        <FaInstagram size={35} className="text-main-300" />
       </Link>
       <Link href={"#"}>
-        <Image src={Telegram} alt="Telegram"></Image>
+        <FaTelegram size={35} className="text-main-300" />
       </Link>
     </div>
   );
