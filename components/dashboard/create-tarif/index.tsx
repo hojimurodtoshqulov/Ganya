@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./dialog"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -54,8 +54,8 @@ const CreateTarif: React.FC<Props> = () => {
                 <DialogTrigger asChild>
                     <Button variant="main" className="text-sm py-2 px-5 font-normal">Добавить тариф</Button>
                 </DialogTrigger>
-                <DialogContent className="lg:p-10 md:p-8  overflow-y-auto">
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
+                <DialogContent className="lg:p-10 md:p-8  overflow-auto h-[97vh]">
+                    <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col gap-4 w-full">
                         <div className="grid w-full  items-center gap-1.5">
                             <Label htmlFor="titleRu">Заголовок</Label>
                             <Input type="text" id="titleRu" placeholder="Базовый пакет:" {...register('titleRu')} />
