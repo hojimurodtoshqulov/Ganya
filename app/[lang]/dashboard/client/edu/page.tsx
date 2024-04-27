@@ -7,20 +7,18 @@ interface Props {}
 
 const ClientEdu: FC<Props> = ({}): JSX.Element => {
   return (
-    <div>
-      <Tabs defaultValue="my-courses">
-        <TabsList>
-          <TabsTrigger value="my-courses">Mening xaridlarim</TabsTrigger>
-          <TabsTrigger value="all-courses">Barcha kurslar</TabsTrigger>
-        </TabsList>
-        <TabsContent value="my-courses">
-          <MyCourses />
-        </TabsContent>
-        <TabsContent value="all-courses">
-          <AllCourses />
-        </TabsContent>
-      </Tabs>
-    </div>
+    <Tabs defaultValue="my-courses">
+      <TabsList className="mb-3 sm:mb-6">
+        <TabsTrigger value="my-courses">Mening xaridlarim</TabsTrigger>
+        <TabsTrigger value="all-courses">Barcha kurslar</TabsTrigger>
+      </TabsList>
+      <TabsContent value="my-courses">
+        <MyCourses />
+      </TabsContent>
+      <TabsContent value="all-courses">
+        <AllCourses />
+      </TabsContent>
+    </Tabs>
   );
 };
 
