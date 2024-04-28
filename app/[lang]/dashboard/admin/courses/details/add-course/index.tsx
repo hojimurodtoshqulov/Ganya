@@ -16,12 +16,12 @@ const AddNewCourse: FC<Props> = ({}): JSX.Element => {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="main" className="h-12 text-sm px-6">
-          Yangi kurs qo'shing
+          Yangi kurs qo&apos;shing
         </Button>
       </DialogTrigger>
       <DialogContent className="p-8 !rounded-2xl">
         <DialogHeader className="text-2xl text-main-300 font-medium">
-          Yangi kurs qo'shing
+          Yangi kurs qo&apos;shing
         </DialogHeader>
         <AddCourseForm action={postAction} />
       </DialogContent>
