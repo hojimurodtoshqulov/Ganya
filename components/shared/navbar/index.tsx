@@ -3,6 +3,7 @@
 import { navlink } from "@/constants";
 import Link from "next/link";
 import { FC, useEffect, useState, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Logo from "@/icons/Logo.svg";
 import Search from "@/icons/search.svg";
@@ -19,6 +20,7 @@ interface NavLinkType {
 const HomeNavbar: FC = () => {
   const [currentHash, setCurrentHash] = useState("#about");
   const prevHashRef = useRef(currentHash);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -40,6 +42,8 @@ const HomeNavbar: FC = () => {
 
   // Boshqa useEffect lar mavjudmi mumkin
 
+  // console.log(currentHash.replace("#", ""));
+
   return (
     <nav className="fixed top-2 left-0 w-full z-50">
       <div className="container flex justify-between items-center">
@@ -48,22 +52,23 @@ const HomeNavbar: FC = () => {
             <Image width={38} height={47} alt="Logo" src={Logo} />
           </Link>
         </div>
-        <div className="hidden gap-5 bg-white p-1 rounded-[30px] md:flex">
-          {navlink.map((element: NavLinkType) => {
-            const isActive = currentHash.replace("#", "") === element.path;
-
-            return (
-              <a
-                onClick={() => setCurrentHash(window.location.hash)}
-                key={element.id}
-                href={`#${element.path}`}
-                className={`text-base leading-6 font-normal px-6 py-3 rounded-3xl ${isActive ? "text-main-300 bg-main-100 hover:bg-main-100" : ""} hover:bg-gray-200`} // Add hover effect
-              >
-                {element.label}
-              </a>
-            );
-          })}
-        </div>
+        {!pathname.includes("articles") ? (
+          <div className="hidden gap-5 bg-white p-1 rounded-[30px] md:flex">
+            {navlink.map((element: NavLinkType) => {
+              const isActive = currentHash.replace("#", "") === element.path;
+              return (
+                <a
+                  onClick={() => setCurrentHash(window.location.hash)}
+                  key={element.id}
+                  href={`#${element.path}`}
+                  className={`text-base leading-6 font-normal px-6 py-3 rounded-3xl ${isActive ? "text-main-300 bg-main-100 hover:bg-main-100" : ""} hover:bg-gray-200`} // Add hover effect
+                >
+                  {element.label}
+                </a>
+              );
+            })}
+          </div>
+        ) : null}
 
         <div className="flex items-center gap-5">
           <div className="p-3 bg-white rounded-xl cursor-pointer">
