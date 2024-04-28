@@ -28,13 +28,13 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
     <form
       action={async (data: FormData) => {
         const result = await action(data);
-        if (result.errors) {
+        if (result?.errors) {
           setState((p) => ({ ...p, errors: result.errors }));
-        } else if (result.successMessage) {
+        } else if (result?.successMessage) {
           redirect("/");
         } else {
           // error toast
-          console.log(result.errorMessage);
+          console.log(result?.errorMessage);
         }
       }}
       className="flex flex-col justify-center gap-6"

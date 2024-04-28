@@ -46,13 +46,13 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
     <form
       action={async (data: FormData) => {
         const result = await action(data);
-        if (result.errors) {
+        if (result?.errors) {
           setState((p) => ({ ...p, errors: result.errors }));
-        } else if (result.sessionId) {
+        } else if (result?.sessionId) {
           router.push("/auth/validate");
         } else {
           // error toast
-          console.log(result.message);
+          console.log(result?.message);
         }
       }}
       className="flex flex-col justify-center gap-6"
