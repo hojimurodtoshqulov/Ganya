@@ -7,11 +7,10 @@ import {
 } from "@/components/ui/dialog";
 import { FC } from "react";
 import AddCourseForm from "./form";
-import { postAction } from "@/lib/actions/course.actions";
 
 interface Props {}
 
-const AddNewCourse: FC<Props> = ({}): JSX.Element => {
+const AddNewCourse: FC<Props> = (): JSX.Element => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -19,11 +18,11 @@ const AddNewCourse: FC<Props> = ({}): JSX.Element => {
           Yangi kurs qo&apos;shing
         </Button>
       </DialogTrigger>
-      <DialogContent className="p-8 !rounded-2xl">
+      <DialogContent className="p-8 !rounded-2xl max-w-[648px]">
         <DialogHeader className="text-2xl text-main-300 font-medium">
           Yangi kurs qo&apos;shing
         </DialogHeader>
-        <AddCourseForm action={postAction} />
+        <AddCourseForm method="POST" />
       </DialogContent>
     </Dialog>
   );
