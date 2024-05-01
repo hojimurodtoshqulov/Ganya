@@ -1,5 +1,6 @@
 import Dars from "@/components/dashboard/dars";
 import DarsList from "@/components/dashboard/dars-list";
+import Sharhlar from "@/components/dashboard/Отзывы";
 import Info from "@/components/shared/info/info";
 import Stati from "@/components/shared/stati/stati";
 import Tariflar from "@/components/shared/tariflar/tariflar";
@@ -22,6 +23,7 @@ function Test() {
         <Dars />
         <DarsList isActive={true} />
         <DarsList />
+        <Sharhlar />
     </>
 }
 
