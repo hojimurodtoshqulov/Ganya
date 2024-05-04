@@ -5,12 +5,17 @@ import LinkById from "@/components/dashboard/link-by-id";
 interface Props {
   params: {
     course: string;
+    lang: "ru" | "uz";
   };
 }
 
 const arr = [1, 2, 3, 4, 5, 6];
 
-const OneOfMyCourses: FC<Props> = ({ params: { course } }): JSX.Element => {
+const OneOfMyCourses: FC<Props> = ({
+  params: { course, lang },
+}): JSX.Element => {
+  console.log(lang, "<----lang");
+  console.log(course, "<----caourseId");
   return (
     <>
       <BackLink

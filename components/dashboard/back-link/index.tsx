@@ -1,6 +1,6 @@
 "use client";
 import { ChevronLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FC } from "react";
 
 interface Props {
@@ -10,7 +10,9 @@ interface Props {
 
 const BackLink: FC<Props> = ({ title, heading }): JSX.Element => {
   const router = useRouter();
-
+  const pathname = usePathname();
+  console.log(pathname, "<----patname");
+  // router.push()
   return (
     <>
       <div
