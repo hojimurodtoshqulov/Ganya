@@ -60,7 +60,7 @@ const CreateTarif: React.FC<Props> = () => {
                             <Label htmlFor="titleRu">Заголовок</Label>
                             <Input type="text" id="titleRu" placeholder="Базовый пакет:" {...register('titleRu')} />
                         </div>
-                        <div className="grid w-full  items-center gap-1.5">
+                        <div className="grid w-full  items-center gap-1.5">``
                             <Label htmlFor="titleUz">Sarlavha</Label>
                             <Input type="text" id="titleUz" placeholder="Asosiy paket:" {...register('titleUz')} />
                         </div>
