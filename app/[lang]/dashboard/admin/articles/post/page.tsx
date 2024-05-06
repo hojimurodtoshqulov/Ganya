@@ -1,5 +1,6 @@
 "use client";
 
+import Modal from "@/components/dashboard/modal";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,7 +11,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import Image from "next/image";
+import React, { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 
 interface hookinterface {
@@ -27,6 +29,7 @@ interface hookinterface {
 }
 
 const Post = () => {
+  const [modal, setModal] = useState(false);
   const form = useForm<hookinterface>({
     defaultValues: {
       titleuz: "",
@@ -58,6 +61,34 @@ const Post = () => {
         {" Lapinoda tug'ilish. Bu qanday edi? (Maqola nomi)"}
       </h2>
       <div className="bg-white p-6 rounded-2xl mt-5">
+        <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center">
+          <div className="flex items-center">
+            <Image
+              className="bg-slate-500 rounded-xl"
+              src={"/public/images/childrens-schedule.png"}
+              width={60}
+              height={60}
+              alt="Post image "
+            />
+            <div className="flex ml-3 flex-col gap-1">
+              <h2 className="text-2xl font-normal">Обложка</h2>
+              <p className="text-base">
+                Выберите или перетащите обложку для курса
+              </p>
+            </div>
+          </div>
+          <Button onClick={() => setModal(true)} variant={"filled"}>
+            Выбрать
+          </Button>
+        </div>
+        <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center mt-4 mb-2">
+          <div className="flex items-center">
+            <h2 className="text-2xl font-normal">Добавить рекламный баннер</h2>
+          </div>
+          <Button onClick={() => setModal(true)} variant={"filled"}>
+            Выбрать
+          </Button>
+        </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="">
             <FormField
@@ -164,6 +195,7 @@ const Post = () => {
           </form>
         </Form>
       </div>
+      {modal ? <Modal onClick={() => setModal(false)} /> : null}
     </div>
   );
 };

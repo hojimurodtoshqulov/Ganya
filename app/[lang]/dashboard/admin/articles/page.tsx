@@ -1,6 +1,6 @@
 import CardArticls from "@/components/dashboard/articls/articlscard";
 import CardStatya from "@/components/shared/stati/card-stati";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
@@ -16,7 +16,12 @@ const Articles: FC = (): JSX.Element => {
           <Search className="absolute top-[10px] left-2" />
           <Input placeholder="Поиск статьей" className="w-full pl-[35px]" />
         </div>
-        <Button variant={"main"}>{"Yangi maqola qo'shing"}</Button>
+        <Link
+          className={buttonVariants({ variant: "main" })}
+          href={"/dashboard/admin/articles/post"}
+        >
+          {"Yangi maqola qo'shing"}
+        </Link>
       </div>
       <div className="grid lg:grid-cols-4 gap-6 mt-10 md:grid-cols-2 grid-cols-1">
         {facedate.map((e, i) => (
