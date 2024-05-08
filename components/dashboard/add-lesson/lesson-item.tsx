@@ -23,7 +23,7 @@ const LessonItem: React.FC<Props> = ({ type, link, value = { title: "", number: 
                         <p className="text-base font-normal">{value?.number}-dars</p>
                         <h1 className="text-[22px] font-medium">{value?.title}</h1>
                     </div> : <h1 className="text-[22px] font-medium">
-                        Dars Qo'shish
+                        Dars Qo&apos;shish
                     </h1>
             }
         </Link>

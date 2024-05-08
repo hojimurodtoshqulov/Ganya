@@ -16,16 +16,45 @@ import { courceCardData } from "@/constants";
 
 
 interface Props {
-  courceCard: any
+  courceCard: any,
+  type?: string
 }
 
-const CourceCard: React.FC<Props> = ({ courceCard }) => {
+const CourceCard: React.FC<Props> = ({ courceCard, type }) => {
   const { modules, title, id } = courceCardData;
   const totalModules = modules.length;
   const [toggle, setToggle] = useState(false);
 
-  return (
+  if (type === 'grid') {
+    return (
+      <div className={`bg-csneutral-100 transition-colors   flex flex-col w-full  gap-4 lg:gap-10  p-4 lg:p-6 xl:p-7 rounded-[20px] xl:rounded-[40px] justify-between `}>
+        <Image
+          src={siblingsHero}
+          alt="title"
+          className="rounded-[20px] xl:rounded-[40px] h-auto w-full md:w-auto overflow-hidden"
+        />
 
+        <div className="grow flex flex-col justify-between space-y-8">
+          <div className="flex flex-row items-center justify-between gap-4">
+            <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">{title}</h2>
+            <Link href={"/"} className="flex flex-row items-center justify-between">
+              <Image src={arrowCorner} alt="salom" className="hidden md:block" />
+            </Link>
+          </div>
+
+          <div className="flex flex-row items-center justify-between gap-2">
+            <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
+              <p className=" border-main-300 border text-main-300 rounded-[30px] px-2 py-[4px]  md:px-4 md:py-2  text-base md:text-[22px]">31 видео уроков</p>
+              <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">{totalModules} модулей</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
     <AccordionItem value={id} className="border-none ">
       <div className=" rounded-[20px] md:rounded-[40px] overflow-hidden  bg-csneutral-100">
         <div className={` ${toggle ? 'bg-main-100' : 'bg-csneutral-100'} transition-colors   flex flex-col md:flex-row w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px] lg:h-[320px]`}>
@@ -101,76 +130,3 @@ const CourceCard: React.FC<Props> = ({ courceCard }) => {
 
 
 export default CourceCard;
-/* 
-
-            <div className="flex flex-col md:grid md:grid-cols-2 gap-5">
-              <div className="py-4 border-b border-csneutral-200  md:relative">
-
-              
-           
-                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
-                  Модуль 1
-                </h3>
-                <p className="text-base md:text-lg text-csneutral-500 font-normal">
-                  Приглашает вас погрузиться в тему введения первого прикорма
-                  для вашего малыша и узнать основные принципы BLW (Baby-Led
-                  Weaning – введение прикорма под руководством ребенка)
-                </p>
-              </div >
-              <div className="py-4 border-b border-csneutral-200">
-                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
-                  Модуль 2
-                </h3>
-                <p className="text-base md:text-lg text-csneutral-500 font-normal">
-                  Посвящен формированию пищевого интереса у вашего малыша,
-                  помогая вам создать здоровые пищевые привычки.
-                </p>
-              </div>
-
-            
-              <div className="py-4 border-b border-csneutral-200 md:relative">
-                <span className="md:absolute right-0 h-[80%] w-[2px] bg-csneutral-200"></span>
-
-                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
-                  Модуль 3
-                </h3>
-                <p className="text-base md:text-lg text-csneutral-500 font-normal">
-                  Предлагает всесторонний анализ аллергии и ценную информацию,
-                  предоставленную врачом-аллергологом.
-                </p>
-              </div>
-              <div className="py-4 border-b border-csneutral-200">
-                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
-                  Модуль 4
-                </h3>
-                <p className="text-base md:text-lg text-csneutral-500 font-normal">
-                  Разработанный совместно с детским психологом, поможет
-                  разобраться в вопросах, связанных с малышами, которые могут
-                  испытывать трудности с пищей.
-                </p>
-              </div>
-              <div className="py-4  border-csneutral-200 md:relative border-b md:border-b-0">
-                <span className="md:absolute right-0 h-[80%] w-[2px] bg-csneutral-200"></span>
-
-                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
-                  Модуль 5
-                </h3>
-                <p className="text-base md:text-lg text-csneutral-500 font-normal">
-                  Приглашает вас отправиться на рынок вместе со мной, где я
-                  поделюсь советами о том, как выбирать лучшие продукты для
-                  вашего малыша.
-                </p>
-              </div>
-              <div className="py-4  border-csneutral-200 ">
-                <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
-                  Модуль 6
-                </h3>
-                <p className="text-base md:text-lg text-csneutral-500 ">
-                  Бонусное видео от детского психолога, дарит ценные советы по
-                  уходу за малышом и созданию благоприятной пищевой среды для
-                  него.
-                </p>
-              </div>
-            </div > 
-
-            */

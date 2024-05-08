@@ -46,7 +46,8 @@ const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
       formData.append("descriptionRu", values.descriptionRu);
       formData.append("descriptionUz", values.descriptionUz);
 
-      const api = 'https://oar-api.onrender.com/api/v1/lessons/create/6636a624f7ab459853ffd68e'
+      const api = process.env.BASE_URL + '/lessons/create/6636a624f7ab459853ffd68e'
+      console.log(api)
       const req = await fetch(api, {
         method: 'POST',
         body: formData
@@ -54,13 +55,9 @@ const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
 
       const res = await req.json()
 
+      console.log(res)
       if (res.ok) {
-        () => toast.success(
-          <div className="flex flex-col gap-1 m-0">
-            <h1 className="text-lg text-main-300 font-semibold">Урок успешно сохранено</h1>
-            <p className="text-sm text-csneutral-500 font-normal">Все данные с видеоурока “Урок 1: Ознакомление” успешно сохранены</p>
-          </div>, {
-        });
+        toast.success('Lesson successfully stored');
       } else {
         throw new Error('Something went')
       }
@@ -68,12 +65,7 @@ const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
       console.log(req)
 
     } catch (error: any) {
-      () => toast.error(
-        <div className="flex flex-col gap-1 m-0">
-          <h1 className="text-lg text-main-300 font-semibold">{error.message}</h1>
-          <p className="text-sm text-csneutral-500 font-normal">Все данные с видеоурока “Урок 1: Ознакомление” успешно сохранены</p>
-        </div>, {
-      });
+      toast.error('Failed to upload lesson');
     }
 
 
@@ -81,12 +73,7 @@ const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
 
   const type = 'success'
 
-  const notify = () => toast[type](
-    <div className="flex flex-col gap-1 m-0">
-      <h1 className="text-lg text-main-300 font-semibold">Урок успешно сохранено</h1>
-      <p className="text-sm text-csneutral-500 font-normal">Все данные с видеоурока “Урок 1: Ознакомление” успешно сохранены</p>
-    </div>, {
-  });
+  const notify = () => toast[type]('Test toaster');
   return <div className="space-y-5">
 
     <div>
@@ -112,24 +99,7 @@ const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
               borderTop: '3px solid red'
             }
           }
-        }}>
-          {(t) => (
-            <ToastBar toast={t}>
-              {({ icon, message }) => (
-                <div className="flex flex-row items-start justify-between gap-3">
-                  <div className={`${t.type === 'error' ? 'bg-red-300' : 'bg-[#E9F9EF]'} bg-green-100 rounded-full`}>
-                    {icon}
-                  </div>
-                  {message}
-
-                  {t.type !== 'loading' && (
-                    <button onClick={() => toast.dismiss(t.id)}>X</button>
-                  )}
-                </div>
-              )}
-            </ToastBar>
-          )}
-        </Toaster>
+        }} />
 
       </div>
 
@@ -147,7 +117,7 @@ const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
               <CiCirclePlus className="w-7 h-7" />
             </div >
             <div className="flex flex-col text-csneutral-500 gap-1">
-              <h1 className="text-[22px] font-medium">Video qo'shish</h1>
+              <h1 className="text-[22px] font-medium">Video qo&apos;shish</h1>
               <p className="text-base font-normal">Videongizni torting yoki tanlang</p>
             </div>
           </div>
