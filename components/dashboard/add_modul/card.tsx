@@ -53,7 +53,7 @@ const Card = ({ number, modul_name, id, updatedData, deletedData }: { number: nu
                         </div>
                         {errors.Number2 && <span className=' text-red-500'>This field is required</span>}
                         <div className='flex flex-col gap-2'>
-                            <label className=' font-normal text-sm text-neutral-400'>Modul qo'shish</label>
+                            <label className='font-normal text-sm text-neutral-400'>Modul qo&apos;shish</label>
                             <Input  {...register("modul_nomi", { required: true })} defaultValue={modul_name} autoComplete='off' placeholder="Modul qo'shish" className=' text-neutral-500' />
                         </div>
                         {errors.Ism && <span className='text-red-500'>This field is required</span>}
@@ -99,7 +99,7 @@ export const AddCard = ({getData}: {getData: (data: FormData | unknown) => void}
             <div className='lg:w-1/3 md:w-1/2 w-full min-w-[330px] p-3 h-auto'>
                 <div className=' rounded-2xl p-4 border-2 border-neutral-300 border-dashed gap-3 flex flex-col min-w-[320px] min-h-[124px] cursor-pointer' onClick={() => onClickHandle()}>
                     <p className='text-neutral-500 text-base'>Modul raqami</p>
-                    <p className='text-[22px] leading-[32px] text-neutral-500'>Modul qo'shish</p>
+                    <p className='text-[22px] leading-[32px] text-neutral-500'>Modul qo&apos;shish</p>
                 </div>
             </div>
 
@@ -123,7 +123,7 @@ export const AddCard = ({getData}: {getData: (data: FormData | unknown) => void}
                         </div>
                         {errors.Number2 && <span className=' text-red-500'>This field is required</span>}
                         <div className='flex flex-col gap-2'>
-                            <label className=' font-normal text-sm text-neutral-400'>Modul qo'shish</label>
+                            <label className=' font-normal text-sm text-neutral-400'>Modul qo&apos;shish</label>
                             <Input  {...register("modul_nomi", { required: true })} autoComplete='off' placeholder="Modul qo'shish" className=' text-neutral-500' />
                         </div>
                         {errors.Ism && <span className='text-red-500'>This field is required</span>}
