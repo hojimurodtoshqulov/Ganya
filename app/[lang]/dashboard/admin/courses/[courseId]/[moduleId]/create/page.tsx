@@ -16,7 +16,7 @@ interface Props {
 }
 
 const schema = z.object({
-  video: z.any(),
+  video: z.union([z.string(), z.instanceof(FileList)]),
   titleRu: z.string().min(1),
   titleUz: z.string(),
   descriptionRu: z.string().min(1),
