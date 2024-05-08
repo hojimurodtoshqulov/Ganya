@@ -1,5 +1,7 @@
+import AddModul from "@/components/dashboard/add_modul";
 import Dars from "@/components/dashboard/dars";
 import DarsList from "@/components/dashboard/dars-list";
+import Banner from "@/components/dashboard/kontent";
 import Sharhlar from "@/components/dashboard/Отзывы";
 import Info from "@/components/shared/info/info";
 import Stati from "@/components/shared/stati/stati";
@@ -16,14 +18,20 @@ const data1 = {
 
 function Test() {
     return <>
-        <Info {...data} />
+        <div className="min-h-screen pt-[100px]">
+            <AddModul />
+            <Sharhlar />
+            <Banner/>
+        </div>
+        {/* <Info {...data} />
         <Info {...data1} sort={true} />
         <Tariflar />
         <Stati />
         <Dars />
         <DarsList isActive={true} />
-        <DarsList />
-        <Sharhlar />
+        <DarsList /> */}
+
+
     </>
 }
 
