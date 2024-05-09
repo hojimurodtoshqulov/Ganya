@@ -7,9 +7,9 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Logo from "@/icons/Logo.svg";
 import Search from "@/icons/search.svg";
-import Globo from "@/icons/lang.svg";
 import Arow from "/public/icons/btn-arrow.svg";
 import { buttonVariants } from "@/components/ui/button";
+import LocaleSwitcher from "../locale-switcher";
 
 interface NavLinkType {
   id: number;
@@ -74,8 +74,8 @@ const HomeNavbar: FC = () => {
           <div className="p-3 bg-white rounded-xl cursor-pointer">
             <Image src={Search} width={20} height={20} alt="search" />
           </div>
-          <div className="p-3 bg-white rounded-xl cursor-pointer">
-            <Image src={Globo} width={20} height={20} alt="lang icon" />
+          <div className="p-3 bg-white rounded-xl cursor-pointer flex items-center justify-center">
+            <LocaleSwitcher />
           </div>
           <div>
             <Link
