@@ -29,7 +29,7 @@ interface ICard {
 }
 
 async function getData<T>(): Promise<T[] | Error> {
-  const res = await fetch(process.env.NEXT_APP_API_URL + "/courses/all", {
+  const res = await fetch('https://oar-api.onrender.com/api/v1' + "/courses/all", {
     cache: "no-store",
   });
 
@@ -45,6 +45,7 @@ const AllCourses: FC = async (): Promise<JSX.Element> => {
   if (data instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
   }
+
 
   return (
     <div className="grid grid-cols-4 gap-6">

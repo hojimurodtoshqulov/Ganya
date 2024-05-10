@@ -18,6 +18,9 @@ const CourseCard: FC<Props> = ({
   children,
   id,
 }): JSX.Element => {
+
+
+  
   return (
     <div className="rounded-2xl overflow-hidden bg-white flex flex-col">
       <div className="relative aspect-[9/5]">
