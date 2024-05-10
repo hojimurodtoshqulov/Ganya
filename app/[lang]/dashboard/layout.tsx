@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Layout: FC<Props> = ({ children, params: { lang } }): JSX.Element => {
-  const [open, setOpen] = useState<boolean>();
+  const [open, setOpen] = useState<boolean>(true);
   const handleClick = useCallback(() => setOpen((p) => !p), []);
   useLayoutEffect(() => {
     if (window.innerWidth < 1024) {

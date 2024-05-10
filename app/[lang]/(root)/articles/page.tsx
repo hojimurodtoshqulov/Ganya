@@ -21,6 +21,7 @@ const Articles: FC = (): JSX.Element => {
         {articeldata.map((e, i) => (
           <Link key={i} href={`/articles/${e}`}>
             <CardStatya
+              hight
               key={e}
               title="Роды в Lapino. Как это было?"
               text="Описание"
