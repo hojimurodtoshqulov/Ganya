@@ -1,12 +1,20 @@
 import { Button } from '@/components/ui/button'
-import React from 'react'
+import React, { FC } from 'react'
 import { Switch } from "@/components/ui/switch";
-
-const BannerCard = () => {
-  return (
+interface banner{
+    "id": string,
+    "createdAt": string,
+    "updatedAt": string,
+    "imageWeb": string,
+    "imageMobile": string,
+    "link": string,
+    "isPublished": boolean
+}
+const BannerCard = ({banner, id}: {banner:banner, id:number}) => {
+    return (
       <div className='rounded-2xl p-4 bg-white gap-3 flex flex-col w-[252px] h-[124px] relative'>
           <div className='flex justify-between'>
-              <p className='text-neutral-500 text-lg'>Banner</p>
+                <p className='text-neutral-500 text-lg'>{id}-Banner</p>
               <Switch className=' bg-main-300'/>
           </div>
 

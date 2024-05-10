@@ -19,7 +19,6 @@ const data1 = {
 function Test() {
     return <>
         <div className="min-h-screen pt-[100px]">
-            <AddModul />
             <Sharhlar />
             <Banner/>
         </div>
