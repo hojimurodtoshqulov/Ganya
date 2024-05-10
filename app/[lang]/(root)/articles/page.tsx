@@ -1,31 +1,77 @@
-import Trening from "@/components/dashboard/trening-card";
-import CardStatya from "@/components/shared/stati/card-stati";
-import Card from "@/components/shared/tariflar/card";
-import Heading from "@/components/ui/heading";
+"use client";
+
+import { FC, useState } from "react";
+import date from "date-and-time";
+import { Articlsall } from "@/types/auth";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { FC } from "react";
+import CardStatya from "@/components/shared/stati/card-stati";
+import Heading from "@/components/ui/heading";
+import Image from "next/image";
+import images from "@/images/showcase-hero1.png";
 
-const articeldata = [1, 2, 3, 4, 5, 6, 7, 8];
+async function getData<T>(): Promise<T[] | Error> {
+  const res = await fetch("https://oar-api.onrender.com/api/v1/articles/all", {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+  return res.json();
+}
 
-const Articles: FC = (): JSX.Element => {
+const Articles: FC = () => {
+  const [searchText, setSearchText] = useState<string>("");
+  const [data, setData] = useState<Articlsall[]>([]);
+
+  const fetchData = async () => {
+    const result: any = await getData<Articlsall[]>();
+    if (!(result instanceof Error)) {
+      setData(result);
+    }
+  };
+
+  useState(() => {
+    fetchData();
+  });
+
+  const filteredData = data.filter((element: Articlsall) =>
+    element.titleUz.toLowerCase().includes(searchText.toLowerCase()),
+  );
+
   return (
-    <div className="container mt-32">
+    <div className="container p-20">
+      <div className="container">
+        <Image
+          className="bg-red-400"
+          width={1320}
+          height={400}
+          src={images}
+          alt="Articls image baner"
+        />
+      </div>
       <div className="flex items-center justify-between">
         <Heading text="Статьи" />
-        <Search />
-        <Input placeholder="Поиск статьей" className="max-w-[425px]" />
+        <div className="relative w-[350px] ">
+          <Search className="absolute top-[10px] left-2" />
+          <Input
+            placeholder="Поиск статьей"
+            className="w-full pl-[35px]"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
       </div>
       <div className="grid lg:grid-cols-3 gap-6 mt-10 md:grid-cols-2 grid-cols-1">
-        {articeldata.map((e, i) => (
-          <Link key={i} href={`/articles/${e}`}>
+        {filteredData?.map((element: Articlsall, i) => (
+          <Link key={i} href={`/articles/${element.id}`}>
             <CardStatya
               hight
-              key={e}
-              title="Роды в Lapino. Как это было?"
-              text="Описание"
-              time="Mar 25, 2024"
+              key={element.id}
+              title={element.titleUz}
+              text={element.textUz}
+              time={`${date.parse(element.createdAt, "DD-MM-YYYY")}`}
               minut={9}
               bacraund
               width
