@@ -71,16 +71,13 @@ const HomeNavbar: FC = () => {
         ) : null}
 
         <div className="flex items-center gap-5">
-          <div className="p-3 bg-white rounded-xl cursor-pointer">
-            <Image src={Search} width={20} height={20} alt="search" />
-          </div>
           <div className="p-3 bg-white rounded-xl cursor-pointer flex items-center justify-center">
             <LocaleSwitcher />
           </div>
           <div>
             <Link
               className={`${buttonVariants({ variant: "main" })} flex gap-1`}
-              href="#"
+              href={`${pathname}/auth/sign-in`}
             >
               Войти
               <Image src={Arow} alt="arrow" />

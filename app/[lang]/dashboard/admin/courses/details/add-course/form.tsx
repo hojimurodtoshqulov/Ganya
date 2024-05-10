@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { Album, Image } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   titleUz: z.string().min(1),
@@ -36,6 +37,8 @@ const AddCourseForm: FC<Props> = ({
 }): JSX.Element => {
   const router = useRouter();
   const pathname = usePathname();
+  const { toast } = useToast();
+
   const [isImage, setIsImage] = useState<boolean>(!!defaultValues?.image);
   const {
     handleSubmit,
@@ -48,7 +51,6 @@ const AddCourseForm: FC<Props> = ({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     const formData = new FormData();
     if (values.image instanceof FileList) {
       formData.append("image", values.image[0], values.image[0].name);
@@ -68,12 +70,19 @@ const AddCourseForm: FC<Props> = ({
       },
     );
     const data = await res.json();
+    if (!res.ok) {
+      toast({ description: data.message, variant: "destructive" });
+    }
     if (res.ok) {
       router.refresh();
       if (method === "POST") {
         reset();
-        router.refresh();
+        // router.refresh();
         router.push(`${pathname}/${data.id}/update`);
+      } else {
+        toast({
+          description: "Course successfully edited!",
+        });
       }
     }
   }
@@ -149,6 +158,7 @@ const AddCourseForm: FC<Props> = ({
           onChange={() => {
             setIsImage(true);
           }}
+          required={defaultValues?.image ? false : true}
         />
       </label>
 
