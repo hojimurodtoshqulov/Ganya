@@ -19,6 +19,7 @@ interface NavLinkType {
 
 const HomeNavbar: FC = () => {
   const [currentHash, setCurrentHash] = useState("#about");
+  const [scrolled, setScrolled] = useState(false);
   const prevHashRef = useRef(currentHash);
   const pathname = usePathname();
 
@@ -27,10 +28,20 @@ const HomeNavbar: FC = () => {
       setCurrentHash(window.location.hash);
     };
 
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
     window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -40,12 +51,10 @@ const HomeNavbar: FC = () => {
     }
   }, [currentHash]);
 
-  // Boshqa useEffect lar mavjudmi mumkin
-
-  // console.log(currentHash.replace("#", ""));
-
   return (
-    <nav className="fixed top-2 left-0 w-full z-50">
+    <nav
+      className={`fixed py-2  left-0 w-full z-50 ${scrolled ? "backdrop-blur-md" : ""}`}
+    >
       <div className="container flex justify-between items-center">
         <div>
           <Link href={"/"}>
