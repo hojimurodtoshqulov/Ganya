@@ -31,9 +31,13 @@ interface ICard {
 }
 
 async function getData<T>(): Promise<T[] | Error> {
-  const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/courses/all", {
-    cache: "no-store",
-  });
+  console.log("progress");
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=inProgress",
+    {
+      cache: "no-store",
+    },
+  );
 
   if (!res.ok) {
     return new Error("Failed to fetch data");
@@ -42,9 +46,9 @@ async function getData<T>(): Promise<T[] | Error> {
   return res.json();
 }
 
-const AllCourses: FC<{
-  lang: "ru" | "uz";
-}> = async ({ lang }): Promise<JSX.Element> => {
+const ProgresCourses: FC<{ lang: "ru" | "uz" }> = async ({
+  lang,
+}): Promise<JSX.Element> => {
   const data = await getData<ICard>();
   if (data instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
@@ -64,7 +68,7 @@ const AllCourses: FC<{
         }) => (
           <CourseCard
             image={image}
-            title={lang === "ru" ? titleRu : titleUz}
+            title={lang === "uz" ? titleUz : titleRu}
             status={courseStatus}
             id={id}
             key={id}
@@ -115,4 +119,4 @@ const AllCourses: FC<{
   );
 };
 
-export default AllCourses;
+export default ProgresCourses;

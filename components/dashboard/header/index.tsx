@@ -3,6 +3,7 @@ import { FC } from "react";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { AlignJustify } from "lucide-react";
 import { UserButton } from "../details";
+import LocaleSwitcher from "@/components/shared/locale-switcher";
 
 const sidebarLinks = [
   {
@@ -33,7 +34,12 @@ const Header: FC<{ handleClick: () => void }> = ({
         />
         {activePath?.label}
       </div>
-      <UserButton />
+      <div className="flex items-center gap-2">
+        <div className="p-3 bg-csneutral-100 rounded-xl cursor-pointer flex items-center justify-center">
+          <LocaleSwitcher />
+        </div>
+        <UserButton />
+      </div>
     </header>
   );
 };

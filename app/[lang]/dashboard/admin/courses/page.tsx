@@ -2,8 +2,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FC } from "react";
 import AllCourses from "./details/all";
 import AddNewCourse from "./details/add-course";
+import ProgresCourses from "./details/all/progress";
+import ArchivedCourses from "./details/all/archived";
 
-const CoursesPage: FC = (): JSX.Element => {
+const CoursesPage: FC<{ params: { lang: "uz" | "ru" } }> = ({
+  params: { lang },
+}): JSX.Element => {
   return (
     <div>
       <div className="flex items-center justify-between gap-5">
@@ -20,10 +24,14 @@ const CoursesPage: FC = (): JSX.Element => {
           <TabsTrigger value="archive">Arxivda</TabsTrigger>
         </TabsList>
         <TabsContent value="all">
-          <AllCourses />
+          <AllCourses lang={lang} />
         </TabsContent>
-        <TabsContent value="progres"></TabsContent>
-        <TabsContent value="archive"></TabsContent>
+        <TabsContent value="progres">
+          <ProgresCourses lang={lang} />
+        </TabsContent>
+        <TabsContent value="archive">
+          <ArchivedCourses lang={lang} />
+        </TabsContent>
       </Tabs>
     </div>
   );
