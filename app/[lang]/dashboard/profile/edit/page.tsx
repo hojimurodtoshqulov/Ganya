@@ -3,12 +3,10 @@
 import Image from "next/image";
 import React from "react";
 import images from "@/images/success.png";
-import Heading from "@/components/ui/heading";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
