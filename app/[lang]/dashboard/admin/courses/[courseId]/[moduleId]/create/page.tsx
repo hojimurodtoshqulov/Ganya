@@ -10,9 +10,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { CiCirclePlus } from "react-icons/ci";
 import { z } from "zod";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface Props {
-  params: Object
+  params: any
 }
 
 const schema = z.object({
@@ -23,13 +25,13 @@ const schema = z.object({
   descriptionUz: z.string()
 })
 
-
 type Schema = z.infer<typeof schema>
-
-// Yangi dars qushish uchun page, form
 
 const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
   const { register, handleSubmit, watch } = useForm<Schema>({ resolver: zodResolver(schema) })
+  const router = useRouter()
+  const videoFile = watch('video') as FileList;
+  const videoName = videoFile && videoFile.length > 0 ? videoFile[0]?.name : '';
 
 
   const onSubmit = async (values: Schema) => {
@@ -46,67 +48,35 @@ const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
       formData.append("descriptionRu", values.descriptionRu);
       formData.append("descriptionUz", values.descriptionUz);
 
-      const api = process.env.BASE_URL + '/lessons/create/6636a624f7ab459853ffd68e'
-      console.log(api)
+      const api = process.env.BASE_URL + `/lessons/create/${params.moduleId}`
       const req = await fetch(api, {
         method: 'POST',
         body: formData
       })
 
+      if (!req.ok) throw new Error('Yangi Dars Yuklashda muammo!')
+
       const res = await req.json()
-
-      console.log(res)
-      if (res.ok) {
-        toast.success('Lesson successfully stored');
-      } else {
-        throw new Error('Something went')
-      }
-
-      console.log(req)
-
+      toast.success('Yangi dars muvaffaqiyatli qo\'shildi')
+      router.refresh()
+      router.push(`/dashboard/admin/courses/${params.courseId}/${params.moduleId}`)
     } catch (error: any) {
-      toast.error('Failed to upload lesson');
+      toast.error(error.message);
     }
-
-
   }
 
-  const type = 'success'
-
-  const notify = () => toast[type]('Test toaster');
   return <div className="space-y-5">
 
-    <div>
-      <button onClick={notify}>Make me a toast</button>
-      <div>
+    <Toaster position="top-right" toastOptions={{
+      style: {
+        backgroundColor: 'white',
+        borderRadius: '16px',
+        padding: '16px',
+        boxShadow: 'box-shadow: 0px 24px 36px 0px #DEDEDE7A'
+      },
 
-        <Toaster position="top-right" toastOptions={{
-          style: {
-            borderTopRightRadius: '100%',
-            borderTopLeftRadius: '100%',
-            backgroundColor: 'white',
-            borderRadius: '16px',
-            padding: '16px',
-            boxShadow: 'box-shadow: 0px 24px 36px 0px #DEDEDE7A'
-          },
-          success: {
-            style: {
-              borderTop: '3px solid green'
-            }
-          },
-          error: {
-            style: {
-              borderTop: '3px solid red'
-            }
-          }
-        }} />
+    }} />
 
-      </div>
-
-      <div className=" rounded-3xl  w-30 h-30 border-t-4 border-t-green-500 rounded-tl-full rounded-tr-full bg-white "></div>
-
-
-    </div>
     <h1 className="text-3xl text-main-300 font-semibold">1-Dars: Tanishish {watch('titleUz')}</h1>
 
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -117,11 +87,11 @@ const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
               <CiCirclePlus className="w-7 h-7" />
             </div >
             <div className="flex flex-col text-csneutral-500 gap-1">
-              <h1 className="text-[22px] font-medium">Video qo&apos;shish</h1>
-              <p className="text-base font-normal">Videongizni torting yoki tanlang</p>
+              <h1 className="text-[22px] font-medium">{videoName ? 'Video Tanlandi' : 'Video qo\'shish'}</h1>
+              <p className="text-base font-normal">{videoName ? videoName : 'Videongizni torting yoki tanlang'}</p>
             </div>
           </div>
-          <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">{watch('video') ? 'O\'zgartirish' : 'Tanlash'}</span>
+          <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">{videoName ? 'O\'zgartirish' : 'Tanlash'}</span>
         </Label>
         <Input id="videoUpload" type="file" accept="video/*" className="absolute inset-0 opacity-0" {...register('video')} />
       </div>

@@ -6,8 +6,9 @@ import { Dialog, DialogContent, DialogTrigger } from "./dialog"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface Description {
     descriptionRu: string;
@@ -17,23 +18,31 @@ interface Description {
 interface Props { }
 
 const schema = z.object({
-    titleRu: z.string(),
-    titleUz: z.string(),
-    description: z.array(z.object({
+    titleRu: z.string().min(1),
+    titleUz: z.string().min(1),
+    descriptions: z.array(z.object({
         descriptionRu: z.string(),
         descriptionUz: z.string(),
     })),
-    price: z.number()
+    price: z.string()
 });
 
+
+type Schema = z.infer<typeof schema>
+
 const CreateTarif: React.FC<Props> = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, control } = useForm<Schema>({
+        resolver: zodResolver(schema),
+        defaultValues: { descriptions: [{ descriptionRu: '', descriptionUz: '' }] } // Set initial values
+    });
+
+
     const [descriptions, setDescriptions] = useState<Array<{
         descriptionRu: string;
         descriptionUz: string;
     }>>([{ descriptionRu: '', descriptionUz: '' }]);
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: Schema) => {
         console.log(data);
     };
 
@@ -46,6 +55,8 @@ const CreateTarif: React.FC<Props> = () => {
         newDescriptions.splice(index, 1);
         setDescriptions(newDescriptions);
     };
+
+
 
     return (
         <div className="flex flex-row justify-between items-center bg-white rounded-2xl p-6">
@@ -64,7 +75,7 @@ const CreateTarif: React.FC<Props> = () => {
                             <Label htmlFor="titleUz">Sarlavha</Label>
                             <Input type="text" id="titleUz" placeholder="Asosiy paket:" {...register('titleUz')} />
                         </div>
-                        {descriptions.map((description, index) => (
+                        {/* {descriptions.map((description, index) => (
                             <div key={index} className="space-y-3">
                                 {index !== 0 && ( // Do not render remove button for the first description
                                     <button
@@ -94,7 +105,45 @@ const CreateTarif: React.FC<Props> = () => {
                                 </div>
 
                             </div>
+                        ))} */}
+
+                        {descriptions.map((description: Description, index: number) => (
+                            <div key={index} className="space-y-3">
+                                {/* Description fields */}
+                                {index !== 0 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => removeDescription(index)}
+                                        className="text-red-500 text-sm font-normal hover:text-red-700 flex justify-end w-full"
+                                    >
+                                        Удалить преимущество
+                                    </button>
+                                )}
+                                <Controller
+                                    name={`description[${index}].descriptionRu` as const}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Textarea
+                                            {...field}
+                                            placeholder="Преимущество 1"
+                                            className="resize-none"
+                                        />
+                                    )}
+                                />
+                                <Controller
+                                    name={`description[${index}].descriptionUz` as const}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Textarea
+                                            {...field}
+                                            placeholder="Afzallik 1"
+                                            className="resize-none"
+                                        />
+                                    )}
+                                />
+                            </div>
                         ))}
+
                         <button type="button" onClick={addDescription} className="w-full flex items-center gap-2 justify-start text-main-300 text-base">
                             <span className="text-2xl">+</span>
                             Добавить преимущество
@@ -103,13 +152,14 @@ const CreateTarif: React.FC<Props> = () => {
                             <Label htmlFor="price">Сумма</Label>
                             <Input type="number" id="price" placeholder="Введите сумму тарифного плана" {...register('price')} />
                         </div>
+
                         <Button className="text-base font-normal" variant={'main'} type="submit">
                             Сохранить
                         </Button>
                     </form>
                 </DialogContent>
             </Dialog>
-        </div>
+        </div >
     );
 };
 

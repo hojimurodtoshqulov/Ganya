@@ -9,11 +9,40 @@ import EditHomeVideo from "@/components/dashboard/EditShowThings/homeVideo";
 import EditShowcase from "@/components/dashboard/EditShowThings/showcase";
 import EditHomeAbout from "@/components/dashboard/EditShowThings/HomeAbout";
 import CourseCard from "@/components/shared/cource-card/courceCard";
+import { Accordion } from "@/components/shared/cource-card/accordian-card";
 
-export default function Card() {
+const getData = async () => {
+    const api = process.env.BASE_URL + '/courses/single/6634ef485708f2f994e5d899'
+    try {
+        const req = await fetch(api, { cache: 'no-store' })
+        if (!req.ok) throw new Error('Something went wrong')
+        const res = await req.json()
+        // router.refresh()
+
+
+        return res
+        console.log(res)
+    } catch (error: any) {
+        console.log(error.message)
+    }
+}
+
+export default async function Card() {
+    const data = await getData();
+    console.log(data)
+
+
+
 
     return (
         <>
+            <Accordion type="single" collapsible>
+                <CourseCard data={data} type="" />
+            </Accordion>
+            <Modules  data={data}/>
+
+
+
 
             {/* <div className="my-5  flex lg:grid lg:grid-cols-2 gap-3 " >
                 <CourseCard courceCard={courceCardData} type="grid" />
@@ -23,7 +52,7 @@ export default function Card() {
             </div> */}
 
 
-            <div className="h-5 bg-white"></div>
+            <div className="h-5 bg-white" ></div>
 
             {/* <div className="my-10 flex flex-wrap gap-3 ">
                 <EditShowThings type="showcase" />
@@ -34,10 +63,8 @@ export default function Card() {
 
 
 
-            <div className="flex flex-col gap-5 my-4">
-
+            <div className="flex flex-col gap-5 my-4" >
                 <SaveLesson link="/" title="Title Saved" />
-
                 <LessonItem link='/' type="create" />
                 <LessonItem link="/" type='item' value={{ number: 1, title: 'Salom Dunyo' }} />
             </div>
@@ -48,7 +75,6 @@ export default function Card() {
             </div>
 
 
-            <Modules courceCard={courceCardData} />
             <div className="grid md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-6">
                 <ModuleCard title={""} />
                 <ModuleCard title={"Курс по грудному вскармливанию"} />

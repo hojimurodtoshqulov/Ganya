@@ -16,36 +16,42 @@ import { courceCardData } from "@/constants";
 
 
 interface Props {
-  courceCard: any,
+  data?: any,
   type?: string
 }
 
-const CourceCard: React.FC<Props> = ({ courceCard, type }) => {
-  const { modules, title, id } = courceCardData;
-  const totalModules = modules.length;
+
+
+const CourceCard: React.FC<Props> = ({ data, type }) => {
+  console.log(data)
+  // const { Module, titleRu, titleUz, id, image, descriptionUz, descriptionRu } = data;
   const [toggle, setToggle] = useState(false);
+  const totalModules = data?.Module?.length;
 
   if (type === 'grid') {
     return (
       <div className={`bg-csneutral-100 transition-colors   flex flex-col w-full  gap-4 lg:gap-10  p-4 lg:p-6 xl:p-7 rounded-[20px] xl:rounded-[40px] justify-between `}>
+        <div className="">
         <Image
-          src={siblingsHero}
-          alt="title"
+          src={data.image}
+          alt={data?.descriptionRu}
           className="rounded-[20px] xl:rounded-[40px] h-auto w-full md:w-auto overflow-hidden"
-        />
+          fill={true}
+          />
+          </div>
 
         <div className="grow flex flex-col justify-between space-y-8">
           <div className="flex flex-row items-center justify-between gap-4">
-            <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">{title}</h2>
-            <Link href={"/"} className="flex flex-row items-center justify-between">
-              <Image src={arrowCorner} alt="salom" className="hidden md:block" />
+            <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">{data?.titleRu}</h2>
+            <Link href={`/${data?.id}`} className="flex flex-row items-center justify-between">
+              <Image src={arrowCorner} alt="salom" className="md:block" />
             </Link>
           </div>
 
           <div className="flex flex-row items-center justify-between gap-2">
             <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
-              <p className=" border-main-300 border text-main-300 rounded-[30px] px-2 py-[4px]  md:px-4 md:py-2  text-base md:text-[22px]">31 видео уроков</p>
-              <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">{totalModules} модулей</p>
+              <p className=" border-main-300 border text-main-300 rounded-[30px] px-2 py-[4px]  md:px-4 md:py-2  text-base md:text-[22px]">{'total'}</p>
+              <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">{data?.totalModules} модулей</p>
             </div>
 
           </div>
@@ -55,19 +61,21 @@ const CourceCard: React.FC<Props> = ({ courceCard, type }) => {
   }
 
   return (
-    <AccordionItem value={id} className="border-none ">
+    <AccordionItem value={data?.id} className="border-none ">
       <div className=" rounded-[20px] md:rounded-[40px] overflow-hidden  bg-csneutral-100">
         <div className={` ${toggle ? 'bg-main-100' : 'bg-csneutral-100'} transition-colors   flex flex-col md:flex-row w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px] lg:h-[320px]`}>
           <Image
-            src={siblingsHero}
-            alt="title"
+            src={data?.image}
+            alt={data?.descriptionRu}
             className="rounded-[20px] xl:rounded-[40px] h-auto w-full md:w-auto overflow-hidden"
+            width={100}
+            height={100}
           />
 
           <div className="grow flex flex-col justify-between space-y-8">
             <div className="flex flex-row items-center justify-between gap-4">
-              <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">{title}</h2>
-              <Link href={"/"} className="flex flex-row items-center justify-between">
+              <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">{data?.titleRu}</h2>
+              <Link href={`/${data?.id}`} className="flex flex-row items-center justify-between">
                 <Image src={arrowCorner} alt="salom" className="hidden md:block" />
               </Link>
 
@@ -80,7 +88,7 @@ const CourceCard: React.FC<Props> = ({ courceCard, type }) => {
 
             <div className="flex flex-row items-center justify-between gap-2">
               <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
-                <p className=" border-main-300 border text-main-300 rounded-[30px] px-2 py-[4px]  md:px-4 md:py-2  text-base md:text-[22px]">31 видео уроков</p>
+                <p className=" border-main-300 border text-main-300 rounded-[30px] px-2 py-[4px]  md:px-4 md:py-2  text-base md:text-[22px]">{12} видео уроков</p>
                 <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">{totalModules} модулей</p>
               </div>
 
@@ -99,14 +107,14 @@ const CourceCard: React.FC<Props> = ({ courceCard, type }) => {
 
           <div className="p-4 lg:p-10 xl:py-12 xl:px-10  w-full  overflow-hidden ">
             <div className="flex flex-col md:grid md:grid-cols-2 gap-5  relative">
-              {modules.map((item, index) => (
+              {data?.Module?.map((item: any, index: any) => (
                 <div key={item.id}>
                   <div className={` md:border-b-0 md:my-4 border-csneutral-200 ${index % 2 === 1 ? 'md:border-l  md:pl-5 border-csneutral-200' : ''}  ${index < totalModules - 1 ? 'border-b  pb-3 md:pb-0' : 'border-b-0'}`}>
                     <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
-                      {item.modulTitle}
+                      {item.titleRu}
                     </h3>
                     <p className="text-base md:text-lg text-csneutral-500 font-normal">
-                      {item.modulDescription}
+                      {item.descriptionRu}
                     </p>
                   </div>
                   {(index % 2 === 1 && (index < totalModules - 2 || index < totalModules - 1)) ? <span className=" my-3 md:absolute  right-0 h-[1px] w-[100%] bg-csneutral-200"></span>
