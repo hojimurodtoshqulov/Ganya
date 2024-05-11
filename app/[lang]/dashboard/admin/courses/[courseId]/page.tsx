@@ -1,12 +1,13 @@
+import AddModul from "@/components/dashboard/add_modul";
+import { Cousine } from "next/font/google";
 import { FC } from "react";
 
-const SingleCourse: FC = (): JSX.Element => {
+const SingleCourse: FC<{ params: { courseId: string } }> = ({ params: { courseId } }): JSX.Element => {
+  console.log(courseId)
   return (
     <div>
-      bu yerda bitta kursni kurinishi buladi, lekin bu yerdan crud ammallarni
-      bajrib bulmaydi
+      <AddModul courseId={courseId}  />
     </div>
   );
-};
-
+}
 export default SingleCourse;
