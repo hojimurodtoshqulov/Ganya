@@ -52,6 +52,7 @@ const AddCourseForm: FC<Props> = ({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData = new FormData();
+    console.log(values);
     if (values.image instanceof FileList) {
       formData.append("image", values.image[0], values.image[0].name);
     } else {
