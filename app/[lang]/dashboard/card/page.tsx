@@ -39,12 +39,12 @@ export default async function Card() {
 
 
 
-            <h1 className="w-full bg-white h-4 p-3">Home page Modules faqat bitta dars uchun </h1>
+            <h1 className="w-full bg-white h-4 p-3">{'Home page Modules faqat bitta dars uchun '}</h1>
             <Accordion type="single" collapsible>
                 <CourseCard data={data} type="" />
             </Accordion>
 
-            <h1 className="w-full bg-white h-4 p-3">Home page Modules ko'p darslar uchun </h1>
+            <h1 className="w-full bg-white h-4 p-3">{"Home page Modules ko'p darslar uchun "}</h1>
             <div className="my-5  flex lg:grid lg:grid-cols-2 gap-6 " >
                 <CourseCard data={data} type="grid" />
                 <CourseCard data={data} type="grid" />
@@ -54,7 +54,7 @@ export default async function Card() {
 
 
 
-            <h1 className="w-full bg-white h-4 p-3">Client yoki admin page uchun  Modules ko'p darslar uchun </h1>
+            <h1 className="w-full bg-white h-4 p-3">{'Client yoki admin page uchun  Modules ko\'p darslar uchun'} </h1>
 
 
             <Modules data={data} />
@@ -79,7 +79,7 @@ export default async function Card() {
 
 
             <div className="pb-6">
-                <CreateTarif method="POST" />
+                {/* <CreateTarif method="POST" /> */}
             </div>
 
 

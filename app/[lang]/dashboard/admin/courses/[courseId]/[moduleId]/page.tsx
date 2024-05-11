@@ -8,7 +8,7 @@ interface Props {
   params: any;
 }
 
-const page: FC<Props> = ({ params }): JSX.Element => {
+const Page: FC<Props> = ({ params }): JSX.Element => {
   const [data, setData] = useState<Object | any>(null);
   const router = useRouter();
 
