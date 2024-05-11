@@ -60,14 +60,16 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
 
     return (
         <div className="flex flex-row justify-between items-center bg-white rounded-2xl p-6">
-            <h1 className="text-[26px] text-main-300">Тарифы</h1>
+            <div>
+                <h1 className="text-[26px] text-main-300">Тарифы</h1>
+            </div>
             <Dialog>
                 <DialogTrigger asChild>
                     <Button variant="main" className="text-sm py-2 px-5 font-normal">
                         Добавить тариф
                     </Button>
                 </DialogTrigger>
-                <DialogContent >
+                <DialogContent>
                     <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col gap-4 w-full">
                         <div className="grid w-full  items-center gap-1.5">
                             <Label htmlFor="price">Davomiyligi</Label>
@@ -76,9 +78,7 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
                             })} />
                         </div>
                         <div className="flex items-center space-x-2">
-                            <Checkbox id="resourses" checked={resources} onCheckedChange={() => setResources(!resources)} {...register('includeResources'), {
-                                setValueAs: (value: any) => Boolean(value)
-                            }} />
+                            <Checkbox id="resourses" checked={resources} onCheckedChange={() => setResources(!resources)} {...register('includeResources')} />
                             <label
                                 htmlFor="resourses"
                                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -87,9 +87,7 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
                             </label>
                         </div>
                         <div className="flex items-center space-x-2">
-                            <Checkbox id="support" checked={support} onCheckedChange={() => setSupport(!support)} {...register('includeSupport', {
-                                setValueAs: (value: any) => Boolean(value)
-                            })} />
+                            <Checkbox id="support" checked={support} onCheckedChange={() => setSupport(!support)} {...register('includeSupport')} />
                             <label
                                 htmlFor="support"
                                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -103,19 +101,19 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
                                 type="number"
                                 id="price"
                                 placeholder="Введите сумму тарифного плана"
-                                {...register('price', {
+                                {...register('price'), {
                                     setValueAs: (value: any) => Number(value)
-                                })}
+                                }}
                             />
                         </div>
-                        <Button className="text-base font-normal" variant={'main'} type="submit">
+                        <Button disabled={isSubmitting} className="text-base font-normal" variant={'main'} type="submit">
                             Сохранить
                         </Button>
                     </form>
                 </DialogContent>
             </Dialog>
         </div>
-    );
+    )
 };
 
 export default CreateTarif;
