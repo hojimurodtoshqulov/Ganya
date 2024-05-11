@@ -31,14 +31,14 @@ interface ICard {
 }
 
 async function getData<T>(): Promise<T[] | Error> {
-<<<<<<< HEAD
-  const res = await fetch("https://oar-api.onrender.com/api/v1/courses/all", {
-=======
-  const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/courses/all", {
->>>>>>> main
-    cache: "no-store",
-  });
-
+  console.log("archived");
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=archived",
+    {
+      cache: "no-store",
+    },
+  );
+  console.log(res, "<------ res");
   if (!res.ok) {
     return new Error("Failed to fetch data");
   }
@@ -46,12 +46,15 @@ async function getData<T>(): Promise<T[] | Error> {
   return res.json();
 }
 
-const AllCourses: FC<{
+const ArchivedCourses: FC<{
   lang: "ru" | "uz";
 }> = async ({ lang }): Promise<JSX.Element> => {
   const data = await getData<ICard>();
   if (data instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
+  }
+  if (data.length === 0) {
+    return <h2>No data</h2>;
   }
 
   return (
@@ -68,7 +71,7 @@ const AllCourses: FC<{
         }) => (
           <CourseCard
             image={image}
-            title={lang === "ru" ? titleRu : titleUz}
+            title={lang === "uz" ? titleUz : titleRu}
             status={courseStatus}
             id={id}
             key={id}
@@ -106,8 +109,8 @@ const AllCourses: FC<{
                     />
                   </DialogContent>
                 </Dialog>
-                <DropdownMenuSeparator />
-                <ArchiveCourse id={id} />
+                {/* <DropdownMenuSeparator />
+                <ArchiveCourse id={id} /> */}
                 <DropdownMenuSeparator />
                 <DeleteCourse id={id} />
               </DropdownMenuContent>
@@ -119,4 +122,4 @@ const AllCourses: FC<{
   );
 };
 
-export default AllCourses;
+export default ArchivedCourses;

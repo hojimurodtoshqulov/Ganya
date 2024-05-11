@@ -29,108 +29,41 @@ export const navlink = [
 ];
 
 export const courceCardData = {
-  id: '1',
-  title: "Прикорм без проблем",
-  image: "./public/images/sibling-hero.png",
-  modules: [
-    /*     {
-          id: "m",
-          modulTitle: "Модуль 1",
-          modulDescription:
-            "Приглашает вас погрузиться в тему введения первого прикорма для вашего малыша и узнать основные принципы BLW (Baby-Led Weaning – введение прикорма под руководством ребенка)",
-          videoLessons: [
-            { id: "v1", video: "https://video.com", title: "video title" },
-            { id: "v2", video: "https://video.com", title: "video title" },
-            { id: "v3", video: "https://video.com", title: "video title" },
-            { id: "v4", video: "https://video.com", title: "video title" },
-            { id: "v5", video: "https://video.com", title: "video title" },
-            { id: "v6", video: "https://video.com", title: "video title" },
-          ],
-        }, */
+  id: "6634ef485708f2f994e5d899",
+  createdAt: "2024-05-03T14:06:00.825Z",
+  updatedAt: "2024-05-03T14:13:20.230Z",
+  titleUz: "Kurs Nomi",
+  titleRu: "Title",
+  image: "https://d3cc8vm8tev909.cloudfront.net/1714745599856-photo_2023-12-10_15-13-17 (2).jpg",
+  descriptionUz: "Kurs Tavsif",
+  descriptionRu: "Cource Description",
+  courseStatus: "inProgress",
+  myCoursesId: null,
+  Module: [
     {
-      id: "m1",
-      modulTitle: "Модуль 1",
-      modulDescription:
-        "Приглашает вас погрузиться в тему введения первого прикорма для вашего малыша и узнать основные принципы BLW (Baby-Led Weaning – введение прикорма под руководством ребенка)",
-      videoLessons: [
-        { id: "v1", video: "https://video.com", title: "video title" },
-        { id: "v2", video: "https://video.com", title: "video title" },
-        { id: "v3", video: "https://video.com", title: "video title" },
-        { id: "v4", video: "https://video.com", title: "video title" },
-        { id: "v5", video: "https://video.com", title: "video title" },
-        { id: "v6", video: "https://video.com", title: "video title" },
-      ],
+      id: "663c6dfc134cf3459c845863",
+      createdAt: "2024-05-09T06:32:28.704Z",
+      updatedAt: "2024-05-09T06:32:28.704Z",
+      titleUz: 'sfsdfsd',
+      titleRu: 'fdsfsdfd',
+      descriptionUz: 'sfasfa',
+      descriptionRu: 'sfasfasfas',
+      courseId: "6634ef485708f2f994e5d899"
     },
     {
-      id: "m2",
-      modulTitle: "Модуль 1",
-      modulDescription:
-        "Приглашает вас погрузиться в тему введения первого прикорма для вашего малыша и узнать основные принципы BLW (Baby-Led Weaning – введение прикорма под руководством ребенка)",
-      videoLessons: [
-        { id: "v1", video: "https://video.com", title: "video title" },
-        { id: "v2", video: "https://video.com", title: "video title" },
-        { id: "v3", video: "https://video.com", title: "video title" },
-        { id: "v4", video: "https://video.com", title: "video title" },
-        { id: "v5", video: "https://video.com", title: "video title" },
-        { id: "v6", video: "https://video.com", title: "video title" },
-      ],
+      id: "663c6e537404e3660e9dae83",
+      createdAt: "2024-05-09T06:33:55.287Z",
+      updatedAt: "2024-05-09T06:33:55.287Z",
+      titleUz: "test attt",
+      titleRu: "test attt",
+      descriptionUz: "test attt",
+      descriptionRu: "test attt",
+      courseId: "6634ef485708f2f994e5d899"
     },
-    {
-      id: "m3",
-      modulTitle: "Модуль 1",
-      modulDescription:
-        "Приглашает вас погрузиться в тему введения первого прикорма для вашего малыша и узнать основные принципы BLW (Baby-Led Weaning – введение прикорма под руководством ребенка)",
-      videoLessons: [
-        { id: "v1", video: "https://video.com", title: "video title" },
-        { id: "v2", video: "https://video.com", title: "video title" },
-        { id: "v3", video: "https://video.com", title: "video title" },
-        { id: "v4", video: "https://video.com", title: "video title" },
-        { id: "v5", video: "https://video.com", title: "video title" },
-        { id: "v6", video: "https://video.com", title: "video title" },
-      ],
-    },
-    {
-      id: "m4",
-      modulTitle: "Модуль 1",
-      modulDescription:
-        "Приглашает вас погрузиться в тему введения первого прикорма для вашего малыша и узнать основные принципы BLW (Baby-Led Weaning – введение прикорма под руководством ребенка)",
-      videoLessons: [
-        { id: "v1", video: "https://video.com", title: "video title" },
-        { id: "v2", video: "https://video.com", title: "video title" },
-        { id: "v3", video: "https://video.com", title: "video title" },
-        { id: "v4", video: "https://video.com", title: "video title" },
-        { id: "v5", video: "https://video.com", title: "video title" },
-        { id: "v6", video: "https://video.com", title: "video title" },
-      ],
-    },
-    {
-      id: "m5",
-      modulTitle: "Модуль 1",
-      modulDescription:
-        "Приглашает вас погрузиться в тему введения первого прикорма для вашего малыша и узнать основные принципы BLW (Baby-Led Weaning – введение прикорма под руководством ребенка)",
-      videoLessons: [
-        { id: "v1", video: "https://video.com", title: "video title" },
-        { id: "v2", video: "https://video.com", title: "video title" },
-        { id: "v3", video: "https://video.com", title: "video title" },
-        { id: "v4", video: "https://video.com", title: "video title" },
-        { id: "v5", video: "https://video.com", title: "video title" },
-        { id: "v6", video: "https://video.com", title: "video title" },
-      ],
-    },
-    {
-      id: "m6",
-      modulTitle: "Модуль 1",
-      modulDescription:
-        "Приглашает вас погрузиться в тему введения первого прикорма для вашего малыша и узнать основные принципы BLW (Baby-Led Weaning – введение прикорма под руководством ребенка)",
-      videoLessons: [
-        { id: "v1", video: "https://video.com", title: "video title" },
-        { id: "v2", video: "https://video.com", title: "video title" },
-        { id: "v3", video: "https://video.com", title: "video title" },
-        { id: "v4", video: "https://video.com", title: "video title" },
-        { id: "v5", video: "https://video.com", title: "video title" },
-        { id: "v6", video: "https://video.com", title: "video title" },
-      ],
-    },
-  ],
-};
+
+  ]
+}
+
+
+
 
