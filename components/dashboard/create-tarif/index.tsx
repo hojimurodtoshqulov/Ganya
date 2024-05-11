@@ -5,161 +5,116 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "./dialog"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Checkbox } from '@/components/ui/checkbox';
+import { useRouter } from 'next/navigation'
 
-interface Description {
-    descriptionRu: string;
-    descriptionUz: string;
+interface Props {
+    courseId?: string
+    method?: 'POST' | 'PATCH'
 }
 
-interface Props { }
-
 const schema = z.object({
-    titleRu: z.string().min(1),
-    titleUz: z.string().min(1),
-    descriptions: z.array(z.object({
-        descriptionRu: z.string(),
-        descriptionUz: z.string(),
-    })),
-    price: z.string()
-});
-
+    available_period: z.number().min(1),
+    includeResources: z.boolean().default(false).optional(),
+    includeSupport: z.boolean().default(false).optional(),
+    price: z.number().min(1)
+})
 
 type Schema = z.infer<typeof schema>
 
-const CreateTarif: React.FC<Props> = () => {
-    const { register, handleSubmit, control } = useForm<Schema>({
+const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
+    const { register, handleSubmit, reset, formState: { isSubmitting, errors } } = useForm<Schema>({
         resolver: zodResolver(schema),
-        defaultValues: { descriptions: [{ descriptionRu: '', descriptionUz: '' }] } // Set initial values
     });
+    const [support, setSupport] = useState(false);
+    const [resources, setResources] = useState(false);
+    const router = useRouter();
 
+    console.log(errors)
 
-    const [descriptions, setDescriptions] = useState<Array<{
-        descriptionRu: string;
-        descriptionUz: string;
-    }>>([{ descriptionRu: '', descriptionUz: '' }]);
-
-    const onSubmit = (data: Schema) => {
+    const onSubmit = async (data: Schema) => {
         console.log(data);
+        const api = process.env.NEXT_PUBLIC_BASE_URL + `/plans/" + (method === 'POST' ? 'create' : 'update') + "/${courseId}`;
+        console.log(api);
+        try {
+            const formData = new FormData();
+            formData.append("available_period", data.available_period.toString());
+            // formData.append("includeResources", data.includeResources);
+            // formData.append("includeSupport", data.includeSupport);
+            formData.append("price", data.price.toString());
+
+            const req = await fetch(api, { method: method, body: formData });
+            if (!req.ok) throw new Error('Plan yaratishda muommo yuzaga keldi');
+            const res = await req.json();
+
+            console.log(res, '<---Response from Plans create  endpoint');
+            router.refresh();
+            reset();
+        } catch (error: any) {
+            console.log(error.message)
+        }
     };
-
-    const addDescription = () => {
-        setDescriptions([...descriptions, { descriptionRu: '', descriptionUz: '' }]);
-    };
-
-    const removeDescription = (index: number) => {
-        const newDescriptions = [...descriptions];
-        newDescriptions.splice(index, 1);
-        setDescriptions(newDescriptions);
-    };
-
-
 
     return (
         <div className="flex flex-row justify-between items-center bg-white rounded-2xl p-6">
             <h1 className="text-[26px] text-main-300">Тарифы</h1>
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button variant="main" className="text-sm py-2 px-5 font-normal">Добавить тариф</Button>
+                    <Button variant="main" className="text-sm py-2 px-5 font-normal">
+                        Добавить тариф
+                    </Button>
                 </DialogTrigger>
-                <DialogContent className="lg:p-10 md:p-8  overflow-auto h-[97vh]">
+                <DialogContent >
                     <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col gap-4 w-full">
                         <div className="grid w-full  items-center gap-1.5">
-                            <Label htmlFor="titleRu">Заголовок</Label>
-                            <Input type="text" id="titleRu" placeholder="Базовый пакет:" {...register('titleRu')} />
+                            <Label htmlFor="price">Davomiyligi</Label>
+                            <Input type="number" id="price" placeholder="Введите сумму тарифного плана" {...register('available_period', {
+                                setValueAs: (value) => Number(value)
+                            })} />
                         </div>
-                        <div className="grid w-full  items-center gap-1.5">``
-                            <Label htmlFor="titleUz">Sarlavha</Label>
-                            <Input type="text" id="titleUz" placeholder="Asosiy paket:" {...register('titleUz')} />
+                        <div className="flex items-center space-x-2">
+                            <Checkbox id="resourses" checked={resources} onCheckedChange={() => setResources(!resources)} {...register('includeResources'), {
+                                setValueAs: (value: any) => Boolean(value)
+                            }} />
+                            <label
+                                htmlFor="resourses"
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                                {'Qo\'shimacha resurslar bilan taminlanish'}
+                            </label>
                         </div>
-                        {/* {descriptions.map((description, index) => (
-                            <div key={index} className="space-y-3">
-                                {index !== 0 && ( // Do not render remove button for the first description
-                                    <button
-                                        type="button"
-                                        onClick={() => removeDescription(index)}
-                                        className="text-red-500 text-sm font-normal hover:text-red-700 flex justify-end w-full"
-                                    >
-                                        Удалить преимущество
-                                    </button>
-                                )}
-                                <div className="grid w-full  items-center gap-1.5">
-                                    <Label htmlFor={`descriptionRu-${index}`}>Описание</Label>
-                                    <Textarea
-                                        placeholder="Преимущество 1"
-                                        className="resize-none"
-                                        {...register(`description[${index}].descriptionRu`)}
-                                    />
-                                </div>
-                                <div className="grid w-full  items-center gap-1.5">
-
-                                    <Label htmlFor={`descriptionUz-${index}`}>Tavsif</Label>
-                                    <Textarea
-                                        placeholder="Afzallik 1"
-                                        className="resize-none"
-                                        {...register(`description[${index}].descriptionUz`)}
-                                    />
-                                </div>
-
-                            </div>
-                        ))} */}
-
-                        {descriptions.map((description: Description, index: number) => (
-                            <div key={index} className="space-y-3">
-                                {/* Description fields */}
-                                {index !== 0 && (
-                                    <button
-                                        type="button"
-                                        onClick={() => removeDescription(index)}
-                                        className="text-red-500 text-sm font-normal hover:text-red-700 flex justify-end w-full"
-                                    >
-                                        Удалить преимущество
-                                    </button>
-                                )}
-                                <Controller
-                                    name={`description[${index}].descriptionRu` as const}
-                                    control={control}
-                                    render={({ field }) => (
-                                        <Textarea
-                                            {...field}
-                                            placeholder="Преимущество 1"
-                                            className="resize-none"
-                                        />
-                                    )}
-                                />
-                                <Controller
-                                    name={`description[${index}].descriptionUz` as const}
-                                    control={control}
-                                    render={({ field }) => (
-                                        <Textarea
-                                            {...field}
-                                            placeholder="Afzallik 1"
-                                            className="resize-none"
-                                        />
-                                    )}
-                                />
-                            </div>
-                        ))}
-
-                        <button type="button" onClick={addDescription} className="w-full flex items-center gap-2 justify-start text-main-300 text-base">
-                            <span className="text-2xl">+</span>
-                            Добавить преимущество
-                        </button>
+                        <div className="flex items-center space-x-2">
+                            <Checkbox id="support" checked={support} onCheckedChange={() => setSupport(!support)} {...register('includeSupport', {
+                                setValueAs: (value: any) => Boolean(value)
+                            })} />
+                            <label
+                                htmlFor="support"
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                                {'Kurs davomida yordam berish'}
+                            </label>
+                        </div>
                         <div className="grid w-full  items-center gap-1.5">
                             <Label htmlFor="price">Сумма</Label>
-                            <Input type="number" id="price" placeholder="Введите сумму тарифного плана" {...register('price')} />
+                            <Input
+                                type="number"
+                                id="price"
+                                placeholder="Введите сумму тарифного плана"
+                                {...register('price', {
+                                    setValueAs: (value: any) => Number(value)
+                                })}
+                            />
                         </div>
-
                         <Button className="text-base font-normal" variant={'main'} type="submit">
                             Сохранить
                         </Button>
                     </form>
                 </DialogContent>
             </Dialog>
-        </div >
+        </div>
     );
 };
 
