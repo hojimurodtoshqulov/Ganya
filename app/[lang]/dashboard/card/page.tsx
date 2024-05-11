@@ -12,7 +12,7 @@ import CourseCard from "@/components/shared/cource-card/courceCard";
 import { Accordion } from "@/components/shared/cource-card/accordian-card";
 
 const getData = async () => {
-    const api = process.env.BASE_URL + '/courses/single/6634ef485708f2f994e5d899'
+    const api = process.env.NEXT_PUBLIC_BASE_URL + '/courses/single/6634ef485708f2f994e5d899'
     try {
         const req = await fetch(api, { cache: 'no-store' })
         if (!req.ok) throw new Error('Something went wrong')
@@ -35,24 +35,32 @@ export default async function Card() {
 
 
     return (
-        <>
+        <div className="flex flex-col gap-4 space-y-9">
+
+
+
+            <h1 className="w-full bg-white h-4 p-3">Home page Modules faqat bitta dars uchun </h1>
             <Accordion type="single" collapsible>
                 <CourseCard data={data} type="" />
             </Accordion>
-            <Modules  data={data}/>
+
+            <h1 className="w-full bg-white h-4 p-3">Home page Modules ko'p darslar uchun </h1>
+            <div className="my-5  flex lg:grid lg:grid-cols-2 gap-6 " >
+                <CourseCard data={data} type="grid" />
+                <CourseCard data={data} type="grid" />
+                <CourseCard data={data} type="grid" />
+                <CourseCard data={data} type="grid" />
+            </div>
 
 
 
-
-            {/* <div className="my-5  flex lg:grid lg:grid-cols-2 gap-3 " >
-                <CourseCard courceCard={courceCardData} type="grid" />
-                <CourseCard courceCard={courceCardData} type="grid" />
-                <CourseCard courceCard={courceCardData} type="grid" />
-                <CourseCard courceCard={courceCardData} type="grid" />
-            </div> */}
+            <h1 className="w-full bg-white h-4 p-3">Client yoki admin page uchun  Modules ko'p darslar uchun </h1>
 
 
-            <div className="h-5 bg-white" ></div>
+            <Modules data={data} />
+
+
+
 
             {/* <div className="my-10 flex flex-wrap gap-3 ">
                 <EditShowThings type="showcase" />
@@ -71,7 +79,7 @@ export default async function Card() {
 
 
             <div className="pb-6">
-                <CreateTarif />
+                <CreateTarif method="POST" />
             </div>
 
 
@@ -81,6 +89,6 @@ export default async function Card() {
                 <ModuleCard title="" />
                 <ModuleCard title="" />
             </div>
-        </>
+        </div>
     )
 }
