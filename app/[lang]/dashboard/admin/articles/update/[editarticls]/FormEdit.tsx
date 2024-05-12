@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { any, z } from "zod";
+import { z } from "zod";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
@@ -38,7 +38,9 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
+const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
+  console.log(articleId);
+
   const router = useRouter();
   const {
     handleSubmit,
@@ -47,13 +49,11 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
     formState: { errors, isSubmitting },
   } = useForm<Schema>({
     resolver: zodResolver(schema),
-    defaultValues: defaultValues,
   });
 
-  const imageWeb: any = watch("imageWeb") && (watch("imageWeb")[0] ?? {});
-  const imageMobile: any =
-    watch("imageMobile") && (watch("imageMobile")[0] ?? {});
-  const articleImage: any =
+  const imageWeb = watch("imageWeb") && (watch("imageWeb")[0] ?? {});
+  const imageMobile = watch("imageMobile") && (watch("imageMobile")[0] ?? {});
+  const articleImage =
     watch("articleImage") && (watch("articleImage")[0] ?? {});
 
   async function onSubmit(data: Schema) {
@@ -69,9 +69,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
     formData.append("textUz", data.textUz);
     formData.append("link", data.link);
 
-    const api =
-      process.env.NEXT_PUBLIC_BASE_URL + `/articles/update/${articleId}`;
-
+    const api = "https://oar-api.onrender.com/api/v1" + "/update/";
     try {
       const req = await fetch(api, { method: "PATCH", body: formData });
       if (!req.ok) throw new Error(" article yangilashda muammo yuzaga keldi");
@@ -84,20 +82,6 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
       console.log(error.message);
     }
   }
-
-  const DeleteFun = () => {
-    fetch(process.env.NEXT_PUBLIC_BASE_URL + `/articles/remove/${articleId}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.text())
-      .then(
-        (res) => (
-          router.push("/dashboard/admin/articles/"),
-          toast.success("Article Muvaffaqiyatli O'chrildi")
-        ),
-      );
-  };
-
   return (
     <div>
       <h2 className="text-[24px] leading-[36px] text-main-300">
@@ -120,13 +104,11 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
             </div>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant={"filled"}>
-                  {imageMobile?.name && imageWeb?.name
-                    ? "редактировать"
-                    : "изменять"}
+                <Button /* onClick={() => setModal(true)} */ variant={"filled"}>
+                  {imageMobile && imageWeb ? "редактировать" : "Выбрать"}
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-[650px] p-10">
+              <DialogContent className="p-7">
                 <div
                   className={cn(
                     "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
@@ -141,7 +123,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                       <h2 className="text-2xl font-normal"> Обложка </h2>
                       <p className="text-base">
                         {imageMobile
-                          ? (imageMobile?.name as string)
+                          ? (imageMobile as string)
                           : "Выберите или перетащите обложку для курса"}
                       </p>
                     </div>
@@ -150,14 +132,14 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file1"
                   >
-                    {imageMobile?.name ? "редактировать" : "изменять"}
+                    {imageMobile ? "редактировать" : "Выбрать"}
                   </label>
                   <Input
                     type="file"
                     accept="image/*"
                     className="w-0 h-0 opacity-0 hidden"
                     id="file1"
-                    {...register("imageMobile")}
+                    {...register("imageMobile", { required: true })}
                   />
                 </div>
                 <div
@@ -174,7 +156,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                       <h2 className="text-2xl font-normal">Обложка Web</h2>
                       <p className="text-base">
                         {imageWeb
-                          ? (imageWeb?.name as string)
+                          ? (imageWeb as string)
                           : "Выберите или перетащите обложку для курса"}
                       </p>
                     </div>
@@ -183,26 +165,30 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file2"
                   >
-                    {imageWeb?.name ? "редактировать" : "изменять"}
+                    {imageWeb ? "редактировать" : "Выбрать"}
                   </label>
                   <Input
                     type="file"
                     accept="image/*"
                     className="w-0 h-0 opacity-0 hidden"
-                    {...register("imageWeb")}
+                    {...register("imageWeb", { required: true })}
                     id="file2"
                   />
                 </div>
                 <div className="relative">
-                  <Link className="absolute top-[1.5rem] left-3" />
+                  <Link className="absolute top-2 left-3" />
                   <Input
                     placeholder="Ссылка"
                     className="mt-4 pl-12"
-                    {...register("link")}
+                    {...register("link", { required: true })}
                   />
                 </div>
                 <DialogClose asChild>
-                  <Button variant={"main"}>Опубликовать</Button>
+                  <Button
+                    /* onClick={() => setModal(true)} */ variant={"filled"}
+                  >
+                    Soxranit
+                  </Button>
                 </DialogClose>
               </DialogContent>
             </Dialog>
@@ -214,18 +200,26 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
             )}
           >
             <div className="flex items-center gap-3">
+              <div className="rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
+                <ImageIcon />
+              </div>
               <div className="text-2xl font-normal flex flex-col ">
-                <h1>Добавить рекламный баннер</h1>
+                <h1>Article Image</h1>
+                <p>
+                  {articleImage
+                    ? (articleImage as string)
+                    : "Faqat Article uchun Rasm"}
+                </p>
               </div>
             </div>
             <label className={buttonVariants({ variant: "filled" })}>
-              {articleImage?.name ? "редактировать" : "изменять"}
+              {articleImage ? "редактировать" : "Выбрать"}
 
               <Input
                 type="file"
                 accept="image/*"
                 className="w-0 h-0 opacity-0 hidden"
-                {...register("articleImage")}
+                {...register("articleImage", { required: true })}
               />
             </label>
           </div>
@@ -257,9 +251,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
               type="text"
               id="headlineRu"
               placeholder="Базовый пакет:"
-              className={cn({
-                "border-destructive": errors?.headlineRu?.types,
-              })}
+              className={cn({ "border-destructive": errors?.headlineRu })}
               {...register("headlineRu", { required: true })}
             />
           </div>
@@ -291,9 +283,8 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
             />
           </div>
 
-          <div className="flex sm:justify-end mt-5 justify-center gap-3">
+          <div className="flex sm:justify-end mt-5 justify-center">
             <Button
-              onClick={DeleteFun}
               disabled={isSubmitting}
               variant={"main"}
               className="bg-red-500 hover:bg-red-400 transition-colors"
@@ -305,9 +296,116 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
             </Button>
           </div>
         </div>
+
+        {/* {modal ? <Modal onClick={() => setModal(false)} /> : null} */}
       </form>
     </div>
   );
 };
 
 export default FormEditArticle;
+
+/*
+ 
+  <FormField
+              control={form.control}
+              name="textUz"
+              render={({ field }) => (
+                <FormItem className="w-full ">
+                  <FormLabel className="text-[#D5D6D8] text-sm mb-4">
+                    Sarlavha uz
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Sarlavha uz" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="titleRu"
+              render={({ field }) => (
+                <FormItem className="w-full ">
+                  <FormLabel className="text-[#D5D6D8] text-sm mb-4">
+                    Sarlavha ru
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Sarlavha ru" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div>
+              <div>
+                {fields.map((field, index) => (
+                  <div className="Input" key={field.id}>
+                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
+                      Sarlavha uz
+                    </FormLabel>
+                    <input
+                      className="flex h-14 w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
+                      // {...register(`articls.${index}.headingRu` as any)}
+                      {...register('headlineRu')}
+                      placeholder="Maqola sarlavhasini kiriting"
+                    />
+                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
+                      Tavsif uz
+                    </FormLabel>
+                    <textarea
+                      className="flex w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
+                      rows={5}
+                      placeholder="Maqolaning tavsifini kiriting"
+                      // {...register(`articls.${index}.descriptionuz` as any)}
+                      {...register('headlineUz')}
+                    ></textarea>
+                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
+                      Sarlavha ru
+                    </FormLabel>
+                    <input
+                      className="flex h-14 w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
+                      placeholder="Maqola sarlavhasini kiriting"
+                      // {...register(`articls.${index}.headinguz` as any)}
+                      {...register('textUz')}
+                    />
+                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
+                      Tavsif ru
+                    </FormLabel>
+                    <textarea
+                      className="flex  w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
+                      rows={5}
+                      placeholder="Maqolaning tavsifini kiriting"
+                      // {...register(`articls.${index}.descriptionru` as any)}
+                      {...register('textRu')}
+                    ></textarea>
+                    {index > 0 && (
+                      <Button
+                        className="mt-2"
+                        variant={"destructive"}
+                        onClick={() => remove(index)}
+                      >
+                        remove
+                      </Button>
+                    )}
+                  </div>
+                ))}
+                <Button
+                  variant={"link"}
+                  className="text-main-300 text-sm"
+                  onClick={() =>
+                    append({
+                      headinlineRu: "",
+                      headlineUZ: "",
+                      textRu: "",
+                      textUz: "",
+                    })
+                  }
+                >
+                  {"+ Sarlavha qo'shing"}
+                </Button>
+              </div>
+            </div>
+
+    */

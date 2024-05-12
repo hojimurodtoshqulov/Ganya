@@ -12,7 +12,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./accordian-card";
-import { courceCardData } from "@/constants";
 import { ImageIcon } from "lucide-react";
 
 interface Props {
@@ -25,6 +24,7 @@ const CourceCard: React.FC<Props> = ({ data, type }) => {
   // const { Module, titleRu, titleUz, id, image, descriptionUz, descriptionRu } = data;
   const [toggle, setToggle] = useState(false);
   const totalModules = data?.Module?.length;
+  console.log(data, totalModules);
 
   if (type === "grid") {
     return (

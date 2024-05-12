@@ -28,6 +28,7 @@ const CreateTarif: FC<Props> = async ({ courseId }): Promise<JSX.Element> => {
     includeResources: boolean;
     includeSupport: boolean;
     price: number;
+    title: string;
   }>(courseId);
   if (response instanceof Error) {
     return <h2>Failed to fetch data.</h2>;

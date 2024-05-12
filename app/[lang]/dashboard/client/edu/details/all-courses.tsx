@@ -36,11 +36,12 @@ const AllCourses: FC = async (): Promise<JSX.Element> => {
   if (data.length === 0) {
     return <h2>No data</h2>;
   }
+  console.log(data, "nu baa");
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {data.map((c) => (
         <LinkById href={`all-courses/${c.id}`} key={c.id}>
-          <ModuleCard title={c.titleUz} />
+          <ModuleCard title={c.titleUz} id={c.id} image={c.image} />
         </LinkById>
       ))}
     </div>

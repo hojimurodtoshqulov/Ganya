@@ -126,6 +126,7 @@
   .showcase-image {
     background-image: url("../public/images/mobile-baner.png");
     background-size: cover;
-    background-position: bottom, top;
+    background-position: right, center;
+    background-repeat: no-repeat;
   }
 }

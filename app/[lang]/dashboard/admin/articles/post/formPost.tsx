@@ -106,7 +106,7 @@ const FormPostArticle: FC<Props> = ({}) => {
                     : "Выбрать"}
                 </Button>
               </DialogTrigger>
-              <DialogContent className="p-7">
+              <DialogContent className="max-w-[650px] p-10">
                 <div
                   className={cn(
                     "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
@@ -118,7 +118,7 @@ const FormPostArticle: FC<Props> = ({}) => {
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal"> Обложка </h2>
+                      <h2 className="text-2xl font-normal">Для мобильного</h2>
                       <p className="text-base">
                         {imageMobile
                           ? (imageMobile?.name as string)
@@ -151,7 +151,7 @@ const FormPostArticle: FC<Props> = ({}) => {
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">Обложка Web</h2>
+                      <h2 className="text-2xl font-normal">Для компьютера</h2>
                       <p className="text-base">
                         {imageWeb
                           ? (imageWeb?.name as string)
@@ -174,7 +174,7 @@ const FormPostArticle: FC<Props> = ({}) => {
                   />
                 </div>
                 <div className="relative">
-                  <Link className="absolute top-2 left-3" />
+                  <Link className="absolute top-[1.5rem] left-3" />
                   <Input
                     placeholder="Ссылка"
                     className="mt-4 pl-12"
@@ -182,7 +182,7 @@ const FormPostArticle: FC<Props> = ({}) => {
                   />
                 </div>
                 <DialogClose asChild>
-                  <Button variant={"filled"}>Soxranit</Button>
+                  <Button variant={"main"}>Опубликовать</Button>
                 </DialogClose>
               </DialogContent>
             </Dialog>
@@ -194,20 +194,12 @@ const FormPostArticle: FC<Props> = ({}) => {
             )}
           >
             <div className="flex items-center gap-3">
-              <div className="rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
-                <ImageIcon />
-              </div>
               <div className="text-2xl font-normal flex flex-col ">
-                <h1>Article Image</h1>
-                <p>
-                  {articleImage
-                    ? (articleImage?.name as string)
-                    : "Faqat Article uchun Rasm"}
-                </p>
+                <h1>Добавить рекламный баннер</h1>
               </div>
             </div>
             <label className={buttonVariants({ variant: "filled" })}>
-              {articleImage?.name ? "редактировать" : "Выбрать"}
+              {articleImage?.name ? "редактировать" : "Добавить"}
 
               <Input
                 type="file"

@@ -2,6 +2,7 @@ import Image from "next/image";
 import icon from "@/icons/Bolt.svg";
 import icon2 from "@/icons/Vector.svg";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 interface PlanCardProps {
   values: {
     available_period: number;
@@ -12,12 +13,13 @@ interface PlanCardProps {
   };
   pro?: boolean;
   small?: boolean;
+  btn?: boolean;
 }
 function PlanCard(props: PlanCardProps): JSX.Element {
   return (
     <div
       className={cn(
-        `flex flex-col w-full ${props.small ? "p-4 rounded-xl" : "py-4 px-5 sm:p-6 lg:p-10 rounded-[20px] md:rounded-[32px]"}  gap-10 ${props.pro ? "bg-main-200" : "bg-csneutral-100"}  h-full justify-between`,
+        `flex flex-col justify-between h-full w-full ${props.small ? "p-4 rounded-xl" : "py-4 px-5 sm:p-6 lg:p-10 rounded-[20px] md:rounded-[32px]"}  gap-10 ${props.pro ? "bg-main-200" : "bg-csneutral-100"}  h-full justify-between`,
       )}
     >
       <div className="flex flex-col gap-3">
@@ -81,12 +83,20 @@ function PlanCard(props: PlanCardProps): JSX.Element {
         </ul>
       </div>
 
-      <div className="flex flex-col gap-2 mt-8">
+      <div className="flex flex-col gap-2">
         <p
           className={`price ${props.small ? "text-[22px]" : "text-[32px]"} ${props.pro ? "text-main-100" : "text-main-300"}`}
         >
           {props.values?.price} UZS
         </p>
+        {props.btn && (
+          <Button
+            variant={props.pro ? "filled" : "outline"}
+            size={props.small ? "sm" : "default"}
+          >
+            Выбрать
+          </Button>
+        )}
       </div>
     </div>
   );

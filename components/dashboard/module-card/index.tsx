@@ -3,13 +3,15 @@ import SiblingsHero from "@/images/siblings-hero.png";
 
 interface ModuleCardProps {
   title: string;
+  image: string;
+  id: string;
 }
 
-const ModuleCard: React.FC<ModuleCardProps> = ({ title }) => {
+const ModuleCard: React.FC<ModuleCardProps> = ({ title, image, id }) => {
   return (
     <div className="rounded-[18px] bg-white overflow-hidden w-full h-full flex flex-col">
       <div className="w-full aspect-[9/5] relative">
-        <Image src={SiblingsHero} alt="image" className="object-cover" fill />
+        <Image src={image} alt="image" className="object-cover" fill />
       </div>
       <div className="w-full h-fit p-4 pt-2 gap-2 flex flex-col justify-between grow">
         <h1 className="text-lg font-semibold">{title}</h1>
