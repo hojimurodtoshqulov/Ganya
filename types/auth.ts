@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { boolean, string, z } from "zod";
 
 export const emailSchema = z.string().email();
 export const phoneSchema = z.string().regex(/^\+?\d{10,14}$/);
@@ -52,3 +52,18 @@ export const validateInput = (input: string) => {
     }
   }
 };
+
+export interface Articlsall {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  titleUz: string;
+  headlineUz: string;
+  headlineRu: string;
+  textUz: string;
+  textRu: string;
+  imageWeb: any;
+  imageMobile: any;
+  link: string;
+  isPublished: boolean;
+}

@@ -11,14 +11,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { any, z } from "zod";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 
-interface Props {}
+interface Props {
+  articleId?: string;
+  defaultValues?: any;
+}
 
 const schema = z.object({
   titleRu: z.string().min(1),
@@ -35,7 +38,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const FormPostArticle: FC<Props> = ({}) => {
+const FormEditArticle: FC = ({ articleId }: Props) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -44,6 +47,23 @@ const FormPostArticle: FC<Props> = ({}) => {
     formState: { errors, isSubmitting },
   } = useForm<Schema>({
     resolver: zodResolver(schema),
+    defaultValues: async () => {
+      const response = await fetch(
+        `https://oar-api.onrender.com/api/v1/articles/single/${articleId}`,
+      );
+
+      const data = await response.json();
+
+      return {
+        headlineUz: data?.headlineUz,
+        headlineRu: data?.headlineRu,
+        textUz: data?.textUz,
+        textRu: data?.textRu,
+        link: data?.link,
+        titleRu: data?.titleRu,
+        titleUz: data?.titleUz,
+      };
+    },
   });
 
   const imageWeb: any = watch("imageWeb") && (watch("imageWeb")[0] ?? {});
@@ -65,11 +85,12 @@ const FormPostArticle: FC<Props> = ({}) => {
     formData.append("textUz", data.textUz);
     formData.append("link", data.link);
 
-    const api = "https://oar-api.onrender.com/api/v1" + "/articles/create";
+    const api = `https://oar-api.onrender.com/api/v1/articles/update/${articleId}`;
+
     try {
-      const req = await fetch(api, { method: "POST", body: formData });
-      if (!req.ok)
-        throw new Error("Yangi article yaratishda muammo yuzaga keldi");
+      const req = await fetch(api, { method: "PATCH", body: formData });
+      if (!req.ok) throw new Error(" article yangilashda muammo yuzaga keldi");
+
       const res = req.json();
       router.refresh();
       toast.success("Article Muvaffaqiyatli yaratildi");
@@ -78,6 +99,23 @@ const FormPostArticle: FC<Props> = ({}) => {
       console.log(error.message);
     }
   }
+
+  const DeleteFun = () => {
+    fetch(
+      "https://oar-api.onrender.com/api/v1/articles/" + `remove/${articleId}`,
+      {
+        method: "DELETE",
+      },
+    )
+      .then((res) => res.text())
+      .then(
+        (res) => (
+          router.push("/dashboard/admin/articles/"),
+          toast.success("Article Muvaffaqiyatli O'chrildi")
+        ),
+      );
+  };
+
   return (
     <div>
       <h2 className="text-[24px] leading-[36px] text-main-300">
@@ -100,7 +138,7 @@ const FormPostArticle: FC<Props> = ({}) => {
             </div>
             <Dialog>
               <DialogTrigger asChild>
-                <Button /* onClick={() => setModal(true)} */ variant={"filled"}>
+                <Button variant={"filled"}>
                   {imageMobile?.name && imageWeb?.name
                     ? "редактировать"
                     : "Выбрать"}
@@ -279,121 +317,23 @@ const FormPostArticle: FC<Props> = ({}) => {
             />
           </div>
 
-          <div className="flex sm:justify-end mt-5 justify-center">
+          <div className="flex sm:justify-end mt-5 justify-center gap-3">
+            <Button
+              onClick={DeleteFun}
+              disabled={isSubmitting}
+              variant={"main"}
+              className="bg-red-500 hover:bg-red-400 transition-colors"
+            >
+              {"O'chirish"}
+            </Button>{" "}
             <Button disabled={isSubmitting} type="submit" variant={"main"}>
               Nashr qilish
             </Button>
           </div>
         </div>
-
-        {/* {modal ? <Modal onClick={() => setModal(false)} /> : null} */}
       </form>
     </div>
   );
 };
 
-export default FormPostArticle;
-
-/* 
-  <FormField
-              control={form.control}
-              name="textUz"
-              render={({ field }) => (
-                <FormItem className="w-full ">
-                  <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                    Sarlavha uz
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="Sarlavha uz" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="titleRu"
-              render={({ field }) => (
-                <FormItem className="w-full ">
-                  <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                    Sarlavha ru
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="Sarlavha ru" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div>
-              <div>
-                {fields.map((field, index) => (
-                  <div className="Input" key={field.id}>
-                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                      Sarlavha uz
-                    </FormLabel>
-                    <input
-                      className="flex h-14 w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
-                      // {...register(`articls.${index}.headingRu` as any)}
-                      {...register('headlineRu')}
-                      placeholder="Maqola sarlavhasini kiriting"
-                    />
-                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                      Tavsif uz
-                    </FormLabel>
-                    <textarea
-                      className="flex w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
-                      rows={5}
-                      placeholder="Maqolaning tavsifini kiriting"
-                      // {...register(`articls.${index}.descriptionuz` as any)}
-                      {...register('headlineUz')}
-                    ></textarea>
-                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                      Sarlavha ru
-                    </FormLabel>
-                    <input
-                      className="flex h-14 w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder="Maqola sarlavhasini kiriting"
-                      // {...register(`articls.${index}.headinguz` as any)}
-                      {...register('textUz')}
-                    />
-                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                      Tavsif ru
-                    </FormLabel>
-                    <textarea
-                      className="flex  w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
-                      rows={5}
-                      placeholder="Maqolaning tavsifini kiriting"
-                      // {...register(`articls.${index}.descriptionru` as any)}
-                      {...register('textRu')}
-                    ></textarea>
-                    {index > 0 && (
-                      <Button
-                        className="mt-2"
-                        variant={"destructive"}
-                        onClick={() => remove(index)}
-                      >
-                        remove
-                      </Button>
-                    )}
-                  </div>
-                ))}
-                <Button
-                  variant={"link"}
-                  className="text-main-300 text-sm"
-                  onClick={() =>
-                    append({
-                      headinlineRu: "",
-                      headlineUZ: "",
-                      textRu: "",
-                      textUz: "",
-                    })
-                  }
-                >
-                  {"+ Sarlavha qo'shing"}
-                </Button>
-              </div>
-            </div>
-
-*/
+export default FormEditArticle;

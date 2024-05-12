@@ -1,12 +1,11 @@
 import FormPostArticle from "./formPost";
 
-interface PageProps {
-}
+interface PageProps {}
 
-const Page: React.FC<PageProps> = ({ }) => {
+const Page: React.FC<PageProps> = ({}) => {
   return (
     <>
-      <FormPostArticle  />
+      <FormPostArticle />
     </>
   );
 };
