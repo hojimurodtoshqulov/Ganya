@@ -29,7 +29,6 @@ const getData = async () => {
 
 export default async function Card() {
     const data = await getData();
-    console.log(data)
 
 
 
@@ -79,7 +78,7 @@ export default async function Card() {
 
 
             <div className="pb-6">
-                {/* <CreateTarif method="POST" /> */}
+                <CreateTarif method="POST" courseId="6634ef485708f2f994e5d899" />
             </div>
 
 

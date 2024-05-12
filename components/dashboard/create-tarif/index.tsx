@@ -17,6 +17,7 @@ interface Props {
 }
 
 const schema = z.object({
+    title: z.string(),
     available_period: z.number().min(1),
     includeResources: z.boolean().default(false).optional(),
     includeSupport: z.boolean().default(false).optional(),
@@ -37,13 +38,14 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
 
     const onSubmit = async (data: Schema) => {
         console.log(data);
-        const api = process.env.NEXT_PUBLIC_BASE_URL + `/plans/" + (method === 'POST' ? 'create' : 'update') + "/${courseId}`;
+        const api = process.env.NEXT_PUBLIC_BASE_URL + `/plans/${method === 'POST' ? 'create' : 'update'}/${courseId}`;
+
         console.log(api);
         try {
             const formData = new FormData();
             formData.append("available_period", data.available_period.toString());
-            // formData.append("includeResources", data.includeResources);
-            // formData.append("includeSupport", data.includeSupport);
+            formData.append("includeResources", data?.includeResources);
+            formData.append("includeSupport", data?.includeSupport);
             formData.append("price", data.price.toString());
 
             const req = await fetch(api, { method: method, body: formData });
@@ -59,10 +61,8 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
     };
 
     return (
-        <div className="flex flex-row justify-between items-center bg-white rounded-2xl p-6">
-            <div>
-                <h1 className="text-[26px] text-main-300">Тарифы</h1>
-            </div>
+        <>            <div className="flex flex-row justify-between items-center bg-white rounded-2xl p-6">
+            <h1 className="text-[26px] text-main-300">Тарифы</h1>
             <Dialog>
                 <DialogTrigger asChild>
                     <Button variant="main" className="text-sm py-2 px-5 font-normal">
@@ -78,7 +78,9 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
                             })} />
                         </div>
                         <div className="flex items-center space-x-2">
-                            <Checkbox id="resourses" checked={resources} onCheckedChange={() => setResources(!resources)} {...register('includeResources')} />
+                            <Checkbox id="resourses" checked={resources} onCheckedChange={() => setResources(!resources)} {...register('includeResources', {
+                                setValueAs: (value) => Boolean(value)
+                            })} />
                             <label
                                 htmlFor="resourses"
                                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -87,7 +89,9 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
                             </label>
                         </div>
                         <div className="flex items-center space-x-2">
-                            <Checkbox id="support" checked={support} onCheckedChange={() => setSupport(!support)} {...register('includeSupport')} />
+                            <Checkbox id="support" checked={support} onCheckedChange={() => setSupport(!support)} {...register('includeSupport', {
+                                setValueAs: (value) => Boolean(value)
+                            })} />
                             <label
                                 htmlFor="support"
                                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -101,9 +105,9 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
                                 type="number"
                                 id="price"
                                 placeholder="Введите сумму тарифного плана"
-                                {...register('price'), {
+                                {...register('price', {
                                     setValueAs: (value: any) => Number(value)
-                                }}
+                                })}
                             />
                         </div>
                         <Button disabled={isSubmitting} className="text-base font-normal" variant={'main'} type="submit">
@@ -113,6 +117,7 @@ const CreateTarif: React.FC<Props> = ({ courseId, method }) => {
                 </DialogContent>
             </Dialog>
         </div>
+        </>
     )
 };
 
