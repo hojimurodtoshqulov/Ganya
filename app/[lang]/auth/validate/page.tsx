@@ -5,7 +5,7 @@ import { smsValidateAction } from "@/lib/actions/auth.actions";
 
 const ValidateSMS: FC = (): JSX.Element => {
   const sms = cookies().get("sms");
-  console.log(sms, "<------");
+  console.log(sms, "<------sms");
 
   return (
     <div className="max-w-[472px] flex flex-col gap-6 justify-center w-full rounded-2xl overflow-hidden bg-white p-6">

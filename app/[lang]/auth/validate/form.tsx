@@ -9,6 +9,7 @@ import SubmitBtn from "../submit-button";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cn } from "@/lib/utils";
 import { redirect } from "next/navigation";
+import ResendCode from "./resend";
 
 type ActionReturn = {
   errorMessage?: string;
@@ -36,7 +37,7 @@ const Form: FC<Props> = ({ action, sms }): JSX.Element => {
         const res = await action(e);
         setState(res);
         if (res?.successMessage) {
-          redirect("/");
+          redirect("/dashboard/client/edu");
         }
       }}
     >
@@ -56,10 +57,7 @@ const Form: FC<Props> = ({ action, sms }): JSX.Element => {
         defaultValue={smsData.sessionId}
         className="hidden"
       />
-      <div className="flex items-center justify-between">
-        <span>0:33</span>
-        <div>Отправить код еще раз</div>
-      </div>
+      <ResendCode sms={sms} />
       <SubmitBtn>Подтвердить</SubmitBtn>
     </form>
   );
