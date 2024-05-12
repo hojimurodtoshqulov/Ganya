@@ -12,47 +12,49 @@ import {
 import { Input } from "@/components/ui/input";
 import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
+import FormPostArticle from "../post/formPost";
+import FormEditArticle from "./FormEdit";
 
-interface hookinterface {
-  titleuz: string;
-  titleru: string;
-  articls: [
-    {
-      headinguz: string;
-      headingru: string;
-      descriptionuz: string;
-      descriptionru: string;
-    },
-  ];
+interface Props {
+  params: any
 }
 
-const Post = () => {
-  const form = useForm<hookinterface>({
-    defaultValues: {
-      titleuz: "",
+const Post: React.FC<Props> = ({ params }) => {
+  /*   const form = useForm<hookinterface>({
+      defaultValues: {
+        titleuz: "",
       titleru: "",
       articls: [
-        {
-          headinguz: "",
-          headingru: "",
-          descriptionuz: "",
-          descriptionru: "",
-        },
+      {
+        headinguz: "",
+      headingru: "",
+      descriptionuz: "",
+      descriptionru: "",
+          },
       ],
-    },
-  });
+      },
+    }); */
 
-  const { control, handleSubmit, register } = form;
+  // const {control, handleSubmit, register} = form;
 
-  const { fields, append, remove } = useFieldArray({
-    name: "articls",
-    control,
-  });
+  //   const {fields, append, remove} = useFieldArray({
+  //     name: "articls",
+  //   control,
+  // });
 
   function onSubmit(data: any) {
     console.log(data);
   }
+
   return (
+    <>
+      <FormEditArticle articleId={params.articleId} />
+    </>
+  );
+};
+
+export default Post;
+/* 
     <div>
       <h2 className="text-[24px] leading-[36px] text-main-300">
         {" Lapinoda tug'ilish. Bu qanday edi? (Maqola nomi)"}
@@ -167,8 +169,4 @@ const Post = () => {
           </form>
         </Form>
       </div>
-    </div>
-  );
-};
-
-export default Post;
+    </div> */
