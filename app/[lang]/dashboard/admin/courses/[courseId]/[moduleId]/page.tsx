@@ -1,44 +1,37 @@
-"use client";
-
 import LessonItem from "@/components/dashboard/add-lesson/lesson-item";
 import { useRouter } from "next/navigation";
-import { FC, useState, useEffect } from "react";
 
 interface Props {
   params: any;
 }
 
-const Page: FC<Props> = ({ params }): JSX.Element => {
-  const [data, setData] = useState<Object | any>(null);
-  const router = useRouter();
 
+const getModuleById = async (id: string) => {
+  try {
+    const api =
+      process.env.NEXT_PUBLIC_BASE_URL +
+      `/modules/single/${id}`;
+    const req = await fetch(api, { cache: "no-store" });
+
+    if (!req.ok) {
+      throw new Error("Failed to fetch module data");
+    }
+    // router.refresh();
+    const data = await req.json();
+    return data
+  } catch (error) {
+    console.error("Error fetching module data:", error);
+  }
+};
+
+
+const Page: React.FC<Props> = async ({ params }): Promise<JSX.Element> => {
+  const data = await getModuleById(params.moduleId)
   const lessonsLength = data?.Lesson?.length;
-
-  useEffect(() => {
-    const getModuleById = async () => {
-      try {
-        const api =
-          process.env.NEXT_PUBLIC_BASE_URL +
-          `/modules/single/${params.moduleId}`;
-        const req = await fetch(api, { cache: "no-store" });
-
-        if (!req.ok) {
-          throw new Error("Failed to fetch module data");
-        }
-        router.refresh();
-        const data = await req.json();
-        setData(data);
-      } catch (error) {
-        console.error("Error fetching module data:", error);
-      }
-    };
-
-    getModuleById();
-  }, []);
 
   return (
     <div>
-      <h1>{data?.titleRu}</h1>
+      <h1 className="text-2xl text-main-300 font-semibold pb-4 ">{data?.titleRu ? data?.titleRu : 'Module title'}</h1>
       <div className="flex flex-col gap-3">
         {data?.Lesson?.map((lesson: any, index: number) => (
           <LessonItem
@@ -60,4 +53,4 @@ const Page: FC<Props> = ({ params }): JSX.Element => {
   );
 };
 
-export default page;
+export default Page;

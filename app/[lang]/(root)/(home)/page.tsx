@@ -48,7 +48,7 @@ export default function Home() {
 
       <div className="container my-20" id="courses">
         <Accordion type="single" collapsible>
-          <CourceCard courceCard={courceCardData} />
+          <CourceCard data={courceCardData} />
         </Accordion>
       </div>
 
