@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import toast, { ToastBar, Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { CiCirclePlus } from "react-icons/ci";
@@ -26,7 +26,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const page: FC<Props> = ({ params }): JSX.Element => {
+const Page: FC<Props> = ({ params }): JSX.Element => {
   const { register, handleSubmit, watch } = useForm<Schema>({
     resolver: zodResolver(schema),
   });
@@ -108,7 +108,7 @@ const page: FC<Props> = ({ params }): JSX.Element => {
     };
 
     getLesson();
-  }, []);
+  }, [params.lessonId]);
 
   return (
     <div className="space-y-5">
@@ -223,4 +223,4 @@ const page: FC<Props> = ({ params }): JSX.Element => {
   );
 };
 
-export default page;
+export default Page;
