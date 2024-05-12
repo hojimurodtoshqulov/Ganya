@@ -3,7 +3,7 @@ const nextConfig = {
   env: {
     BOT_TOKEN: process.env.BOT_TOKEN,
     BOT_CHAT_ID: process.env.BOT_CHAT_ID,
-    BASE_URL: process.env.BASE_URL 
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL
   },
   images: {
     remotePatterns: [

@@ -20,7 +20,7 @@ const DeleteCourse: FC<{ id: string }> = ({ id }): JSX.Element => {
     if (res.ok) {
       router.refresh();
       toast({
-        description: "Course successfully archived!",
+        description: "Course successfully deleted!",
       });
     } else {
       toast({
