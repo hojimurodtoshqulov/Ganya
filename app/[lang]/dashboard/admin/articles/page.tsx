@@ -1,14 +1,12 @@
 "use client";
 
-import CardArticls from "@/components/dashboard/articls/articlscard";
-import CardStatya from "@/components/shared/stati/card-stati";
-import { Button, buttonVariants } from "@/components/ui/button";
-import Heading from "@/components/ui/heading";
-import { Input } from "@/components/ui/input";
+import React, { FC, useState, useEffect } from "react";
 import { Articlsall } from "@/types/auth";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { FC, useState } from "react";
+import CardArticls from "@/components/dashboard/articls/articlscard";
+import { Input } from "@/components/ui/input";
+import { buttonVariants } from "@/components/ui/button";
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch("https://oar-api.onrender.com/api/v1/articles/all", {
@@ -31,22 +29,24 @@ const Articles: FC = (): JSX.Element => {
     }
   };
 
-  useState(() => {
+  useEffect(() => {
     fetchData();
-  });
+  }, []); // useEffect ni ichida ikkala qurilgan funksiyalarni yozding
 
   const filteredData = data.filter((element: Articlsall) =>
     element.titleUz.toLowerCase().includes(searchText.toLowerCase()),
   );
-
-  console.log(filteredData);
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <div className="relative w-[350px] ">
           <Search className="absolute top-[10px] left-2" />
-          <Input placeholder="Поиск статьей" className="w-full pl-[35px]" />
+          <Input
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder="Поиск статьей"
+            className="w-full pl-[35px]"
+          />
         </div>
         <Link
           className={buttonVariants({ variant: "main" })}
@@ -61,7 +61,11 @@ const Articles: FC = (): JSX.Element => {
             <CardArticls
               title={element?.titleUz}
               text={element?.textUz}
-              time="Mar 25, 2024"
+              time={new Date().toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
               minut={9}
               width
             />

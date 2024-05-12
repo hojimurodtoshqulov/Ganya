@@ -141,10 +141,10 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
                 <Button variant={"filled"}>
                   {imageMobile?.name && imageWeb?.name
                     ? "редактировать"
-                    : "Выбрать"}
+                    : "изменять"}
                 </Button>
               </DialogTrigger>
-              <DialogContent className="p-7">
+              <DialogContent className="max-w-[650px] p-10">
                 <div
                   className={cn(
                     "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
@@ -168,14 +168,14 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file1"
                   >
-                    {imageMobile?.name ? "редактировать" : "Выбрать"}
+                    {imageMobile?.name ? "редактировать" : "изменять"}
                   </label>
                   <Input
                     type="file"
                     accept="image/*"
                     className="w-0 h-0 opacity-0 hidden"
                     id="file1"
-                    {...register("imageMobile", { required: true })}
+                    {...register("imageMobile")}
                   />
                 </div>
                 <div
@@ -201,26 +201,26 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file2"
                   >
-                    {imageWeb?.name ? "редактировать" : "Выбрать"}
+                    {imageWeb?.name ? "редактировать" : "изменять"}
                   </label>
                   <Input
                     type="file"
                     accept="image/*"
                     className="w-0 h-0 opacity-0 hidden"
-                    {...register("imageWeb", { required: true })}
+                    {...register("imageWeb")}
                     id="file2"
                   />
                 </div>
                 <div className="relative">
-                  <Link className="absolute top-2 left-3" />
+                  <Link className="absolute top-[1.5rem] left-3" />
                   <Input
                     placeholder="Ссылка"
                     className="mt-4 pl-12"
-                    {...register("link", { required: true })}
+                    {...register("link")}
                   />
                 </div>
                 <DialogClose asChild>
-                  <Button variant={"filled"}>Soxranit</Button>
+                  <Button variant={"main"}>Опубликовать</Button>
                 </DialogClose>
               </DialogContent>
             </Dialog>
@@ -232,26 +232,18 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
             )}
           >
             <div className="flex items-center gap-3">
-              <div className="rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
-                <ImageIcon />
-              </div>
               <div className="text-2xl font-normal flex flex-col ">
-                <h1>Article Image</h1>
-                <p>
-                  {articleImage
-                    ? (articleImage?.name as string)
-                    : "Faqat Article uchun Rasm"}
-                </p>
+                <h1>Добавить рекламный баннер</h1>
               </div>
             </div>
             <label className={buttonVariants({ variant: "filled" })}>
-              {articleImage?.name ? "редактировать" : "Выбрать"}
+              {articleImage?.name ? "редактировать" : "изменять"}
 
               <Input
                 type="file"
                 accept="image/*"
                 className="w-0 h-0 opacity-0 hidden"
-                {...register("articleImage", { required: true })}
+                {...register("articleImage")}
               />
             </label>
           </div>
