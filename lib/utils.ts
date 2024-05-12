@@ -38,7 +38,3 @@ export async function fetchSendMessage(data: FormSchemaType) {
     console.log(error);
   }
 }
-
-
-
-

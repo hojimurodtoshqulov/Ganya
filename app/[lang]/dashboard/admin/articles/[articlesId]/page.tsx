@@ -1,10 +1,42 @@
+"use client";
+
 import { Button, buttonVariants } from "@/components/ui/button";
+import { Articlsall } from "@/types/auth";
 import { Pencil, Trash } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 
-const DetelPage = () => {
+interface propstype {
+  params: {
+    articlesId: string;
+  };
+}
+
+const DetelPage = ({ params }: propstype) => {
+  async function getData<T>(): Promise<T[] | Error> {
+    const res = await fetch(
+      `https://oar-api.onrender.com/api/v1/articles/single/${params.articlesId}`,
+    );
+    if (!res.ok) {
+      return new Error("Failed to fetch data");
+    }
+    return res.json();
+  }
+
+  const [data, setData] = useState<Articlsall>();
+
+  const fetchData = async () => {
+    const result: any = await getData();
+    if (!(result instanceof Error)) {
+      setData(result);
+    }
+  };
+
+  useState(() => {
+    fetchData();
+  });
+
   return (
     <div>
       <Link
@@ -17,26 +49,14 @@ const DetelPage = () => {
       <div className="bg-white rounded-2xl p-6">
         <div className="flex justify-between items-center">
           <h2 className="text-[24px] leading-[36px] text-main-300">
-            {"Lapinoda tug'ilish. Bu qanday edi? (Maqola nomi)"}
+            {data?.headlineUz}
           </h2>
-          <Link href={"/dashboard/admin/articles/edit"}>
+          <Link href={`/dashboard/admin/articles/${params.articlesId}/edit`}>
             <Pencil className="cursor-pointer" />
           </Link>
         </div>
-        <h4 className="text-lg text-main-300 mt-5">1-band</h4>
-        <p className="text-sm mt-1">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem ex
-          officia commodi animi distinctio maiores excepturi quae ipsum natus
-          cum, exercitationem fuga earum tempora voluptatibus odit voluptate
-          illo nesciunt vero!
-        </p>
-        <h4 className="text-lg text-main-300 mt-5">1-band</h4>
-        <p className="text-sm mt-1">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem ex
-          officia commodi animi distinctio maiores excepturi quae ipsum natus
-          cum, exercitationem fuga earum tempora voluptatibus odit voluptate
-          illo nesciunt vero!
-        </p>
+        <h4 className="text-lg text-main-300 mt-5">{data?.textUz}</h4>
+        <p className="text-sm mt-1">{data?.textUz}</p>
       </div>
     </div>
   );
