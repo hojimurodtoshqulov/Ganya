@@ -9,45 +9,72 @@ interface Props {
   };
 }
 
-const OneOfAllCourses: FC<Props> = ({ params: { course } }): JSX.Element => {
+async function getData<T>(id: string): Promise<T | Error> {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/courses/single/" + id,
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+async function getPlan<T>(id: string): Promise<T[] | Error> {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/plans/all/" + id,
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+const OneOfAllCourses: FC<Props> = async ({
+  params: { course },
+}): Promise<JSX.Element> => {
+  const data = await getData<{
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    titleUz: string;
+    titleRu: string;
+    image: string;
+    descriptionUz: string;
+    descriptionRu: string;
+    courseStatus: string;
+    myCoursesId: null;
+    Module: any[];
+  }>(course);
+  if (data instanceof Error) return <h2>Failed to fetch data.</h2>;
+  const plans = await getPlan<{
+    id: string;
+    price: number;
+    available_period: number;
+    title: string;
+    includeSupport: boolean;
+    includeResources: boolean;
+  }>(course);
+  if (plans instanceof Error) return <h2>Failed to fetch data.</h2>;
+
   return (
     <div>
-      <Modules courceCard={courceCardData} />
+      <Modules data={data} />
       <div className="flex gap-6 flex-col justify-center p-6 bg-white mt-5 rounded-2xl">
         <h2 className="font-comfortaa text-main-300 font-semibold text-[26px]">
           Тарифы
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 items-center justify-center lg:grid-cols-3 gap-5 md:gap-6">
-          <Card
-            small
-            title="Базовый пакет:"
-            price="650.000 UZS"
-            content={[
-              "Доступ ко всем видеоурокам в течение 3 месяцев с момента приобретения курса.",
-            ]}
-          />
-
-          <Card
-            small
-            title="Стандартный"
-            price="850.000 UZS"
-            content={[
-              "Доступ ко всем видеоурокам в течение 6 месяцев с момента приобретения курса.",
-              "Дополнительные текстовые материалы.",
-            ]}
-            pro
-          />
-
-          <Card
-            small
-            title="Премиум пакет:"
-            price="1 200 000 UZS"
-            content={[
-              "Доступ ко всем видеоурокам в течение 1 года с момента приобретения курса.",
-              "Дополнительные текстовые материалы.",
-              "1 онлайн - консультации со мной.",
-            ]}
-          />
+          {plans.map((plan) => (
+            <Card key={plan.id} values={plan} btn small />
+          ))}
         </div>
       </div>
     </div>

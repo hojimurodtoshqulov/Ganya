@@ -1,5 +1,6 @@
 import Image from "next/image";
-import userImage from "@/images/IMG_0574 1.jpg";
+import userImage1 from "@/images/about1.png";
+import userImage2 from "@/images/about2.png";
 
 interface InfoProps {
   title: string;
@@ -39,7 +40,7 @@ function Info(props: InfoProps): JSX.Element {
           <Image
             className="w-full h-full rounded-[40px] min-w-[343px] max-[370px]:min-w-[300px] max-w-[536px] max-[900px]:h-[416px] max-[900px]:max-w-full"
             priority
-            src={userImage}
+            src={props.sort ? userImage2 : userImage1}
             alt="Picture of the author"
           />
         </div>

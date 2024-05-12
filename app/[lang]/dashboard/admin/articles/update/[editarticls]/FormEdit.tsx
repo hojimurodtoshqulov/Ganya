@@ -105,16 +105,14 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
             <Dialog>
               <DialogTrigger asChild>
                 <Button /* onClick={() => setModal(true)} */ variant={"filled"}>
-                  {imageMobile?.name && imageWeb?.name
-                    ? "редактировать"
-                    : "Выбрать"}
+                  {imageMobile && imageWeb ? "редактировать" : "Выбрать"}
                 </Button>
               </DialogTrigger>
               <DialogContent className="p-7">
                 <div
                   className={cn(
                     "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
-                    "border-destructive" === errors?.imageMobile,
+                    { "border-destructive": errors?.imageMobile },
                   )}
                 >
                   <div className="flex items-center">
@@ -125,7 +123,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
                       <h2 className="text-2xl font-normal"> Обложка </h2>
                       <p className="text-base">
                         {imageMobile
-                          ? (imageMobile?.name as string)
+                          ? (imageMobile as string)
                           : "Выберите или перетащите обложку для курса"}
                       </p>
                     </div>
@@ -134,7 +132,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file1"
                   >
-                    {imageMobile?.name ? "редактировать" : "Выбрать"}
+                    {imageMobile ? "редактировать" : "Выбрать"}
                   </label>
                   <Input
                     type="file"
@@ -147,7 +145,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
                 <div
                   className={cn(
                     "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center ",
-                    "border-destructive" === errors?.imageWeb,
+                    { "border-destructive": errors?.imageWeb },
                   )}
                 >
                   <div className="flex items-center">
@@ -158,7 +156,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
                       <h2 className="text-2xl font-normal">Обложка Web</h2>
                       <p className="text-base">
                         {imageWeb
-                          ? (imageWeb?.name as string)
+                          ? (imageWeb as string)
                           : "Выберите или перетащите обложку для курса"}
                       </p>
                     </div>
@@ -167,7 +165,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file2"
                   >
-                    {imageWeb?.name ? "редактировать" : "Выбрать"}
+                    {imageWeb ? "редактировать" : "Выбрать"}
                   </label>
                   <Input
                     type="file"
@@ -198,7 +196,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
           <div
             className={cn(
               "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center mt-4 mb-2",
-              "border-destructive" === errors?.articleImage,
+              { "border-destructive": errors?.articleImage },
             )}
           >
             <div className="flex items-center gap-3">
@@ -209,13 +207,13 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
                 <h1>Article Image</h1>
                 <p>
                   {articleImage
-                    ? (articleImage?.name as string)
+                    ? (articleImage as string)
                     : "Faqat Article uchun Rasm"}
                 </p>
               </div>
             </div>
             <label className={buttonVariants({ variant: "filled" })}>
-              {articleImage?.name ? "редактировать" : "Выбрать"}
+              {articleImage ? "редактировать" : "Выбрать"}
 
               <Input
                 type="file"
@@ -232,7 +230,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
               type="text"
               id="titleRu"
               placeholder="Базовый пакет:"
-              className={cn("border-destructive" === errors?.titleRu)}
+              className={cn({ "border-destructive": errors?.titleRu })}
               {...register("titleRu", { required: true })}
             />
           </div>
@@ -242,7 +240,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
               type="text"
               id="titleUz"
               placeholder="Asosiy paket:"
-              className={cn("border-destructive" === errors?.titleUz)}
+              className={cn({ "border-destructive": errors?.titleUz })}
               {...register("titleUz", { required: true })}
             />
           </div>
@@ -253,7 +251,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
               type="text"
               id="headlineRu"
               placeholder="Базовый пакет:"
-              className={cn("border-destructive" === errors?.headlineRu?.types)}
+              className={cn({ "border-destructive": errors?.headlineRu })}
               {...register("headlineRu", { required: true })}
             />
           </div>
@@ -263,7 +261,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
               type="text"
               id="headlineUz"
               placeholder="Asosiy paket:"
-              className={cn("border-destructive" === errors?.headlineUz)}
+              className={cn({ "border-destructive": errors?.headlineUz })}
               {...register("headlineUz")}
             />
           </div>
@@ -272,7 +270,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
             <Textarea
               id="textRu"
               placeholder="Преимущество 1"
-              className={cn("border-destructive" === errors?.textRu)}
+              className={cn({ "border-destructive": errors?.textRu })}
               {...register("textRu")}
             />
           </div>
@@ -280,7 +278,7 @@ const FormEditArticle: FC<Props> = ({ defaultValues, articleId }) => {
             <Label htmlFor={`textUz`}>Tavsif</Label>
             <Textarea
               placeholder="Преимущество 1"
-              className={cn("border-destructive" === errors?.textUz)}
+              className={cn({ "border-destructive": errors?.textUz })}
               {...register("textUz")}
             />
           </div>
