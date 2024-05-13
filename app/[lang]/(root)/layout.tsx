@@ -11,7 +11,6 @@ const Layout: FC<Props> = ({ children }): JSX.Element => {
     <div className="bg-white">
       <Header />
       <main>{children}</main>
-
       <Footer />
     </div>
   );
