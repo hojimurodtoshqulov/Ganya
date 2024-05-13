@@ -65,5 +65,6 @@ export interface Articlsall {
   imageWeb: any;
   imageMobile: any;
   link: string;
+  articleImage: any;
   isPublished: boolean;
 }

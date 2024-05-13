@@ -5,11 +5,11 @@ import date from "date-and-time";
 import { Articlsall } from "@/types/auth";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import Link from "next/link";
 import CardStatya from "@/components/shared/stati/card-stati";
 import Heading from "@/components/ui/heading";
 import Image from "next/image";
 import images from "@/images/showcase-hero1.png";
+import Link from "next/link";
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch("https://oar-api.onrender.com/api/v1/articles/all", {
@@ -18,7 +18,7 @@ async function getData<T>(): Promise<T[] | Error> {
   if (!res.ok) {
     return new Error("Failed to fetch data");
   }
-  return res.json();
+  return res?.json();
 }
 
 const Articles: FC = () => {
@@ -41,17 +41,17 @@ const Articles: FC = () => {
   );
 
   return (
-    <div className="container p-20">
+    <div className="container pt-20">
       <div className="container">
         <Image
-          className="bg-red-400"
+          className="w-full aspect-[66/17] h-[340px] object-cover rounded-[40px]"
           width={1320}
           height={400}
           src={images}
           alt="Articls image baner"
         />
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex lg:flex-row mt-10 flex-col gap-2 items-center justify-between">
         <Heading text="Статьи" />
         <div className="relative w-[350px] ">
           <Search className="absolute top-[10px] left-2" />
@@ -65,14 +65,12 @@ const Articles: FC = () => {
       </div>
       <div className="grid lg:grid-cols-3 gap-6 mt-10 md:grid-cols-2 grid-cols-1">
         {filteredData?.map((element: Articlsall, i) => (
-          <Link key={i} href={`/articles/${element.id}`}>
+          <Link key={element.id} href={`/articles/${element.id}`}>
             <CardStatya
               hight
-              key={element.id}
               title={element.titleUz}
               text={element.textUz}
               time={`${date.parse(element.createdAt, "DD-MM-YYYY")}`}
-              minut={9}
               bacraund
               width
             />
