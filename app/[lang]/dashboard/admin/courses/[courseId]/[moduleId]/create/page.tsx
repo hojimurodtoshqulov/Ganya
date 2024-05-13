@@ -1,7 +1,15 @@
 import { FC } from "react";
+import FormCreateLesson from "./FormCreateLesson";
 
-const CreateLesson: FC = (): JSX.Element => {
-  return <div>Yangi dars qushish uchun page, form</div>;
+interface Props {
+  params: any;
+}
+
+  
+const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
+  return (
+    <div><FormCreateLesson params={params} /></div>
+  )
 };
 
 export default CreateLesson;

@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Layout: FC<Props> = ({ children, params: { lang } }): JSX.Element => {
-  const [open, setOpen] = useState<boolean>();
+  const [open, setOpen] = useState<boolean>(true);
   const handleClick = useCallback(() => setOpen((p) => !p), []);
   useLayoutEffect(() => {
     if (window.innerWidth < 1024) {
@@ -36,7 +36,7 @@ const Layout: FC<Props> = ({ children, params: { lang } }): JSX.Element => {
         <div className="sticky top-0 left-0 w-full z-10">
           <Header handleClick={handleClick} />
         </div>
-        <main className="px-4 py-3 md:p-6">{children}</main>
+        <main className="px-4 pt-3 md:p-6 md:pb-0">{children}</main>
       </div>
     </div>
   );

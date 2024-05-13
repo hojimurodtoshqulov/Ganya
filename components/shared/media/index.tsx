@@ -5,15 +5,15 @@ import Link from "next/link";
 
 const Media: FC = () => {
   return (
-    <div className="flex gap-5 items-center">
+    <div className="flex gap-5 items-center text-main-100">
       <Link href={"#"}>
-        <FaYoutube size={35} className="text-main-300" />
+        <FaYoutube size={35} />
       </Link>
       <Link href={"#"}>
-        <FaInstagram size={35} className="text-main-300" />
+        <FaInstagram size={35} />
       </Link>
       <Link href={"#"}>
-        <FaTelegram size={35} className="text-main-300" />
+        <FaTelegram size={35} />
       </Link>
     </div>
   );

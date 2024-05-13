@@ -6,15 +6,16 @@ interface CardProps {
   minut: number;
   bacraund?: boolean;
   width?: boolean;
+  hight?: boolean;
 }
 
 function CardStatya(props: CardProps) {
   return (
     <div
-      className={`flex flex-wrap flex-col gap-4 rounded-[40px] p-6 ${!props.width ? "max-w-[424px]" : "w-full"} h-[374px] justify-between ${!props.bacraund ? "bg-white" : "bg-[#F4F5F5]"}`}
+      className={`flex flex-wrap flex-col gap-4 rounded-[40px] p-6 ${!props.width ? "max-w-[424px]" : "w-full"} ${!props.hight ? "h-[375px]" : "h-auto"} justify-between ${!props.bacraund ? "bg-white" : "bg-[#F4F5F5]"}`}
     >
       <div className="flex flex-col gap-3">
-        <h2 className="text-[32px] leading-[44px] font-comfortaa text-csneutral-600">
+        <h2 className="text-[12px] leading-[44px] font-comfortaa text-csneutral-600">
           {props.title}
         </h2>
         <p className="text-[22px] leading-[32px] text-csneutral-500">

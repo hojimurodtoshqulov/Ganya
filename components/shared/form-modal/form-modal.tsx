@@ -48,7 +48,10 @@ function FormModal() {
         }}
       >
         <DialogTrigger asChild>
-          <Button className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8" variant={"main"}>
+          <Button
+            className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8"
+            variant={"main"}
+          >
             Оставить заявку
           </Button>
         </DialogTrigger>
@@ -74,7 +77,10 @@ function FormModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8" variant={"main"}>
+        <Button
+          className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8 text-main-300"
+          variant={"filled"}
+        >
           Оставить заявку
         </Button>
       </DialogTrigger>

@@ -15,6 +15,8 @@ import {
 import { SquarePen } from "lucide-react";
 import { FC } from "react";
 import AddCourseForm from "../add-course/form";
+import DeleteCourse from "./delete";
+import ArchiveCourse from "./archive";
 
 interface ICard {
   id: string;
@@ -29,7 +31,7 @@ interface ICard {
 }
 
 async function getData<T>(): Promise<T[] | Error> {
-  const res = await fetch(process.env.NEXT_APP_API_URL + "/courses/all", {
+  const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/courses/all", {
     cache: "no-store",
   });
 
@@ -40,7 +42,9 @@ async function getData<T>(): Promise<T[] | Error> {
   return res.json();
 }
 
-const AllCourses: FC = async (): Promise<JSX.Element> => {
+const AllCourses: FC<{
+  lang: "ru" | "uz";
+}> = async ({ lang }): Promise<JSX.Element> => {
   const data = await getData<ICard>();
   if (data instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
@@ -60,7 +64,7 @@ const AllCourses: FC = async (): Promise<JSX.Element> => {
         }) => (
           <CourseCard
             image={image}
-            title={titleRu}
+            title={lang === "ru" ? titleRu : titleUz}
             status={courseStatus}
             id={id}
             key={id}
@@ -74,31 +78,34 @@ const AllCourses: FC = async (): Promise<JSX.Element> => {
               <DropdownMenuContent className="rounded-xl w-52 text-sm text-csneutral-500">
                 <LinkById href={`${id}/update`} className="px-2 block">
                   Редактировать
-                  <DropdownMenuSeparator />
                 </LinkById>
-                <>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <p className="px-2 cursor-pointer">Переименовать</p>
-                    </DialogTrigger>
-                    <DialogContent className="p-8 !rounded-2xl max-w-[648px]">
-                      <DialogHeader className="text-2xl text-main-300 font-medium">
-                        Переименовать
-                      </DialogHeader>
-                      <AddCourseForm
-                        method="PATCH"
-                        id={id}
-                        defaultValues={{
-                          titleRu,
-                          titleUz,
-                          descriptionRu,
-                          descriptionUz,
-                          image,
-                        }}
-                      />
-                    </DialogContent>
-                  </Dialog>
-                </>
+                <DropdownMenuSeparator />
+
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <p className="px-2 cursor-pointer">Переименовать</p>
+                  </DialogTrigger>
+                  <DialogContent className="p-8 !rounded-2xl max-w-[648px]">
+                    <DialogHeader className="text-2xl text-main-300 font-medium">
+                      Переименовать
+                    </DialogHeader>
+                    <AddCourseForm
+                      method="PATCH"
+                      id={id}
+                      defaultValues={{
+                        titleRu,
+                        titleUz,
+                        descriptionRu,
+                        descriptionUz,
+                        image,
+                      }}
+                    />
+                  </DialogContent>
+                </Dialog>
+                <DropdownMenuSeparator />
+                <ArchiveCourse id={id} />
+                <DropdownMenuSeparator />
+                <DeleteCourse id={id} />
               </DropdownMenuContent>
             </DropdownMenu>
           </CourseCard>

@@ -7,9 +7,9 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Logo from "@/icons/Logo.svg";
 import Search from "@/icons/search.svg";
-import Globo from "@/icons/lang.svg";
 import Arow from "/public/icons/btn-arrow.svg";
 import { buttonVariants } from "@/components/ui/button";
+import LocaleSwitcher from "../locale-switcher";
 
 interface NavLinkType {
   id: number;
@@ -19,6 +19,7 @@ interface NavLinkType {
 
 const HomeNavbar: FC = () => {
   const [currentHash, setCurrentHash] = useState("#about");
+  const [scrolled, setScrolled] = useState(false);
   const prevHashRef = useRef(currentHash);
   const pathname = usePathname();
 
@@ -27,10 +28,20 @@ const HomeNavbar: FC = () => {
       setCurrentHash(window.location.hash);
     };
 
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
     window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -40,12 +51,10 @@ const HomeNavbar: FC = () => {
     }
   }, [currentHash]);
 
-  // Boshqa useEffect lar mavjudmi mumkin
-
-  // console.log(currentHash.replace("#", ""));
-
   return (
-    <nav className="fixed top-2 left-0 w-full z-50">
+    <nav
+      className={`fixed py-2  left-0 w-full z-50 ${scrolled ? "backdrop-blur-md" : ""}`}
+    >
       <div className="container flex justify-between items-center">
         <div>
           <Link href={"/"}>
@@ -71,16 +80,13 @@ const HomeNavbar: FC = () => {
         ) : null}
 
         <div className="flex items-center gap-5">
-          <div className="p-3 bg-white rounded-xl cursor-pointer">
-            <Image src={Search} width={20} height={20} alt="search" />
-          </div>
-          <div className="p-3 bg-white rounded-xl cursor-pointer">
-            <Image src={Globo} width={20} height={20} alt="lang icon" />
+          <div className="p-3 bg-white rounded-xl cursor-pointer flex items-center justify-center">
+            <LocaleSwitcher />
           </div>
           <div>
             <Link
               className={`${buttonVariants({ variant: "main" })} flex gap-1`}
-              href="#"
+              href={`${pathname}/auth/sign-in`}
             >
               Войти
               <Image src={Arow} alt="arrow" />

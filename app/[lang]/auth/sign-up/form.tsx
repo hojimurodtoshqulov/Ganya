@@ -8,8 +8,8 @@ import { PasswordInput } from "../password-input";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
-import { useFormStatus } from "react-dom";
 import SubmitBtn from "../submit-button";
+import { useToast } from "@/components/ui/use-toast";
 
 const conditions = [
   "Не менее 8 символов",
@@ -32,6 +32,7 @@ interface Props {
 
 const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
   const router = useRouter();
+  const { toast } = useToast();
   const [state, setState] = useState<ActionReturn>();
 
   const termsErr = getActionErrors("terms", state?.errors)?.[0];
@@ -52,6 +53,10 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
           router.push("/auth/validate");
         } else {
           // error toast
+          toast({
+            description: result?.message,
+            variant: "destructive",
+          });
           console.log(result?.message);
         }
       }}
