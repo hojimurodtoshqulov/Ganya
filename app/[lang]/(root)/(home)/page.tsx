@@ -129,7 +129,7 @@ export default async function Home() {
       <FAQ />
 
       <div id="articles">
-        <Stati />
+        <Stati container="container" />
       </div>
 
       <div id="contacts">
