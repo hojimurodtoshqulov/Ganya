@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import React from "react";
 import CardStatya from "./card-stati";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Articlsall } from "@/types/auth";
@@ -22,7 +24,7 @@ async function Stati({ container }: { container?: string }) {
         <h2 className="title text-h2 leading-[56px] mb-8">Статьи</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {getdata.slice(-3).map((article: Articlsall) => (
-            <Link key={article?.id} href={`/articles/${article.id}`}>
+            <Link key={article.id} href={`/articles/${article.id}`}>
               <CardStatya
                 key={article.id}
                 title={article.headlineUz}

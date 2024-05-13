@@ -42,7 +42,8 @@ const FormLessonEdit: FC<Props> = ({ params, data }): JSX.Element => {
   const router = useRouter();
 
   const { video: videoFile } = watch();
-  const videoName = videoFile && videoFile.length > 0 ? videoFile[0]?.name : "";
+
+  const videoName = typeof videoFile !== "string" ? videoFile[0]?.name : "";
 
   const onSubmit = async (values: Schema) => {
     try {

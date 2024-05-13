@@ -31,7 +31,7 @@ const Articles: FC = (): JSX.Element => {
 
   useEffect(() => {
     fetchData();
-  }, []); // useEffect ni ichida ikkala qurilgan funksiyalarni yozding
+  }, []);
 
   const filteredData = data.filter((element: Articlsall) =>
     element.titleUz.toLowerCase().includes(searchText.toLowerCase()),

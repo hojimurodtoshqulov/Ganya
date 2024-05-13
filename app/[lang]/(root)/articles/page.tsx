@@ -5,11 +5,11 @@ import date from "date-and-time";
 import { Articlsall } from "@/types/auth";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import Link from "next/link";
 import CardStatya from "@/components/shared/stati/card-stati";
 import Heading from "@/components/ui/heading";
 import Image from "next/image";
 import images from "@/images/showcase-hero1.png";
+import Link from "next/link";
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch("https://oar-api.onrender.com/api/v1/articles/all", {
@@ -68,7 +68,6 @@ const Articles: FC = () => {
           <Link key={element.id} href={`/articles/${element.id}`}>
             <CardStatya
               hight
-              key={element.id}
               title={element.titleUz}
               text={element.textUz}
               time={`${date.parse(element.createdAt, "DD-MM-YYYY")}`}

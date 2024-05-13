@@ -38,7 +38,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const FormEditArticle: FC = ({ articleId }: Props) => {
+const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -47,25 +47,7 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
     formState: { errors, isSubmitting },
   } = useForm<Schema>({
     resolver: zodResolver(schema),
-    defaultValues: async () => {
-      const response = await fetch(
-        `https://oar-api.onrender.com/api/v1/articles/single/${articleId}`,
-      );
-
-      const data = await response.json();
-
-      return {
-        headlineUz: data?.headlineUz,
-        headlineRu: data?.headlineRu,
-        textUz: data?.textUz,
-        textRu: data?.textRu,
-        link: data?.link,
-        titleRu: data?.titleRu,
-        titleUz: data?.titleUz,
-        imageMobile: data?.imageMobile,
-        imageWeb: data?.imageWeb,
-      };
-    },
+    defaultValues: defaultValues,
   });
 
   const imageWeb: any = watch("imageWeb") && (watch("imageWeb")[0] ?? {});
@@ -76,7 +58,6 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
 
   async function onSubmit(data: Schema) {
     const formData = new FormData();
-
     formData.append("bannerImageWeb", data.imageWeb[0]);
     formData.append("bannerImageMobile", data.imageMobile[0]);
     formData.append("articleImage", data.articleImage[0]);
@@ -88,7 +69,8 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
     formData.append("textUz", data.textUz);
     formData.append("link", data.link);
 
-    const api = `https://oar-api.onrender.com/api/v1/articles/update/${articleId}`;
+    const api =
+      process.env.NEXT_PUBLIC_BASE_URL + `/articles/update/${articleId}`;
 
     try {
       const req = await fetch(api, { method: "PATCH", body: formData });
@@ -104,12 +86,9 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
   }
 
   const DeleteFun = () => {
-    fetch(
-      "https://oar-api.onrender.com/api/v1/articles/" + `remove/${articleId}`,
-      {
-        method: "DELETE",
-      },
-    )
+    fetch(process.env.NEXT_PUBLIC_BASE_URL + `/articles/remove/${articleId}`, {
+      method: "DELETE",
+    })
       .then((res) => res.text())
       .then(
         (res) => (

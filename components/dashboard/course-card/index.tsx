@@ -11,16 +11,36 @@ interface Props {
   id: string;
 }
 
-const CourseCard: FC<Props> = ({
+async function getData<T>(id: string): Promise<T[] | Error> {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/plans/all/" + id,
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+const CourseCard: FC<Props> = async ({
   image,
   status,
   title,
   children,
   id,
-}): JSX.Element => {
+}): Promise<JSX.Element> => {
+  const plans = await getData<{
+    price: number;
+  }>(id);
 
+  if (plans instanceof Error) {
+    return <h2>Failed to fetch data.</h2>;
+  }
 
-  
   return (
     <div className="rounded-2xl overflow-hidden bg-white flex flex-col">
       <div className="relative aspect-[9/5]">
@@ -34,7 +54,9 @@ const CourseCard: FC<Props> = ({
         <h4 className="text-lg font-semibold">{title}</h4>
 
         <div className="space-y-2">
-          <h3 className="text-lg text-main-300 font-semibold">600.000 UZS</h3>
+          <h3 className="text-lg text-main-300 font-semibold">
+            {plans?.[0]?.price ? plans?.[0]?.price + " UZS" : "0 UZS"}
+          </h3>
           <Status status={status} />
         </div>
       </LinkById>
@@ -44,7 +66,7 @@ const CourseCard: FC<Props> = ({
 
 export default CourseCard;
 
-const Status: FC<{
+export const Status: FC<{
   status: string;
 }> = ({ status }) => {
   return (

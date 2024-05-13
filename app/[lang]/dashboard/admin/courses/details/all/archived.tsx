@@ -18,7 +18,7 @@ import AddCourseForm from "../add-course/form";
 import DeleteCourse from "./delete";
 import ArchiveCourse from "./archive";
 
-interface ICard {
+export interface ICard {
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -38,7 +38,7 @@ async function getData<T>(): Promise<T[] | Error> {
       cache: "no-store",
     },
   );
-  console.log(res, "<------ res");
+
   if (!res.ok) {
     return new Error("Failed to fetch data");
   }
