@@ -9,7 +9,8 @@ interface PlanCardProps {
     includeResources: boolean;
     includeSupport: boolean;
     price: number;
-    title: string;
+    titleUz: string;
+    titleRu: string;
   };
   pro?: boolean;
   small?: boolean;
@@ -26,7 +27,7 @@ function PlanCard(props: PlanCardProps): JSX.Element {
         <h2
           className={`title ${props.small ? "text-xl" : "text-2xl md:text-[32px]"} font-comfortaa font-semibold ${props.pro ? "text-main-100" : "text-csneutral-600"}`}
         >
-          {props.values?.title}
+          {props.values?.titleRu}
         </h2>
         <ul className="flex flex-col gap-2">
           <li className="flex gap-2 items-start">
