@@ -20,9 +20,12 @@ async function Tariflar({ id }: { id: string }) {
     includeResources: boolean;
     includeSupport: boolean;
     price: number;
-    title: string;
+    titleUz: string;
+    titleRu: string;
     id: string;
   }>(id);
+
+  console.log(data,"<--- home page plans")
 
   if (data instanceof Error) return <h2>Failed to fetch data.</h2>;
 

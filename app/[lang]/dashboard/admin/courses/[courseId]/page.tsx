@@ -40,7 +40,8 @@ const SingleCourse: FC<{ params: { courseId: string } }> = async ({
     includeResources: boolean;
     includeSupport: boolean;
     price: number;
-    title: string;
+    titleUz: string;
+    titleRu: string;
     id: string;
   }>(courseId);
   if (course instanceof Error || plans instanceof Error)
