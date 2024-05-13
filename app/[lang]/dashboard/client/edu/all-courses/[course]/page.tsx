@@ -58,7 +58,8 @@ const OneOfAllCourses: FC<Props> = async ({
     id: string;
     price: number;
     available_period: number;
-    title: string;
+    titleUz: string;
+    titleRu: string;
     includeSupport: boolean;
     includeResources: boolean;
   }>(course);

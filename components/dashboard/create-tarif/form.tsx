@@ -24,9 +24,9 @@ interface Props {
 }
 
 const schema = z.object({
-  // titleUz: z.string().min(1),
-  // titleRu: z.string().min(1),
-  title: z.string().min(1),
+  titleUz: z.string().min(1),
+  titleRu: z.string().min(1),
+  // title: z.string().min(1),
   available_period: z.number().min(1),
   includeResources: z.boolean().default(false).optional(),
   includeSupport: z.boolean().default(false).optional(),
@@ -101,18 +101,18 @@ const CreateTarifForm: React.FC<Props> = ({
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-4 w-full"
     >
-      <div className="grid w-full  items-center gap-1.5">
+      {/* <div className="grid w-full  items-center gap-1.5">
         <Label htmlFor="title">Title</Label>
         <Input id="title" placeholder="Title" {...register("title")} />
-      </div>
-      {/* <div className="grid w-full  items-center gap-1.5">
+      </div> */}
+      <div className="grid w-full  items-center gap-1.5">
         <Label htmlFor="titleUz">Title UZ</Label>
         <Input id="titleUz" placeholder="Title uz" {...register("titleUz")} />
       </div>
       <div className="grid w-full  items-center gap-1.5">
         <Label htmlFor="titleRu">Title RU</Label>
         <Input id="titleRu" placeholder="Title ru" {...register("titleRu")} />
-      </div> */}
+      </div>
       <div className="grid w-full  items-center gap-1.5">
         <Label htmlFor="load">Davomiyligi</Label>
         <Input
