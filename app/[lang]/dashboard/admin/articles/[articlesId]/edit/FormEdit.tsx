@@ -62,6 +62,8 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
         link: data?.link,
         titleRu: data?.titleRu,
         titleUz: data?.titleUz,
+        imageMobile: data?.imageMobile,
+        imageWeb: data?.imageWeb,
       };
     },
   });
@@ -74,6 +76,7 @@ const FormEditArticle: FC = ({ articleId }: Props) => {
 
   async function onSubmit(data: Schema) {
     const formData = new FormData();
+
     formData.append("bannerImageWeb", data.imageWeb[0]);
     formData.append("bannerImageMobile", data.imageMobile[0]);
     formData.append("articleImage", data.articleImage[0]);

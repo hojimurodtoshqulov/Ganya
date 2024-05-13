@@ -3,7 +3,7 @@ interface CardProps {
   title: string;
   text: string;
   time: string;
-  minut: number;
+
   bacraund?: boolean;
   width?: boolean;
   hight?: boolean;
@@ -24,7 +24,6 @@ function CardStatya(props: CardProps) {
       </div>
 
       <div className="flex gap-2 text-lg">
-        <p>{props.minut} минут чтения</p>
         <span>·</span> <p>{props.time}</p>
       </div>
     </div>

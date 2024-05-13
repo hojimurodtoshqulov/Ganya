@@ -1,11 +1,11 @@
 "use client";
 
-import Stati from "@/components/shared/stati/stati";
+import { FC, useEffect, useState } from "react";
 import Heading from "@/components/ui/heading";
-import { Articlsall } from "@/types/auth";
 import Image from "next/image";
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
+import Stati from "@/components/shared/stati/stati";
+import { Articlsall } from "@/types/auth";
 import images from "@/images/siblings-hero.png";
 
 interface Props {
@@ -23,28 +23,29 @@ const SingleArticle: FC<Props> = ({ params }: Props): JSX.Element => {
     )
       .then((res) => res.json())
       .then((json) => setData(json));
-  }, [params?.articleId]);
+  }, [params.articleId]);
+
+  console.log(data, "<---- this is data");
 
   return (
-    <div className="container">
-      <div className="pt-32">
+    <div>
+      <div className="pt-32 ">
         <Image
-          className="max-w[1320px] h-[328px] object-cover rounded-[40px]"
+          className="w-full aspect-[66/17] h-[340px] object-cover rounded-[40px]"
           src={images}
           width={1320}
           height={328}
           alt="images"
         />
       </div>
-
-      <div className=" pt-28">
-        <div className="flex justify-between gap-6">
-          <div className="bg-">
-            <Heading text={`${data?.titleUz}`} />
+      <div className="pt-28">
+        <div className="flex lg:flex-row flex-col-reverse  justify-between container w-full gap-6">
+          <div className="bg-csneutral-100 p-10 rounded-[40px]">
+            <Heading text={`${data?.headlineRu}`} />
             <h2 className="font-normal text-[32px] leading-[44px] mb-4 font-comfortaa mt-8">
               Подзаголовок
             </h2>
-            <p className="font-normal text-2xl text-[#585D65] max-w-[827px]">
+            <p className="font-normal text-2xl text-[#585D65]">
               {`${data?.textUz}`} Lorem ipsum dolor sit amet consectetur
               adipisicing elit. At iusto quia iste facere ullam. Ipsa magnam hic
               officia facilis sequi nisi animi illum accusantium vitae! Nisi,
@@ -83,19 +84,19 @@ const SingleArticle: FC<Props> = ({ params }: Props): JSX.Element => {
               cupiditate velit et.
             </p>
           </div>
-          <Link className="w-[30%]" href={`${data?.link}`}>
+          <Link className="flex flex-col" href={`${data?.link}`}>
             <Image
-              src={data?.imageWeb}
-              className="w-[424px] h-[620px] object-cover rounded-[40px]"
-              width={424}
-              height={620}
+              src={"/public/images/siblings-hero.png"}
+              className="lg:w-[425px] w-full lg:h-[620px] h-[140px]  object-cover rounded-[40px] bg-slate-400 "
+              width={0}
+              height={0}
               alt="Image baner"
             />
           </Link>
         </div>
       </div>
-      <div id="articles">
-        <Stati />
+      <div>
+        <Stati container="container" />
       </div>
     </div>
   );
