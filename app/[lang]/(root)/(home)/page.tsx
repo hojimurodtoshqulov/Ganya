@@ -13,6 +13,7 @@ import TeamCard from "@/components/shared/team";
 import Tariflar from "@/components/shared/tariflar/tariflar";
 import Stati from "@/components/shared/stati/stati";
 import CurseHelp from "@/components/shared/curs-helped";
+import { teamMembers } from "@/constants/team";
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch(
@@ -113,8 +114,8 @@ export default async function Home() {
       <div className="container mb-16" id="team">
         <Carousel
           title="Команда"
-          data={[0, 1, 2, 3, 4, 5].map((r, i) => (
-            <TeamCard key={i} />
+          data={teamMembers.map((team, i) => (
+            <TeamCard key={i} data={team} />
           ))}
         />
       </div>
