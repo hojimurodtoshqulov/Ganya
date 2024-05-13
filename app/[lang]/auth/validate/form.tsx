@@ -8,7 +8,7 @@ import { FC, useState } from "react";
 import SubmitBtn from "../submit-button";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cn } from "@/lib/utils";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import ResendCode from "./resend";
 
 type ActionReturn = {
@@ -23,7 +23,9 @@ interface Props {
 
 const Form: FC<Props> = ({ action, sms }): JSX.Element => {
   const [state, setState] = useState<ActionReturn>();
+  const router = useRouter();
   console.log(state);
+
   if (!sms) {
     redirect("/auth/sign-up");
   }
@@ -36,8 +38,9 @@ const Form: FC<Props> = ({ action, sms }): JSX.Element => {
       action={async (e: FormData) => {
         const res = await action(e);
         setState(res);
+        console.log(res)
         if (res?.successMessage) {
-          redirect("/dashboard/client/edu");
+          router.push("/dashboard/client/edu");
         }
       }}
     >
