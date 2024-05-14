@@ -31,7 +31,11 @@ interface ICard {
 }
 
 async function getData<T>(): Promise<T[] | Error> {
+<<<<<<< HEAD
   const res = await fetch("https://oar-api.onrender.com/api/v1/courses/all", {
+=======
+  const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/courses/all", {
+>>>>>>> main
     cache: "no-store",
   });
 

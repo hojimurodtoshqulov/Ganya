@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ZodIssue } from "zod";
 import { redirect } from "next/navigation";
 import SubmitBtn from "../submit-button";
+import { useToast } from "@/components/ui/use-toast";
 
 type ActionReturn = {
   errors?: ZodIssue[];
@@ -20,6 +21,7 @@ interface Props {
 
 const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
   const [state, setState] = useState<ActionReturn>();
+  const { toast } = useToast();
 
   const emailOrPhoneErr = getActionErrors("emailOrPhone", state?.errors)?.[0];
   const passwordErr = getActionErrors("password", state?.errors)?.[0];
@@ -31,9 +33,13 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
         if (result?.errors) {
           setState((p) => ({ ...p, errors: result.errors }));
         } else if (result?.successMessage) {
-          redirect("/");
+          redirect("/dashboard/client/edu");
         } else {
           // error toast
+          toast({
+            description: result?.errorMessage,
+            variant: "destructive",
+          });
           console.log(result?.errorMessage);
         }
       }}

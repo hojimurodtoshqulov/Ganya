@@ -9,10 +9,9 @@ interface Props {
 const Layout: FC<Props> = ({ children }): JSX.Element => {
   return (
     <div className="bg-white">
-      {/* header */}
       <Header />
       <main>{children}</main>
-      {/* footer */}
+
       <Footer />
     </div>
   );

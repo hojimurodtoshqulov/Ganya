@@ -1,22 +1,32 @@
 import Image from "next/image";
-import SiblignsHero from "@/images/siblings-hero.png";
-import { courceCardData } from "@/constants";
+import { ImageIcon } from "lucide-react";
 
 interface ModulesProps {
   data?: any;
 }
 
+
+// w-full max-h-44 md:max-h-72
+
 const Modules: React.FC<ModulesProps> = ({ data }) => {
   const totalModules = data?.Module.length;
   return (
     <div className="flex flex-col gap-5">
-      <div className="max-h-44 md:max-h-72">
-        <Image
-          src={data?.image}
-          alt={data?.descriptionRu}
-          className=" object-cover overflow-hidden rounded-2xl w-full max-h-44 md:max-h-72"
-          fill={true}
-        />
+      <div className="h-44 md:h-72 relative">
+        {data?.image ? (
+          <Image
+            src={data?.image}
+            alt={data?.descriptionRu}
+            className="object-cover overflow-hidden rounded-2xl w-auto h-auto"
+            fill={true}
+          />
+        ) : (
+          <span
+            className="rounded-[20px] bg-white flex  items-center justify-center h-full xl:rounded-[40px] w-full md:w-auto overflow-hidden"
+          >
+            <ImageIcon />
+          </span>
+        )}
       </div>
 
       <div className="p-4 lg:p-6   w-full  overflow-hidden rounded-2xl bg-white">

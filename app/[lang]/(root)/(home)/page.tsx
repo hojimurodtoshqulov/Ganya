@@ -1,13 +1,10 @@
 import Carousel from "@/components/shared/carousel";
 import FAQ from "@/components/shared/faq";
 import Fits from "@/components/shared/fits";
-
 import CourceCard from "@/components/shared/cource-card/courceCard";
-
 import Showcase from "@/components/shared/showcase";
 import SubscribtionForm from "@/components/shared/subscribtion-form/subscribtionForm";
-import { courceCardData, about, about1, reviews } from "@/constants";
-
+import { about, about1, reviews } from "@/constants";
 import { Accordion } from "@/components/shared/cource-card/accordian-card";
 import { Play } from "lucide-react";
 import Info from "@/components/shared/info/info";
@@ -16,8 +13,62 @@ import TeamCard from "@/components/shared/team";
 import Tariflar from "@/components/shared/tariflar/tariflar";
 import Stati from "@/components/shared/stati/stati";
 import CurseHelp from "@/components/shared/curs-helped";
+import { teamMembers } from "@/constants/team";
 
-export default function Home() {
+async function getData<T>(): Promise<T[] | Error> {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=completed",
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+async function getCourse<T>(id: string): Promise<T[] | Error> {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/courses/single/" + id,
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+export default async function Home() {
+  const data = await getData<{
+    id: string;
+  }>();
+
+  if (data instanceof Error) {
+    return <h2>Failed to fetch data.</h2>;
+  }
+  const courseId = data.pop()?.id ?? "";
+  const course = await getCourse<{
+    id: string;
+    titleUz: string;
+    titleRu: string;
+    image: string;
+    descriptionUz: string;
+    descriptionRu: string;
+    courseStatus: string;
+    Module: any[];
+  }>(courseId);
+  console.log(course);
+
+  if (course instanceof Error) {
+    return <h2>Failed to fetch data.</h2>;
+  }
+
   return (
     <div>
       <div id="about">
@@ -48,7 +99,7 @@ export default function Home() {
 
       <div className="container my-20" id="courses">
         <Accordion type="single" collapsible>
-          <CourceCard courceCard={courceCardData} />
+          <CourceCard data={course} />
         </Accordion>
       </div>
 
@@ -63,8 +114,8 @@ export default function Home() {
       <div className="container mb-16" id="team">
         <Carousel
           title="Команда"
-          data={[0, 1, 2, 3, 4, 5].map((r, i) => (
-            <TeamCard key={i} />
+          data={teamMembers.map((team, i) => (
+            <TeamCard key={i} data={team} />
           ))}
         />
       </div>
@@ -73,12 +124,12 @@ export default function Home() {
       </div>
 
       <div className="container">
-        <Tariflar />
+        <Tariflar id={courseId} />
       </div>
       <FAQ />
 
       <div id="articles">
-        <Stati />
+        <Stati container="container" />
       </div>
 
       <div id="contacts">
