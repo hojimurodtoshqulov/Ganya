@@ -7,7 +7,6 @@ import EditIcon from "@/icons/editIcon.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import LinkById from "../link-by-id";
 interface data {
   id: string | null;
   createdAt: string | null;
@@ -71,23 +70,21 @@ const Card = ({ bacData, id }: { bacData: data; id: number }) => {
   return (
     <>
       <div className="lg:w-1/3 md:w-1/2 w-full min-w-[330px] pr-5 py-3 pl-0 h-auto">
-        <LinkById href={bacData.id ?? ""}>
-          <div className="rounded-2xl p-4 bg-white gap-3 flex flex-col min-w-[320px] min-h-[124px] relative">
-            <Image
-              src={EditIcon}
-              alt="edit"
-              width={20}
-              height={20}
-              className="absolute top-4 right-4 cursor-pointer"
-              onClick={() => onClickHandle()}
-            />
+        <div className="rounded-2xl p-4 bg-white gap-3 flex flex-col min-w-[320px] min-h-[124px] relative">
+          <Image
+            src={EditIcon}
+            alt="edit"
+            width={20}
+            height={20}
+            className="absolute top-4 right-4 cursor-pointer"
+            onClick={() => onClickHandle()}
+          />
 
-            <p className="text-neutral-500 text-base">{id + 1} - modul</p>
-            <p className="text-[22px] leading-[32px] text-neutral-500">
-              {bacData.titleUz}
-            </p>
-          </div>
-        </LinkById>
+          <p className="text-neutral-500 text-base">{id + 1} - modul</p>
+          <p className="text-[22px] leading-[32px] text-neutral-500">
+            {bacData.titleUz}
+          </p>
+        </div>
       </div>
 
       <div

@@ -118,7 +118,7 @@ export default async function Home() {
       <div className="container mb-16" id="team">
         <Carousel
           title="Команда"
-          data={teamMembers.map((team, i) => (
+          data={[...teamMembers, ...teamMembers].map((team, i) => (
             <TeamCard key={i} data={team} />
           ))}
         />
@@ -133,7 +133,7 @@ export default async function Home() {
       <FAQ />
 
       <div id="articles">
-        <Stati />
+        <Stati container="container" />
       </div>
 
       <div id="contacts">

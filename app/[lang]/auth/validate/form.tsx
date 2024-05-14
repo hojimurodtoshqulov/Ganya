@@ -36,9 +36,11 @@ const Form: FC<Props> = ({ action, sms }): JSX.Element => {
     <form
       className="flex flex-col gap-6"
       action={async (e: FormData) => {
+        const data = e;
+        data.append("sessionId", smsData?.sessionId);
         const res = await action(e);
         setState(res);
-        console.log(res)
+        console.log(res, "res");
         if (res?.successMessage) {
           router.push("/dashboard/client/edu");
         }
@@ -55,11 +57,7 @@ const Form: FC<Props> = ({ action, sms }): JSX.Element => {
           ))}
         </InputOTPGroup>
       </InputOTP>
-      <input
-        name="sessionId"
-        defaultValue={smsData.sessionId}
-        className="hidden"
-      />
+
       <ResendCode sms={sms} />
       <SubmitBtn>Подтвердить</SubmitBtn>
     </form>

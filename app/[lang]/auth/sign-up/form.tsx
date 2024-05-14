@@ -53,6 +53,7 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
           router.push("/auth/validate");
         } else {
           // error toast
+          console.log(result, "result error");
           toast({
             description: result?.message,
             variant: "destructive",
