@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Switch } from "@/components/ui/switch";
 import Modal from '../modal1';
 interface banner {
@@ -22,13 +22,12 @@ const BannerCard = ({ banner, id }: { banner: banner, id: number }) => {
         const updatedChecked = async () => {
             const formData = new FormData()
             formData.append('isPublished', String(checked));
-            const res = await fetch(`https://oar-api.onrender.com/api/v1/banners/update/${banner.id}`, {
+            await fetch(`https://oar-api.onrender.com/api/v1/banners/update/${banner.id}`, {
                 method: "PATCH",
                 body: formData
             });
         }
         updatedChecked()
-        console.log(banner)
     }, [checked])
 
 

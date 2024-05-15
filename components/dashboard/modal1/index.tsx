@@ -17,10 +17,13 @@ interface banner {
     "isPublished": boolean
 }
 const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boolean, banner?: banner }) => {
-    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm();
     const router = useRouter()
     const ref = useRef<HTMLFormElement>(null);
     const [method, setMethod] = useState('')
+    const imageWeb: any = watch("imageWeb") && (watch("imageWeb")[0] ?? '');
+    const imageMobile: any = watch("imageMobile") && (watch("imageMobile")[0] ?? '');
+
     const onSubmitHandle = async (data: any) => {
         const formData = new FormData()
 
@@ -40,11 +43,9 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
             }
             else if (method === "PATCH") {
                 if (data.imageWeb[0]) {
-                    console.log("have1")
                     formData.append('images', data.imageWeb[0], data.imageWeb[0].name)
                 }
                 if (data.imageMobile[0]) {
-                    console.log("have2")
                     formData.append('images', data.imageMobile[0], data.imageMobile[0].name);
                 }
                 formData.append('link', data.link);
@@ -110,7 +111,9 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                     <div className="flex ml-3 flex-col gap-1">
                                         <h2 className="text-2xl font-normal">Обложка</h2>
                                         <p className="text-base">
-                                            Выберите или перетащите обложку для курса
+                                            {imageWeb
+                                                ? (imageWeb?.name as string)
+                                                : "Выберите или перетащите обложку для курса"}
                                         </p>
                                     </div>
 
@@ -120,9 +123,9 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                     className={buttonVariants({ variant: "filled" })}
                                     htmlFor="fayl"
                                 >
-                                    Выбрать
+                                    {imageWeb?.name ? "редактировать" : "Выбрать"}
                                 </label>
-                                <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb")} />
+                                <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb", { required: true })} />
 
                             </div>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px]">
@@ -140,7 +143,9 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                     <div className="flex ml-3 flex-col gap-1">
                                         <h2 className="text-2xl font-normal">Обложка</h2>
                                         <p className="text-base">
-                                            Выберите или перетащите обложку для курса
+                                            {imageMobile
+                                                ? (imageMobile?.name as string)
+                                                : "Выберите или перетащите обложку для курса"}
                                         </p>
                                     </div>
                                 </div>
@@ -149,9 +154,9 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                     htmlFor="fayl2"
                                     className={buttonVariants({ variant: "filled" })}
                                 >
-                                    Выбрать
+                                    {imageMobile?.name ? "редактировать" : "Выбрать"}
                                 </label>
-                                <Input type="file" accept="image/*" className="hidden" id="fayl2"  {...register("imageMobile")} />
+                                <Input type="file" accept="image/*" className="hidden" id="fayl2"  {...register("imageMobile", {required:true})} />
                             </div>
                             <div className="relative">
                                 <Link className="absolute top-2 left-3" />
@@ -205,7 +210,9 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                     <div className="flex ml-3 flex-col gap-1">
                                         <h2 className="text-2xl font-normal">Обложка</h2>
                                         <p className="text-base">
-                                            Выберите или перетащите обложку для курса
+                                                {imageWeb
+                                                    ? (imageWeb?.name as string)
+                                                    : "Выберите или перетащите обложку для курса"}
                                         </p>
                                     </div>
 
@@ -215,7 +222,7 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                     className={buttonVariants({ variant: "filled" })}
                                     htmlFor="fayl"
                                 >
-                                    Выбрать
+                                        {imageWeb?.name ? "редактировать" : "Выбрать"}
                                 </label>
                                 <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb", { required: true })} />
 
@@ -234,8 +241,10 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                     </div>
                                     <div className="flex ml-3 flex-col gap-1">
                                         <h2 className="text-2xl font-normal">Обложка</h2>
-                                        <p className="text-base">
-                                            Выберите или перетащите обложку для курса
+                                            <p className="text-base">
+                                                {imageMobile
+                                                    ? (imageMobile?.name as string)
+                                                    : "Выберите или перетащите обложку для курса"}
                                         </p>
                                     </div>
                                 </div>
@@ -244,7 +253,7 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                     htmlFor="fayl2"
                                     className={buttonVariants({ variant: "filled" })}
                                 >
-                                    Выбрать
+                                        {imageMobile?.name ? "редактировать" : "Выбрать"}
                                 </label>
                                 <Input type="file" accept="image/*" className="hidden" id="fayl2"  {...register("imageMobile", { required: true })} />
                             </div>
