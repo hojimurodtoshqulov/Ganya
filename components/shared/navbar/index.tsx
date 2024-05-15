@@ -6,10 +6,9 @@ import { FC, useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Logo from "@/icons/Logo.svg";
-import Search from "@/icons/search.svg";
-import Arow from "/public/icons/btn-arrow.svg";
 import { buttonVariants } from "@/components/ui/button";
 import LocaleSwitcher from "../locale-switcher";
+import { ArrowRight } from "lucide-react";
 
 interface NavLinkType {
   id: number;
@@ -85,11 +84,11 @@ const HomeNavbar: FC = () => {
           </div>
           <div>
             <Link
-              className={`${buttonVariants({ variant: "main" })} flex gap-1`}
+              className={`${buttonVariants({ variant: "filled" })} flex gap-1 items-center font-normal px-6`}
               href={`${pathname}/auth/sign-in`}
             >
-              Войти
-              <Image src={Arow} alt="arrow" />
+              <span>Войти</span>
+              <ArrowRight />
             </Link>
           </div>
         </div>

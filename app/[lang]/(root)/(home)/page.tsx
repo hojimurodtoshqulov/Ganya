@@ -30,18 +30,22 @@ async function getData<T>(): Promise<T[] | Error> {
   return res.json();
 }
 async function getCourse<T>(id: string): Promise<T[] | Error> {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_BASE_URL + "/courses/single/" + id,
-    {
-      cache: "no-store",
-    },
-  );
+  try {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + "/courses/single/" + id,
+      {
+        cache: "no-store",
+      },
+    );
 
-  if (!res.ok) {
+    if (!res.ok) {
+      return new Error("Failed to fetch data");
+    }
+
+    return res.json();
+  } catch (e) {
     return new Error("Failed to fetch data");
   }
-
-  return res.json();
 }
 
 export default async function Home() {
@@ -114,7 +118,7 @@ export default async function Home() {
       <div className="container mb-16" id="team">
         <Carousel
           title="Команда"
-          data={teamMembers.map((team, i) => (
+          data={[...teamMembers, ...teamMembers].map((team, i) => (
             <TeamCard key={i} data={team} />
           ))}
         />
