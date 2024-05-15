@@ -7,6 +7,7 @@ import EditIcon from "@/icons/editIcon.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 interface data {
   id: string | null;
   createdAt: string | null;
@@ -82,7 +83,7 @@ const Card = ({ bacData, id }: { bacData: data; id: number }) => {
 
           <p className="text-neutral-500 text-base">{id + 1} - modul</p>
           <p className="text-[22px] leading-[32px] text-neutral-500">
-            {bacData.titleUz}
+            <Link href={bacData.id + ""}>{bacData.titleUz}</Link>
           </p>
         </div>
       </div>
