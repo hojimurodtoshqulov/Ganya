@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Banner from "@/components/dashboard/kontent";
+import Sharhlar from "@/components/dashboard/Отзывы";
 
 const Content: FC = (): JSX.Element => {
   return (
@@ -18,7 +19,7 @@ const Content: FC = (): JSX.Element => {
           <Banner />
         </TabsContent>
         <TabsContent value="fikrlar">
-          bu yerda fikrlar crud ammallarni bajariladi
+          <Sharhlar/>
         </TabsContent>
       </Tabs>
     </div>
