@@ -1,3 +1,4 @@
+import AddModul from "@/components/dashboard/add_modul";
 import Modules from "@/components/dashboard/module-card/module.card";
 import PlanCard from "@/components/shared/tariflar/card";
 
@@ -36,7 +37,7 @@ const SingleCourse: FC<{ params: { courseId: string } }> = async ({
 }): Promise<JSX.Element> => {
   const course = await getCourse(courseId);
   const plans = await getPlans<{
-    available_period: number;
+    availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
     price: number;

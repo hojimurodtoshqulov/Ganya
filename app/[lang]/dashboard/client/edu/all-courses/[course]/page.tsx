@@ -57,7 +57,7 @@ const OneOfAllCourses: FC<Props> = async ({
   const plans = await getPlan<{
     id: string;
     price: number;
-    available_period: number;
+    availablePeriod: number;
     titleUz: string;
     titleRu: string;
     includeSupport: boolean;

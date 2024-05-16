@@ -6,8 +6,6 @@ import { FC, useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Logo from "@/icons/Logo.svg";
-import Search from "@/icons/search.svg";
-import Arow from "/public/icons/btn-arrow.svg";
 import { buttonVariants } from "@/components/ui/button";
 import LocaleSwitcher from "../locale-switcher";
 import Headroom from "react-headroom";
