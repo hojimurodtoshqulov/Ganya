@@ -2,7 +2,7 @@ import AddModul from "@/components/dashboard/add_modul";
 import Dars from "@/components/dashboard/dars";
 import DarsList from "@/components/dashboard/dars-list";
 import Banner from "@/components/dashboard/kontent";
-import Sharhlar from "@/components/dashboard/Отзывы";
+import Sharhlar from "@/components/dashboard/comments";
 import Info from "@/components/shared/info/info";
 import Stati from "@/components/shared/stati/stati";
 import Tariflar from "@/components/shared/tariflar/tariflar";
@@ -20,7 +20,7 @@ function Test() {
     return <>
         <div className="min-h-screen pt-[100px]">
             <Sharhlar />
-            <Banner/>
+            <Banner />
         </div>
         {/* <Info {...data} />
         <Info {...data1} sort={true} />
