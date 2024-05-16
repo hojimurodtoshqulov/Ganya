@@ -24,7 +24,7 @@ async function getData<T>(id: string): Promise<T[] | Error> {
 const CreateTarif: FC<Props> = async ({ courseId }): Promise<JSX.Element> => {
   const response = await getData<{
     id: string;
-    available_period: number;
+    availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
     price: number;

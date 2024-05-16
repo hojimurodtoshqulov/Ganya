@@ -16,7 +16,7 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
 }
 async function Tariflar({ id }: { id: string }) {
   const data = await getCourse<{
-    available_period: number;
+    availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
     price: number;
