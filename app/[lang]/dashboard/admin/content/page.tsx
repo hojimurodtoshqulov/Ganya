@@ -10,7 +10,7 @@ const Content: FC = (): JSX.Element => {
         Kontentlar
       </h3>
 
-      <Tabs defaultValue="all">
+      <Tabs defaultValue="banners">
         <TabsList className="mb-3 sm:mb-6">
           <TabsTrigger value="banners">Bannerlar</TabsTrigger>
           <TabsTrigger value="fikrlar">Fikrlar</TabsTrigger>

@@ -37,7 +37,7 @@ const SingleCourse: FC<{ params: { courseId: string } }> = async ({
 }): Promise<JSX.Element> => {
   const course = await getCourse(courseId);
   const plans = await getPlans<{
-    available_period: number;
+    availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
     price: number;

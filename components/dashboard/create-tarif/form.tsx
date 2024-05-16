@@ -16,7 +16,7 @@ interface Props {
   courseId?: string;
   planId?: string;
   defaultValues?: {
-    available_period: number;
+    availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
     price: number;
@@ -27,7 +27,7 @@ const schema = z.object({
   titleUz: z.string().min(1),
   titleRu: z.string().min(1),
   // title: z.string().min(1),
-  available_period: z.number().min(1),
+  availablePeriod: z.number().min(1),
   includeResources: z.boolean().default(false).optional(),
   includeSupport: z.boolean().default(false).optional(),
   price: z.number().min(1),
@@ -118,9 +118,9 @@ const CreateTarifForm: React.FC<Props> = ({
         <Input
           type="number"
           id="load"
-          defaultValue={defaultValues?.available_period}
+          defaultValue={defaultValues?.availablePeriod}
           placeholder="Kurs davomiyligi"
-          {...register("available_period", {
+          {...register("availablePeriod", {
             setValueAs: (value) => Number(value),
           })}
         />
