@@ -1,3 +1,4 @@
+import AddModul from "@/components/dashboard/add_modul";
 import Modules from "@/components/dashboard/module-card/module.card";
 import PlanCard from "@/components/shared/tariflar/card";
 
