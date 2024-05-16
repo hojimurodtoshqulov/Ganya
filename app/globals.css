@@ -81,6 +81,11 @@
   .text-h1 {
     @apply font-bold text-3xl md:text-5xl lg:text-[56px] text-main-300 font-comfortaa;
   }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 .container {
   max-width: 1400px;
