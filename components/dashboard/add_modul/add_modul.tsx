@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/navigation';
 
 
-export const AddCard = ({id}: {id:string | string[]}) => {
+export const AddCard = ({ id, accessToken }: { id: string | string[]; accessToken:string | undefined}) => {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
     const [isOpen, setIsOpen] = useState(false)
     const router = useRouter()
@@ -22,7 +22,8 @@ export const AddCard = ({id}: {id:string | string[]}) => {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
                 }
             });
         if (res.ok) {
@@ -52,23 +53,23 @@ export const AddCard = ({id}: {id:string | string[]}) => {
             }} >
                 <form ref={ref} onSubmit={handleSubmit((data) => onSubmitHandle(data))} method='post' className='bg-white flex flex-col w-11/12 max-w-[648px] max-h-[534px] h-5/6 overflow-auto p-10 gap-6 rounded-2xl' style={{ scrollbarWidth: 'none' }}>
                     <div className='flex flex-col gap-4'>
+
                         <div className='flex flex-col gap-2'>
-                            <label className='font-normal text-sm text-neutral-400'>Modul nomi</label>
-                            <Input autoComplete='off' {...register("titleUz", { required: true })} type='text' placeholder='Modul nomi' className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`} />
+                            <label className='font-normal text-sm text-neutral-400'>Название модуля</label>
+                            <Input autoComplete='off' {...register("titleRu", { required: true })} type='text' placeholder='Ru' className={`text-neutral-500 ${errors.titleRu ? "border-destructive focus-visible:!border-destructive" : ""}`} />
                         </div>
 
                         <div className='flex flex-col gap-2'>
-                            <label className='font-normal text-sm text-neutral-400'>название модуля</label>
-                            <Input autoComplete='off' {...register("titleRu", { required: true })} type='text' placeholder='название модуля' className={`text-neutral-500 ${errors.titleRu ? "border-destructive focus-visible:!border-destructive" : ""}`} />
-                        </div>
-                        <div className='flex flex-col gap-2'>
-                            <label className=' font-normal text-sm text-neutral-400'>Modul tavsifi</label>
-                            <Input  {...register("descriptionUz", { required: true })} autoComplete='off' placeholder="Modul tavsifi" className={`text-neutral-500 ${errors.descriptionUz ? "border-destructive focus-visible:!border-destructive" : ""}`} />
+                            <Input autoComplete='off' {...register("titleUz", { required: true })} type='text' placeholder='Uz' className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`} />
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <label className=' font-normal text-sm text-neutral-400'>Описание модуля</label>
-                            <Input  {...register("descriptionRu", { required: true })} autoComplete='off' placeholder='Описание модуля' className={`text-neutral-500 ${errors.descriptionRu ? "border-destructive focus-visible:!border-destructive" : ""}`} />
+                            <Input  {...register("descriptionRu", { required: true })} autoComplete='off' placeholder='Ru' className={`text-neutral-500 ${errors.descriptionRu ? "border-destructive focus-visible:!border-destructive" : ""}`} />
+                        </div>
+
+                        <div className='flex flex-col gap-2'>
+                            <Input  {...register("descriptionUz", { required: true })} autoComplete='off' placeholder="Uz" className={`text-neutral-500 ${errors.descriptionUz ? "border-destructive focus-visible:!border-destructive" : ""}`} />
                         </div>
 
                     </div>

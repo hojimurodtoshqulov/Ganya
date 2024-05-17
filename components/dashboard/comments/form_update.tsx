@@ -6,16 +6,18 @@ import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react'
 import { useForm } from "react-hook-form";
 interface data {
-    "id": string,
-    "createdAt": string,
-    "updatedAt": string,
-    "username": string,
-    "userAvatar": string,
-    "text": string,
-    "isPublished": boolean
+    id: string,
+    username: string,
+    occupationUz: string,
+    occupationRu: string,
+    textUz: string,
+    textRu: string,
+    isPublished: boolean,
+    createdAt: string,
+    updatedAt: string
 }
 
-const FormUpdate = ({ open, closeFunc, comment }: { closeFunc: Function, open: boolean, comment: data }) => {
+const FormUpdate = ({ open, closeFunc, comment, accessToken }: { closeFunc: Function, open: boolean, comment: data, accessToken:string | undefined }) => {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
     const ref = useRef<HTMLFormElement>(null);
     const [count1, setcount1] = useState(0)
@@ -24,7 +26,6 @@ const FormUpdate = ({ open, closeFunc, comment }: { closeFunc: Function, open: b
     const router = useRouter()
 
     const onSubmitHandle = async (data: FormData | unknown) => {
-        console.log(comment.id)
         if (method && method === "PATCH") {
             const res = await fetch(
                 `https://oar-api.onrender.com/api/v1/comments/update/${comment.id}`,
@@ -33,6 +34,7 @@ const FormUpdate = ({ open, closeFunc, comment }: { closeFunc: Function, open: b
                     body: JSON.stringify(data),
                     headers: {
                         "Content-Type": "application/json",
+                        Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
                     },
                 },
             );
@@ -46,6 +48,9 @@ const FormUpdate = ({ open, closeFunc, comment }: { closeFunc: Function, open: b
                 `https://oar-api.onrender.com/api/v1/comments/delete/${comment.id}`,
                 {
                     method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+                    }
                 },
             );
             if (res.ok) {
@@ -62,52 +67,36 @@ const FormUpdate = ({ open, closeFunc, comment }: { closeFunc: Function, open: b
             }
         }} >
 
-            <form ref={ref} onSubmit={handleSubmit((data) => {
-                console.log("salom")
-                onSubmitHandle(data)
-            })} className='bg-white flex flex-col w-11/12 max-w-[648px] max-h-[534px] h-5/6 overflow-auto p-10 gap-6 rounded-2xl' style={{ scrollbarWidth: 'none' }}>
+            <form ref={ref} onSubmit={onSubmitHandle}
+                className='bg-white flex flex-col w-11/12 max-w-[648px] max-h-[534px] h-5/6 overflow-auto p-10 gap-6 rounded-2xl' style={{ scrollbarWidth: 'none' }}>
                 <div className='flex flex-col gap-4'>
 
                     <div className='flex flex-col gap-2'>
                         <label className='font-normal text-sm text-neutral-400'>Имя Фамилия</label>
-                        <Input autoComplete='off' {...register("Имя", { required: true })} placeholder='Введите Имя и Фамилию' className='text-neutral-500' defaultValue={comment.username} />
+                        <Input autoComplete='off' {...register("username", { required: true })} placeholder='Введите Имя и Фамилию' defaultValue={comment.username} className={`text-neutral-500 ${errors.username ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
                     </div>
-                    {errors.Имя && <span className='text-red-500'>This field is required</span>}
-
-                    <div className='flex flex-col gap-2'>
-                        <label className=' font-normal text-sm text-neutral-400'>Ism Familiya</label>
-                        <Input  {...register("Ism", { required: true })} autoComplete='off' placeholder='Ism va familiyani kiriting' className=' text-neutral-500' defaultValue={comment.username} />
-                    </div>
-                    {errors.Ism && <span className='text-red-500'>This field is required</span>}
 
                     <div className='flex flex-col gap-2'>
                         <label className=' font-normal text-sm text-neutral-400'>Должность</label>
-                        <Input  {...register("должность", { required: true })} autoComplete='off' placeholder='Введите должность или положение' className=' text-neutral-500' />
+                        <Input  {...register("occupationRu", { required: true })}  defaultValue={comment.occupationRu} autoComplete='off' placeholder='Ru' className={`text-neutral-500 ${errors.occupationRu ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
                     </div>
-                    {errors.должность && <span className='text-red-500'>This field is required</span>}
 
                     <div className='flex flex-col gap-2'>
-                        <label className=' font-normal text-sm text-neutral-400'>Lavozim</label>
-                        <Input {...register("Lavozim", { required: true })} autoComplete='off' placeholder='Lavozim yoki lavozimni kiriting' className=' text-neutral-500' />
+                        <Input {...register("occupationUz", { required: true })} autoComplete='off' defaultValue={comment.occupationUz} placeholder='Uz' className={`text-neutral-500 ${errors.occupationUz ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
                     </div>
-                    {errors.Lavozim && <span className='text-red-500'>This field is required</span>}
-
-
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="отзыв" className='font-normal text-sm text-neutral-400'></label>
-                        <Textarea {...register("отзыв", { required: true, onChange: (e) => { setcount1(e.target.value.length) } })} maxLength={400} autoComplete='off' className='h-[120px]' placeholder='Введите отзыв пользователя'  />
-                        {errors.отзыв && <span className='text-red-500'>This field is required</span>}
+                        <label htmlFor="отзыв" className='font-normal text-sm text-neutral-400'>Oтзыв</label>
+                        <Textarea {...register("textRu", { required: true, onChange: (e) => { setcount1(e.target.value.length) } })} maxLength={400} placeholder='Ru' autoComplete='off' defaultValue={comment.textRu} className={`text-neutral-500 h-[120px] ${errors.textRu ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
+
                         <p className={`${count1 >= 400 ? 'text-red-500' : ''} text-end`}>{count1 || 0}/400</p>
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="sharh" className='font-normal text-sm text-neutral-400'></label>
-                        <Textarea {...register("sharh", { required: true, onChange: (e) => { setcount2(e.target.value.length) } })} maxLength={400} autoComplete='off' className='h-[120px]' placeholder='Foydalanuvchi sharhini kiriting' />
-                        {errors.sharh && <span className='text-red-500'>This field is required</span>}
+                        <Textarea {...register("textUz", { required: true, onChange: (e) => { setcount2(e.target.value.length) } })} maxLength={400} placeholder='Uz' autoComplete='off' defaultValue={comment.textUz} className={`text-neutral-500 h-[120px] ${errors.textUz ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
                         <p className={`${count2 >= 400 ? 'text-red-500' : ''} text-end`}>{count2 || 0}/400</p>
                     </div>
-
                 </div>
+
                 <div className="flex justify-end max-sm:flex-col gap-4">
                     <Button
                         variant={"outline"}

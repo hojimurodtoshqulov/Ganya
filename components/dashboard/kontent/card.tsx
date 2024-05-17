@@ -12,7 +12,7 @@ interface banner {
     "link": string,
     "isPublished": boolean
 }
-const BannerCard = ({ banner, id }: { banner: banner, id: number }) => {
+const BannerCard = ({ banner, id, accessToken }: { banner: banner, id: number, accessToken: string | undefined }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [checked, setChecked] = useState(banner.isPublished)
     const onClick = () => {
@@ -24,7 +24,10 @@ const BannerCard = ({ banner, id }: { banner: banner, id: number }) => {
             formData.append('isPublished', String(checked));
             await fetch(`https://oar-api.onrender.com/api/v1/banners/update/${banner.id}`, {
                 method: "PATCH",
-                body: formData
+                body: formData,
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+                }
             });
         }
         updatedChecked()
@@ -44,7 +47,7 @@ const BannerCard = ({ banner, id }: { banner: banner, id: number }) => {
                 <p className='text-[22px] leading-[32px] text-neutral-500'></p>
                 <Button variant={"filled"} onClick={onClick} className='py-3 px-5'>Изменить</Button>
                 {isOpen ?
-                    (<Modal isOpen={isOpen} onClick={onClick} banner={banner} />) : ''}
+                    (<Modal isOpen={isOpen} onClick={onClick} banner={banner} accessToken={accessToken} />) : ''}
             </div>
         </>
 
