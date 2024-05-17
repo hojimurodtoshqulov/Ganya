@@ -1,3 +1,4 @@
+import AddModul from "@/components/dashboard/add_modul";
 import Modules from "@/components/dashboard/module-card/module.card";
 import PlanCard from "@/components/shared/tariflar/card";
 
@@ -31,12 +32,12 @@ async function getPlans<T>(id: string): Promise<T[] | Error> {
 
   return res.json();
 }
-const SingleCourse: FC<{ params: { courseId: string } }> = async ({
-  params: { courseId },
+const SingleCourse: FC<{ params: { courseId: string, lang: string } }> = async ({
+  params: { courseId, lang },
 }): Promise<JSX.Element> => {
   const course = await getCourse(courseId);
   const plans = await getPlans<{
-    available_period: number;
+    availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
     price: number;
@@ -48,7 +49,7 @@ const SingleCourse: FC<{ params: { courseId: string } }> = async ({
     return <h2>Failed to fetch course data.</h2>;
   return (
     <>
-      <Modules data={course} />
+      <Modules data={course} lang={lang} />
 
       <div className="bg-white rounded-2xl p-6 mt-10">
         <h2 className="text-main-300 text-2xl font-medium mb-5">Тарифы</h2>

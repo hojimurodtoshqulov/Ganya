@@ -38,3 +38,11 @@ export async function fetchSendMessage(data: FormSchemaType) {
     console.log(error);
   }
 }
+
+export const getLangText = (
+  lang: string,
+  textUz: string,
+  textRu: string,
+): string => {
+  return lang === "uz" ? textUz : textRu;
+};

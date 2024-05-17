@@ -3,12 +3,13 @@ import { ImageIcon } from "lucide-react";
 
 interface ModulesProps {
   data?: any;
+  lang: string
 }
 
 
 // w-full max-h-44 md:max-h-72
 
-const Modules: React.FC<ModulesProps> = ({ data }) => {
+const Modules: React.FC<ModulesProps> = ({ data, lang }) => {
   const totalModules = data?.Module.length;
   return (
     <div className="flex flex-col gap-5">
@@ -31,7 +32,7 @@ const Modules: React.FC<ModulesProps> = ({ data }) => {
 
       <div className="p-4 lg:p-6   w-full  overflow-hidden rounded-2xl bg-white">
         <h1 className="text-[26px] text-main-300 pb-4">
-          {data?.titleRu}
+          {lang === 'ru' ? data?.titleRu : data?.titleUz}
         </h1>
 
         <div className="flex flex-col md:grid md:grid-cols-2 gap-5  relative">
@@ -41,10 +42,11 @@ const Modules: React.FC<ModulesProps> = ({ data }) => {
                 className={` md:border-b-0 md:my-4 border-csneutral-200 ${index % 2 === 1 ? "md:border-l  md:pl-5 border-csneutral-200" : ""}  ${index < totalModules - 1 ? "border-b  pb-3 md:pb-0" : "border-b-0"}`}
               >
                 <h3 className="md:text-lg mb-3 text-main-300 font-bold font-comfortaa">
-                  {item?.titleRu}
+                  {lang === 'ru' ? item?.titleRu : item?.titleUz}
+
                 </h3>
                 <p className="text-sm text-csneutral-500 font-normal">
-                  {item?.descriptionRu}
+                  {lang === 'ru' ? data?.descriptionRu : data?.descriptionUz}
                 </p>
               </div>
               {index % 2 === 1 &&

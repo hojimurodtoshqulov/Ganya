@@ -8,7 +8,7 @@ import CreateTarifForm from "./form";
 import DeleteBtn from "./delete-btn";
 interface CardProps {
   values: {
-    available_period: number;
+    availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
     price: number;
@@ -46,7 +46,7 @@ function Card(props: CardProps): JSX.Element {
               className={`${props.small ? "text-sm" : "text-base"} font-roboto ${props.pro ? "text-csneutral-100" : ""}`}
             >
               Доступ ко всем видеоурокам в течение{" "}
-              {props.values.available_period} месяцев с момента приобретения
+              {props.values.availablePeriod} месяцев с момента приобретения
               курса.
             </p>
           </li>

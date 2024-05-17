@@ -1,5 +1,7 @@
 import { FC } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Banner from "@/components/dashboard/kontent";
+import Sharhlar from "@/components/dashboard/comments";
 
 const Content: FC = (): JSX.Element => {
   return (
@@ -8,16 +10,16 @@ const Content: FC = (): JSX.Element => {
         Kontentlar
       </h3>
 
-      <Tabs defaultValue="all">
+      <Tabs defaultValue="banners">
         <TabsList className="mb-3 sm:mb-6">
           <TabsTrigger value="banners">Bannerlar</TabsTrigger>
           <TabsTrigger value="fikrlar">Fikrlar</TabsTrigger>
         </TabsList>
         <TabsContent value="banners">
-          bu yerga banner crud ammallarni bajariladi
+          <Banner />
         </TabsContent>
         <TabsContent value="fikrlar">
-          bu yerda fikrlar crud ammallarni bajariladi
+          <Sharhlar />
         </TabsContent>
       </Tabs>
     </div>

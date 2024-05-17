@@ -80,12 +80,20 @@ export const loginAction = async (formData: FormData) => {
         },
       );
       const json = await res.json();
-
+      // console.log(json, "<--------------------------- bu login json");
       cookies().set({
-        name: "tokens",
-        value: JSON.stringify(json),
+        name: "accessToken",
+        value: JSON.stringify(json.accessToken),
         httpOnly: true,
         secure: true,
+        maxAge: 60 * 60 * 24 * 7,
+      });
+      cookies().set({
+        name: "refreshToken",
+        value: JSON.stringify(json.refreshToken),
+        httpOnly: true,
+        secure: true,
+        maxAge: 60 * 60 * 24,
       });
 
       return {
@@ -128,11 +136,20 @@ export const smsValidateAction = async (formData: FormData) => {
 
       if (res.ok) {
         cookies().set({
-          name: "tokens",
-          value: JSON.stringify(json),
+          name: "accessToken",
+          value: JSON.stringify(json.accessToken),
           httpOnly: true,
           secure: true,
+          maxAge: 60 * 60 * 24 * 1000,
         });
+        cookies().set({
+          name: "refreshToken",
+          value: JSON.stringify(json.refreshToken),
+          httpOnly: true,
+          secure: true,
+          maxAge: 60 * 60 * 24 * 6 * 1000,
+        });
+
         // cookies().delete("sms")
         return {
           successMessage: "Code successfuly posted",
