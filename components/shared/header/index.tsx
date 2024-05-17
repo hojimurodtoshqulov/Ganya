@@ -3,7 +3,7 @@ import HomeNavbar from "../navbar";
 
 const Header: FC = (): JSX.Element => {
   return (
-    <header>
+    <header className="relative z-[100]">
       <HomeNavbar />
     </header>
   );
