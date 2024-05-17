@@ -1,18 +1,19 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { CiCirclePlus } from "react-icons/ci";
-
+import { useRouter } from "next/navigation";
 
 interface Props {
     type: 'create' | 'item',
-    link: any
+    link: any,
+    lang?: string,
     value?: {
         title: any,
         number: number
     }
 }
 
-const LessonItem: React.FC<Props> = ({ type, link, value = { title: {}, number: 0 } }) => {
+const LessonItem: React.FC<Props> = ({ type, link, value = { title: {}, number: 0 }, lang }) => {
 
     return (
         <Link href={link} className={clsx("rounded-2xl p-4 flex items-center justify-start gap-3", type === 'item' && 'bg-white', type === 'create' && 'border-dashed border-2')}>
@@ -22,10 +23,10 @@ const LessonItem: React.FC<Props> = ({ type, link, value = { title: {}, number: 
             {
                 type === 'item' ?
                     <div className="flex flex-col text-csneutral-500">
-                        <p className="text-base font-normal">{value?.number + 1}-dars</p>
-                        <h1 className="text-[22px] font-medium">{value?.title.titleRu}</h1>
+                        <p className="text-base font-normal">Урок {value?.number + 1}</p>
+                        <h1 className="text-[22px] font-medium">{lang === 'ru' ? value?.title.titleRu : value?.title.titleUz}</h1>
                     </div> : <h1 className="text-[22px] font-medium">
-                        Dars Qo&apos;shish
+                        Добавить урок
                     </h1>
             }
         </Link >

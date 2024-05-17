@@ -1,8 +1,10 @@
 import LessonItem from "@/components/dashboard/add-lesson/lesson-item";
+import BackLink from "@/components/dashboard/back-link";
 import { useRouter } from "next/navigation";
 
 interface Props {
   params: any;
+
 }
 
 
@@ -31,22 +33,22 @@ const Page: React.FC<Props> = async ({ params }): Promise<JSX.Element> => {
 
   return (
     <div>
+      <BackLink title="Вернуться к модулям" heading='' />
       <h1 className="text-2xl text-main-300 font-semibold pb-4 ">{data?.titleRu ? data?.titleRu : 'Module title'}</h1>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 pb-6">
         {data?.Lesson?.map((lesson: any, index: number) => (
           <LessonItem
             type="item"
             link={`/dashboard/admin/courses/${params.courseId}/${params.moduleId}/${lesson.id}`}
             value={{ title: lesson, number: index }}
             key={lesson.id}
+            lang={params.lang}
           />
         ))}
 
-        {/*    <LessonItem type="create" link={{ pathname: `/dashboard/admin/courses/${params.courseId}/${params.moduleId}/create`, query: `number=${lessonsLength + 1}` }} /> */}
-
         <LessonItem
           type="create"
-          link={`/dashboard/admin/courses/${params.courseId}/${params.moduleId}/create/?number=${lessonsLength + 1}`}
+          link={`/dashboard/admin/courses/${params.courseId}/${params.moduleId}/create?search=1}`}
         />
       </div>
     </div>

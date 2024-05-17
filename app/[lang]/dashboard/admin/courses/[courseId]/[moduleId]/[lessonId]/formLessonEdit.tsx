@@ -11,6 +11,9 @@ import { useForm } from "react-hook-form";
 import { CiCirclePlus } from "react-icons/ci";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import BackLink from "@/components/dashboard/back-link";
+import { cn } from "@/lib/utils";
+import clsx from "clsx";
 
 interface Props {
   params: any;
@@ -33,17 +36,17 @@ const FormLessonEdit: FC<Props> = ({ params, data }): JSX.Element => {
     handleSubmit,
     watch,
     reset,
-    formState: { isSubmitting },
+    formState: { errors: inputErrors, isSubmitting },
   } = useForm<Schema>({
     resolver: zodResolver(schema),
-    defaultValues: data,
+    defaultValues: data ?? {},
   });
   const [lesson, setLesson] = useState<Object | any>(null);
   const router = useRouter();
 
   const { video: videoFile } = watch();
 
-  const videoName = typeof videoFile !== "string" ? videoFile[0]?.name : "";
+  const videoName = videoFile && videoFile.length >= 0 && (typeof videoFile !== "string" ? videoFile[0]?.name : "");
 
   const onSubmit = async (values: Schema) => {
     try {
@@ -67,17 +70,15 @@ const FormLessonEdit: FC<Props> = ({ params, data }): JSX.Element => {
         body: formData,
       });
 
-      if (!req.ok) throw new Error("Nimadur xato ketdi");
+      if (!req.ok) throw new Error("что-то пошло не так");
       reset();
       const res = req.json();
-      toast.success("Dars muvaffaqiyatli yangilandi");
+      toast.success("Урок успешно обновлен");
       router.refresh();
       setLesson(null);
-      /* router.push(
-                `/dashboard/admin/courses/${params.courseId}/${params.moduleId}`,
-            ); */
+      router.back()
     } catch (error: any) {
-      toast.error("Darsni yangilashda muamo yuzaga keldi");
+      toast.error("Не удалось обновить урок.");
     }
   };
 
@@ -88,15 +89,12 @@ const FormLessonEdit: FC<Props> = ({ params, data }): JSX.Element => {
     try {
       const req = await fetch(api, { method: "DELETE" });
 
-      if (!req.ok) throw new Error("Darsni o'chirishda muammo yuzaga keldi");
+      if (!req.ok) throw new Error("Не удалось удалить курс");
 
       const res = await req.json();
-      toast.success("Muvafaqiyatli o'chirildi");
+      toast.success("Удален успешно");
       router.refresh();
-      setLesson(null);
-      router.push(
-        `/dashboard/admin/courses/${params.courseId}/${params.moduleId}`,
-      );
+      router.back()
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -104,6 +102,7 @@ const FormLessonEdit: FC<Props> = ({ params, data }): JSX.Element => {
 
   return (
     <div className="space-y-5">
+      <BackLink title="Вернуться к урокам" heading='' />
       <Toaster
         position="top-right"
         toastOptions={{
@@ -115,12 +114,11 @@ const FormLessonEdit: FC<Props> = ({ params, data }): JSX.Element => {
           },
         }}
       />
-
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div className="relative">
           <Label
             htmlFor="videoUpload"
-            className=" relative rounded-2xl p-4 flex items-center justify-between gap-3 border-dashed border-2"
+            className={clsx("relative rounded-2xl p-4 flex items-center justify-between gap-3 border-dashed border-2", inputErrors.video && "border-destructive")}
           >
             <div className="flex items-center gap-3">
               <div className="rounded-xl w-[60px] h-[60px] flex items-center justify-center bg-white">
@@ -128,15 +126,15 @@ const FormLessonEdit: FC<Props> = ({ params, data }): JSX.Element => {
               </div>
               <div className="flex flex-col text-csneutral-500 gap-1">
                 <h1 className="text-[22px] font-medium">
-                  {videoName ? "Video Tanlandi" : "Video qo'shish"}
+                  {videoName ? "Видео выбрано" : "Добавить видео"}
                 </h1>
                 <p className="text-base font-normal">
-                  {videoName || "Videongizni torting yoki tanlang"}
+                  {videoName ? videoName : "Перетащите или выберите ваще видео"}
                 </p>
               </div>
             </div>
             <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">
-              {videoName ? "O'zgartirish" : "Tanlash"}
+              {videoName ? "Редактировать" : "Выбрать"}
             </span>
           </Label>
           <Input
@@ -144,66 +142,68 @@ const FormLessonEdit: FC<Props> = ({ params, data }): JSX.Element => {
             type="file"
             accept="video/*"
             className="absolute inset-0 opacity-0"
-            {...register("video")}
+            {...register("video", { required: true })}
+            defaultValue={data?.vide}
           />
         </div>
 
+
         <div className="rounded-2xl  bg-white flex flex-col gap-4 p-6">
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="titleRu">Заголовок</Label>
+            <Label htmlFor="titleRu">Подзаголовок</Label>
             <Input
               type="text"
               id="titleRu"
-              placeholder="Базовый пакет:"
-              {...register("titleRu")}
+              placeholder="Ru"
+              className={cn({ "border-destructive": inputErrors.titleRu })}
+              {...register("titleRu", { required: true })}
               defaultValue={data?.titleRu}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="titleUz">Sarlavha</Label>
             <Input
               type="text"
               id="titleUz"
-              placeholder="Asosiy paket:"
-              {...register("titleUz")}
+              placeholder="Uz"
+              className={cn({ "border-destructive": inputErrors.titleUz })}
+              {...register("titleUz", { required: true })}
               defaultValue={data?.titleUz}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Label htmlFor={`descriptionRu`}>Описание</Label>
             <Textarea
-              placeholder="Преимущество 1"
-              className="resize-none"
-              {...register("descriptionRu")}
+              placeholder="Ru"
+              className={cn({ "border-destructive": inputErrors.descriptionRu })}
+              {...register("descriptionRu", { required: true })}
               defaultValue={data?.descriptionRu}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor={`descriptionUz`}>Tavsif</Label>
             <Textarea
-              placeholder="Преимущество 1"
-              className="resize-none"
-              {...register("descriptionUz")}
+              placeholder="Uz"
+              className={cn({ "border-destructive": inputErrors.descriptionUz })}
+              {...register("descriptionUz", { required: true })}
               defaultValue={data?.descriptionUz}
             />
           </div>
 
-          <div className="flex items-center gap-4  justify-end">
+          <div className="flex justify-end gap-3">
             <Button
               disabled={isSubmitting}
               onClick={handleDeleteLesson}
               className="bg-red-400 hover:bg-red-300 transition-colors text-sm font-normal py3 px-5"
               variant={"main"}
             >
-              {"O'chirish"}
+              Удалить
             </Button>
             <Button
               disabled={isSubmitting}
               type="submit"
-              className=" text-sm font-normal py3 px-5"
+              className="disabled:bg-main-200 text-sm font-normal py3 px-5"
               variant={"main"}
             >
-              Saqlash
+              Сохранить
             </Button>
           </div>
         </div>
@@ -213,3 +213,4 @@ const FormLessonEdit: FC<Props> = ({ params, data }): JSX.Element => {
 };
 
 export default FormLessonEdit;
+
