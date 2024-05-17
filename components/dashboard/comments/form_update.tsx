@@ -38,6 +38,7 @@ const FormUpdate = ({ open, closeFunc, comment, accessToken }: { closeFunc: Func
                     },
                 },
             );
+            console.log(res.ok)
             if (res.ok) {
                 router.refresh();
                 closeFunc();
@@ -67,7 +68,7 @@ const FormUpdate = ({ open, closeFunc, comment, accessToken }: { closeFunc: Func
             }
         }} >
 
-            <form ref={ref} onSubmit={onSubmitHandle}
+            <form ref={ref} onSubmit={handleSubmit(onSubmitHandle)}
                 className='bg-white flex flex-col w-11/12 max-w-[648px] max-h-[534px] h-5/6 overflow-auto p-10 gap-6 rounded-2xl' style={{ scrollbarWidth: 'none' }}>
                 <div className='flex flex-col gap-4'>
 
@@ -78,21 +79,21 @@ const FormUpdate = ({ open, closeFunc, comment, accessToken }: { closeFunc: Func
 
                     <div className='flex flex-col gap-2'>
                         <label className=' font-normal text-sm text-neutral-400'>Должность</label>
-                        <Input  {...register("occupationRu", { required: true })}  defaultValue={comment.occupationRu} autoComplete='off' placeholder='Ru' className={`text-neutral-500 ${errors.occupationRu ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
+                        <Input  {...register("occupationRu", { required: true })} defaultValue={comment.occupationRu} autoComplete='off' placeholder='Должность Ru' className={`text-neutral-500 ${errors.occupationRu ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
                     </div>
 
                     <div className='flex flex-col gap-2'>
-                        <Input {...register("occupationUz", { required: true })} autoComplete='off' defaultValue={comment.occupationUz} placeholder='Uz' className={`text-neutral-500 ${errors.occupationUz ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
+                        <Input {...register("occupationUz", { required: true })} autoComplete='off' defaultValue={comment.occupationUz} placeholder='Должность Uz' className={`text-neutral-500 ${errors.occupationUz ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
                     </div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="отзыв" className='font-normal text-sm text-neutral-400'>Oтзыв</label>
-                        <Textarea {...register("textRu", { required: true, onChange: (e) => { setcount1(e.target.value.length) } })} maxLength={400} placeholder='Ru' autoComplete='off' defaultValue={comment.textRu} className={`text-neutral-500 h-[120px] ${errors.textRu ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
+                        <Textarea {...register("textRu", { required: true, onChange: (e) => { setcount1(e.target.value.length) } })} maxLength={400} placeholder='Text Ru' autoComplete='off' defaultValue={comment.textRu} className={`text-neutral-500 h-[120px] ${errors.textRu ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
 
                         <p className={`${count1 >= 400 ? 'text-red-500' : ''} text-end`}>{count1 || 0}/400</p>
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Textarea {...register("textUz", { required: true, onChange: (e) => { setcount2(e.target.value.length) } })} maxLength={400} placeholder='Uz' autoComplete='off' defaultValue={comment.textUz} className={`text-neutral-500 h-[120px] ${errors.textUz ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
+                        <Textarea {...register("textUz", { required: true, onChange: (e) => { setcount2(e.target.value.length) } })} maxLength={400} placeholder='Text Uz' autoComplete='off' defaultValue={comment.textUz} className={`text-neutral-500 h-[120px] ${errors.textUz ? 'border-destructive focus-visible:!border-destructive' : ''}`} />
                         <p className={`${count2 >= 400 ? 'text-red-500' : ''} text-end`}>{count2 || 0}/400</p>
                     </div>
                 </div>

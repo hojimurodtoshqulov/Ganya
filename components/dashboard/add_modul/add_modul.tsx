@@ -56,20 +56,20 @@ export const AddCard = ({ id, accessToken }: { id: string | string[]; accessToke
 
                         <div className='flex flex-col gap-2'>
                             <label className='font-normal text-sm text-neutral-400'>Название модуля</label>
-                            <Input autoComplete='off' {...register("titleRu", { required: true })} type='text' placeholder='Ru' className={`text-neutral-500 ${errors.titleRu ? "border-destructive focus-visible:!border-destructive" : ""}`} />
+                            <Input autoComplete='off' {...register("titleRu", { required: true })} type='text' placeholder='Название Ru' className={`text-neutral-500 ${errors.titleRu ? "border-destructive focus-visible:!border-destructive" : ""}`} />
                         </div>
 
                         <div className='flex flex-col gap-2'>
-                            <Input autoComplete='off' {...register("titleUz", { required: true })} type='text' placeholder='Uz' className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`} />
+                            <Input autoComplete='off' {...register("titleUz", { required: true })} type='text' placeholder='Название Uz' className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`} />
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <label className=' font-normal text-sm text-neutral-400'>Описание модуля</label>
-                            <Input  {...register("descriptionRu", { required: true })} autoComplete='off' placeholder='Ru' className={`text-neutral-500 ${errors.descriptionRu ? "border-destructive focus-visible:!border-destructive" : ""}`} />
+                            <Input  {...register("descriptionRu", { required: true })} autoComplete='off' placeholder='Описание Ru' className={`text-neutral-500 ${errors.descriptionRu ? "border-destructive focus-visible:!border-destructive" : ""}`} />
                         </div>
 
                         <div className='flex flex-col gap-2'>
-                            <Input  {...register("descriptionUz", { required: true })} autoComplete='off' placeholder="Uz" className={`text-neutral-500 ${errors.descriptionUz ? "border-destructive focus-visible:!border-destructive" : ""}`} />
+                            <Input  {...register("descriptionUz", { required: true })} autoComplete='off' placeholder="Описание Uz" className={`text-neutral-500 ${errors.descriptionUz ? "border-destructive focus-visible:!border-destructive" : ""}`} />
                         </div>
 
                     </div>

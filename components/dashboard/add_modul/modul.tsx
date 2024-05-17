@@ -121,7 +121,7 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
                 autoComplete="off"
                 {...register("titleRu", { required: true })}
                 type="text"
-                placeholder="Ru"
+                placeholder="Название Ru"
                 defaultValue={bacData.titleRu ? bacData.titleRu : ""}
                 className={`text-neutral-500 ${errors.titleRu ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
@@ -132,7 +132,7 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
                 autoComplete="off"
                 {...register("titleUz", { required: true })}
                 type="text"
-                placeholder="Uz"
+                placeholder="Название Uz"
                 defaultValue={bacData.titleUz ? bacData.titleUz : ""}
                 className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
@@ -149,7 +149,7 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
                   bacData.descriptionRu ? bacData.descriptionRu : ""
                 }
                 autoComplete="off"
-                placeholder="Ru"
+                placeholder="Описание Ru"
                 className={`text-neutral-500 ${errors.descriptionRu ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
             </div>
@@ -161,7 +161,7 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
                   bacData.descriptionUz ? bacData.descriptionUz : ""
                 }
                 autoComplete="off"
-                placeholder="Uz"
+                placeholder="Описание Uz"
                 className={`text-neutral-500 ${errors.descriptionUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
             </div>

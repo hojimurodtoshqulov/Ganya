@@ -103,6 +103,7 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                 >
                     <div className="p-10 bg-white rounded-2xl absolute z-[100]">
                         <form ref={ref} onSubmit={handleSubmit(onSubmitHandle)}>
+                            <p className=" text-neutral-500 text-lg  font-semibold mb-3">Desktop Image</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px] mb-4">
                                 <div className="flex items-center">
                                     <div
@@ -136,6 +137,7 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                                 <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb")} />
 
                             </div>
+                            <p className=" text-neutral-500 text-lg font-semibold mb-3">Mobile Image</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px]">
                                 <div className="flex items-center">
                                     <div
@@ -201,7 +203,8 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                     style={{ background: "#64793733" }}
                 >
                     <div className="p-10 bg-white rounded-2xl absolute z-[100]">
-                        <form ref={ref} onSubmit={handleSubmit(onSubmitHandle)}>
+                            <form ref={ref} onSubmit={handleSubmit(onSubmitHandle)}>
+                                <p className=" text-neutral-500 text-lg font-semibold mb-3">Desktop Image</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px] mb-4">
                                 <div className="flex items-center">
                                     <div
@@ -234,7 +237,8 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                                 </label>
                                 <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb", { required: true })} />
 
-                            </div>
+                                </div>
+                                <p className=" text-neutral-500 text-lg font-semibold mb-3">Mobile Image</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px]">
                                 <div className="flex items-center">
                                     <div
