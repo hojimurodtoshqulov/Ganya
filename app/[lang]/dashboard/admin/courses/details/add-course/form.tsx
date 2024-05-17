@@ -9,11 +9,17 @@ import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { Album, Image } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { getAccessToken } from "@/lib/actions/token";
 
 const formSchema = z.object({
   titleUz: z.string().min(1),
   titleRu: z.string().min(1),
-  image: z.union([z.string(), z.instanceof(FileList)]),
+  image: z.union([
+    z.string(),
+    z.object({
+      0: z.any(),
+    }),
+  ]),
   descriptionUz: z.string().min(1),
   descriptionRu: z.string().min(1),
 });
@@ -28,12 +34,14 @@ interface Props {
     image: string;
   };
   id?: string;
+  accessToken?: string;
 }
 
 const AddCourseForm: FC<Props> = ({
   method,
   id,
   defaultValues,
+  accessToken,
 }): JSX.Element => {
   const router = useRouter();
   const pathname = usePathname();
@@ -52,9 +60,9 @@ const AddCourseForm: FC<Props> = ({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData = new FormData();
-    console.log(values);
-    if (values.image instanceof FileList) {
-      formData.append("image", values.image[0], values.image[0].name);
+    // console.log(values);
+    if (typeof values.image === "object") {
+      formData.append("image", values?.image?.[0], values?.image?.[0]?.name);
     } else {
       formData.append("image", values.image);
     }
@@ -63,14 +71,35 @@ const AddCourseForm: FC<Props> = ({
     formData.append("descriptionUz", values.descriptionUz);
     formData.append("descriptionRu", values.descriptionRu);
 
-    const res = await fetch(
-      `https://oar-api.onrender.com/api/v1/courses/${method === "POST" ? "create" : `update/${id}`}`,
+    let res = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL +
+        "/courses/" +
+        (method === "POST" ? "create" : `update/${id}`),
       {
         method: method,
         body: formData,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+        },
       },
     );
     const data = await res.json();
+    if (res.status === 401) {
+      const json = await getAccessToken();
+      console.log(json);
+      res = await fetch(
+        process.env.NEXT_PUBLIC_BASE_URL +
+          "/courses/" +
+          (method === "POST" ? "create" : `update/${id}`),
+        {
+          method: method,
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+          },
+        },
+      );
+    }
     if (!res.ok) {
       toast({ description: data.message, variant: "destructive" });
     }

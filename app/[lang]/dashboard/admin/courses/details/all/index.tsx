@@ -17,6 +17,7 @@ import { FC } from "react";
 import AddCourseForm from "../add-course/form";
 import DeleteCourse from "./delete";
 import ArchiveCourse from "./archive";
+import { cookies } from "next/headers";
 
 interface ICard {
   id: string;
@@ -92,6 +93,7 @@ const AllCourses: FC<{
                     <AddCourseForm
                       method="PATCH"
                       id={id}
+                      accessToken={cookies().get("accessToken")?.value}
                       defaultValues={{
                         titleRu,
                         titleUz,
@@ -103,8 +105,13 @@ const AllCourses: FC<{
                   </DialogContent>
                 </Dialog>
                 <DropdownMenuSeparator />
-                <ArchiveCourse id={id} />
+
+                <ArchiveCourse
+                  id={id}
+                  accessToken={cookies().get("accessToken")?.value}
+                />
                 <DropdownMenuSeparator />
+
                 <DeleteCourse id={id} />
               </DropdownMenuContent>
             </DropdownMenu>

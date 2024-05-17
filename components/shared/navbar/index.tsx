@@ -77,7 +77,6 @@ const HomeNavbar: FC = () => {
                 href={`${pathname}/auth/sign-in`}
               >
                 Войти
-                {/* <Image src={Arow} alt="arrow" /> */}
                 <ArrowRight />
               </Link>
             </div>
