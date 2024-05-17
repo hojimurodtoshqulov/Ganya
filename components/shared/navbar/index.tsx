@@ -9,6 +9,7 @@ import Logo from "@/icons/Logo.svg";
 import { buttonVariants } from "@/components/ui/button";
 import LocaleSwitcher from "../locale-switcher";
 import Headroom from "react-headroom";
+import { ArrowRight } from "lucide-react";
 
 interface NavLinkType {
   id: number;
@@ -76,7 +77,8 @@ const HomeNavbar: FC = () => {
                 href={`${pathname}/auth/sign-in`}
               >
                 Войти
-                <Image src={Arow} alt="arrow" />
+                {/* <Image src={Arow} alt="arrow" /> */}
+                <ArrowRight />
               </Link>
             </div>
           </div>
