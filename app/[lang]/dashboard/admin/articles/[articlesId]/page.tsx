@@ -1,41 +1,33 @@
-"use client";
-
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Articlsall } from "@/types/auth";
+import { buttonVariants } from "@/components/ui/button";
 import { FaSquarePen } from "react-icons/fa6";
 import Link from "next/link";
-import React, { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
+import DetelCard from "./detelpage";
 
 interface propstype {
   params: {
     articlesId: string;
+    lang: string;
   };
 }
 
-const DetelPage = ({ params }: propstype) => {
-  async function getData<T>(): Promise<T[] | Error> {
-    const res = await fetch(
-      `https://oar-api.onrender.com/api/v1/articles/single/${params.articlesId}`,
-    );
-    if (!res.ok) {
-      return new Error("Failed to fetch data");
-    }
-    return res.json();
-  }
+async function getData(paramsId: string) {
+  const res = await fetch(
+    `https://oar-api.onrender.com/api/v1/articles/single/${paramsId}`,
+    {
+      cache: "no-store",
+    },
+  );
 
-  const [data, setData] = useState<Articlsall>();
+  return res.json();
+}
 
-  const fetchData = async () => {
-    const result: any = await getData();
-    if (!(result instanceof Error)) {
-      setData(result);
-    }
-  };
+export default async function DetelPage({
+  params: { lang, articlesId },
+}: propstype) {
+  const data = await getData(articlesId);
 
-  useState(() => {
-    fetchData();
-  });
+  console.log(lang, "uzb");
 
   return (
     <div>
@@ -46,20 +38,7 @@ const DetelPage = ({ params }: propstype) => {
         <FaChevronLeft className="font-normal" />
         Orqaga
       </Link>
-      <div className="bg-white rounded-2xl p-6">
-        <div className="flex justify-between items-center">
-          <h2 className="text-[24px] leading-[36px] text-main-300">
-            {data?.titleUz}
-          </h2>
-          <Link href={`/dashboard/admin/articles/${params.articlesId}/edit`}>
-            <FaSquarePen className="cursor-pointer text-3xl" />
-          </Link>
-        </div>
-        <h4 className="text-lg text-main-300 mt-5">{data?.textUz}</h4>
-        <p className="text-sm mt-1">{data?.textUz}</p>
-      </div>
+      <DetelCard data={data} lang={lang} articlesId={articlesId} />
     </div>
   );
-};
-
-export default DetelPage;
+}

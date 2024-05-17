@@ -48,7 +48,8 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
   }
 }
 
-export default async function Home() {
+export default async function Home({ params: { lang } }: { params: { lang: string } }) {
+  console.log()
   const data = await getData<{
     id: string;
   }>();
@@ -103,7 +104,7 @@ export default async function Home() {
 
       <div className="container my-20" id="courses">
         <Accordion type="single" collapsible>
-          <CourceCard data={course} />
+          <CourceCard data={course} lang={lang} />
         </Accordion>
       </div>
 

@@ -1,10 +1,14 @@
 "use client";
 
 import { useToast } from "@/components/ui/use-toast";
+import { getAccessToken } from "@/lib/actions/token";
 import { useRouter } from "next/navigation";
 import { FC, FormEvent } from "react";
 
-const ArchiveCourse: FC<{ id: string }> = ({ id }): JSX.Element => {
+const ArchiveCourse: FC<{ id: string; accessToken?: string }> = ({
+  id,
+  accessToken,
+}): JSX.Element => {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -12,18 +16,42 @@ const ArchiveCourse: FC<{ id: string }> = ({ id }): JSX.Element => {
   formData.append("courseStatus", "archived");
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const res = await fetch(
+    let res = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + `/courses/update/${id}`,
       {
         method: "PATCH",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+        },
       },
     );
+
+    if (res.status === 401) {
+      const json = await getAccessToken();
+      res = await fetch(
+        process.env.NEXT_PUBLIC_BASE_URL + `/courses/update/${id}`,
+        {
+          method: "PATCH",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+          },
+        },
+      );
+    }
 
     if (res.ok) {
       router.refresh();
       toast({
         description: "Course successfully archived!",
+      });
+    }
+    if (!res.ok) {
+      const json = await res.json();
+      toast({
+        description: json?.message ?? "Something went wrong!",
+        variant: "destructive",
       });
     }
   }

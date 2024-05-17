@@ -6,6 +6,7 @@ import { courceCardData } from "@/constants";
 interface Props {
   params: {
     course: string;
+    lang: string;
   };
 }
 
@@ -38,7 +39,7 @@ async function getPlan<T>(id: string): Promise<T[] | Error> {
   return res.json();
 }
 const OneOfAllCourses: FC<Props> = async ({
-  params: { course },
+  params: { course, lang },
 }): Promise<JSX.Element> => {
   const data = await getData<{
     id: string;
@@ -67,7 +68,7 @@ const OneOfAllCourses: FC<Props> = async ({
 
   return (
     <div>
-      <Modules data={data} />
+      <Modules data={data} lang={lang} />
       <div className="flex gap-6 flex-col justify-center p-6 bg-white mt-5 rounded-2xl">
         <h2 className="font-comfortaa text-main-300 font-semibold text-[26px]">
           Тарифы

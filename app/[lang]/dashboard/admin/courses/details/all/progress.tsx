@@ -17,6 +17,7 @@ import { FC } from "react";
 import AddCourseForm from "../add-course/form";
 import DeleteCourse from "./delete";
 import ArchiveCourse from "./archive";
+import { cookies } from "next/headers";
 
 interface ICard {
   id: string;
@@ -96,6 +97,7 @@ const ProgresCourses: FC<{ lang: "ru" | "uz" }> = async ({
                     <AddCourseForm
                       method="PATCH"
                       id={id}
+                      accessToken={cookies().get("accessToken")?.value}
                       defaultValues={{
                         titleRu,
                         titleUz,

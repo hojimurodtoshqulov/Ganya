@@ -19,7 +19,7 @@ function CardArticls(props: CardProps) {
           {props.title}
         </h2>
         <p className="text-[12px] leading-[18px] text-csneutral-500">
-          {props.text}...
+          {props.text}
         </p>
       </div>
 

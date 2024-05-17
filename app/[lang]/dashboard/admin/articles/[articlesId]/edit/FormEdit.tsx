@@ -23,6 +23,7 @@ import { FaChevronLeft } from "react-icons/fa";
 interface Props {
   articleId?: string;
   defaultValues?: any;
+  accessToken?: string;
 }
 
 const schema = z.object({
@@ -40,7 +41,11 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
+const FormEditArticle: FC<Props> = ({
+  articleId,
+  defaultValues,
+  accessToken,
+}) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -49,12 +54,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
     formState: { errors, isSubmitting },
   } = useForm<Schema>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      ...defaultValues,
-      imageMobile: null,
-      imageWeb: null,
-      articleImage: null,
-    },
+    defaultValues: defaultValues,
   });
 
   const imageWeb: any = watch("imageWeb") && (watch("imageWeb")[0] ?? {});
@@ -80,7 +80,13 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
       process.env.NEXT_PUBLIC_BASE_URL + `/articles/update/${articleId}`;
 
     try {
-      const req = await fetch(api, { method: "PATCH", body: formData });
+      const req = await fetch(api, {
+        method: "PATCH",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+        },
+      });
       if (!req.ok) throw new Error(" article yangilashda muammo yuzaga keldi");
 
       const res = req.json();
@@ -95,6 +101,9 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
   const DeleteFun = () => {
     fetch(process.env.NEXT_PUBLIC_BASE_URL + `/articles/remove/${articleId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+      },
     })
       .then((res) => res.text())
       .then(
@@ -149,7 +158,6 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                 </p>
               </div>
             </div>
-
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={"filled"}>
@@ -170,7 +178,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal"> Обложка </h2>
+                      <h2 className="text-2xl font-normal">Для мобильного</h2>
                       <p className="text-base">
                         {imageMobile
                           ? (imageMobile?.name as string)
@@ -189,7 +197,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                     accept="image/*"
                     className="w-0 h-0 opacity-0 hidden"
                     id="file1"
-                    {...(register("imageMobile"), { required: true })}
+                    {...register("imageMobile")}
                   />
                 </div>
                 <div
@@ -203,7 +211,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">Обложка Web</h2>
+                      <h2 className="text-2xl font-normal">Для компьютера</h2>
                       <p className="text-base">
                         {imageWeb
                           ? (imageWeb?.name as string)
@@ -221,7 +229,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                     type="file"
                     accept="image/*"
                     className="w-0 h-0 opacity-0 hidden"
-                    {...(register("imageWeb"), { required: true })}
+                    {...register("imageWeb")}
                     id="file2"
                   />
                 </div>
@@ -266,28 +274,26 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
             <Input
               type="text"
               id="titleRu"
-              placeholder="Базовый пакет:"
+              placeholder="Базовый пакет: Ru"
               className={cn({ "border-destructive": errors?.titleRu })}
               {...register("titleRu", { required: true })}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="titleUz">Sarlavha</Label>
             <Input
               type="text"
-              id="titleUz"
-              placeholder="Asosiy paket:"
+              id="titleRu"
+              placeholder="Asosiy paket: Uz"
               className={cn({ "border-destructive": errors?.titleUz })}
               {...register("titleUz", { required: true })}
             />
           </div>
-
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="headlineRu">Заголовок</Label>
+            <Label htmlFor="headlineRu">Подзаголовок</Label>
             <Input
               type="text"
               id="headlineRu"
-              placeholder="Базовый пакет:"
+              placeholder="Базовый пакет: Ru"
               className={cn({
                 "border-destructive": errors?.headlineRu?.types,
               })}
@@ -295,11 +301,10 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="headlineUz">Sarlavha</Label>
             <Input
               type="text"
-              id="headlineUz"
-              placeholder="Asosiy paket:"
+              id="headlineRu"
+              placeholder="Asosiy paket: Uz"
               className={cn({ "border-destructive": errors?.headlineUz })}
               {...register("headlineUz")}
             />
@@ -308,15 +313,15 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
             <Label htmlFor={`textRu`}>Описание</Label>
             <Textarea
               id="textRu"
-              placeholder="Преимущество 1"
+              placeholder="Преимущество 1 Ru"
               className={cn({ "border-destructive": errors?.textRu })}
               {...register("textRu")}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor={`textUz`}>Tavsif</Label>
             <Textarea
-              placeholder="Преимущество 1"
+              id="textRu"
+              placeholder="Преимущество 1 Uz"
               className={cn({ "border-destructive": errors?.textUz })}
               {...register("textUz")}
             />

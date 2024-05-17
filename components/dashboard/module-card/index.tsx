@@ -5,9 +5,10 @@ interface ModuleCardProps {
   title: string;
   image: string;
   id: string;
+  lang?: string;
 }
 
-const ModuleCard: React.FC<ModuleCardProps> = ({ title, image, id }) => {
+const ModuleCard: React.FC<ModuleCardProps> = ({ title, image, id, lang }) => {
   return (
     <div className="rounded-[18px] bg-white overflow-hidden w-full h-full flex flex-col">
       <div className="w-full aspect-[9/5] relative">

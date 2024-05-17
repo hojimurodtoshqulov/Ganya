@@ -19,7 +19,9 @@ import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import { FaChevronLeft } from "react-icons/fa";
 
-interface Props {}
+interface Props {
+  accessToken?: string;
+}
 
 const schema = z.object({
   titleRu: z.string().min(1),
@@ -36,7 +38,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const FormPostArticle: FC<Props> = ({}) => {
+const FormPostArticle: FC<Props> = ({ accessToken }) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -46,6 +48,8 @@ const FormPostArticle: FC<Props> = ({}) => {
   } = useForm<Schema>({
     resolver: zodResolver(schema),
   });
+
+  console.log(accessToken, "this is access token");
 
   const imageWeb: any = watch("imageWeb") && (watch("imageWeb")[0] ?? {});
   const imageMobile: any =
@@ -68,7 +72,13 @@ const FormPostArticle: FC<Props> = ({}) => {
 
     const api = "https://oar-api.onrender.com/api/v1" + "/articles/create";
     try {
-      const req = await fetch(api, { method: "POST", body: formData });
+      const req = await fetch(api, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+        },
+      });
       if (!req.ok)
         throw new Error("Yangi article yaratishda muammo yuzaga keldi");
       const res = req.json();
@@ -89,7 +99,7 @@ const FormPostArticle: FC<Props> = ({}) => {
         Orqaga
       </h1>
       <h2 className="text-[24px] leading-[36px] text-main-300">
-        {`Lapinoda tug'ilish. Bu qanday edi? (${watch("textUz") ? watch("titleUz") : "Maqola nomi"})`}
+        {`(${watch("textUz") ? watch("titleUz") : "Maqola nomi"})`}
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="bg-white p-6 rounded-2xl mt-5 space-y-5">
@@ -129,7 +139,7 @@ const FormPostArticle: FC<Props> = ({}) => {
             </div>
             <Dialog>
               <DialogTrigger asChild>
-                <Button /* onClick={() => setModal(true)} */ variant={"filled"}>
+                <Button variant={"filled"}>
                   {imageMobile?.name && imageWeb?.name
                     ? "редактировать"
                     : "Выбрать"}
@@ -222,28 +232,26 @@ const FormPostArticle: FC<Props> = ({}) => {
             <Input
               type="text"
               id="titleRu"
-              placeholder="Базовый пакет:"
+              placeholder="Базовый пакет: Ru"
               className={cn({ "border-destructive": errors?.titleRu })}
               {...register("titleRu", { required: true })}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="titleUz">Sarlavha</Label>
             <Input
               type="text"
-              id="titleUz"
-              placeholder="Asosiy paket:"
+              id="titleRu"
+              placeholder="Asosiy paket: Uz"
               className={cn({ "border-destructive": errors?.titleUz })}
               {...register("titleUz", { required: true })}
             />
           </div>
-
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="headlineRu">Заголовок</Label>
+            <Label htmlFor="headlineUz">Подзаголовок</Label>
             <Input
               type="text"
-              id="headlineRu"
-              placeholder="Базовый пакет:"
+              id="headlineUz"
+              placeholder="Asosiy paket: Uz"
               className={cn({
                 "border-destructive": errors?.headlineRu?.types,
               })}
@@ -251,11 +259,10 @@ const FormPostArticle: FC<Props> = ({}) => {
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="headlineUz">Sarlavha</Label>
             <Input
               type="text"
               id="headlineUz"
-              placeholder="Asosiy paket:"
+              placeholder="Базовый пакет: Ru"
               className={cn({ "border-destructive": errors?.headlineUz })}
               {...register("headlineUz")}
             />
@@ -264,15 +271,15 @@ const FormPostArticle: FC<Props> = ({}) => {
             <Label htmlFor={`textRu`}>Описание</Label>
             <Textarea
               id="textRu"
-              placeholder="Преимущество 1"
+              placeholder="Преимущество 1 Ru"
               className={cn({ "border-destructive": errors?.textRu })}
               {...register("textRu")}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor={`textUz`}>Tavsif</Label>
             <Textarea
-              placeholder="Преимущество 1"
+              id="textRu"
+              placeholder="Преимущество 1 Uz"
               className={cn({ "border-destructive": errors?.textUz })}
               {...register("textUz")}
             />
@@ -284,115 +291,9 @@ const FormPostArticle: FC<Props> = ({}) => {
             </Button>
           </div>
         </div>
-
-        {/* {modal ? <Modal onClick={() => setModal(false)} /> : null} */}
       </form>
     </div>
   );
 };
 
 export default FormPostArticle;
-
-/* 
-  <FormField
-              control={form.control}
-              name="textUz"
-              render={({ field }) => (
-                <FormItem className="w-full ">
-                  <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                    Sarlavha uz
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="Sarlavha uz" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="titleRu"
-              render={({ field }) => (
-                <FormItem className="w-full ">
-                  <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                    Sarlavha ru
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="Sarlavha ru" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div>
-              <div>
-                {fields.map((field, index) => (
-                  <div className="Input" key={field.id}>
-                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                      Sarlavha uz
-                    </FormLabel>
-                    <input
-                      className="flex h-14 w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
-                      // {...register(`articls.${index}.headingRu` as any)}
-                      {...register('headlineRu')}
-                      placeholder="Maqola sarlavhasini kiriting"
-                    />
-                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                      Tavsif uz
-                    </FormLabel>
-                    <textarea
-                      className="flex w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
-                      rows={5}
-                      placeholder="Maqolaning tavsifini kiriting"
-                      // {...register(`articls.${index}.descriptionuz` as any)}
-                      {...register('headlineUz')}
-                    ></textarea>
-                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                      Sarlavha ru
-                    </FormLabel>
-                    <input
-                      className="flex h-14 w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder="Maqola sarlavhasini kiriting"
-                      // {...register(`articls.${index}.headinguz` as any)}
-                      {...register('textUz')}
-                    />
-                    <FormLabel className="text-[#D5D6D8] text-sm mb-4">
-                      Tavsif ru
-                    </FormLabel>
-                    <textarea
-                      className="flex  w-full rounded-xl border-2 border-csneutral-200 bg-background p-4 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:!border-main-200 disabled:cursor-not-allowed disabled:opacity-50"
-                      rows={5}
-                      placeholder="Maqolaning tavsifini kiriting"
-                      // {...register(`articls.${index}.descriptionru` as any)}
-                      {...register('textRu')}
-                    ></textarea>
-                    {index > 0 && (
-                      <Button
-                        className="mt-2"
-                        variant={"destructive"}
-                        onClick={() => remove(index)}
-                      >
-                        remove
-                      </Button>
-                    )}
-                  </div>
-                ))}
-                <Button
-                  variant={"link"}
-                  className="text-main-300 text-sm"
-                  onClick={() =>
-                    append({
-                      headinlineRu: "",
-                      headlineUZ: "",
-                      textRu: "",
-                      textUz: "",
-                    })
-                  }
-                >
-                  {"+ Sarlavha qo'shing"}
-                </Button>
-              </div>
-            </div>
-
-*/

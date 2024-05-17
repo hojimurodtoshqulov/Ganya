@@ -11,6 +11,9 @@ import { useForm } from "react-hook-form";
 import { CiCirclePlus } from "react-icons/ci";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import BackLink from "@/components/dashboard/back-link";
+import { cn } from "@/lib/utils";
+import clsx from "clsx";
 
 interface Props {
     params: any;
@@ -27,7 +30,7 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
-    const { register, handleSubmit, watch, reset, formState: { isSubmitting } } = useForm<Schema>({
+    const { register, handleSubmit, watch, reset, formState: { isSubmitting, errors: inputErrors } } = useForm<Schema>({
         resolver: zodResolver(schema),
     });
     const router = useRouter();
@@ -55,15 +58,13 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
                 body: formData,
             });
 
-            if (!req.ok) throw new Error("Yangi Dars Yuklashda muammo!");
+            if (!req.ok) throw new Error("Новый урок. Проблема с загрузкой!");
 
             const res = await req.json();
             reset()
-            toast.success("Yangi dars muvaffaqiyatli qo'shildi");
+            toast.success("Новый урок успешно добавлен");
             router.refresh();
-            /*  router.push(
-                 `/dashboard/admin/courses/${params.courseId}/${params.moduleId}`,
-             ); */
+            router.back()
         } catch (error: any) {
             toast.error(error.message);
         }
@@ -71,6 +72,7 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
 
     return (
         <div className="space-y-5">
+            <BackLink title="Вернуться к урокам" heading='' />
             <Toaster
                 position="top-right"
                 toastOptions={{
@@ -87,7 +89,7 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
                 <div className="relative">
                     <Label
                         htmlFor="videoUpload"
-                        className=" relative rounded-2xl p-4 flex items-center justify-between gap-3 border-dashed border-2"
+                        className={clsx("relative rounded-2xl p-4 flex items-center justify-between gap-3 border-dashed border-2", inputErrors.video && "border-destructive")}
                     >
                         <div className="flex items-center gap-3">
                             <div className="rounded-xl w-[60px] h-[60px] flex items-center justify-center bg-white">
@@ -95,15 +97,15 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
                             </div>
                             <div className="flex flex-col text-csneutral-500 gap-1">
                                 <h1 className="text-[22px] font-medium">
-                                    {videoName ? "Video Tanlandi" : "Video qo'shish"}
+                                    {videoName ? "Видео выбрано" : "Добавить видео"}
                                 </h1>
                                 <p className="text-base font-normal">
-                                    {videoName ? videoName : "Videongizni torting yoki tanlang"}
+                                    {videoName ? videoName : "Перетащите или выберите ваще видео"}
                                 </p>
                             </div>
                         </div>
                         <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">
-                            {videoName ? "O'zgartirish" : "Tanlash"}
+                            {videoName ? "Редактировать" : "Выбрать"}
                         </span>
                     </Label>
                     <Input
@@ -111,7 +113,7 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
                         type="file"
                         accept="video/*"
                         className="absolute inset-0 opacity-0"
-                        {...register("video")}
+                        {...register("video", { required: true })}
                     />
                 </div>
 
@@ -121,33 +123,33 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
                         <Input
                             type="text"
                             id="titleRu"
-                            placeholder="Базовый пакет:"
-                            {...register("titleRu")}
+                            placeholder="Ru"
+                            className={cn({ "border-destructive": inputErrors.titleRu })}
+                            {...register("titleRu", { required: true })}
                         />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
-                        <Label htmlFor="titleUz">Sarlavha</Label>
                         <Input
                             type="text"
                             id="titleUz"
-                            placeholder="Asosiy paket:"
-                            {...register("titleUz")}
+                            placeholder="Uz"
+                            className={cn({ "border-destructive": inputErrors.titleUz })}
+                            {...register("titleUz", { required: true })}
                         />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
                         <Label htmlFor={`descriptionRu`}>Описание</Label>
                         <Textarea
-                            placeholder="Преимущество 1"
-                            className="resize-none"
-                            {...register("descriptionRu")}
+                            placeholder="Ru"
+                            className={cn({ "border-destructive": inputErrors.descriptionRu })}
+                            {...register("descriptionRu", { required: true })}
                         />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
-                        <Label htmlFor={`descriptionUz`}>Tavsif</Label>
                         <Textarea
-                            placeholder="Преимущество 1"
-                            className="resize-none"
-                            {...register("descriptionUz")}
+                            placeholder="Uz"
+                            className={cn({ "border-destructive": inputErrors.descriptionUz })}
+                            {...register("descriptionUz", { required: true })}
                         />
                     </div>
 
@@ -158,7 +160,7 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
                             className="disabled:bg-main-200 text-sm font-normal py3 px-5"
                             variant={"main"}
                         >
-                            Saqlash
+                            Сохранить
                         </Button>
                     </div>
                 </div>

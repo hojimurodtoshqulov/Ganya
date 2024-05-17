@@ -17,14 +17,12 @@ import { ImageIcon } from "lucide-react";
 interface Props {
   data?: any;
   type?: string;
+  lang: string
 }
 
-const CourceCard: React.FC<Props> = ({ data, type }) => {
-  console.log(data);
-  // const { Module, titleRu, titleUz, id, image, descriptionUz, descriptionRu } = data;
+const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
   const [toggle, setToggle] = useState(false);
   const totalModules = data?.Module?.length;
-  console.log(data, totalModules);
 
   if (type === "grid") {
     return (
@@ -49,7 +47,7 @@ const CourceCard: React.FC<Props> = ({ data, type }) => {
         <div className="flex flex-col justify-between space-y-8">
           <div className="flex flex-row items-center justify-between gap-4 grow">
             <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
-              {data?.titleRu}
+              {lang === 'ru' ? data?.titleRu : data?.titleUz}
             </h2>
             <Link href={`/${data?.id}`} className="flex justify-end">
               <Image src={arrowCorner} alt="salom" className="md:block" />
@@ -92,7 +90,7 @@ const CourceCard: React.FC<Props> = ({ data, type }) => {
           <div className="grow flex flex-col justify-between space-y-8">
             <div className="flex flex-row items-center justify-between gap-4">
               <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
-                {data?.titleRu}
+                {lang === 'ru' ? data?.titleRu : data?.titleUz}
               </h2>
               <Link href={`/${data?.id}`} className="flex justify-end grow">
                 <Image
@@ -132,14 +130,14 @@ const CourceCard: React.FC<Props> = ({ data, type }) => {
                     className={` md:border-b-0 md:my-4 border-csneutral-200 ${index % 2 === 1 ? "md:border-l  md:pl-5 border-csneutral-200" : ""}  ${index < totalModules - 1 ? "border-b  pb-3 md:pb-0" : "border-b-0"}`}
                   >
                     <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
-                      {item.titleRu}
+                      {lang === 'ru' ? item.titleRu : item?.titleUz}
                     </h3>
                     <p className="text-base md:text-lg text-csneutral-500 font-normal">
-                      {item.descriptionRu}
+                      {lang === 'ru' ? item.descriptionRu : item.descriptionUz}
                     </p>
                   </div>
                   {index % 2 === 1 &&
-                  (index < totalModules - 2 || index < totalModules - 1) ? (
+                    (index < totalModules - 2 || index < totalModules - 1) ? (
                     <span className=" my-3 md:absolute  right-0 h-[1px] w-[100%] bg-csneutral-200"></span>
                   ) : null}
                 </div>
