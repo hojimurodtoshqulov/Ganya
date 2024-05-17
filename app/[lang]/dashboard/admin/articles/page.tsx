@@ -60,7 +60,7 @@ const Articles: FC = (): JSX.Element => {
           <Link key={i} href={`/dashboard/admin/articles/${element?.id}`}>
             <CardArticls
               title={element?.titleUz}
-              text={element?.textUz}
+              text={element?.textUz?.slice(0, 50)}
               time={new Date().toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",

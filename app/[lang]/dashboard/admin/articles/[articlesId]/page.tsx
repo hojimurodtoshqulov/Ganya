@@ -2,7 +2,7 @@
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Articlsall } from "@/types/auth";
-import { Pencil, Trash } from "lucide-react";
+import { FaSquarePen } from "react-icons/fa6";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
@@ -49,10 +49,10 @@ const DetelPage = ({ params }: propstype) => {
       <div className="bg-white rounded-2xl p-6">
         <div className="flex justify-between items-center">
           <h2 className="text-[24px] leading-[36px] text-main-300">
-            {data?.headlineUz}
+            {data?.titleUz}
           </h2>
           <Link href={`/dashboard/admin/articles/${params.articlesId}/edit`}>
-            <Pencil className="cursor-pointer" />
+            <FaSquarePen className="cursor-pointer text-3xl" />
           </Link>
         </div>
         <h4 className="text-lg text-main-300 mt-5">{data?.textUz}</h4>

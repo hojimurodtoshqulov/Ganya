@@ -25,7 +25,7 @@ function CardStatya(props: CardProps) {
       </div>
 
       <div className="flex gap-2 text-lg">
-        <span>·</span> <p>{props.time}</p>
+        <p>{props.time}</p>
       </div>
     </div>
   );

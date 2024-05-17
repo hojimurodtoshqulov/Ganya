@@ -3,8 +3,7 @@
 import Heading from "@/components/ui/heading";
 import Image from "next/image";
 import Link from "next/link";
-import Stati from "@/components/shared/stati/stati";
-import images from "@/images/siblings-hero.png";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { Articlsall } from "@/types/auth";
 import CardStatya from "@/components/shared/stati/card-stati";
@@ -14,38 +13,6 @@ interface Props {
     articleId: string;
   };
 }
-
-// async function getArticles<T>(id: string): Promise<T[] | Error> {
-//   const res = await fetch(
-//     process.env.NEXT_PUBLIC_BASE_URL + "/articles/single/" + id,
-//     {
-//       cache: "no-store",
-//     },
-//   );
-
-//   if (!res.ok) {
-//     return new Error("Failed to fetch data");
-//   }
-
-//   return res?.json();
-// }
-
-// const articles = await getArticles<{
-//   id: string;
-//   createdAt: string;
-//   updatedAt: string;
-//   titleUz: string;
-//   headlineUz: string;
-//   headlineRu: string;
-//   textUz: string;
-//   textRu: string;
-//   imageWeb: any;
-//   imageMobile: any;
-//   link: string;
-//   isPublished: boolean;
-// }>(params.articleId);
-
-// console.log(articles);
 
 export default function SingleArticle({ params }: Props) {
   const [data, setData] = useState<Articlsall>();
@@ -75,7 +42,7 @@ export default function SingleArticle({ params }: Props) {
           />
         </div>
       </div>
-      <div className="py-28">
+      <div className="py-10 lg:py28">
         <div className="flex lg:flex-row flex-col-reverse  justify-between container w-full gap-6">
           <div className="bg-csneutral-100 w-full p-10 rounded-[40px]">
             <Heading text={`${data?.headlineUz}`} />
@@ -86,10 +53,25 @@ export default function SingleArticle({ params }: Props) {
               {data?.textUz}
             </p>
           </div>
-          <Link className="flex flex-col w-[425px]" href={`${data?.link}`}>
+          <Link
+            className="flex w-full h-[250px] flex-col lg:hidden"
+            href={`${data?.link}`}
+          >
             <Image
               src={data?.imageWeb}
-              className="lg:w-[425px] w-full lg:h-[620px] h-[140px] object-cover rounded-[40px] bg-slate-400 "
+              className="lg:w-[450px] w-full lg:h-[620px] h-[250px] object-cover rounded-[40px] bg-slate-400 "
+              width={425}
+              height={620}
+              alt="Image baner"
+            />
+          </Link>
+          <Link
+            className="hidden w-1/3 flex-col lg:flex"
+            href={`${data?.link}`}
+          >
+            <Image
+              src={data?.imageWeb}
+              className="lg:w-[450px] w-full lg:h-[620px] h-[140px] object-cover rounded-[40px] bg-slate-400 "
               width={425}
               height={620}
               alt="Image baner"
@@ -107,7 +89,7 @@ export default function SingleArticle({ params }: Props) {
                   key={article.id}
                   title={article.headlineUz}
                   text={article.textUz}
-                  time={article.updatedAt}
+                  time={format(new Date(article.updatedAt), "MMMM dd, yyyy")}
                 />
               </Link>
             ))}
