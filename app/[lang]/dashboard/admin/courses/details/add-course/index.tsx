@@ -8,9 +8,12 @@ import {
 import { FC } from "react";
 import AddCourseForm from "./form";
 
-interface Props {}
+interface Props {
+  accessToken?: string;
+  lang: "uz" | "ru";
+}
 
-const AddNewCourse: FC<Props> = (): JSX.Element => {
+const AddNewCourse: FC<Props> = ({ lang, accessToken }): JSX.Element => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -22,7 +25,7 @@ const AddNewCourse: FC<Props> = (): JSX.Element => {
         <DialogHeader className="text-2xl text-main-300 font-medium">
           Yangi kurs qo&apos;shing
         </DialogHeader>
-        <AddCourseForm method="POST" />
+        <AddCourseForm method="POST" accessToken={accessToken} />
       </DialogContent>
     </Dialog>
   );
