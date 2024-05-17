@@ -20,8 +20,8 @@ interface data {
 const FormUpdate = ({ open, closeFunc, comment, accessToken }: { closeFunc: Function, open: boolean, comment: data, accessToken:string | undefined }) => {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
     const ref = useRef<HTMLFormElement>(null);
-    const [count1, setcount1] = useState(0)
-    const [count2, setcount2] = useState(0)
+    const [count1, setcount1] = useState(comment.textRu.length)
+    const [count2, setcount2] = useState(comment.textUz.length)
     const [method, setMethod] = useState("");
     const router = useRouter()
 

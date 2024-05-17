@@ -32,6 +32,8 @@ const Form = ({ open, closeFunc, accessToken }: { closeFunc: Function, open: boo
 
         if (ref.current) {
             (ref.current).reset();
+            setcount1(0)
+            setcount2(0)
         }
     };
     return (
