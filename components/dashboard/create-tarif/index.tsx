@@ -3,13 +3,14 @@ import { Dialog, DialogContent, DialogTrigger } from "./dialog";
 import { FC } from "react";
 import CreateTarifForm from "./form";
 import Card from "./card";
+import { cookies } from "next/headers";
 
 interface Props {
   courseId: string;
 }
 async function getData<T>(id: string): Promise<T[] | Error> {
   const res = await fetch(
-    "https://oar-api.onrender.com/api/v1/plans/all/" + id,
+    process.env.NEXT_PUBLIC_BASE_URL + "/plans/all/" + id,
     {
       cache: "no-store",
     },
@@ -47,7 +48,11 @@ const CreateTarif: FC<Props> = async ({ courseId }): Promise<JSX.Element> => {
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <CreateTarifForm courseId={courseId} method="POST" />
+            <CreateTarifForm
+              courseId={courseId}
+              method="POST"
+              accessToken={cookies().get("accessToken")?.value}
+            />
           </DialogContent>
         </Dialog>
       </div>
