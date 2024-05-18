@@ -7,7 +7,14 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Logo, SidebarButton, SidebarContact } from "../details";
 
-const links = [
+const userLinks = [
+  {
+    icon: LayoutGrid,
+    label: "Обучение",
+    path: "edu",
+  },
+];
+const adminLinks = [
   {
     icon: LayoutGrid,
     label: "Обучение",
@@ -18,9 +25,14 @@ const links = [
 interface SidebarProps {
   lang: Locale;
   handleClick: () => void;
+  role?: string;
 }
 
-const SideBar: FC<SidebarProps> = ({ lang, handleClick }): JSX.Element => {
+const SideBar: FC<SidebarProps> = ({
+  lang,
+  handleClick,
+  role,
+}): JSX.Element => {
   const paths = useSelectedLayoutSegments();
 
   return (
@@ -39,7 +51,7 @@ const SideBar: FC<SidebarProps> = ({ lang, handleClick }): JSX.Element => {
         </div>
 
         <nav className="flex flex-col text-base ">
-          {links.slice(0, 2).map((link) => {
+          {(role === "user" ? userLinks : adminLinks).map((link) => {
             const active = paths.includes(link.path);
             return (
               <Link

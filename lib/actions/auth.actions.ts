@@ -79,7 +79,7 @@ export const loginAction = async (formData: FormData) => {
         },
       );
       const json = await res.json();
-      // console.log(json, "<--------------------------- bu login json");
+      console.log(json, "<--------------------------- bu login json");
       cookies().set({
         name: "accessToken",
         value: JSON.stringify(json.accessToken),
