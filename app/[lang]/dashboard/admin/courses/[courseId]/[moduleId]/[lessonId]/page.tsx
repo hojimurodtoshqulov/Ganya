@@ -9,7 +9,7 @@ interface Props {
 
 const getLesson = async (id: string) => {
   console.log(id)
-  
+
   const api = process.env.NEXT_PUBLIC_BASE_URL + `/lessons/single/${id}`;
   const accessToken = cookies().get('accessToken')?.value;
   try {
