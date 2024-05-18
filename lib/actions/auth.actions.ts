@@ -7,7 +7,6 @@ import {
   validateInput,
 } from "@/types/auth";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export const registerAction = async (formData: FormData) => {
   const validatedFields = registerSchema.safeParse({
@@ -24,7 +23,7 @@ export const registerAction = async (formData: FormData) => {
       const link = validateInput(emailOrPhone) as "email" | "phone";
       console.log("start", link);
       const res = await fetch(
-        `https://oar-api.onrender.com/api/v1/auth/${link}/register`,
+        process.env.NEXT_PUBLIC_BASE_URL + `/auth/${link}/register`,
         {
           method: "POST",
           headers: {
@@ -70,7 +69,7 @@ export const loginAction = async (formData: FormData) => {
       const link = validateInput(emailOrPhone) as "email" | "phone";
       console.log("start", link);
       const res = await fetch(
-        `https://oar-api.onrender.com/api/v1/auth/${link}/login`,
+        process.env.NEXT_PUBLIC_BASE_URL + `/auth/${link}/login`,
         {
           method: "POST",
           headers: {
@@ -123,7 +122,7 @@ export const smsValidateAction = async (formData: FormData) => {
     try {
       const { data } = validatedFields;
       const res = await fetch(
-        `https://oar-api.onrender.com/api/v1/auth/confirm-code`,
+        process.env.NEXT_PUBLIC_BASE_URL + `/auth/confirm-code`,
         {
           method: "POST",
           headers: {

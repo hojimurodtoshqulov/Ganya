@@ -5,6 +5,7 @@ import { i18n } from "./lib/i18n-config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
+import { getAccessToken } from "./lib/actions/token";
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -16,7 +17,7 @@ function getLocale(request: NextRequest): string | undefined {
 
   // Use negotiator and intl-localematcher to get best locale
   let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
-    locales
+    locales,
   );
 
   const locale = matchLocale(languages, locales, i18n.defaultLocale);
@@ -24,7 +25,7 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
@@ -40,7 +41,8 @@ export function middleware(request: NextRequest) {
 
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+    (locale) =>
+      !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
 
   // Redirect if there is no locale
@@ -50,9 +52,82 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(
       new URL(
         `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
-        request.url
-      )
+        request.url,
+      ),
     );
+  }
+
+  const refreshToken = request.cookies.get("refreshToken")?.value ?? "";
+  if (!refreshToken && pathname.indexOf("/dashboard") > -1) {
+    return NextResponse.redirect(new URL("/auth/sign-in", request.url));
+  }
+  const accessToken = request.cookies.get("accessToken")?.value ?? "";
+  if (!accessToken && pathname.includes("/dashboard")) {
+    console.log("blabalbalalabal");
+    const response = NextResponse.next();
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + "/auth/refresh-access-token",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          refreshToken: JSON.parse(refreshToken),
+        }),
+      },
+    );
+    const json = await res.json();
+    console.log(json);
+    if (!res.ok) {
+      return NextResponse.redirect(new URL("/auth/sign-in", request.url));
+    }
+    response.cookies.set({
+      name: "accessToken",
+      value: JSON.stringify(json.accessToken),
+      httpOnly: true,
+      secure: true,
+      maxAge: 60 * 60 * 24 * 1000,
+      path: "/",
+    });
+
+    return response;
+  }
+  if (pathname.includes("/dashboard")) {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + "/users/profile",
+      {
+        cache: "no-store",
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken)}`,
+        },
+      },
+    );
+    const json = await res.json();
+    console.log("jeejejeejej", json);
+    if (pathname.includes("/admin") && json?.role === "admin") {
+      return NextResponse.next();
+    } else if (pathname.includes("/client") && json?.role === "user") {
+      console.log("user");
+      return NextResponse.next();
+    } else if (pathname.includes("/client") && json?.role !== "user") {
+      return NextResponse.redirect(new URL("/auth/sign-in", request.url));
+    } else if (pathname.includes("/admin") && json?.role !== "admin") {
+      return NextResponse.redirect(new URL("/auth/sign-in", request.url));
+    }
+    if (json?.refreshToken) {
+      const response = NextResponse.next();
+
+      response.cookies.set({
+        name: "refreshToken",
+        value: json?.refreshToken,
+        secure: true,
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 6.5,
+        path: "/",
+      });
+      return response;
+    }
+    if (!res.ok) {
+      return NextResponse.redirect(new URL("/auth/sign-in", request.url));
+    }
   }
 }
 
