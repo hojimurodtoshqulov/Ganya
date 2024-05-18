@@ -1,23 +1,43 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { getAccessToken } from "@/lib/actions/token";
 import { useRouter } from "next/navigation";
 import { FC, FormEvent } from "react";
 
-const StatusForm: FC<{ id: string }> = ({ id }): JSX.Element => {
+const StatusForm: FC<{ id: string; accessToken?: string }> = ({
+  id,
+  accessToken,
+}): JSX.Element => {
   const router = useRouter();
   const { toast } = useToast();
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("courseStatus", "completed");
-    const res = await fetch(
-      `https://oar-api.onrender.com/api/v1/courses/update/${id}`,
+    let res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/courses/update/${id}`,
       {
         method: "PATCH",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+        },
       },
     );
+    if (res.status === 401) {
+      const json = await getAccessToken();
+      res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/courses/update/${id}`,
+        {
+          method: "PATCH",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+          },
+        },
+      );
+    }
     const data = await res.json();
 
     if (!res.ok) {
