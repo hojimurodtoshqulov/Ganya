@@ -172,6 +172,30 @@
     "auth": {
       "title": "So'rov qoldiring",
       "name": "Ismi Familiya",
+
+      "btn": "So'rov qoldiring"
+    }
+  },
+  "articles": {
+    "title": "Maqolalar",
+    "text": "Subtitr"
+  },
+  "auth": {
+    "title": "So'rov qoldiring",
+    "name": "Ismi Familiya",
+    "plesholder": "Ism va familiyangizni kiriting",
+    "tel": "Telefon raqami",
+    "sent": "Yuborish",
+    "sucsestitle": "Sizning Sorovingiz qabul qilindi",
+    "sucsestext": "Menejerimiz tez orada siz bilan bog'lanadi",
+    "sucsesbtn": "Yopish",
+    "btn2": "O'quv qo'llanmasiga o'tish"
+  },
+  "dashboard": {
+    "saidbar": {
+      "text1": "trening",
+      "text2": "Profil",
+      "text3": "Chiqish",
       "plesholder": "Ism va familiyangizni kiriting",
       "tel": "Telefon raqami",
       "sent": "Yuborish",
@@ -377,5 +401,10 @@
         "btn": "Tasdiqlash"
       }
     }
+  },
+  "pay": {
+    "heading": "To'lov usuli",
+    "title": "Tarif rejasi:",
+    "pay": "To'lov miqdori:"
   }
 }
