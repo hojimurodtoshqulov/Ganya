@@ -15,6 +15,18 @@ import Stati from "@/components/shared/stati/stati";
 import CurseHelp from "@/components/shared/curs-helped";
 import { teamMembers } from "@/constants/team";
 import { getDictionary } from "@/lib/get-dictionary";
+interface Review{
+  id: string,
+  username: string,
+  occupationUz: string,
+  occupationRu: string,
+  textUz: string,
+  textRu: string,
+  isPublished: boolean,
+  createdAt: string,
+  updatedAt: string
+}
+
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch(
@@ -51,6 +63,9 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
 
 export default async function Home({ params: { lang } }: { params: { lang: 'ru' | 'uz' } }) {
 
+  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all")
+  const dataComment = await res.json()
+  const dataComments = dataComment.slice(-3)
   const data = await getData<{
     id: string;
   }>();
@@ -112,8 +127,8 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
       <div className="container mb-16">
         <Carousel
           title={dcitionary.home.Reviews.title}
-          data={[...reviews, ...reviews].map((r, i) => (
-            <ReviewCard key={i} {...r} />
+          data={dataComments.map((r:Review, i:number) => (
+            <ReviewCard key={i} review={r} lang={lang} />
           ))}
         />
       </div>
