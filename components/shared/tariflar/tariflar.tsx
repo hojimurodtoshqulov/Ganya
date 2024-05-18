@@ -14,7 +14,7 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
 
   return res.json();
 }
-async function Tariflar({ id }: { id: string }) {
+async function Tariflar({ id, lang }: { id: string, lang:'uz' | 'ru'}) {
   const data = await getCourse<{
     availablePeriod: number;
     includeResources: boolean;
@@ -31,7 +31,7 @@ async function Tariflar({ id }: { id: string }) {
 
   return (
     <div className="flex gap-6 px-6 flex-col pb-5 justify-center">
-      <h2 className="title text-h2  leading-[56px]">Тарифы</h2>
+      <h2 className="title text-h2  leading-[56px]">{lang==="ru" ? 'Тарифы':'Tariflar'}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 items-center justify-center lg:grid-cols-3 gap-5 md:gap-6">
         {data.map((t, i) => (
           <Card values={t} key={t.id} btn pro={i === 1} />

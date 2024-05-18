@@ -33,7 +33,7 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
         if (result?.errors) {
           setState((p) => ({ ...p, errors: result.errors }));
         } else if (result?.successMessage) {
-          redirect("/dashboard/client/edu");
+          redirect("/dashboard");
         } else {
           // error toast
           toast({

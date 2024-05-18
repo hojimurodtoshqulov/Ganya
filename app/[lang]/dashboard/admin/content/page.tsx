@@ -3,7 +3,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Banner from "@/components/dashboard/kontent";
 import Sharhlar from "@/components/dashboard/comments";
 
-const Content: FC = (): JSX.Element => {
+const Content: FC<{ params: { lang: 'uz' | 'ru' } }> = ({
+  params: { lang },
+}): JSX.Element => {
   return (
     <div>
       <h3 className="font-comfortaa font-bold text-[26px] text-main-300">
@@ -19,7 +21,7 @@ const Content: FC = (): JSX.Element => {
           <Banner />
         </TabsContent>
         <TabsContent value="fikrlar">
-          <Sharhlar />
+          <Sharhlar lang={lang} />
         </TabsContent>
       </Tabs>
     </div>

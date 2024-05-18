@@ -22,8 +22,8 @@ export const getAccessToken = async () => {
       },
     );
     if (!res.ok) {
-      // redirect("/auth/sign-in");
-      console.log("token pge error");
+      redirect("/auth/sign-in");
+      // console.log("token pge error");
     }
     const json = await res.json();
     console.log(json);
