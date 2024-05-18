@@ -65,7 +65,7 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
 
   const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all")
   const dataComment = await res.json()
-  const dataComments = dataComment.slice(-3)
+  const dataComments = dataComment
   const data = await getData<{
     id: string;
   }>();
