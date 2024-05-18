@@ -16,7 +16,13 @@ async function Getpost() {
   return response.json();
 }
 
-async function Stati({ container }: { container?: string }) {
+async function Stati({
+  container,
+  lang,
+}: {
+  container?: string;
+  lang: string;
+}) {
   const getdata = await Getpost();
 
   return (
@@ -28,8 +34,8 @@ async function Stati({ container }: { container?: string }) {
             <Link key={article.id} href={`/articles/${article.id}`}>
               <CardStatya
                 key={article.id}
-                title={article.headlineUz}
-                text={article.textUz}
+                title={lang === "ru" ? article.headlineUz : article.headlineRu}
+                text={lang === "uz" ? article.textUz : article.textRu}
                 time={format(new Date(article.updatedAt), "MMMM dd, yyyy")}
               />
             </Link>

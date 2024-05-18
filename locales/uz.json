@@ -128,7 +128,8 @@
     "sent": "Yuborish",
     "sucsestitle": "Sizning Sorovingiz qabul qilindi",
     "sucsestext": "Menejerimiz tez orada siz bilan bog'lanadi",
-    "sucsesbtn": "Yopish"
+    "sucsesbtn": "Yopish",
+    "btn2": "O'quv qo'llanmasiga o'tish"
   },
   "dashboard": {
     "saidbar": {
@@ -327,5 +328,10 @@
       "try": "Kodni qayta yuboring",
       "btn": "Tasdiqlash"
     }
+  },
+  "pay": {
+    "heading": "To'lov usuli",
+    "title": "Tarif rejasi:",
+    "pay": "To'lov miqdori:"
   }
 }

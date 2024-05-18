@@ -251,20 +251,20 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
             <Input
               type="text"
               id="headlineUz"
-              placeholder="Asosiy paket: Uz"
-              className={cn({
-                "border-destructive": errors?.headlineRu?.types,
-              })}
-              {...register("headlineRu", { required: true })}
+              placeholder="Asosiy paket: Ru"
+              className={cn({ "border-destructive": errors?.headlineUz })}
+              {...register("headlineUz")}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Input
               type="text"
               id="headlineUz"
-              placeholder="Базовый пакет: Ru"
-              className={cn({ "border-destructive": errors?.headlineUz })}
-              {...register("headlineUz")}
+              placeholder="Базовый пакет: Uz"
+              className={cn({
+                "border-destructive": errors?.headlineRu?.types,
+              })}
+              {...register("headlineRu", { required: true })}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">

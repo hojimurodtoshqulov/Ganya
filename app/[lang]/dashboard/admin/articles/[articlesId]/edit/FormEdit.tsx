@@ -293,6 +293,15 @@ const FormEditArticle: FC<Props> = ({
             <Input
               type="text"
               id="headlineRu"
+              placeholder="Asosiy paket: Uz"
+              className={cn({ "border-destructive": errors?.headlineUz })}
+              {...register("headlineUz")}
+            />
+          </div>
+          <div className="grid w-full  items-center gap-1.5">
+            <Input
+              type="text"
+              id="headlineRu"
               placeholder="Базовый пакет: Ru"
               className={cn({
                 "border-destructive": errors?.headlineRu?.types,
@@ -300,15 +309,7 @@ const FormEditArticle: FC<Props> = ({
               {...register("headlineRu", { required: true })}
             />
           </div>
-          <div className="grid w-full  items-center gap-1.5">
-            <Input
-              type="text"
-              id="headlineRu"
-              placeholder="Asosiy paket: Uz"
-              className={cn({ "border-destructive": errors?.headlineUz })}
-              {...register("headlineUz")}
-            />
-          </div>
+
           <div className="grid w-full  items-center gap-1.5">
             <Label htmlFor={`textRu`}>Описание</Label>
             <Textarea

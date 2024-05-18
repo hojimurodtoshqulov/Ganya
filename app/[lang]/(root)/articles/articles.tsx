@@ -20,8 +20,10 @@ interface props {
 export default function ArticlesPage({ articls, lang }: props) {
   const [searchText, setSearchText] = useState<string>("");
 
+  console.log(articls, "this is data");
+
   const filteredData = articls?.filter((element: Articlsall) =>
-    element.titleUz.toLowerCase().includes(searchText.toLowerCase()),
+    element?.titleUz.toLowerCase().includes(searchText.toLowerCase()),
   );
 
   return (

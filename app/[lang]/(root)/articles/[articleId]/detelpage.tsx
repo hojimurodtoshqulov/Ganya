@@ -17,7 +17,7 @@ interface Props {
 export default function DeteleArticle({ detel, articlsall, lang }: Props) {
   return (
     <div>
-      <div className="pt-32 ">
+      <div className="pt-10 ">
         <div className="container">
           <Image
             className="w-full aspect-[66/17] h-[340px] object-cover rounded-[40px]"
@@ -38,7 +38,7 @@ export default function DeteleArticle({ detel, articlsall, lang }: Props) {
               Подзаголовок
             </h2>
             <p className="font-normal w-full text-2xl text-[#585D65]">
-              {lang === "ru" ? detel?.textUz : detel.textRu}
+              {lang === "ru" ? detel?.textRu : detel.textUz}
             </p>
           </div>
           <Link
@@ -78,7 +78,7 @@ export default function DeteleArticle({ detel, articlsall, lang }: Props) {
                   title={
                     lang === "ru" ? article.headlineUz : article.headlineRu
                   }
-                  text={lang === "ru" ? article.textUz : article.titleRu}
+                  text={lang === "ru" ? article.textRu : article.titleUz}
                   time={format(new Date(article.updatedAt), "MMMM dd, yyyy")}
                 />
               </Link>

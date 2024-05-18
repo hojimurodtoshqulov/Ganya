@@ -48,8 +48,12 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
   }
 }
 
-export default async function Home({ params: { lang } }: { params: { lang: string } }) {
-  console.log()
+export default async function Home({
+  params: { lang },
+}: {
+  params: { lang: string };
+}) {
+  console.log();
   const data = await getData<{
     id: string;
   }>();
@@ -134,7 +138,7 @@ export default async function Home({ params: { lang } }: { params: { lang: strin
       <FAQ />
 
       <div id="articles">
-        <Stati container="container" />
+        <Stati lang={lang} container="container" />
       </div>
 
       <div id="contacts">
