@@ -112,7 +112,10 @@ const AllCourses: FC<{
                 />
                 <DropdownMenuSeparator />
 
-                <DeleteCourse id={id} />
+                <DeleteCourse
+                  id={id}
+                  accessToken={cookies().get("accessToken")?.value}
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           </CourseCard>

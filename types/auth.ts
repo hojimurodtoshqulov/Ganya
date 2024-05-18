@@ -58,6 +58,7 @@ export interface Articlsall {
   createdAt: string;
   updatedAt: string;
   titleUz: string;
+  titleRu: string;
   headlineUz: string;
   headlineRu: string;
   textUz: string;

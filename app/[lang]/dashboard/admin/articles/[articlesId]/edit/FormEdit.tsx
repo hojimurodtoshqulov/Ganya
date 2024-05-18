@@ -11,16 +11,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { any, z } from "zod";
+import { z } from "zod";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { FaChevronLeft } from "react-icons/fa";
 
 interface Props {
   articleId?: string;
   defaultValues?: any;
+  accessToken?: string;
 }
 
 const schema = z.object({
@@ -38,7 +41,11 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
+const FormEditArticle: FC<Props> = ({
+  articleId,
+  defaultValues,
+  accessToken,
+}) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -73,7 +80,13 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
       process.env.NEXT_PUBLIC_BASE_URL + `/articles/update/${articleId}`;
 
     try {
-      const req = await fetch(api, { method: "PATCH", body: formData });
+      const req = await fetch(api, {
+        method: "PATCH",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+        },
+      });
       if (!req.ok) throw new Error(" article yangilashda muammo yuzaga keldi");
 
       const res = req.json();
@@ -88,29 +101,56 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
   const DeleteFun = () => {
     fetch(process.env.NEXT_PUBLIC_BASE_URL + `/articles/remove/${articleId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+      },
     })
       .then((res) => res.text())
       .then(
         (res) => (
-          router.push("/dashboard/admin/articles/"),
-          toast.success("Article Muvaffaqiyatli O'chrildi")
+          toast.success("Article Muvaffaqiyatli O'chrildi"),
+          router.push("/dashboard/admin/articles/")
         ),
       );
   };
 
   return (
     <div>
+      <h1
+        className={`${buttonVariants({ variant: "link" })} flex gap-2 items-center`}
+        onClick={() => router.back()}
+      >
+        <FaChevronLeft className="font-normal" />
+        Orqaga
+      </h1>
       <h2 className="text-[24px] leading-[36px] text-main-300">
-        {`Lapinoda tug'ilish. Bu qanday edi? (${watch("textUz") ? watch("titleUz") : "Maqola nomi"})`}
+        {`(${watch("textUz") ? watch("titleUz") : "Maqola nomi"})`}
       </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-white p-6 rounded-2xl mt-5 space-y-5">
-          <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center">
+          <div
+            className={cn(
+              "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center mt-4 mb-2",
+              { "border-destructive": errors.imageWeb || errors.imageMobile },
+            )}
+          >
             <div className="flex items-center">
-              <div className="rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
-                <ImageIcon />
+              <div className="rounded-xl flex items-center gap-3 justify-center mr-8">
+                <Image
+                  src={defaultValues?.imageMobile}
+                  alt="images"
+                  width={80}
+                  height={80}
+                  className="rounded w-[80px] h-[80px] object-cover"
+                />
+                <Image
+                  src={defaultValues?.imageWeb}
+                  alt="images"
+                  width={80}
+                  height={80}
+                  className="rounded w-[80px] h-[80px] object-cover"
+                />
               </div>
-
               <div className="flex ml-3 flex-col gap-1">
                 <h2 className="text-2xl font-normal">Обложка</h2>
                 <p className="text-base">
@@ -138,7 +178,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal"> Обложка </h2>
+                      <h2 className="text-2xl font-normal">Для мобильного</h2>
                       <p className="text-base">
                         {imageMobile
                           ? (imageMobile?.name as string)
@@ -171,7 +211,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">Обложка Web</h2>
+                      <h2 className="text-2xl font-normal">Для компьютера</h2>
                       <p className="text-base">
                         {imageWeb
                           ? (imageWeb?.name as string)
@@ -210,7 +250,7 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
           <div
             className={cn(
               "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center mt-4 mb-2",
-              { "border-destructive": errors?.articleImage },
+              { "border-destructive": errors.imageWeb || errors.imageMobile },
             )}
           >
             <div className="flex items-center gap-3">
@@ -225,38 +265,35 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
                 type="file"
                 accept="image/*"
                 className="w-0 h-0 opacity-0 hidden"
-                {...register("articleImage")}
+                {...register("articleImage", { required: true })}
               />
             </label>
           </div>
-
           <div className="grid w-full  items-center gap-1.5">
             <Label htmlFor="titleRu">Заголовок</Label>
             <Input
               type="text"
               id="titleRu"
-              placeholder="Базовый пакет:"
+              placeholder="Базовый пакет: Ru"
               className={cn({ "border-destructive": errors?.titleRu })}
               {...register("titleRu", { required: true })}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="titleUz">Sarlavha</Label>
             <Input
               type="text"
-              id="titleUz"
-              placeholder="Asosiy paket:"
+              id="titleRu"
+              placeholder="Asosiy paket: Uz"
               className={cn({ "border-destructive": errors?.titleUz })}
               {...register("titleUz", { required: true })}
             />
           </div>
-
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="headlineRu">Заголовок</Label>
+            <Label htmlFor="headlineRu">Подзаголовок</Label>
             <Input
               type="text"
               id="headlineRu"
-              placeholder="Базовый пакет:"
+              placeholder="Базовый пакет: Ru"
               className={cn({
                 "border-destructive": errors?.headlineRu?.types,
               })}
@@ -264,11 +301,10 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="headlineUz">Sarlavha</Label>
             <Input
               type="text"
-              id="headlineUz"
-              placeholder="Asosiy paket:"
+              id="headlineRu"
+              placeholder="Asosiy paket: Uz"
               className={cn({ "border-destructive": errors?.headlineUz })}
               {...register("headlineUz")}
             />
@@ -277,15 +313,15 @@ const FormEditArticle: FC<Props> = ({ articleId, defaultValues }) => {
             <Label htmlFor={`textRu`}>Описание</Label>
             <Textarea
               id="textRu"
-              placeholder="Преимущество 1"
+              placeholder="Преимущество 1 Ru"
               className={cn({ "border-destructive": errors?.textRu })}
               {...register("textRu")}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor={`textUz`}>Tavsif</Label>
             <Textarea
-              placeholder="Преимущество 1"
+              id="textRu"
+              placeholder="Преимущество 1 Uz"
               className={cn({ "border-destructive": errors?.textUz })}
               {...register("textUz")}
             />
