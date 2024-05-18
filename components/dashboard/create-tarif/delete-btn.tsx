@@ -1,11 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { getAccessToken } from "@/lib/actions/token";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 
-const DeleteBtn: FC<{ id: string }> = ({ id }): JSX.Element => {
+const DeleteBtn: FC<{ id: string; accessToken?: string }> = ({
+  id,
+  accessToken,
+}): JSX.Element => {
   const {
     handleSubmit,
     formState: { isSubmitting },
@@ -15,12 +19,29 @@ const DeleteBtn: FC<{ id: string }> = ({ id }): JSX.Element => {
   const router = useRouter();
 
   const submit = async () => {
-    const res = await fetch(
+    let res = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + "/plans/delete/" + id,
       {
         method: "DELETE",
+
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+        },
       },
     );
+    if (res.status === 401) {
+      const json = await getAccessToken();
+      res = await fetch(
+        process.env.NEXT_PUBLIC_BASE_URL + "/plans/delete/" + id,
+        {
+          method: "DELETE",
+
+          headers: {
+            Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+          },
+        },
+      );
+    }
     if (!res.ok) {
       toast({
         description: "Something went wrong!",
