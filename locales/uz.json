@@ -1,12 +1,12 @@
 {
   "home": {
     "navbar": {
-      "abaut": "Biz haqimizda",
-      "courses": "Kurslar",
-      "team": "jamoa",
-      "articles": "Maqolalar",
-      "Contacts": "Kontaktlar",
-      "login ": "Kirish"
+      "О нас": "Biz haqimizda",
+      "Курсы": "Kurslar",
+      "Команда": "Jamoa",
+      "Статьи": "Maqolalar",
+      "Контакты": "Kontaktlar",
+      "login": "Kirish"
     },
     "showcase": {
       "title": "Ongli Onalik Akademiyasi",
