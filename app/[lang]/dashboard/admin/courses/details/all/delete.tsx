@@ -1,21 +1,40 @@
 "use client";
 
 import { useToast } from "@/components/ui/use-toast";
+import { getAccessToken } from "@/lib/actions/token";
 import { useRouter } from "next/navigation";
 import { FC, FormEvent } from "react";
 
-const DeleteCourse: FC<{ id: string }> = ({ id }): JSX.Element => {
+const DeleteCourse: FC<{ id: string; accessToken?: string }> = ({
+  id,
+  accessToken,
+}): JSX.Element => {
   const router = useRouter();
   const { toast } = useToast();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const res = await fetch(
+    let res = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + `/courses/remove/${id}`,
       {
         method: "DELETE",
+
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+        },
       },
     );
+
+    if (res.status === 401) {
+      const json = await getAccessToken();
+      await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/courses/remove/${id}`, {
+        method: "DELETE",
+
+        headers: {
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+        },
+      });
+    }
 
     if (res.ok) {
       router.refresh();
