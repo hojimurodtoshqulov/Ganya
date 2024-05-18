@@ -31,7 +31,7 @@ const getUser = async () => {
 export default async function Profile({ params: { lang } }: { params: { lang: 'ru' | 'uz' } }) {
   const user = await getUser();
   return (
-    <div className="w-gll max-w-[calc(100vw_-_368px)]">
+    <div className="w-full max-w-[calc(100vw_-_368px)]">
       {lang === "ru" ?
         <Heading text="Профиль" />
         :
