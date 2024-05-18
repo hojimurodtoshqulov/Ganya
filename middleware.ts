@@ -51,7 +51,7 @@ export async function middleware(request: NextRequest) {
 
     return NextResponse.redirect(
       new URL(
-        `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
+        `/${locale ?? "ru"}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
         request.url,
       ),
     );
