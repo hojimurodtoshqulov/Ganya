@@ -13,7 +13,6 @@ const Layout: FC<Props> = async ({
   params: { lang },
 }): Promise<JSX.Element> => {
   const user = await getUserData();
-  console.log(user, "<<<<<this is user");
 
   return (
     <InnerLayout params={{ lang, role: user?.role }}>{children}</InnerLayout>

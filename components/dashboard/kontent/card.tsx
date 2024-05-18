@@ -12,7 +12,7 @@ interface banner {
     "link": string,
     "isPublished": boolean
 }
-const BannerCard = ({ banner, id, accessToken }: { banner: banner, id: number, accessToken: string | undefined }) => {
+const BannerCard = ({ banner, id, accessToken, lang }: { banner: banner, id: number, accessToken: string | undefined , lang:'uz' | 'ru'}) => {
     const [isOpen, setIsOpen] = useState(false)
     const [checked, setChecked] = useState(banner.isPublished)
     const onClick = () => {
@@ -38,7 +38,7 @@ const BannerCard = ({ banner, id, accessToken }: { banner: banner, id: number, a
         <>
             <div className='rounded-2xl p-4 bg-white gap-3 flex flex-col w-[252px] h-[124px] relative'>
                 <div className='flex justify-between'>
-                    <p className='text-neutral-500 text-lg'>{id + 1}-Banner</p>
+                    <p className='text-neutral-500 text-lg'>{id + 1}-{lang === 'ru' ? "Баннер" : "Banner"}</p>
                     <Switch className=' bg-main-300' defaultChecked={banner.isPublished ? true : false} onCheckedChange={() => {
                         setChecked(prev => !prev)
                     }} />

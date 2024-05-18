@@ -14,7 +14,6 @@ const InnerLayout: FC<Props> = ({
   children,
   params: { lang, role },
 }): JSX.Element => {
-  console.log(role);
   const [open, setOpen] = useState<boolean>(true);
   const handleClick = useCallback(() => setOpen((p) => !p), []);
   useLayoutEffect(() => {

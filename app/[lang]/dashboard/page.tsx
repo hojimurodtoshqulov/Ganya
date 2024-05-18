@@ -1,7 +1,5 @@
-import { getAccessToken } from "@/lib/actions/token";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { FC } from "react";
 
 const Dashboard = async () => {
   const accessToken = cookies().get("accessToken")?.value ?? "";
@@ -27,12 +25,10 @@ const Dashboard = async () => {
     // }
     const json = await res.json();
     if (json.role === "admin") {
-      console.log("admin dash", "<<<---");
       redirect("/dashboard/admin/courses");
     } else if (json.role === "user") {
       redirect("/dashboard/client/edu");
     }
-    console.log(json, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,");
   }
 };
 
