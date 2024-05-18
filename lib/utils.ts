@@ -21,7 +21,11 @@ export const getActionErrors = (
 export async function fetchSendMessage(data: FormSchemaType) {
   const BASE_URL = "https://api.telegram.org";
   const TOKEN = process.env.BOT_TOKEN;
+  // const TOKEN = '';
   const chatId = process.env.BOT_CHAT_ID;
+  // const chatId = '
+
+  console.log(chatId)
 
   try {
     const req = await fetch(`${BASE_URL}/bot${TOKEN}/sendMessage`, {
