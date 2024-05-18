@@ -14,22 +14,28 @@ import { useRouter } from "next/navigation";
 import BackLink from "@/components/dashboard/back-link";
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
-
+import { getLangText } from "@/lib/utils";
 interface Props {
-    params: any;
+    params: {
+        courseId: string;
+        moduleId: string;
+        lang: 'ru' | 'uz'
+    };
+    accToken?: string;
 }
 
 const schema = z.object({
     video: z.union([z.string(), z.instanceof(FileList)]),
     titleRu: z.string().min(1),
-    titleUz: z.string(),
+    titleUz: z.string().min(1),
     descriptionRu: z.string().min(1),
-    descriptionUz: z.string(),
+    descriptionUz: z.string().min(1),
 });
+
 
 type Schema = z.infer<typeof schema>;
 
-const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
+const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, accToken }): JSX.Element => {
     const { register, handleSubmit, watch, reset, formState: { isSubmitting, errors: inputErrors } } = useForm<Schema>({
         resolver: zodResolver(schema),
     });
@@ -52,10 +58,12 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
             formData.append("descriptionUz", values.descriptionUz);
 
             const api =
-                process.env.NEXT_PUBLIC_BASE_URL + `/lessons/create/${params.moduleId}`;
+                process.env.NEXT_PUBLIC_BASE_URL + `/lessons/create/${moduleId}`;
+
             const req = await fetch(api, {
                 method: "POST",
                 body: formData,
+                headers: { Authorization: `Bearer ${JSON.parse(accToken ?? "")}` }
             });
 
             if (!req.ok) throw new Error("Новый урок. Проблема с загрузкой!");
@@ -72,7 +80,11 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
 
     return (
         <div className="space-y-5">
-            <BackLink title="Вернуться к урокам" heading='' />
+            {lang === 'ru' ?
+                <BackLink title="Вернуться к урокам" heading='' />
+                :
+                <BackLink title="Darslarga Qaytish" heading='' />
+            }
             <Toaster
                 position="top-right"
                 toastOptions={{
@@ -97,15 +109,15 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
                             </div>
                             <div className="flex flex-col text-csneutral-500 gap-1">
                                 <h1 className="text-[22px] font-medium">
-                                    {videoName ? "Видео выбрано" : "Добавить видео"}
+                                    {videoName ? getLangText(lang, "Video Tanlandi", "Видео выбрано") : getLangText(lang, "Video Tanlash", "Добавить видео")}
                                 </h1>
                                 <p className="text-base font-normal">
-                                    {videoName ? videoName : "Перетащите или выберите ваще видео"}
+                                    {videoName ? videoName : getLangText(lang, "Videoni tanlang yoki torting", "Перетащите или выберите ваще видео")}
                                 </p>
                             </div>
                         </div>
                         <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">
-                            {videoName ? "Редактировать" : "Выбрать"}
+                            {videoName ? getLangText(lang, "O\'zgartirish", "Редактировать") : getLangText(lang, "Tanlash", "Выбрать")}
                         </span>
                     </Label>
                     <Input
@@ -119,7 +131,7 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
 
                 <div className="rounded-2xl  bg-white flex flex-col gap-4 p-6">
                     <div className="grid w-full  items-center gap-1.5">
-                        <Label htmlFor="titleRu">Заголовок</Label>
+                        <Label htmlFor="titleRu">{getLangText(lang, "Sarlavha", "Подзаголовок")}</Label>
                         <Input
                             type="text"
                             id="titleRu"
@@ -138,7 +150,7 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
                         />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
-                        <Label htmlFor={`descriptionRu`}>Описание</Label>
+                        <Label htmlFor={`descriptionRu`}>{getLangText(lang, "Tavsif", "Описание")}</Label>
                         <Textarea
                             placeholder="Ru"
                             className={cn({ "border-destructive": inputErrors.descriptionRu })}
@@ -160,7 +172,7 @@ const FormCreateLesson: FC<Props> = ({ params }): JSX.Element => {
                             className="disabled:bg-main-200 text-sm font-normal py3 px-5"
                             variant={"main"}
                         >
-                            Сохранить
+                            {getLangText(lang, "Saqlash", "Сохранить")}
                         </Button>
                     </div>
                 </div>
