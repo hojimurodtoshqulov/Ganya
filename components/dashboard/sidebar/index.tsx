@@ -1,6 +1,13 @@
 "use client";
 import { Locale } from "@/lib/i18n-config";
-import { LayoutGrid, LogOut, LucideIcon, UserRound, X } from "lucide-react";
+import {
+  LayoutGrid,
+  LogOut,
+  UserRound,
+  X,
+  Newspaper,
+  Image,
+} from "lucide-react";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { FC, memo } from "react";
 import { Button } from "@/components/ui/button";
@@ -17,8 +24,18 @@ const userLinks = [
 const adminLinks = [
   {
     icon: LayoutGrid,
-    label: "Обучение",
-    path: "edu",
+    label: "Курсы",
+    path: "courses",
+  },
+  {
+    icon: Newspaper,
+    label: "Статьи",
+    path: "articles",
+  },
+  {
+    icon: Image,
+    label: "Контент",
+    path: "content",
   },
 ];
 
@@ -31,7 +48,7 @@ interface SidebarProps {
 const SideBar: FC<SidebarProps> = ({
   lang,
   handleClick,
-  role,
+  role = "admin",
 }): JSX.Element => {
   const paths = useSelectedLayoutSegments();
 
@@ -55,7 +72,7 @@ const SideBar: FC<SidebarProps> = ({
             const active = paths.includes(link.path);
             return (
               <Link
-                href={`/${lang}/dashboard/client/${link.path}`}
+                href={`/${lang}/dashboard/${role === "user" ? "client" : "admin"}/${link.path}`}
                 key={link.path}
               >
                 <SidebarButton {...link} active={active} />

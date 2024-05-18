@@ -84,14 +84,12 @@ export const loginAction = async (formData: FormData) => {
         name: "accessToken",
         value: JSON.stringify(json.accessToken),
         httpOnly: true,
-        secure: true,
         maxAge: 60 * 60 * 24 * 7,
       });
       cookies().set({
         name: "refreshToken",
         value: JSON.stringify(json.refreshToken),
         httpOnly: true,
-        secure: true,
         maxAge: 60 * 60 * 24,
       });
 
@@ -138,14 +136,12 @@ export const smsValidateAction = async (formData: FormData) => {
           name: "accessToken",
           value: JSON.stringify(json.accessToken),
           httpOnly: true,
-          secure: true,
           maxAge: 60 * 60 * 24 * 1000,
         });
         cookies().set({
           name: "refreshToken",
           value: JSON.stringify(json.refreshToken),
           httpOnly: true,
-          secure: true,
           maxAge: 60 * 60 * 24 * 6 * 1000,
         });
 

@@ -63,15 +63,16 @@ export async function middleware(request: NextRequest) {
   }
   const accessToken = request.cookies.get("accessToken")?.value ?? "";
   if (!accessToken && pathname.includes("/dashboard")) {
-    console.log("blabalbalalabal");
+    console.log("ref", refreshToken);
+    const data = {
+      refreshToken: refreshToken,
+    };
     const response = NextResponse.next();
     const res = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + "/auth/refresh-access-token",
       {
         method: "POST",
-        body: JSON.stringify({
-          refreshToken: JSON.parse(refreshToken),
-        }),
+        body: JSON.stringify(data),
       },
     );
     const json = await res.json();
@@ -83,7 +84,6 @@ export async function middleware(request: NextRequest) {
       name: "accessToken",
       value: JSON.stringify(json.accessToken),
       httpOnly: true,
-      secure: true,
       maxAge: 60 * 60 * 24 * 1000,
       path: "/",
     });
@@ -91,15 +91,33 @@ export async function middleware(request: NextRequest) {
     return response;
   }
   if (pathname.includes("/dashboard")) {
-    const res = await fetch(
-      process.env.NEXT_PUBLIC_BASE_URL + "/users/profile",
-      {
-        cache: "no-store",
-        headers: {
-          Authorization: `Bearer ${JSON.parse(accessToken)}`,
-        },
+    console.log(accessToken);
+    let res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/users/profile", {
+      cache: "no-store",
+      headers: {
+        Authorization: `Bearer ${JSON.parse(accessToken)}`,
       },
-    );
+    });
+    // if (res.status === 401) {
+    //   console.log("su ishladi");
+    //   const nr = await fetch(
+    //     process.env.NEXT_PUBLIC_BASE_URL + "/auth/refresh-access-token",
+    //     {
+    //       method: "POST",
+    //       body: JSON.stringify({ refreshToken: refreshToken }),
+    //     },
+    //   );
+    //   if (nr.ok) {
+    //     const j = await nr.json();
+    //     console.log(j);
+    //   }
+    //   res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/users/profile", {
+    //     cache: "no-store",
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`,
+    //     },
+    //   });
+    // }
     const json = await res.json();
     console.log("jeejejeejej", json);
     if (pathname.includes("/admin") && json?.role === "admin") {
@@ -118,7 +136,6 @@ export async function middleware(request: NextRequest) {
       response.cookies.set({
         name: "refreshToken",
         value: json?.refreshToken,
-        secure: true,
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 6.5,
         path: "/",
