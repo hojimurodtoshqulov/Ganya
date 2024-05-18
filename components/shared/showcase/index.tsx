@@ -1,17 +1,10 @@
-"use client"
+import Image from "next/image";
 import FormModal from "../form-modal/form-modal";
+import showcaseHero from "@/images/showcase-hero1.png";
 import Media from "../media";
-import { type getDictionary } from '../../../lib/get-dictionary'
-import { usePathname } from "next/navigation";
+import { type getDictionary } from '../../../lib/get-dictionary';
 
-
-export default function Showcase({
-  dict,
-}: {
-  dict: Awaited<ReturnType<typeof getDictionary>>["home"];
-}) {
-  const l = usePathname()
-  const lang = l.split('/')[1]
+export default function Showcase({ dict }: { dict: Awaited<ReturnType<typeof getDictionary>>['home'] }) {
 
   return (
     <div className="w-full showcase-image bg-main-200">
@@ -21,7 +14,7 @@ export default function Showcase({
             {dict.showcase.title}
           </h1>
 
-          <FormModal />
+          <FormModal dict={dict} />
           <div className="md:mt-32 mt-[400px] mb-[30px]">
             <Media />
           </div>

@@ -33,7 +33,9 @@ const Page: React.FC<Props> = async ({ params }): Promise<JSX.Element> => {
 
   return (
     <div>
-      <BackLink title="Вернуться к модулям" heading='' />
+      {params.lang === 'ru' ? <BackLink title="Вернуться к модулям" heading='' /> : <BackLink title="Modullarga Qaytish" heading='' />
+      }
+
       <h1 className="text-2xl text-main-300 font-semibold pb-4 ">{data?.titleRu ? data?.titleRu : 'Module title'}</h1>
       <div className="flex flex-col gap-3 pb-6">
         {data?.Lesson?.map((lesson: any, index: number) => (
