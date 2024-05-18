@@ -1,6 +1,7 @@
 import React from 'react'
 import AddBanner from './addCard'
 import BannerCard from './card'
+import { cookies } from 'next/headers';
 
 interface banner {
   "id": string,
@@ -26,6 +27,7 @@ async function getData<T>(): Promise<T | Error> {
 
 
 const Banner = async () => {
+  const accessToken = cookies().get("accessToken")?.value;
   const banners = await getData<banner[]>();
   if (banners instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
@@ -34,9 +36,9 @@ const Banner = async () => {
   return (
     <div className='bg-neutral-100 flex flex-wrap gap-5'>
       {banners.map((banner, id) => (
-        <BannerCard key={id} banner={banner} id={id} />
+        <BannerCard key={id} banner={banner} id={id} accessToken={accessToken} />
       ))}
-      <AddBanner />
+      <AddBanner accessToken={accessToken}/>
     </div>
   )
 }

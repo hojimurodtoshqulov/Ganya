@@ -19,7 +19,7 @@ const data1 = {
 function Test() {
     return <>
         <div className="min-h-screen pt-[100px]">
-            <Sharhlar />
+
             <Banner />
         </div>
         {/* <Info {...data} />

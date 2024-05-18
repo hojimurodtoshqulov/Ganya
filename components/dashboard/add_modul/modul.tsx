@@ -19,7 +19,7 @@ interface data {
   courseId: string | null;
 }
 
-const Card = ({ bacData, id }: { bacData: data; id: number }) => {
+const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; lang: string; accessToken: string | undefined }) => {
   const {
     register,
     handleSubmit,
@@ -42,6 +42,7 @@ const Card = ({ bacData, id }: { bacData: data; id: number }) => {
           body: JSON.stringify(data),
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
           },
         },
       );
@@ -55,6 +56,9 @@ const Card = ({ bacData, id }: { bacData: data; id: number }) => {
         `https://oar-api.onrender.com/api/v1/modules/delete/${bacData.id}`,
         {
           method: "DELETE",
+          headers:{
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+          }
         },
       );
       if (res.ok) {
@@ -83,7 +87,7 @@ const Card = ({ bacData, id }: { bacData: data; id: number }) => {
 
           <p className="text-neutral-500 text-base">{id + 1} - modul</p>
           <p className="text-[22px] leading-[32px] text-neutral-500">
-            <Link href={bacData.id + ""}>{bacData.titleUz}</Link>
+            <Link href={bacData.id + ""}>{lang==='ru'? bacData.titleRu : bacData.titleUz}</Link>
           </p>
         </div>
       </div>
@@ -107,49 +111,33 @@ const Card = ({ bacData, id }: { bacData: data; id: number }) => {
           className="bg-white flex flex-col w-11/12 max-w-[648px] max-h-[534px] h-5/6 overflow-auto p-10 gap-6 rounded-2xl"
           style={{ scrollbarWidth: "none" }}
         >
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <label className="font-normal text-sm text-neutral-400">
-                Modul nomi
-              </label>
-              <Input
-                autoComplete="off"
-                {...register("titleUz", { required: true })}
-                type="text"
-                placeholder="modul nomi"
-                defaultValue={bacData.titleUz ? bacData.titleUz : ""}
-                className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
-              />
-            </div>
+          <div className="flex flex-col gap-4 ">
 
             <div className="flex flex-col gap-2">
               <label className="font-normal text-sm text-neutral-400">
-                название модуля
+                Название модуля
               </label>
               <Input
                 autoComplete="off"
                 {...register("titleRu", { required: true })}
                 type="text"
-                placeholder="название модуля"
+                placeholder="Название Ru"
                 defaultValue={bacData.titleRu ? bacData.titleRu : ""}
                 className={`text-neutral-500 ${errors.titleRu ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-normal text-sm text-neutral-400">
-                Modul tavsifi
-              </label>
               <Input
-                {...register("descriptionUz", { required: true })}
-                defaultValue={
-                  bacData.descriptionUz ? bacData.descriptionUz : ""
-                }
                 autoComplete="off"
-                placeholder="modul tavsifi"
-                className={`text-neutral-500 ${errors.descriptionUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
+                {...register("titleUz", { required: true })}
+                type="text"
+                placeholder="Название Uz"
+                defaultValue={bacData.titleUz ? bacData.titleUz : ""}
+                className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
             </div>
+
 
             <div className="flex flex-col gap-2">
               <label className=" font-normal text-sm text-neutral-400">
@@ -161,8 +149,20 @@ const Card = ({ bacData, id }: { bacData: data; id: number }) => {
                   bacData.descriptionRu ? bacData.descriptionRu : ""
                 }
                 autoComplete="off"
-                placeholder="Описание модуля"
+                placeholder="Описание Ru"
                 className={`text-neutral-500 ${errors.descriptionRu ? "border-destructive focus-visible:!border-destructive" : ""}`}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Input
+                {...register("descriptionUz", { required: true })}
+                defaultValue={
+                  bacData.descriptionUz ? bacData.descriptionUz : ""
+                }
+                autoComplete="off"
+                placeholder="Описание Uz"
+                className={`text-neutral-500 ${errors.descriptionUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
             </div>
           </div>

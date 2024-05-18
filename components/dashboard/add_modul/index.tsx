@@ -1,6 +1,6 @@
 import Card from "./modul";
 import { AddCard } from "./add_modul";
-
+import { cookies } from "next/headers";
 interface data {
   id: string | null;
   createdAt: string | null;
@@ -51,10 +51,12 @@ async function getData<T>(id: string): Promise<T | Error> {
   return res.json();
 }
 const AddModul = async ({
-  courseId,
+  courseId, lang
 }: {
-  courseId: string;
-}): Promise<JSX.Element> => {
+    courseId: string;
+    lang: string
+  }): Promise<JSX.Element> => {
+  const accessToken = cookies().get("accessToken")?.value;
   const response = await getData<Response>(courseId);
   if (response instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
@@ -66,9 +68,9 @@ const AddModul = async ({
       </h1>
       <div className="flex flex-wrap">
         {response.Module.map((data: data, id: number) => (
-          <Card key={id} bacData={data} id={id} />
+          <Card key={id} bacData={data} id={id} lang={lang} accessToken={accessToken} />
         ))}
-        <AddCard id={courseId} />
+        <AddCard id={courseId} accessToken={accessToken} />
       </div>
     </div>
   );
