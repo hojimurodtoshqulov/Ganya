@@ -1,15 +1,19 @@
 import Image from "next/image";
 import userImage1 from "@/images/about1.png";
 import userImage2 from "@/images/about2.png";
+import { getDictionary } from "@/lib/get-dictionary";
 
 interface InfoProps {
   title: string;
   text: string;
   tags?: string[];
   sort?: boolean;
+  lang: "uz" | "ru";
+
 }
 
-function Info(props: InfoProps): JSX.Element {
+async function Info(props: InfoProps){
+  const dcitionary = await getDictionary(props.lang)
   return (
     <>
       <div
@@ -19,7 +23,7 @@ function Info(props: InfoProps): JSX.Element {
           <div className="flex flex-col gap-2 md:gap-4">
             <h2 className="text-h2">{props.title}</h2>
             <p className="text-base md:text-[22px] md:leading-8 text-main-200 font-roboto">
-              {props.text}
+              {props.text }
             </p>
           </div>
           {props.tags && (

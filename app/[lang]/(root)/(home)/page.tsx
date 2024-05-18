@@ -50,7 +50,6 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
 }
 
 export default async function Home({ params: { lang } }: { params: { lang: 'ru' | 'uz' } }) {
-  console.log()
   const data = await getData<{
     id: string;
   }>();
@@ -69,14 +68,12 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
     courseStatus: string;
     Module: any[];
   }>(courseId);
-  console.log(course);
 
   if (course instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
   }
 
   const dcitionary = await getDictionary(lang)
-
   return (
     <div>
       <div id="about">
@@ -88,13 +85,13 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
         </div>
       </div>
       <div className="container">
-        <Info {...about} />
+        <Info {...about} lang={lang} />
       </div>
       <div className="container">
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
       <div className="container">
-        <Info {...about1} sort={true} />
+        <Info {...about1} sort={true} lang={lang} />
       </div>
 
       <div className="mt-20">
