@@ -28,7 +28,7 @@ async function Stati({
   return (
     <div className="bg-csneutral-100 py-20 my-16">
       <div className={`${container}`}>
-        <h2 className="title text-h2 leading-[56px] mb-8">Статьи</h2>
+        <h2 className="title text-h2 leading-[56px] mb-8">{articles.title}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {getdata.slice(-3).map((article: Articlsall) => (
             <Link key={article.id} href={`/articles/${article.id}`}>
@@ -46,7 +46,7 @@ async function Stati({
             className={`${buttonVariants({ variant: "main" })} rounded-[20px] text-lg px-8 mt-8`}
             href={"/articles"}
           >
-            Перейти к статьям
+            {articles.btn}
           </Link>
         </div>
       </div>

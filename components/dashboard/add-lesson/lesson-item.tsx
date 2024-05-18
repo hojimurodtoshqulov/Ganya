@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 interface Props {
     type: 'create' | 'item',
     link: any,
-    lang?: string,
+    lang?: 'ru' | 'uz',
     value?: {
         title: any,
         number: number
@@ -26,7 +26,7 @@ const LessonItem: React.FC<Props> = ({ type, link, value = { title: {}, number: 
                         <p className="text-base font-normal">{lang === 'ru' ? `Урок ${value?.number + 1}` : `${value?.number + 1}-dars`}</p>
                         <h1 className="text-[22px] font-medium">{lang === 'ru' ? value?.title.titleRu : value?.title.titleUz}</h1>
                     </div> : <h1 className="text-[22px] font-medium">
-                        {lang === 'ru' ? 'Добавить урок' : 'Dars Qo\'shish'}
+                        {lang === 'ru' ? "Добавить урок" : "Dars Qo'shish"}
                     </h1>
             }
         </Link >
