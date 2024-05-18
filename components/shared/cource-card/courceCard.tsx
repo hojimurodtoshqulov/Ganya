@@ -57,7 +57,7 @@ const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
           <div className="flex flex-row items-center justify-between gap-2">
             <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
               <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">
-                {totalModules} модулей
+                {totalModules} {lang === 'ru' ? 'модулей' : 'modul'}
               </p>
             </div>
           </div>

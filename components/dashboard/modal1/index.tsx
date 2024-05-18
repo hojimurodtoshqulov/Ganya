@@ -16,21 +16,23 @@ interface banner {
     "link": string,
     "isPublished": boolean
 }
-const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boolean, banner?: banner }) => {
+const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, isOpen: boolean, banner?: banner, accessToken: string | undefined }) => {
     const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm();
     const router = useRouter()
     const ref = useRef<HTMLFormElement>(null);
     const [method, setMethod] = useState('')
     const imageWeb: any = watch("imageWeb") && (watch("imageWeb")[0] ?? '');
-    const imageMobile: any = watch("imageMobile") && (watch("imageMobile")[0] ?? '');
+    const imageMobile: any = watch("imageMobile") && (watch("imageMobile")[0] ?? ''); 
 
     const onSubmitHandle = async (data: any) => {
         const formData = new FormData()
-
         if (banner) {
             if (method === 'DELETE') {
                 const res = await fetch(`https://oar-api.onrender.com/api/v1/banners/delete/${banner.id}`, {
-                    method: "DELETE"
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+                    },
                 });
                 if (res.ok) {
                     onClick()
@@ -51,7 +53,10 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                 formData.append('link', data.link);
                 const res = await fetch(`https://oar-api.onrender.com/api/v1/banners/update/${banner.id}`, {
                     method: "PATCH",
-                    body: formData
+                    body: formData,
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`
+                    }
                 });
 
                 if (res.ok) {
@@ -70,6 +75,9 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
             const res = await fetch(`https://oar-api.onrender.com/api/v1/banners/create`, {
                 method: 'POST',
                 body: formData,
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+                }
             });
 
             if (res.ok) {
@@ -95,6 +103,7 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                 >
                     <div className="p-10 bg-white rounded-2xl absolute z-[100]">
                         <form ref={ref} onSubmit={handleSubmit(onSubmitHandle)}>
+                            <p className=" text-neutral-500 text-lg  font-semibold mb-3">Desktop Image</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px] mb-4">
                                 <div className="flex items-center">
                                     <div
@@ -125,9 +134,10 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                 >
                                     {imageWeb?.name ? "редактировать" : "Выбрать"}
                                 </label>
-                                <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb", { required: true })} />
+                                <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb")} />
 
                             </div>
+                            <p className=" text-neutral-500 text-lg font-semibold mb-3">Mobile Image</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px]">
                                 <div className="flex items-center">
                                     <div
@@ -156,11 +166,11 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                 >
                                     {imageMobile?.name ? "редактировать" : "Выбрать"}
                                 </label>
-                                <Input type="file" accept="image/*" className="hidden" id="fayl2"  {...register("imageMobile", {required:true})} />
+                                <Input type="file" accept="image/*" className="hidden" id="fayl2"  {...register("imageMobile")} />
                             </div>
                             <div className="relative">
                                 <Link className="absolute top-2 left-3" />
-                                <Input placeholder="Ссылка" className={`mt-4 pl-12 ${errors.link ? "border-destructive focus-visible:!border-destructive" : ""}`}  {...register("link")} defaultValue={banner.link} />
+                                <Input placeholder="Ссылка" className={`mt-4 pl-12 ${errors.link ? "border-destructive focus-visible:!border-destructive" : ""}`}  {...register("link", {required:true})} defaultValue={banner.link} />
 
                             </div>
                             <div className="flex justify-end max-sm:flex-col gap-4 mt-4">
@@ -193,7 +203,8 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                     style={{ background: "#64793733" }}
                 >
                     <div className="p-10 bg-white rounded-2xl absolute z-[100]">
-                        <form ref={ref} onSubmit={handleSubmit(onSubmitHandle)}>
+                            <form ref={ref} onSubmit={handleSubmit(onSubmitHandle)}>
+                                <p className=" text-neutral-500 text-lg font-semibold mb-3">Desktop Image</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px] mb-4">
                                 <div className="flex items-center">
                                     <div
@@ -226,7 +237,8 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                                 </label>
                                 <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb", { required: true })} />
 
-                            </div>
+                                </div>
+                                <p className=" text-neutral-500 text-lg font-semibold mb-3">Mobile Image</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px]">
                                 <div className="flex items-center">
                                     <div
@@ -259,7 +271,7 @@ const Modal = ({ onClick, isOpen, banner }: { onClick: () => void, isOpen: boole
                             </div>
                             <div className="relative">
                                 <Link className="absolute top-2 left-3" />
-                                <Input placeholder="Ссылка" className={`mt-4 pl-12 ${errors.link ? "border-destructive focus-visible:!border-destructive" : ""}`}  {...register("link")} />
+                                <Input placeholder="Ссылка" className={`mt-4 pl-12 ${errors.link ? "border-destructive focus-visible:!border-destructive" : ""}`}  {...register("link", {required:true})} />
 
                             </div>
                             <Button variant={"main"}

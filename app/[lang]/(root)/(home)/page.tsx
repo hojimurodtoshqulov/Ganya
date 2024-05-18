@@ -14,6 +14,7 @@ import Tariflar from "@/components/shared/tariflar/tariflar";
 import Stati from "@/components/shared/stati/stati";
 import CurseHelp from "@/components/shared/curs-helped";
 import { teamMembers } from "@/constants/team";
+import { getDictionary } from "@/lib/get-dictionary";
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch(
@@ -48,8 +49,7 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
   }
 }
 
-export default async function Home({ params: { lang } }: { params: { lang: string } }) {
-  console.log()
+export default async function Home({ params: { lang } }: { params: { lang: 'ru' | 'uz' } }) {
   const data = await getData<{
     id: string;
   }>();
@@ -68,16 +68,16 @@ export default async function Home({ params: { lang } }: { params: { lang: strin
     courseStatus: string;
     Module: any[];
   }>(courseId);
-  console.log(course);
 
   if (course instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
   }
 
+  const dcitionary = await getDictionary(lang)
   return (
     <div>
       <div id="about">
-        <Showcase />
+        <Showcase dict={dcitionary.home} />
       </div>
       <div className="container">
         <div className="my-10 md:my-32 bg-csneutral-100 rounded-2xl md:rounded-[40px] flex items-center justify-center w-full aspect-[3/2] md:aspect-[5/2]">
@@ -85,13 +85,13 @@ export default async function Home({ params: { lang } }: { params: { lang: strin
         </div>
       </div>
       <div className="container">
-        <Info {...about} />
+        <Info {...about} lang={lang} />
       </div>
       <div className="container">
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
       <div className="container">
-        <Info {...about1} sort={true} />
+        <Info {...about1} sort={true} lang={lang} />
       </div>
 
       <div className="mt-20">
@@ -138,7 +138,7 @@ export default async function Home({ params: { lang } }: { params: { lang: strin
       </div>
 
       <div id="contacts">
-        <SubscribtionForm />
+        <SubscribtionForm dict={dcitionary.home} />
       </div>
     </div>
   );

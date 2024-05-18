@@ -23,10 +23,10 @@ const LessonItem: React.FC<Props> = ({ type, link, value = { title: {}, number: 
             {
                 type === 'item' ?
                     <div className="flex flex-col text-csneutral-500">
-                        <p className="text-base font-normal">Урок {value?.number + 1}</p>
+                        <p className="text-base font-normal">{lang === 'ru' ? `Урок ${value?.number + 1}` : `${value?.number + 1}-dars`}</p>
                         <h1 className="text-[22px] font-medium">{lang === 'ru' ? value?.title.titleRu : value?.title.titleUz}</h1>
                     </div> : <h1 className="text-[22px] font-medium">
-                        Добавить урок
+                        {lang === 'ru' ? 'Добавить урок' : 'Dars Qo\'shish'}
                     </h1>
             }
         </Link >

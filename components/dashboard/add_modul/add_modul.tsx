@@ -5,7 +5,13 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-export const AddCard = ({ id }: { id: string | string[] }) => {
+export const AddCard = ({
+  id,
+  accessToken,
+}: {
+  id: string | string[];
+  accessToken: string | undefined;
+}) => {
   const {
     register,
     handleSubmit,
@@ -20,12 +26,13 @@ export const AddCard = ({ id }: { id: string | string[] }) => {
 
   const onSubmitHandle = async (data: FormData | unknown) => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/modules/create/${id}`,
+      `https://oar-api.onrender.com/api/v1/modules/create/${id}`,
       {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
         },
       },
     );
@@ -75,38 +82,24 @@ export const AddCard = ({ id }: { id: string | string[] }) => {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <label className="font-normal text-sm text-neutral-400">
-                Modul nomi
-              </label>
-              <Input
-                autoComplete="off"
-                {...register("titleUz", { required: true })}
-                type="text"
-                placeholder="Modul nomi"
-                className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="font-normal text-sm text-neutral-400">
-                название модуля
+                Название модуля
               </label>
               <Input
                 autoComplete="off"
                 {...register("titleRu", { required: true })}
                 type="text"
-                placeholder="название модуля"
+                placeholder="Название Ru"
                 className={`text-neutral-500 ${errors.titleRu ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
             </div>
+
             <div className="flex flex-col gap-2">
-              <label className=" font-normal text-sm text-neutral-400">
-                Modul tavsifi
-              </label>
               <Input
-                {...register("descriptionUz", { required: true })}
                 autoComplete="off"
-                placeholder="Modul tavsifi"
-                className={`text-neutral-500 ${errors.descriptionUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
+                {...register("titleUz", { required: true })}
+                type="text"
+                placeholder="Название Uz"
+                className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
             </div>
 
@@ -117,8 +110,17 @@ export const AddCard = ({ id }: { id: string | string[] }) => {
               <Input
                 {...register("descriptionRu", { required: true })}
                 autoComplete="off"
-                placeholder="Описание модуля"
+                placeholder="Описание Ru"
                 className={`text-neutral-500 ${errors.descriptionRu ? "border-destructive focus-visible:!border-destructive" : ""}`}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Input
+                {...register("descriptionUz", { required: true })}
+                autoComplete="off"
+                placeholder="Описание Uz"
+                className={`text-neutral-500 ${errors.descriptionUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
             </div>
           </div>

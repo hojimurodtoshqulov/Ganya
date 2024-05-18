@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import React, { useState } from 'react'
 import Form from './form'
 
-const AddCard = () => {
+const AddCard = ({accessToken}: {accessToken: string | undefined}) => {
   const [isOpen, setIsOpen] = useState(false)
   const onClickHandle = () => {
     setIsOpen(!isOpen)
@@ -14,7 +14,7 @@ const AddCard = () => {
         <h3 className='text-lg text-main-300 font-medium font-roboto'>Добавить новый отзыв</h3>
         <Button variant={"main"} size={"default"} onClick={onClickHandle} className=' font-normal h-10 rounded-lg'>Добавить</Button>
       </div>
-      <Form closeFunc={onClickHandle} open={isOpen} />
+      <Form closeFunc={onClickHandle} open={isOpen} accessToken={accessToken} />
     </>
 
   )
