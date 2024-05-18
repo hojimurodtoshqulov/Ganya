@@ -130,7 +130,7 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
       </div>
 
       <div className="container">
-        <Tariflar id={courseId} />
+        <Tariflar id={courseId} lang={lang} />
       </div>
       <FAQ title={dcitionary.home.answear.title} cards={dcitionary.home.answear.cards} />
 
