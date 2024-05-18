@@ -1,11 +1,8 @@
 import Heading from "@/components/ui/heading";
 import Image from "next/image";
-import { FC } from "react";
-import images from "@/images/success.png";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { FaPerson } from "react-icons/fa6";
 import { User2Icon } from "lucide-react";
 
 const getUser = async () => {
