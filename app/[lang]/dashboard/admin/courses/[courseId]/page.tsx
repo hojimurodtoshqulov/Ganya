@@ -32,9 +32,9 @@ async function getPlans<T>(id: string): Promise<T[] | Error> {
 
   return res.json();
 }
-const SingleCourse: FC<{ params: { courseId: string, lang: string } }> = async ({
-  params: { courseId, lang },
-}): Promise<JSX.Element> => {
+const SingleCourse: FC<{
+  params: { courseId: string; lang: string };
+}> = async ({ params: { courseId, lang } }): Promise<JSX.Element> => {
   const course = await getCourse(courseId);
   const plans = await getPlans<{
     availablePeriod: number;
