@@ -9,7 +9,7 @@ import Logo from "@/icons/Logo.svg";
 import { buttonVariants } from "@/components/ui/button";
 import LocaleSwitcher from "../locale-switcher";
 import Headroom from "react-headroom";
-import { ArrowRight } from "lucide-react";
+import { ArrowBigLeft, ArrowRight } from "lucide-react";
 
 interface NavLinkType {
   id: number;

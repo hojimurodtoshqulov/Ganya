@@ -2,9 +2,10 @@
 
 import React from "react";
 import CardStatya from "./card-stati";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Articlsall } from "@/types/auth";
 import Link from "next/link";
+import { format } from "date-fns";
 
 async function Getpost() {
   const response = await fetch(
@@ -29,7 +30,7 @@ async function Stati({ container }: { container?: string }) {
                 key={article.id}
                 title={article.headlineUz}
                 text={article.textUz}
-                time={article.updatedAt}
+                time={format(new Date(article.updatedAt), "MMMM dd, yyyy")}
               />
             </Link>
           ))}
