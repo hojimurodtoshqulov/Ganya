@@ -50,6 +50,7 @@ const Page: React.FC<Props> = async ({ params }): Promise<JSX.Element> => {
 
         <LessonItem
           type="create"
+          lang={params.lang}
           link={`/dashboard/admin/courses/${params.courseId}/${params.moduleId}/create?search=1}`}
         />
       </div>
