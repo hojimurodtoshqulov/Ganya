@@ -50,6 +50,7 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
 }
 
 export default async function Home({ params: { lang } }: { params: { lang: 'ru' | 'uz' } }) {
+
   const data = await getData<{
     id: string;
   }>();
@@ -85,22 +86,22 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
         </div>
       </div>
       <div className="container">
-        <Info {...about} lang={lang} />
+        <Info lang={lang} data={dcitionary.home.abaut} />
       </div>
       <div className="container">
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
       <div className="container">
-        <Info {...about1} sort={true} lang={lang} />
+        <Info sort={true} lang={lang} data={dcitionary.home.Lure} />
       </div>
 
       <div className="mt-20">
-        <CurseHelp />
+        <CurseHelp help={dcitionary.home.help} />
       </div>
       <div className="container">
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
-      <Fits />
+      <Fits fits={dcitionary.home.whocurse} />
 
       <div className="container my-20" id="courses">
         <Accordion type="single" collapsible>
@@ -110,7 +111,7 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
 
       <div className="container mb-16">
         <Carousel
-          title="Отзывы прошлых потоков:"
+          title={dcitionary.home.Reviews.title}
           data={[...reviews, ...reviews].map((r, i) => (
             <ReviewCard key={i} {...r} />
           ))}
@@ -118,7 +119,7 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
       </div>
       <div className="container mb-16" id="team">
         <Carousel
-          title="Команда"
+          title={dcitionary.home.team.title}
           data={[...teamMembers, ...teamMembers].map((team, i) => (
             <TeamCard key={i} data={team} />
           ))}
@@ -131,10 +132,10 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
       <div className="container">
         <Tariflar id={courseId} />
       </div>
-      <FAQ />
+      <FAQ title={dcitionary.home.answear.title} cards={dcitionary.home.answear.cards} />
 
       <div id="articles">
-        <Stati container="container" />
+        <Stati container="container" articles={dcitionary.home.articlesHome} />
       </div>
 
       <div id="contacts">
