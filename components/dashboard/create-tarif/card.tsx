@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CreateTarifForm from "./form";
 import DeleteBtn from "./delete-btn";
+import { cookies } from "next/headers";
 interface CardProps {
   values: {
     availablePeriod: number;
@@ -111,10 +112,14 @@ function Card(props: CardProps): JSX.Element {
               method="PATCH"
               planId={props.planId}
               defaultValues={props.values}
+              accessToken={cookies().get("accessToken")?.value}
             />
           </DialogContent>
         </Dialog>
-        <DeleteBtn id={props.planId} />
+        <DeleteBtn
+          id={props.planId}
+          accessToken={cookies().get("accessToken")?.value}
+        />
       </div>
     </div>
   );
