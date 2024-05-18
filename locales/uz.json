@@ -195,6 +195,22 @@
       "backtext": "Homiladorlikka tayyorgarlik"
     },
     "admin": {
+
+    "saidbar": [
+        {
+          "label": "Kurslar",
+          "path": "courses"
+        },
+        {
+          "label": "Maqolalar",
+          "path": "articles"
+        },
+        {
+          "label": "Kontent",
+          "path": "content"
+        }
+    ],
+
       "topbar": {
         "course": "Kurslar",
         "text1": "Barcha kurslar",

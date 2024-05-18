@@ -2,6 +2,7 @@ import { FC, ReactNode } from "react";
 import { Locale } from "@/lib/i18n-config";
 import InnerLayout from "./layout-inner";
 import { getUserData } from "@/lib/actions/user";
+import { getDictionary } from "@/lib/get-dictionary";
 
 interface Props {
   children: ReactNode;
@@ -13,9 +14,10 @@ const Layout: FC<Props> = async ({
   params: { lang },
 }): Promise<JSX.Element> => {
   const user = await getUserData();
+  const dictionary = await getDictionary(lang)
 
   return (
-    <InnerLayout params={{ lang, role: user?.role }}>{children}</InnerLayout>
+    <InnerLayout params={{ lang, role: user?.role }} dictionary={dictionary.dashboard.admin.saidbar}>{children}</InnerLayout>
   );
 };
 

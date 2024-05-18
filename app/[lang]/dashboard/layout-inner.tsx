@@ -8,11 +8,12 @@ import { cn } from "@/lib/utils";
 interface Props {
   children: ReactNode;
   params: { lang: Locale; role?: string };
+  dictionary: {label: string, path: string}[]
 }
 
 const InnerLayout: FC<Props> = ({
   children,
-  params: { lang, role },
+  params: { lang, role }, dictionary
 }): JSX.Element => {
   const [open, setOpen] = useState<boolean>(true);
   const handleClick = useCallback(() => setOpen((p) => !p), []);
@@ -29,7 +30,7 @@ const InnerLayout: FC<Props> = ({
           `w-full sm:w-80 h-screen p-5 border-r border-csneutral-200 z-50 fixed bottom-0 top-0 ${open ? "left-0" : "-left-full"} bg-white transition-all animate-out`,
         )}
       >
-        <SideBar lang={lang} handleClick={handleClick} role={role} />
+        <SideBar lang={lang} handleClick={handleClick} role={role} dictionary={dictionary} />
       </div>
       <div
         className={`transition-all relative animate-out hidden lg:block ${open ? "w-80" : "w-0"}`}
