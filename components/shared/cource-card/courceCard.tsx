@@ -49,7 +49,7 @@ const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
             <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
               {lang === 'ru' ? data?.titleRu : data?.titleUz}
             </h2>
-            <Link href={`/${data?.id}`} className="flex justify-end">
+            <Link href={`/courses/${data?.id}`} className="flex justify-end">
               <Image src={arrowCorner} alt="salom" className="md:block" />
             </Link>
           </div>
@@ -89,10 +89,10 @@ const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
 
           <div className="grow flex flex-col justify-between space-y-8">
             <div className="flex flex-row items-center justify-between gap-4">
-              <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
-                {lang === 'ru' ? data?.titleRu : data?.titleUz}
-              </h2>
-              <Link href={`/${data?.id}`} className="flex justify-end grow">
+              <Link href={`courses/${data?.id}`} className="flex justify-between grow">
+                <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
+                  {lang === 'ru' ? data?.titleRu : data?.titleUz}
+                </h2>
                 <Image
                   src={arrowCorner}
                   alt="salom"
