@@ -23,7 +23,7 @@ interface Props {
     lang: "ru" | "uz";
   };
   data: any;
-  accToken?: string
+  accToken?: string;
 }
 
 const schema = z.object({
@@ -36,7 +36,12 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data, accToken }): JSX.Element => {
+const FormLessonEdit: FC<Props> = ({
+  params: { lang, lessonId, moduleId },
+  data,
+  accToken,
+}): JSX.Element => {
+  console.log(data);
   const {
     register,
     handleSubmit,
@@ -45,14 +50,24 @@ const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data,
     formState: { errors: inputErrors, isSubmitting },
   } = useForm<Schema>({
     resolver: zodResolver(schema),
-    defaultValues: data ?? {},
+    defaultValues:
+      {
+        descriptionRu: data?.descriptionRu,
+        descriptionUz: data?.descriptionUz,
+        titleRu: data?.titleRu,
+        titleUz: data?.titleUz,
+        video: "",
+      } ?? {},
   });
   const [lesson, setLesson] = useState<Object | any>(null);
   const router = useRouter();
 
   const { video: videoFile } = watch();
 
-  const videoName = videoFile && videoFile.length >= 0 && (typeof videoFile !== "string" ? videoFile[0]?.name : "");
+  const videoName =
+    videoFile &&
+    videoFile.length >= 0 &&
+    (typeof videoFile !== "string" ? videoFile[0]?.name : "");
 
   const onSubmit = async (values: Schema) => {
     try {
@@ -85,7 +100,7 @@ const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data,
       toast.success("Урок успешно обновлен");
       router.refresh();
       setLesson(null);
-      router.back()
+      router.back();
     } catch (error: any) {
       toast.error("Не удалось обновить урок.");
     }
@@ -108,20 +123,19 @@ const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data,
       const res = await req.json();
       toast.success("Удален успешно");
       router.refresh();
-      router.back()
+      router.back();
     } catch (error: any) {
       toast.error(error.message);
     }
   };
 
-
   return (
     <div className="space-y-5">
-      {lang === 'ru' ?
-        <BackLink title="Вернуться к урокам" heading='' />
-        :
-        <BackLink title="Darslarga Qaytish" heading='' />
-      }
+      {lang === "ru" ? (
+        <BackLink title="Вернуться к урокам" heading="" />
+      ) : (
+        <BackLink title="Darslarga Qaytish" heading="" />
+      )}
       <Toaster
         position="top-right"
         toastOptions={{
@@ -138,7 +152,10 @@ const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data,
         <div className="relative">
           <Label
             htmlFor="videoUpload"
-            className={clsx("relative rounded-2xl p-4 flex items-center justify-between gap-3 border-dashed border-2", inputErrors.video && "border-destructive")}
+            className={clsx(
+              "relative rounded-2xl p-4 flex items-center justify-between gap-3 border-dashed border-2",
+              inputErrors.video && "border-destructive",
+            )}
           >
             <div className="flex items-center gap-3">
               <div className="rounded-xl w-[60px] h-[60px] flex items-center justify-center bg-white">
@@ -146,15 +163,25 @@ const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data,
               </div>
               <div className="flex flex-col text-csneutral-500 gap-1">
                 <h1 className="text-[22px] font-medium">
-                  {videoName ? getLangText(lang, "Video Tanlandi", "Видео выбрано") : getLangText(lang, "Video Tanlash", "Добавить видео")}
+                  {videoName
+                    ? getLangText(lang, "Video Tanlandi", "Видео выбрано")
+                    : getLangText(lang, "Video Tanlash", "Добавить видео")}
                 </h1>
                 <p className="text-base font-normal">
-                  {videoName ? videoName : getLangText(lang, "Videoni tanlang yoki torting", "Перетащите или выберите ваще видео")}
+                  {videoName
+                    ? videoName
+                    : getLangText(
+                        lang,
+                        "Videoni tanlang yoki torting",
+                        "Перетащите или выберите ваще видео",
+                      )}
                 </p>
               </div>
             </div>
             <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">
-              {videoName ? getLangText(lang, "O\'zgartirish", "Редактировать") : getLangText(lang, "Tanlash", "Выбрать")}
+              {videoName
+                ? getLangText(lang, "O'zgartirish", "Редактировать")
+                : getLangText(lang, "Tanlash", "Выбрать")}
             </span>
           </Label>
           <Input
@@ -162,21 +189,23 @@ const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data,
             type="file"
             accept="video/*"
             className="absolute inset-0 opacity-0"
-            defaultValue={data?.video}
+            // defaultValue={data?.video}
             {...register("video", { required: true })}
           />
         </div>
 
         <div className="rounded-2xl  bg-white flex flex-col gap-4 p-6">
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="titleRu">{getLangText(lang, "Sarlavha", "Подзаголовок")}</Label>
+            <Label htmlFor="titleRu">
+              {getLangText(lang, "Sarlavha", "Подзаголовок")}
+            </Label>
             <Input
               type="text"
               id="titleRu"
               placeholder="Ru"
               className={cn({ "border-destructive": inputErrors.titleRu })}
               {...register("titleRu", { required: true })}
-              defaultValue={data?.titleRu}
+              // defaultValue={data?.titleRu}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
@@ -190,10 +219,14 @@ const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data,
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor={`descriptionRu`}>{getLangText(lang, "Tavsif", "Описание")}</Label>
+            <Label htmlFor={`descriptionRu`}>
+              {getLangText(lang, "Tavsif", "Описание")}
+            </Label>
             <Textarea
               placeholder="Ru"
-              className={cn({ "border-destructive": inputErrors.descriptionRu })}
+              className={cn({
+                "border-destructive": inputErrors.descriptionRu,
+              })}
               {...register("descriptionRu", { required: true })}
               defaultValue={data?.descriptionRu}
             />
@@ -201,7 +234,9 @@ const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data,
           <div className="grid w-full  items-center gap-1.5">
             <Textarea
               placeholder="Uz"
-              className={cn({ "border-destructive": inputErrors.descriptionUz })}
+              className={cn({
+                "border-destructive": inputErrors.descriptionUz,
+              })}
               {...register("descriptionUz", { required: true })}
               defaultValue={data?.descriptionUz}
             />
@@ -233,4 +268,3 @@ const FormLessonEdit: FC<Props> = ({ params: { lang, lessonId, moduleId }, data,
 };
 
 export default FormLessonEdit;
-
