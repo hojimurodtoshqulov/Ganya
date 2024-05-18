@@ -12,9 +12,15 @@ interface Props {
   detel?: any;
   articlsall?: any;
   lang: string;
+  langue: any;
 }
 
-export default function DeteleArticle({ detel, articlsall, lang }: Props) {
+export default function DeteleArticle({
+  detel,
+  articlsall,
+  lang,
+  langue,
+}: Props) {
   return (
     <div>
       <div className="pt-10 ">
@@ -32,10 +38,10 @@ export default function DeteleArticle({ detel, articlsall, lang }: Props) {
         <div className="flex lg:flex-row flex-col-reverse  justify-between container w-full gap-6">
           <div className="bg-csneutral-100 w-full p-10 rounded-[40px]">
             <Heading
-              text={lang === "ru" ? detel?.headlineUz : detel.headlineRu}
+              text={lang === "ru" ? detel?.headlineRu : detel.headlineUz}
             />
             <h2 className="font-normal text-[32px] leading-[44px] mb-4 font-comfortaa mt-8">
-              Подзаголовок
+              {langue.articles.text}
             </h2>
             <p className="font-normal w-full text-2xl text-[#585D65]">
               {lang === "ru" ? detel?.textRu : detel.textUz}
@@ -69,14 +75,16 @@ export default function DeteleArticle({ detel, articlsall, lang }: Props) {
       </div>
       <div className="bg-csneutral-100 py-40">
         <div className="container ">
-          <h2 className="title text-h2 leading-[56px] mb-8">Статьи</h2>
+          <h2 className="title text-h2 leading-[56px] mb-8">
+            {langue.articles.title}
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {articlsall?.slice(-3).map((article: Articlsall) => (
               <Link key={article.id} href={`/articles/${article.id}`}>
                 <CardStatya
                   key={article.id}
                   title={
-                    lang === "ru" ? article.headlineUz : article.headlineRu
+                    lang === "ru" ? article.headlineRu : article.headlineUz
                   }
                   text={lang === "ru" ? article.textRu : article.titleUz}
                   time={format(new Date(article.updatedAt), "MMMM dd, yyyy")}

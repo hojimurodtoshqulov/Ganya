@@ -15,12 +15,11 @@ import { format } from "date-fns";
 interface props {
   articls?: any;
   lang: string;
+  langue: any;
 }
 
-export default function ArticlesPage({ articls, lang }: props) {
+export default function ArticlesPage({ articls, lang, langue }: props) {
   const [searchText, setSearchText] = useState<string>("");
-
-  console.log(articls, "this is data");
 
   const filteredData = articls?.filter((element: Articlsall) =>
     element?.titleUz.toLowerCase().includes(searchText.toLowerCase()),
@@ -38,7 +37,7 @@ export default function ArticlesPage({ articls, lang }: props) {
         />
       </div>
       <div className="flex lg:flex-row mt-10 flex-col gap-2 items-center justify-between">
-        <Heading text="Статьи" />
+        <Heading text={langue.articles.title} />
         <div className="relative w-[350px] ">
           <Search className="absolute top-[10px] left-2" />
           <Input
@@ -53,8 +52,12 @@ export default function ArticlesPage({ articls, lang }: props) {
         {filteredData?.map((element: Articlsall, i: number) => (
           <Link key={element.id} href={`/articles/${element.id}`}>
             <CardStatya
-              title={lang === "ru" ? element.titleUz : element?.titleRu}
-              text={lang === "ru" ? element.textUz : element.textRu}
+              title={lang === "ru" ? element.titleRu : element?.titleUz}
+              text={
+                lang === "ru"
+                  ? element.textRu.slice(0, 80)
+                  : element.textUz.slice(0, 80)
+              }
               time={format(new Date(element.updatedAt), "MMMM dd, yyyy")}
               bacraund
             />

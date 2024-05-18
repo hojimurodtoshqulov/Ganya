@@ -65,7 +65,9 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-  console.log();
+  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all");
+  const dataComment = await res.json();
+  const dataComments = dataComment;
   const data = await getData<{
     id: string;
   }>();
@@ -153,7 +155,11 @@ export default async function Home({
       />
 
       <div id="articles">
-        <Stati lang={lang} container="container" />
+        <Stati
+          container="container"
+          lang={lang}
+          articles={dcitionary.home.articlesHome}
+        />
       </div>
 
       <div id="contacts">

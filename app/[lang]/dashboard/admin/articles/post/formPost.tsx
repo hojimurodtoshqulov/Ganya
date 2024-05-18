@@ -54,6 +54,7 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
   const imageWeb: any = watch("imageWeb") && (watch("imageWeb")[0] ?? {});
   const imageMobile: any =
     watch("imageMobile") && (watch("imageMobile")[0] ?? {});
+
   const articleImage: any =
     watch("articleImage") && (watch("articleImage")[0] ?? {});
 
@@ -92,7 +93,7 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
   return (
     <div>
       <h1
-        className={`${buttonVariants({ variant: "link" })} flex gap-2 items-center`}
+        className={`${buttonVariants({ variant: "link" })} flex gap-2 items-center cursor-pointer`}
         onClick={() => router.back()}
       >
         <FaChevronLeft className="font-normal" />
@@ -103,25 +104,10 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="bg-white p-6 rounded-2xl mt-5 space-y-5">
-          <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center ">
-            <div className="text-2xl font-normal flex flex-col ">
-              <h1>Добавить рекламный баннер</h1>
-            </div>
-            <label className={buttonVariants({ variant: "filled" })}>
-              {articleImage?.name ? "редактировать" : "Добавить"}
-
-              <Input
-                type="file"
-                accept="image/*"
-                className="w-0 h-0 opacity-0 hidden"
-                {...register("articleImage", { required: true })}
-              />
-            </label>
-          </div>
           <div
             className={cn(
-              "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center mt-4 mb-2",
-              { "border-destructive": errors?.articleImage },
+              "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
+              { "border-destructive": errors.articleImage },
             )}
           >
             <div className="flex items-center gap-3">
@@ -137,6 +123,26 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
                 </div>
               </div>
             </div>
+            <label className={buttonVariants({ variant: "filled" })}>
+              {articleImage?.name ? "редактировать" : "Добавить"}
+              <Input
+                type="file"
+                accept="image/*"
+                className="w-0 h-0 opacity-0 hidden"
+                {...register("articleImage", { required: true })}
+              />
+            </label>
+          </div>
+          <div
+            className={cn(
+              "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
+              { "border-destructive": errors?.imageMobile || errors.imageWeb },
+            )}
+          >
+            <div className="text-2xl font-normal flex flex-col ">
+              <h1>Добавить рекламный баннер</h1>
+            </div>
+
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={"filled"}>
@@ -252,7 +258,9 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
               type="text"
               id="headlineUz"
               placeholder="Asosiy paket: Ru"
-              className={cn({ "border-destructive": errors?.headlineUz })}
+              className={cn({
+                "border-destructive": errors?.headlineUz,
+              })}
               {...register("headlineUz")}
             />
           </div>
@@ -262,9 +270,9 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
               id="headlineUz"
               placeholder="Базовый пакет: Uz"
               className={cn({
-                "border-destructive": errors?.headlineRu?.types,
+                "border-destructive": errors?.headlineRu,
               })}
-              {...register("headlineRu", { required: true })}
+              {...register("headlineRu")}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
