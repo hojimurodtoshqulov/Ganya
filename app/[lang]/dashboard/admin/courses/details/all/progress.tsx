@@ -109,9 +109,15 @@ const ProgresCourses: FC<{ lang: "ru" | "uz" }> = async ({
                   </DialogContent>
                 </Dialog>
                 <DropdownMenuSeparator />
-                <ArchiveCourse id={id} />
+                <ArchiveCourse
+                  id={id}
+                  accessToken={cookies().get("accessToken")?.value}
+                />
                 <DropdownMenuSeparator />
-                <DeleteCourse id={id} />
+                <DeleteCourse
+                  id={id}
+                  accessToken={cookies().get("accessToken")?.value}
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           </CourseCard>

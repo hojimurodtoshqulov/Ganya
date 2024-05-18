@@ -1,118 +1,145 @@
 {
   "home": {
     "navbar": {
-      "abaut": "Biz haqimizda",
-      "courses": "Kurslar",
-      "team": "jamoa",
-      "articles": "Maqolalar",
-      "Contacts": "Kontaktlar",
-      "login ": "Kirish"
+      "О нас": "Biz haqimizda",
+      "Курсы": "Kurslar",
+      "Команда": "Jamoa",
+      "Статьи": "Maqolalar",
+      "Контакты": "Kontaktlar",
+      "login": "Kirish"
     },
     "showcase": {
-      "title": "Ehtiyotkorlik akademiyasi Ota-onalik",
-      "showcasebtn": "Arizangizni yuboring"
-    },
-    "abaut": {
-      "title": "Biz haqimizda",
-      "text": "'Ongli ota-ona tarbiyasi akademiyasi' platformasi ikki farzandni tarbiyalashda haqiqiy tajribaga ega ona, tadbirkor va ta'sirchan Ganya Usmonova tomonidan yaratilgan. Platformada siz nafaqat shaxsiy tajribadan to'plangan bilim va tajribaga ega bo'lishingiz mumkin. ikki farzandni tarbiyalashda, balki so'nggi ilmiy tadqiqotlarni ham tasdiqladi.",
-      "influencer": "ta'sir qiluvchi",
-      "Business": "ishbilarmon ayol"
-    },
-    "Lure": {
-      "title": "'Muammolarsiz qo'shimcha oziqlantirish' kursi",
-      "text": "'Muammolarsiz qo'shimcha oziqlantirish' kursini ishlab chiqishda men nafaqat o'z tajribamni, balki jahon ilmiy yondashuvlarini ham qo'lladim, vaqt va ilmiy jamoatchilik tomonidan tasdiqlangan bilim va usullarga murojaat qildim. Kursni yaratish uchun bolalar parvarishi va pediatriya sohasidagi taniqli mutaxassislar jalb qilingan, ularning har biri sizga eng qimmatli va kerakli bilimlarni taqdim etish uchun kursni shakllantirishga hissa qo'shgan. Bu mening bolaning sog‘lom rivojlanishi ilmiy dalillar va ilg‘or tajribalar asosida qo‘shimcha oziqlantirishga ongli yondashishdan boshlanadi, degan ishonchim tufayli mumkin bo‘ldi."
-    },
-    "help": {
-      "title": "Kurs yordam beradi",
-      "heading1": "1. Farzandingiz salomatligiga ishonch hosil qiling",
-      "desc": "Biz sizga eng mos va xavfsiz qo'shimcha oziqlantirish mahsulotlarini tanlash bo'yicha bilim berish orqali o'zingizni ishonchli his qilishingizga yordam beramiz.",
-      "heading2": "2. Qo'shimcha ovqatlarni kiritishning soddaligi va ravshanligi",
-      "desc2": "Biz qo'shimcha oziqlantirishning murakkab jihatlarini sodda tilda tushuntiramiz, jarayonni osonlashtiradi va uni har bir ota-ona uchun tushunarli va tushunarli qiladi.",
-      "heading3": "3. Allergik reaktsiyalardan qochish",
-      "desc3": "Biz sizga yangi oziq-ovqatlarni qanday qilib to'g'ri kiritishni va allergiya xavfini minimallashtirish uchun bolaning tanasining reaktsiyasini kuzatishni o'rgatamiz.",
-      "heading4": "4. Sog'lom ovqatlanish asoslarini qurish",
-      "desc4": "Farzandingizning sog'lom rivojlanishi va o'sishini qo'llab-quvvatlash uchun sog'lom ovqatlanish odatlariga asos soling."
-    },
-    "whocurse": {
-      "text1": "Ota-onalar qo'shimcha oziqlantirishni joriy qilishni rejalashtirmoqda va ma'lumotlarning ko'pligidan hayratda.",
-      "text2": "Farzandlarida to'g'ri ovqatlanish odatlarini rivojlantirmoqchi bo'lgan va oziq-ovqatga qiziqishini rivojlantirmoqchi bo'lgan ota-onalar.",
-      "text3": "Bolasini butun oila bilan mustaqil ovqatlanishga o'rgatmoqchi bo'lgan ota-onalar.",
-      "text4": "Qo'shimcha oziqlantirishni joriy etishda muammolarga duch kelgan va samarali echimlarni izlayotgan ota-onalar.",
-      "text5": "Stress va tashvishlardan qochib, o'z farzandining ovqatlanishini tabiiy va beparvo qilishni xohlaydigan ota-onalar"
-    },
-    "Reviews": {
-      "title": "O'tgan strimlardan olingan sharhlar:"
-    },
-    "team": {
-      "title": "Jamoa"
-    },
-    "Rates": {
-      "easy": {
-        "title": "Asosiy paket:",
-        "desc": "Kurs sotib olingan kundan boshlab 3 oy davomida barcha video darslarga kirish."
+      "title": "Ongli Onalik Akademiyasi",
+      "showcasModul": {
+        "btn": "Ariza Qoldirish",
+        "title": "Ariza Qoldirish",
+        "lable": "Ism Familiyasi",
+        "placeholder": "Ismingizni va familiyangizni kiriting",
+        "phoneLabel": "Telfon raqami",
+        "submit": "Yuborish",
+        "success": {
+          "title": "Sizning arizangiz qabul qilindi",
+          "paragraph": "Tez orada menejerimiz siz bilan bog'lanadi",
+          "close": "Yopish"
+        }
       },
-      "medium": {
-        "text": "Standart",
-        "desc1": "Kurs sotib olingan kundan boshlab 6 oy davomida barcha video darslarga kirish.",
-        "desc2": "Qo'shimcha matn materiallari."
+      "abaut": {
+        "title": "Biz haqimizda",
+        "text": "'Ongli ota-ona tarbiyasi akademiyasi' platformasi ikki farzandni tarbiyalashda haqiqiy tajribaga ega ona, tadbirkor va ta'sirchan Ganya Usmonova tomonidan yaratilgan. Platformada siz nafaqat shaxsiy tajribadan to'plangan bilim va tajribaga ega bo'lishingiz mumkin. ikki farzandni tarbiyalashda, balki so'nggi ilmiy tadqiqotlarni ham tasdiqladi.",
+        "influencer": "ta'sir qiluvchi",
+        "Business": "ishbilarmon ayol"
       },
-      "hard": {
-        "text": "Premium paket:",
-        "desc1": "Kurs sotib olingan kundan boshlab 1 yil davomida barcha video darslarga kirish.",
-        "desc2": "Qo'shimcha matn materiallari.",
-        "desc3": "Men bilan 1 ta onlayn maslahat."
+      "Lure": {
+        "title": "'Muammolarsiz qo'shimcha oziqlantirish' kursi",
+        "text": "'Muammolarsiz qo'shimcha oziqlantirish' kursini ishlab chiqishda men nafaqat o'z tajribamni, balki jahon ilmiy yondashuvlarini ham qo'lladim, vaqt va ilmiy jamoatchilik tomonidan tasdiqlangan bilim va usullarga murojaat qildim. Kursni yaratish uchun bolalar parvarishi va pediatriya sohasidagi taniqli mutaxassislar jalb qilingan, ularning har biri sizga eng qimmatli va kerakli bilimlarni taqdim etish uchun kursni shakllantirishga hissa qo'shgan. Bu mening bolaning sog‘lom rivojlanishi ilmiy dalillar va ilg‘or tajribalar asosida qo‘shimcha oziqlantirishga ongli yondashishdan boshlanadi, degan ishonchim tufayli mumkin bo‘ldi."
       },
-      "ratesbtn": "Tanlash"
-    },
-    "answear": {
-      "title": "Ko'p beriladigan savollar",
-      "part1": {
-        "title": "Qanday qilib kursga yozilishim mumkin?",
-        "text": "Siz bizning veb-saytimizda maxsus ro'yxatdan o'tish shakli orqali kursga ro'yxatdan o'tishingiz mumkin. Kursni tanlang, kerakli ma'lumotlarni to'ldiring va to'lovni amalga oshiring, shundan so'ng siz elektron pochta orqali tasdiqlash va barcha kerakli ko'rsatmalar olasiz."
+      "help": {
+        "title": "Kurs yordam beradi",
+        "heading1": "1. Farzandingiz salomatligiga ishonch hosil qiling",
+        "desc": "Biz sizga eng mos va xavfsiz qo'shimcha oziqlantirish mahsulotlarini tanlash bo'yicha bilim berish orqali o'zingizni ishonchli his qilishingizga yordam beramiz.",
+        "heading2": "2. Qo'shimcha ovqatlarni kiritishning soddaligi va ravshanligi",
+        "desc2": "Biz qo'shimcha oziqlantirishning murakkab jihatlarini sodda tilda tushuntiramiz, jarayonni osonlashtiradi va uni har bir ota-ona uchun tushunarli va tushunarli qiladi.",
+        "heading3": "3. Allergik reaktsiyalardan qochish",
+        "desc3": "Biz sizga yangi oziq-ovqatlarni qanday qilib to'g'ri kiritishni va allergiya xavfini minimallashtirish uchun bolaning tanasining reaktsiyasini kuzatishni o'rgatamiz.",
+        "heading4": "4. Sog'lom ovqatlanish asoslarini qurish",
+        "desc4": "Farzandingizning sog'lom rivojlanishi va o'sishini qo'llab-quvvatlash uchun sog'lom ovqatlanish odatlariga asos soling."
       },
-      "part2": {
-        "title": "Kursni o'tash uchun menga biron bir maxsus bilim yoki jihoz kerakmi?",
-        "text": "Ha, bizning kurslarimiz onlayn va siz ularni dunyoning istalgan nuqtasidan olishingiz mumkin. Sizga kerak bo'lgan yagona narsa barqaror Internet aloqasi."
+      "whocurse": {
+        "text1": "Ota-onalar qo'shimcha oziqlantirishni joriy qilishni rejalashtirmoqda va ma'lumotlarning ko'pligidan hayratda.",
+        "text2": "Farzandlarida to'g'ri ovqatlanish odatlarini rivojlantirmoqchi bo'lgan va oziq-ovqatga qiziqishini rivojlantirmoqchi bo'lgan ota-onalar.",
+        "text3": "Bolasini butun oila bilan mustaqil ovqatlanishga o'rgatmoqchi bo'lgan ota-onalar.",
+        "text4": "Qo'shimcha oziqlantirishni joriy etishda muammolarga duch kelgan va samarali echimlarni izlayotgan ota-onalar.",
+        "text5": "Stress va tashvishlardan qochib, o'z farzandining ovqatlanishini tabiiy va beparvo qilishni xohlaydigan ota-onalar"
       },
-      "part3": {
-        "title": "Kursni o'tash uchun menga biron bir maxsus bilim yoki jihoz kerakmi?",
-        "text": "Hech qanday maxsus bilim va jihozlar talab qilinmaydi. Sizga kerak bo'lgan yagona narsa - Internetga ulangan kompyuter yoki mobil qurilma."
+      "Reviews": {
+        "title": "O'tgan strimlardan olingan sharhlar:"
       },
-      "part4": {
-        "title": "To'lay olmayman",
-        "text": "Agar siz to'lay olmasangiz, aloqa formasini to'ldiring va biz sizga to'lov ma'lumotlarini yuboramiz."
+      "team": {
+        "title": "Jamoa"
       },
-      "part5": {
-        "title": "Kursning vaqt chegarasi bormi?",
-        "text": "Kursni sotib olganingizdan so'ng, siz unga umrbod kirish huquqiga ega bo'lasiz, bu esa uni o'z tezligingizda yakunlash imkonini beradi."
+      "Rates": {
+        "easy": {
+          "title": "Asosiy paket:",
+          "desc": "Kurs sotib olingan kundan boshlab 3 oy davomida barcha video darslarga kirish."
+        },
+        "medium": {
+          "text": "Standart",
+          "desc1": "Kurs sotib olingan kundan boshlab 6 oy davomida barcha video darslarga kirish.",
+          "desc2": "Qo'shimcha matn materiallari."
+        },
+        "hard": {
+          "text": "Premium paket:",
+          "desc1": "Kurs sotib olingan kundan boshlab 1 yil davomida barcha video darslarga kirish.",
+          "desc2": "Qo'shimcha matn materiallari.",
+          "desc3": "Men bilan 1 ta onlayn maslahat."
+        },
+        "ratesbtn": "Tanlash"
       },
-      "part6": {
-        "title": "O'qituvchilar yoki boshqa kurs ishtirokchilari bilan suhbatlashsam bo'ladimi?",
-        "text": "Ha, standart paketga savollar berish, tajriba almashish va o‘qituvchilar va boshqa talabalar bilan qiziqarli mavzularni muhokama qilish mumkin bo‘lgan chat guruhlari kiradi."
+      "answear": {
+        "title": "Ko'p beriladigan savollar",
+        "part1": {
+          "title": "Qanday qilib kursga yozilishim mumkin?",
+          "text": "Siz bizning veb-saytimizda maxsus ro'yxatdan o'tish shakli orqali kursga ro'yxatdan o'tishingiz mumkin. Kursni tanlang, kerakli ma'lumotlarni to'ldiring va to'lovni amalga oshiring, shundan so'ng siz elektron pochta orqali tasdiqlash va barcha kerakli ko'rsatmalar olasiz."
+        },
+        "part2": {
+          "title": "Kursni o'tash uchun menga biron bir maxsus bilim yoki jihoz kerakmi?",
+          "text": "Ha, bizning kurslarimiz onlayn va siz ularni dunyoning istalgan nuqtasidan olishingiz mumkin. Sizga kerak bo'lgan yagona narsa barqaror Internet aloqasi."
+        },
+        "part3": {
+          "title": "Kursni o'tash uchun menga biron bir maxsus bilim yoki jihoz kerakmi?",
+          "text": "Hech qanday maxsus bilim va jihozlar talab qilinmaydi. Sizga kerak bo'lgan yagona narsa - Internetga ulangan kompyuter yoki mobil qurilma."
+        },
+        "part4": {
+          "title": "To'lay olmayman",
+          "text": "Agar siz to'lay olmasangiz, aloqa formasini to'ldiring va biz sizga to'lov ma'lumotlarini yuboramiz."
+        },
+        "part5": {
+          "title": "Kursning vaqt chegarasi bormi?",
+          "text": "Kursni sotib olganingizdan so'ng, siz unga umrbod kirish huquqiga ega bo'lasiz, bu esa uni o'z tezligingizda yakunlash imkonini beradi."
+        },
+        "part6": {
+          "title": "O'qituvchilar yoki boshqa kurs ishtirokchilari bilan suhbatlashsam bo'ladimi?",
+          "text": "Ha, standart paketga savollar berish, tajriba almashish va o‘qituvchilar va boshqa talabalar bilan qiziqarli mavzularni muhokama qilish mumkin bo‘lgan chat guruhlari kiradi."
+        },
+        "part7": {
+          "title": "Kursni tugatgandan so'ng sertifikatlar berasizmi?",
+          "text": "Kursni muvaffaqiyatli tugatgandan so'ng, har bir ishtirokchiga olingan bilimlarni tasdiqlovchi sertifikat beriladi."
+        },
+        "part8": {
+          "title": "Kurs materiali qanchalik tez-tez yangilanadi?"
+        },
+        "part9": {
+          "title": "Kelajak kursi uchun mavzu taklif qila olamanmi?",
+          "text": "Biz har doim takliflarga ochiqmiz va yangi kurslar bo'yicha g'oyalaringizni ko'rib chiqishdan mamnunmiz. Iltimos, taklifingizni veb-saytimizdagi fikr-mulohaza shakli orqali yuboring."
+        },
+        "part10": {
+          "title": "Kursni tugatgandan so'ng sertifikatlar berasizmi?",
+          "text": "Javob"
+        }
       },
-      "part7": {
-        "title": "Kursni tugatgandan so'ng sertifikatlar berasizmi?",
-        "text": "Kursni muvaffaqiyatli tugatgandan so'ng, har bir ishtirokchiga olingan bilimlarni tasdiqlovchi sertifikat beriladi."
+      "articles": {
+        "title": "Maqolalar",
+        "btn": "Maqolaga o'tish"
       },
-      "part8": {
-        "title": "Kurs materiali qanchalik tez-tez yangilanadi?"
-      },
-      "part9": {
-        "title": "Kelajak kursi uchun mavzu taklif qila olamanmi?",
-        "text": "Biz har doim takliflarga ochiqmiz va yangi kurslar bo'yicha g'oyalaringizni ko'rib chiqishdan mamnunmiz. Iltimos, taklifingizni veb-saytimizdagi fikr-mulohaza shakli orqali yuboring."
-      },
-      "part10": {
-        "title": "Kursni tugatgandan so'ng sertifikatlar berasizmi?",
-        "text": "Javob"
+      "contact": {
+        "text": "Kursga hozir ro'yxatdan o'ting va biz bilan ongli ravishda tarbiyalash sari sayohatingizni boshlang!",
+        "name": "Ismi Familiya",
+        "btn": "So'rov qoldiring"
       }
     },
     "articles": {
       "title": "Maqolalar",
-      "btn": "Maqolaga o'tish"
+      "text": "Subtitr"
     },
     "contact": {
-      "text": "Kursga hozir ro'yxatdan o'ting va biz bilan ongli ravishda tarbiyalash sari sayohatingizni boshlang!",
+      "text": "Hoziroq kursga yoziling va biz bilan ongli ravishda ota-onalikka sayohatingizni boshlang!",
+      "name": "Ism Familiyasi",
+      "btn": "Arizani qoldirish"
+    },
+    "auth": {
+      "title": "So'rov qoldiring",
       "name": "Ismi Familiya",
+
       "btn": "So'rov qoldiring"
     }
   },
@@ -135,198 +162,211 @@
     "saidbar": {
       "text1": "trening",
       "text2": "Profil",
-      "text3": "Chiqish"
+      "text3": "Chiqish",
+      "plesholder": "Ism va familiyangizni kiriting",
+      "tel": "Telefon raqami",
+      "sent": "Yuborish",
+      "sucsestitle": "Sizning Sorovingiz qabul qilindi",
+      "sucsestext": "Menejerimiz tez orada siz bilan bog'lanadi",
+      "sucsesbtn": "Yopish"
     },
-    "client": {
-      "education": "Ta'lim",
-      "mycourse": "Mening xaridlarim",
-      "student": "Talaba",
-      "allcourse": "Barcha kurslar",
-      "educationbtn": "Ta'limga boring",
-      "problemtext": "Muammolarsiz qo'shimcha oziqlantirish",
-      "backtext": "Homiladorlikka tayyorgarlik"
-    },
-    "admin": {
-      "topbar": {
-        "course": "Kurslar",
-        "text1": "Barcha kurslar",
-        "text2": "ishlab chiqilmoqda",
-        "text3": "Arxivda",
-        "btn": "Yangi kurs qo'shish"
+    "dashboard": {
+      "saidbar": {
+        "text1": "trening",
+        "text2": "Profil",
+        "text3": "Chiqish"
       },
-      "popover": {
-        "text1": "Tahrirlash",
-        "text2": "Nomini o'zgartirish",
-        "text3": "Statistika",
-        "text4": "Arxivga o'tkazish",
-        "text5": "O'chirish"
+      "client": {
+        "education": "Ta'lim",
+        "mycourse": "Mening xaridlarim",
+        "student": "Talaba",
+        "allcourse": "Barcha kurslar",
+        "educationbtn": "Ta'limga boring",
+        "problemtext": "Muammolarsiz qo'shimcha oziqlantirish",
+        "backtext": "Homiladorlikka tayyorgarlik"
       },
-      "helpcenter": {
-        "title": "Biz bilan bog'laning",
-        "matn": "Biz barcha savollarga javob beramiz"
-      },
-      "curse": {
-        "createmodal": {
-          "title": "Yangi kurs qo'shish",
-          "text": "Kurs nomi",
-          "plecholder": "Misol: Emizish kursi",
-          "imagetext": "Kurs qopqog'ini tanlang yoki torting",
-          "imagetitle": "Qopqoq",
-          "btn": "Tanlash",
-          "tugma": "Davom etish"
-        },
-        "changemodal": {
-          "plecholder": "Homiladorlikka tayyorgarlik",
-          "ttile": "Muqovangiz yuklandi",
-          "text": "Kurs uchun qopqoqni tanlang yoki torting",
-          "btn": "O'zgartirish",
-          "tugma": "Davom etish"
-        },
-        "modul": {
-          "title1": "Modul",
-          "text": "Modul raqami",
-          "title": "modul qo'shish",
-          "addtext": "Modul tavsifini qo'shish"
-        },
-        "tarif": {
-          "title": "Tariflar",
-          "btn": "Tarif qo'shish"
+      "admin": {
+        "topbar": {
+          "course": "Kurslar",
+          "text1": "Barcha kurslar",
+          "text2": "ishlab chiqilmoqda",
+          "text3": "Arxivda",
+          "btn": "Yangi kurs qo'shish"
         },
         "popover": {
-          "text1": "Nomini o'zgartirish",
-          "text2": "modul qo'shish",
-          "text3": "Nashr qilish",
+          "text1": "Tahrirlash",
+          "text2": "Nomini o'zgartirish",
+          "text3": "Statistika",
+          "text4": "Arxivga o'tkazish",
           "text5": "O'chirish"
         },
-        "modal": {
-          "text1": "Sarlavha",
-          "plecholder": "Asosiy paket:",
-          "desc": "Tavsif",
-          "plecholder2": "Avantaj 1",
-          "addtext": "Foyda qo'shish",
-          "price": "Miqdor",
-          "plecholder3": "Tarif rejasi summasini kiriting",
-          "btn": "Saqlash",
-          "error": "Afzallikni o'chirish"
+        "helpcenter": {
+          "title": "Biz bilan bog'laning",
+          "matn": "Biz barcha savollarga javob beramiz"
         },
-        "footer": {
-          "status": "Holat:",
-          "text": "Nashr qilishdan oldin hamma narsani tayyorlab qo'yganingizga ishonch hosil qiling",
-          "btn": "Nashr qilish"
-        }
-      },
-      "createcourse": {
-        "title": "Dars qo'shish",
-        "popover": {
-          "text1": "Dars qo'shish",
-          "text2": "Nomini o'zgartirish",
-          "text3": "O'chirish"
+        "curse": {
+          "createmodal": {
+            "title": "Yangi kurs qo'shish",
+            "text": "Kurs nomi",
+            "plecholder": "Misol: Emizish kursi",
+            "imagetext": "Kurs qopqog'ini tanlang yoki torting",
+            "imagetitle": "Qopqoq",
+            "btn": "Tanlash",
+            "tugma": "Davom etish"
+          },
+          "changemodal": {
+            "plecholder": "Homiladorlikka tayyorgarlik",
+            "ttile": "Muqovangiz yuklandi",
+            "text": "Kurs uchun qopqoqni tanlang yoki torting",
+            "btn": "O'zgartirish",
+            "tugma": "Davom etish"
+          },
+          "modul": {
+            "title1": "Modul",
+            "text": "Modul raqami",
+            "title": "modul qo'shish",
+            "addtext": "Modul tavsifini qo'shish"
+          },
+          "tarif": {
+            "title": "Tariflar",
+            "btn": "Tarif qo'shish"
+          },
+          "popover": {
+            "text1": "Nomini o'zgartirish",
+            "text2": "modul qo'shish",
+            "text3": "Nashr qilish",
+            "text5": "O'chirish"
+          },
+          "modal": {
+            "text1": "Sarlavha",
+            "plecholder": "Asosiy paket:",
+            "desc": "Tavsif",
+            "plecholder2": "Avantaj 1",
+            "addtext": "Foyda qo'shish",
+            "price": "Miqdor",
+            "plecholder3": "Tarif rejasi summasini kiriting",
+            "btn": "Saqlash",
+            "error": "Afzallikni o'chirish"
+          },
+          "footer": {
+            "status": "Holat:",
+            "text": "Nashr qilishdan oldin hamma narsani tayyorlab qo'yganingizga ishonch hosil qiling",
+            "btn": "Nashr qilish"
+          }
         },
-        "forms": {
-          "label1": "Subtitr",
-          "plecholder1": "Subtitr",
-          "label2": "Ta'rif",
-          "plecholder2": "Darsga sharhlar qo'shing",
-          "btn": "Saqlash",
-          "tugma": "Tanlash",
-          "text": "Bu erda uy vazifasi bo'ladi",
-          "delete": "O'chirish"
+        "createcourse": {
+          "title": "Dars qo'shish",
+          "popover": {
+            "text1": "Dars qo'shish",
+            "text2": "Nomini o'zgartirish",
+            "text3": "O'chirish"
+          },
+          "forms": {
+            "label1": "Subtitr",
+            "plecholder1": "Subtitr",
+            "label2": "Ta'rif",
+            "plecholder2": "Darsga sharhlar qo'shing",
+            "btn": "Saqlash",
+            "tugma": "Tanlash",
+            "text": "Bu erda uy vazifasi bo'ladi",
+            "delete": "O'chirish"
+          },
+          "tost": {
+            "title": "Dars muvaffaqiyatli saqlandi",
+            "text": "'1-dars: Kirish' video darsidagi barcha ma'lumotlar muvaffaqiyatli saqlandi"
+          }
         },
-        "tost": {
-          "title": "Dars muvaffaqiyatli saqlandi",
-          "text": "'1-dars: Kirish' video darsidagi barcha ma'lumotlar muvaffaqiyatli saqlandi"
-        }
-      },
-      "articels": {
-        "home": {
-          "search": "Maqolalar qidirish",
-          "text": "Yangi maqola qo'shish",
-          "title": "Aloqador maqolalar"
+        "articels": {
+          "home": {
+            "search": "Maqolalar qidirish",
+            "text": "Yangi maqola qo'shish",
+            "title": "Aloqador maqolalar"
+          },
+          "forms": {
+            "image": "Qopqoq",
+            "text": "Kurs uchun qopqoqni tanlang yoki torting",
+            "btn": "Tanlash",
+            "heading": "sarlavha",
+            "title": "Subtitr",
+            "desck": "Ta'rif",
+            "baner": "Reklama bannerini qo'shish",
+            "banerbtn": "Qo'shish",
+            "save": "Ko'rib chiqish",
+            "sent": "Nashr qilish"
+          },
+          "modal": {
+            "wep": "Kompyuter uchun",
+            "mobile": "Mobil uchun",
+            "text": "PNG formatidagi surat",
+            "link": "havola",
+            "btn": "Tanlash",
+            "save": "Nashr qilish"
+          }
         },
-        "forms": {
-          "image": "Qopqoq",
-          "text": "Kurs uchun qopqoqni tanlang yoki torting",
-          "btn": "Tanlash",
-          "heading": "sarlavha",
-          "title": "Subtitr",
-          "desck": "Ta'rif",
-          "baner": "Reklama bannerini qo'shish",
-          "banerbtn": "Qo'shish",
-          "save": "Ko'rib chiqish",
-          "sent": "Nashr qilish"
-        },
-        "modal": {
-          "wep": "Kompyuter uchun",
-          "mobile": "Mobil uchun",
-          "text": "PNG formatidagi surat",
-          "link": "havola",
-          "btn": "Tanlash",
-          "save": "Nashr qilish"
-        }
-      },
-      "baner": {
-        "heading": "Tarkib",
-        "text1": "Foto-video",
-        "text2": "bannerlar",
-        "text3": "Sharhlar",
-        "btn": "O'zgartirish",
-        "createbaner": "Yangi slayd qo'shish",
-        "modal": {
-          "wep": "Kompyuter uchun",
-          "mobile": "Mobil uchun",
-          "text": "PNG formatidagi surat",
-          "link": "havola",
-          "btn": "Tanlash",
-          "save": "Nashr qilish"
-        },
-        "Reviews": {
-          "name": "Ismi Familiya",
-          "text": "Lavozim",
-          "create": "Yangi sharh qo'shish",
-          "btn": "Qo'shish"
-        },
-        "createrewiews": {
-          "name": "Ismi Familiya",
-          "plecholder1": "Ism va familiyani kiriting",
-          "label1": "Joylashuv",
-          "plecholder2": "Unvan yoki lavozimni kiriting",
-          "label2": "Ko'rib chiqish",
-          "plecholder3": "Foydalanuvchi sharhini kiriting",
-          "btn": "Qo'shish"
+        "baner": {
+          "heading": "Tarkib",
+          "text1": "Foto-video",
+          "text2": "bannerlar",
+          "text3": "Sharhlar",
+          "btn": "O'zgartirish",
+          "createbaner": "Yangi slayd qo'shish",
+          "modal": {
+            "wep": "Kompyuter uchun",
+            "mobile": "Mobil uchun",
+            "text": "PNG formatidagi surat",
+            "link": "havola",
+            "btn": "Tanlash",
+            "save": "Nashr qilish"
+          },
+          "Reviews": {
+            "name": "Ismi Familiya",
+            "text": "Lavozim",
+            "create": "Yangi sharh qo'shish",
+            "btn": "Qo'shish"
+          },
+          "createrewiews": {
+            "name": "Ismi Familiya",
+            "plecholder1": "Ism va familiyani kiriting",
+            "label1": "Joylashuv",
+            "plecholder2": "Unvan yoki lavozimni kiriting",
+            "label2": "Ko'rib chiqish",
+            "plecholder3": "Foydalanuvchi sharhini kiriting",
+            "btn": "Qo'shish"
+          }
         }
       }
-    }
-  },
-  "Registration": {
-    "sigin": {
-      "title": "Ro'yxatdan o'tish",
-      "text": "Bu bir daqiqa vaqt oladi",
-      "plecholder1": "Telefon yoki elektron pochta",
-      "plecholder2": "Parol yarating",
-      "label1": "Kamida 8 ta belgi",
-      "label2": "Faqat bosh lotin harflari",
-      "label3": "Raqamlar",
-      "label4": "Belgilar",
-      "plecholder3": "Parolni takrorlang",
-      "quation": "Men shaxsiy ma'lumotlarni qayta ishlashga roziman",
-      "btn": "Ro'yxatdan o'tish",
-      "login": "Allaqachon hisobingiz bormi?"
     },
-    "login": {
-      "title": "Kirish",
-      "text": "Bu bir daqiqa vaqt oladi",
-      "plecholder1": "Telefon yoki elektron pochta",
-      "plecholder2": "Parol yarating",
-      "forgetparol": "Parolni unutdingizmi?",
-      "btn": "Kirish",
-      "link": "Ro'yxatdan o'tish",
-      "sigin": "Hisobingiz yo'qmi?"
-    },
-    "confirm": {
-      "title": "Tasdiqlash kodi",
-      "text": "Bu bir daqiqa vaqt oladi",
-      "try": "Kodni qayta yuboring",
-      "btn": "Tasdiqlash"
+    "Registration": {
+      "sigin": {
+        "title": "Ro'yxatdan o'tish",
+        "text": "Bu bir daqiqa vaqt oladi",
+        "plecholder1": "Telefon yoki elektron pochta",
+        "plecholder2": "Parol yarating",
+        "label1": "Kamida 8 ta belgi",
+        "label2": "Faqat bosh lotin harflari",
+        "label3": "Raqamlar",
+        "label4": "Belgilar",
+        "plecholder3": "Parolni takrorlang",
+        "quation": "Men shaxsiy ma'lumotlarni qayta ishlashga roziman",
+        "btn": "Ro'yxatdan o'tish",
+        "login": "Allaqachon hisobingiz bormi?"
+      },
+      "login": {
+        "title": "Kirish",
+        "text": "Bu bir daqiqa vaqt oladi",
+        "plecholder1": "Telefon yoki elektron pochta",
+        "plecholder2": "Parol yarating",
+        "forgetparol": "Parolni unutdingizmi?",
+        "btn": "Kirish",
+        "link": "Ro'yxatdan o'tish",
+        "sigin": "Hisobingiz yo'qmi?"
+      },
+      "confirm": {
+        "title": "Tasdiqlash kodi",
+        "text": "Bu bir daqiqa vaqt oladi",
+        "try": "Kodni qayta yuboring",
+        "btn": "Tasdiqlash"
+      }
     }
   },
   "pay": {

@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Profile: FC = (): JSX.Element => {
   return (
-    <div>
+    <div className="w-full max-w-[calc(100vw_-_368px)]">
       <Heading text="Профиль" />
       <div className="mt-5 mx-6 p-6 rounded-2xl bg-white ">
         <div className="flex">

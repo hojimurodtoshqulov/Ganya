@@ -114,7 +114,10 @@ const ArchivedCourses: FC<{
                 {/* <DropdownMenuSeparator />
                 <ArchiveCourse id={id} /> */}
                 <DropdownMenuSeparator />
-                <DeleteCourse id={id} />
+                <DeleteCourse
+                  id={id}
+                  accessToken={cookies().get("accessToken")?.value}
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           </CourseCard>

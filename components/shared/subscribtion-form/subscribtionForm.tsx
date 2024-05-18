@@ -11,8 +11,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { fetchSendMessage } from "@/lib/utils";
 import { FormSchema, FormSchemaType } from "@/lib/types";
+import { getDictionary } from "@/lib/get-dictionary";
 
-export default function SubscriptionForm() {
+export default function SubscriptionForm({ dict }: { dict: Awaited<ReturnType<typeof getDictionary>>['home'] }) {
   const [show, setShow] = useState(false);
   const {
     register,
@@ -38,8 +39,7 @@ export default function SubscriptionForm() {
   return (
     <div className="container p-8 lg:p-20 rounded-[40px] bg-[#F4F1C6] flex flex-col items-center justify-center">
       <h1 className="text-h1 lg:leading-[70px] text-center">
-        Запишитесь на курс прямо сейчас и начните свой путь в осознанное
-        родительство вместе с нами!
+        {dict.contact.text}
       </h1>
 
       {show && (
@@ -51,9 +51,9 @@ export default function SubscriptionForm() {
         >
           <DialogContent className="sm:max-w-[425px] md:max-w-[648px]  ">
             <div className="flex items-center justify-center flex-col">
-              <h2 className="text-h2">Ваша щаявка принято</h2>
+              <h2 className="text-h2">{dict.showcase.showcasModul.success.title}</h2>
               <p className="text-csneutral-500 py-4">
-                Скоро с вами свяжется наш менеджер
+                {dict.showcase.showcasModul.success.paragraph}
               </p>
 
               <Image src={successIcon} alt="scuccess" />
@@ -61,7 +61,7 @@ export default function SubscriptionForm() {
 
             <DialogClose asChild>
               <Button className="text-lg font-normal" variant={"main"}>
-                Закрыть
+                {dict.showcase.showcasModul.success.close}
               </Button>
             </DialogClose>
           </DialogContent>
@@ -74,7 +74,7 @@ export default function SubscriptionForm() {
       >
         <div className="flex flex-col gap-1 items-center">
           <Input
-            placeholder="Имя Фамилия"
+            placeholder={dict.contact.name}
             {...register("fullName", { required: true })}
           />
           {errors.fullName && (
@@ -93,7 +93,7 @@ export default function SubscriptionForm() {
         </div>
 
         <Button type="submit" variant={"main"} className="font-normal text-lg">
-          Оставить заявку
+          {dict.contact.btn}
         </Button>
       </form>
     </div>
