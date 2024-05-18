@@ -85,7 +85,7 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
             onClick={() => onClickHandle()}
           />
 
-          <p className="text-neutral-500 text-base">{id + 1} - modul</p>
+          <p className="text-neutral-500 text-base">{id + 1} - {lang === "ru" ? "модуль" : "modul"}</p>
           <p className="text-[22px] leading-[32px] text-neutral-500">
             <Link href={bacData.id + ""}>{lang==='ru'? bacData.titleRu : bacData.titleUz}</Link>
           </p>

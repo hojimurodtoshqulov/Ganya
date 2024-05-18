@@ -7,10 +7,11 @@ import { useRouter } from "next/navigation";
 
 export const AddCard = ({
   id,
-  accessToken,
+  accessToken,lang
 }: {
   id: string | string[];
-  accessToken: string | undefined;
+    accessToken: string | undefined;
+  lang: "uz" | "ru"
 }) => {
   const {
     register,
@@ -53,9 +54,9 @@ export const AddCard = ({
           className=" rounded-2xl p-4 border-2 border-neutral-300 border-dashed gap-3 flex flex-col min-w-[320px] min-h-[124px] cursor-pointer"
           onClick={() => onClickHandle()}
         >
-          <p className="text-neutral-500 text-base">Modul raqami</p>
+          <p className="text-neutral-500 text-base">{lang === "ru" ? "Номер модуля" :"Modul raqami"}</p>
           <p className="text-[22px] leading-[32px] text-neutral-500">
-            Modul qo&apos;shish
+            {lang === "ru" ? "Добавить модуль" : "Modul qo'shish"}
           </p>
         </div>
       </div>

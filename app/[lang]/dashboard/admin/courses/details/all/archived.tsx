@@ -32,7 +32,6 @@ export interface ICard {
 }
 
 async function getData<T>(): Promise<T[] | Error> {
-  console.log("archived");
   const res = await fetch(
     process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=archived",
     {
