@@ -55,10 +55,12 @@ const SingleCourse: FC<{
       </Accordion>
 
       <div className="bg-white rounded-2xl pt-6 mt-10">
-        <h2 className="text-main-300 text-2xl font-medium mb-5">Тарифы</h2>
+        <h2 className="text-main-300 text-2xl md:text-4xl font-medium mb-5">
+          {lang === "ru" ? "Тарифы" : "Tariflar"}
+        </h2>
         <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-5">
           {plans?.map((plan: any) => (
-            <PlanCard key={plan.id} values={plan} small lang={lang} />
+            <PlanCard key={plan.id} values={plan} lang={lang} btn />
           ))}
         </div>
       </div>
