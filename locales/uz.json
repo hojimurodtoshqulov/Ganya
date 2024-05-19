@@ -198,13 +198,6 @@
       "sucsestitle": "Sizning Sorovingiz qabul qilindi",
       "sucsestext": "Menejerimiz tez orada siz bilan bog'lanadi",
       "sucsesbtn": "Yopish"
-    }
-  },
-  "dashboard": {
-    "saidbar": {
-      "text1": "trening",
-      "text2": "Profil",
-      "text3": "Chiqish"
     },
     "client": {
       "education": "Ta'lim",
