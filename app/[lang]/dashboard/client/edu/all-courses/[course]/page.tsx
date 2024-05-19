@@ -1,12 +1,11 @@
 import Modules from "@/components/dashboard/module-card/module.card";
 import Card from "@/components/shared/tariflar/card";
 import { FC } from "react";
-import { courceCardData } from "@/constants";
 
 interface Props {
   params: {
     course: string;
-    lang: string;
+    lang: "uz" | "ru";
   };
 }
 
@@ -75,7 +74,7 @@ const OneOfAllCourses: FC<Props> = async ({
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 items-center justify-center lg:grid-cols-3 gap-5 md:gap-6">
           {plans.map((plan) => (
-            <Card key={plan.id} values={plan} btn small />
+            <Card key={plan.id} values={plan} btn small lang={lang} />
           ))}
         </div>
       </div>

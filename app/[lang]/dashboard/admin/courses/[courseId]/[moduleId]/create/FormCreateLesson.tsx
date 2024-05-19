@@ -15,6 +15,7 @@ import BackLink from "@/components/dashboard/back-link";
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import { getLangText } from "@/lib/utils";
+import { getDictionary } from "@/lib/get-dictionary";
 interface Props {
     params: {
         courseId: string;
@@ -22,6 +23,7 @@ interface Props {
         lang: 'ru' | 'uz'
     };
     accToken?: string;
+    dict: Awaited<ReturnType<typeof getDictionary>>['dashboard'];
 }
 
 const schema = z.object({
@@ -35,7 +37,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, accToken }): JSX.Element => {
+const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, accToken, dict }): JSX.Element => {
     const { register, handleSubmit, watch, reset, formState: { isSubmitting, errors: inputErrors } } = useForm<Schema>({
         resolver: zodResolver(schema),
     });
@@ -45,6 +47,7 @@ const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, acc
 
     const onSubmit = async (values: Schema) => {
         try {
+            if (!videoFile || !videoName) throw new Error(`${dict.admin.createLesson.toast.videoError}`)
             const formData = new FormData();
             if (values.video instanceof FileList) {
                 formData.append("video", values.video[0], values.video[0].name);
@@ -57,6 +60,7 @@ const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, acc
             formData.append("descriptionRu", values.descriptionRu);
             formData.append("descriptionUz", values.descriptionUz);
 
+
             const api =
                 process.env.NEXT_PUBLIC_BASE_URL + `/lessons/create/${moduleId}`;
 
@@ -66,11 +70,11 @@ const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, acc
                 headers: { Authorization: `Bearer ${JSON.parse(accToken ?? "")}` }
             });
 
-            if (!req.ok) throw new Error("Новый урок. Проблема с загрузкой!");
+            if (!req.ok) throw new Error(`${dict.admin.createLesson.toast.createError}`);
 
             const res = await req.json();
             reset()
-            toast.success("Новый урок успешно добавлен");
+            toast.success(dict.admin.createLesson.toast.save);
             router.refresh();
             router.back()
         } catch (error: any) {
@@ -109,15 +113,15 @@ const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, acc
                             </div>
                             <div className="flex flex-col text-csneutral-500 gap-1">
                                 <h1 className="text-[22px] font-medium">
-                                    {videoName ? getLangText(lang, "Video Tanlandi", "Видео выбрано") : getLangText(lang, "Video Tanlash", "Добавить видео")}
+                                    {videoName ? getLangText(lang, "Video Tanlandi", "Видео выбрано") : dict.admin.createLesson.videoLable}
                                 </h1>
                                 <p className="text-base font-normal">
-                                    {videoName ? videoName : getLangText(lang, "Videoni tanlang yoki torting", "Перетащите или выберите ваще видео")}
+                                    {videoName ? videoName : dict.admin.createLesson.videoDescription}
                                 </p>
                             </div>
                         </div>
                         <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">
-                            {videoName ? getLangText(lang, "O\'zgartirish", "Редактировать") : getLangText(lang, "Tanlash", "Выбрать")}
+                            {videoName ? dict.admin.createLesson.btnEdit : dict.admin.createLesson.btnSelect}
                         </span>
                     </Label>
                     <Input
@@ -131,11 +135,11 @@ const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, acc
 
                 <div className="rounded-2xl  bg-white flex flex-col gap-4 p-6">
                     <div className="grid w-full  items-center gap-1.5">
-                        <Label htmlFor="titleRu">{getLangText(lang, "Sarlavha", "Подзаголовок")}</Label>
+                        <Label htmlFor="titleRu">{dict.admin.createLesson.title}</Label>
                         <Input
                             type="text"
                             id="titleRu"
-                            placeholder="Ru"
+                            placeholder={`${dict.admin.createLesson.title} RU`}
                             className={cn({ "border-destructive": inputErrors.titleRu })}
                             {...register("titleRu", { required: true })}
                         />
@@ -144,22 +148,22 @@ const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, acc
                         <Input
                             type="text"
                             id="titleUz"
-                            placeholder="Uz"
+                            placeholder={`${dict.admin.createLesson.title} UZ`}
                             className={cn({ "border-destructive": inputErrors.titleUz })}
                             {...register("titleUz", { required: true })}
                         />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
-                        <Label htmlFor={`descriptionRu`}>{getLangText(lang, "Tavsif", "Описание")}</Label>
+                        <Label htmlFor={`descriptionRu`}>{dict.admin.createLesson.title1}</Label>
                         <Textarea
-                            placeholder="Ru"
+                            placeholder={`${dict.admin.createLesson.placeholder} RU`}
                             className={cn({ "border-destructive": inputErrors.descriptionRu })}
                             {...register("descriptionRu", { required: true })}
                         />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
                         <Textarea
-                            placeholder="Uz"
+                            placeholder={`${dict.admin.createLesson.placeholder} UZ`}
                             className={cn({ "border-destructive": inputErrors.descriptionUz })}
                             {...register("descriptionUz", { required: true })}
                         />
@@ -172,7 +176,7 @@ const FormCreateLesson: FC<Props> = ({ params: { lang, courseId, moduleId }, acc
                             className="disabled:bg-main-200 text-sm font-normal py3 px-5"
                             variant={"main"}
                         >
-                            {getLangText(lang, "Saqlash", "Сохранить")}
+                            {dict.admin.createLesson.btnSave}
                         </Button>
                     </div>
                 </div>
