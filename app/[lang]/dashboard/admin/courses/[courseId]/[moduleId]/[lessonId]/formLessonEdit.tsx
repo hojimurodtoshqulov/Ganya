@@ -74,11 +74,18 @@ const FormLessonEdit: FC<Props> = ({
   const onSubmit = async (values: Schema) => {
     try {
       const formData = new FormData();
-      if (values.video instanceof FileList) {
-        formData.append("video", values.video[0], values.video[0].name);
+      if (!videoName) {
+        formData.append('video', data.video)
+
       } else {
-        formData.append("video", values.video);
+        if (values.video instanceof FileList) {
+          formData.append("video", values.video[0], values.video[0].name);
+        } else {
+          formData.append("video", values.video);
+        }
       }
+
+
 
       formData.append("titleUz", values.titleUz);
       formData.append("titleRu", values.titleRu);
