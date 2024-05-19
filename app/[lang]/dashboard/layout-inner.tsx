@@ -38,7 +38,7 @@ const InnerLayout: FC<Props> = ({
 
       <div className="relative w-full flex-1">
         <div className="sticky top-0 left-0 w-full z-10">
-          <Header handleClick={handleClick} />
+          <Header handleClick={handleClick} dictionary={dictionary} />
         </div>
         <main className="px-4 pt-3 md:p-6 md:pb-0">{children}</main>
       </div>

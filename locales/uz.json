@@ -171,7 +171,6 @@
     "auth": {
       "title": "So'rov qoldiring",
       "name": "Ismi Familiya",
-
       "btn": "So'rov qoldiring"
     }
   },
@@ -219,8 +218,7 @@
       "backtext": "Homiladorlikka tayyorgarlik"
     },
     "admin": {
-
-    "saidbar": [
+      "saidbar": [
         {
           "label": "Kurslar",
           "path": "courses"
@@ -232,9 +230,16 @@
         {
           "label": "Kontent",
           "path": "content"
+        },
+        {
+          "label": "Ta'lim",
+          "path": "edu"
+        },
+        {
+          "label": "Profil",
+          "path": "profile"
         }
-    ],
-
+      ],
       "topbar": {
         "course": "Kurslar",
         "text1": "Barcha kurslar",
@@ -242,7 +247,6 @@
         "text3": "Arxivda",
         "btn": "Yangi kurs qo'shish"
       },
-
       "popover": {
         "text1": "Tahrirlash",
         "text2": "Nomini o'zgartirish",
@@ -250,12 +254,10 @@
         "text4": "Arxivga o'tkazish",
         "text5": "O'chirish"
       },
-
       "helpcenter": {
         "title": "Biz bilan bog'laning",
         "matn": "Biz barcha savollarga javob beramiz"
       },
-
       "curse": {
         "createmodal": {
           "title": "Yangi kurs qo'shish",
@@ -306,7 +308,6 @@
           "btn": "Nashr qilish"
         }
       },
-
       "createcourse": {
         "title": "Dars qo'shish",
         "popover": {
@@ -329,7 +330,6 @@
           "text": "'1-dars: Kirish' video darsidagi barcha ma'lumotlar muvaffaqiyatli saqlandi"
         }
       },
-
       "articels": {
         "home": {
           "search": "Maqolalar qidirish",
@@ -357,7 +357,6 @@
           "save": "Nashr qilish"
         }
       },
-
       "baner": {
         "heading": "Tarkib",
         "text1": "Foto-video",
