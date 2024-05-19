@@ -33,7 +33,7 @@ async function getPlans<T>(id: string): Promise<T[] | Error> {
   return res.json();
 }
 const SingleCourse: FC<{
-  params: { courseId: string; lang: string };
+  params: { courseId: string; lang: "uz" | "ru" };
 }> = async ({ params: { courseId, lang } }): Promise<JSX.Element> => {
   const course = await getCourse(courseId);
   const plans = await getPlans<{
@@ -55,7 +55,7 @@ const SingleCourse: FC<{
         <h2 className="text-main-300 text-2xl font-medium mb-5">Тарифы</h2>
         <div className="grid grid-cols-3 gap-5">
           {plans.map((plan) => (
-            <PlanCard key={plan.id} values={plan} small />
+            <PlanCard key={plan.id} values={plan} small lang={lang} />
           ))}
         </div>
       </div>

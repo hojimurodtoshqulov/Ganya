@@ -233,7 +233,7 @@
       "topbar": {
         "course": "Kurslar",
         "text1": "Barcha kurslar",
-        "text2": "ishlab chiqilmoqda",
+        "text2": "Ishlab chiqilmoqda",
         "text3": "Arxivda",
         "btn": "Yangi kurs qo'shish"
       },
@@ -273,7 +273,7 @@
           "title": "modul qo'shish",
           "addtext": "Modul tavsifini qo'shish"
         },
-        "tarif": {
+        "tarifi": {
           "title": "Tariflar",
           "btn": "Tarif qo'shish"
         },

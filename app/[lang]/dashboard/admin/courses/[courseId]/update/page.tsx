@@ -12,7 +12,7 @@ const UpdateCourse: FC<{ params: { courseId: string; lang: "uz" | "ru" } }> = ({
         <AddModul courseId={courseId} lang={lang} />
 
         <div className="pb-6 bg-white">
-          <CreateTarif courseId={courseId} />
+          <CreateTarif courseId={courseId} lang={lang} />
         </div>
       </div>
 
