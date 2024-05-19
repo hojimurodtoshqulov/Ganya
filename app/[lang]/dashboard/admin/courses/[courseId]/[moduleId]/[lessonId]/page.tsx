@@ -2,13 +2,13 @@ import { FC } from "react";
 import FormLessonEdit from "./formLessonEdit";
 import toast from "react-hot-toast";
 import { cookies } from "next/headers";
-
+import { getDictionary } from "@/lib/get-dictionary";
 interface Props {
   params: any;
 }
 
+
 const getLesson = async (id: string) => {
-  console.log(id);
 
   const api = process.env.NEXT_PUBLIC_BASE_URL + `/lessons/single/${id}`;
   const accessToken = cookies().get("accessToken")?.value;
@@ -20,13 +20,9 @@ const getLesson = async (id: string) => {
       },
     });
 
-    // const a = await req.json();
-    // console.log(a);
-
-    // if (!req.ok) throw new Error("Failed to fetch");
+    if (!req.ok) throw new Error("Failed to fetch");
 
     const res = await req.json();
-    console.log(res);
 
     return res;
   } catch (error: any) {
@@ -36,12 +32,12 @@ const getLesson = async (id: string) => {
 
 const Page: FC<Props> = async ({ params }): Promise<JSX.Element> => {
   const data = await getLesson(params.lessonId);
-  console.log(data, "ls id");
   const accessToken = cookies().get("accessToken")?.value;
+  const dictionary = await getDictionary(params.lang)
 
   return (
     <div>
-      <FormLessonEdit params={params} data={data} accToken={accessToken} />
+      <FormLessonEdit params={params} data={data} accToken={accessToken} dict={dictionary.dashboard} />
     </div>
   );
 };

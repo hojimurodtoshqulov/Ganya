@@ -120,7 +120,7 @@ const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", 
 
             <div className="mt-5 mx-6 p-6 rounded-2xl bg-white ">
 
-                <h1 className="text-4xl pb-3 text-main-300 font-normal">
+                <h1 className="text-2xl  md:text-4xl pb-3 text-main-300 font-normal">
                     {getLangText(lang, "Profile Tahrirlash", " Редактировать профиль")}
                 </h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -142,11 +142,11 @@ const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", 
                             )}
 
                             <div>
-                                <h3 className="text-3xl font-normal text-[#585D65]">
+                                <h3 className="text-xl md:text-3xl font-normal text-[#585D65]">
                                     {getLangText(lang, "Profile Rasmi", " Фото профиля")}
                                 </h3>
 
-                                <div className="flex py-3 px-5 bg-main-100 items-center rounded-[8px] mt-3 cursor-pointer">
+                                <div className="flex py-1 px-3 md:py-3 md:px-5 bg-main-100 items-center rounded-[8px] mt-3 cursor-pointer">
                                     <label
                                         htmlFor="picture"
                                         className="text-sm text-main-300 ml-1 cursor-pointer"
@@ -158,15 +158,15 @@ const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", 
                             </div>
                         </div>
                         <div >
-                            <div className="mt-5 md:grid grid-cols-2 gap-4 grid-rows-1 items-end">
+                            <div className="mt-5 md:grid grid-cols-2 gap-4 grid-rows-1 items-end space-y-3 md:space-y-0">
                                 <div className="">
-                                    <h3 className="text-3xl font-normal text-[#585D65] mb-4">
+                                    <h3 className="text-xl md:text-3xl font-normal text-[#585D65] mb-2 md:mb-3">
                                         {getLangText(lang, "Assosiy Malumotlar", "Основная информация")}
                                     </h3>
                                     <Input placeholder="Фамилия" {...register('fullName')} defaultValue={defaultValue?.fullname} />
                                 </div>
                                 <div>
-                                    <h3 className="text-3xl font-normal text-[#585D65] mb-4 ">
+                                    <h3 className=" text-xl md:text-3xl font-normal text-[#585D65] mb-2 md:mb-3">
                                         {getLangText(lang, "Kontakt malumotlari", "Контактная информация")}
                                     </h3>
                                     {defaultValue?.phone ? (
@@ -190,7 +190,7 @@ const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", 
                         <Input type="password" {...form.register("password")} placeholder="Password" />
                         <Input type="password" {...form.register('passwordCheck')} placeholder="Password Check" />
                     </div>
-                    <div className="flex justify-end mt-5 ">
+                    <div className="flex justify-end  mt-3 ">
                         <Button type="submit" variant={"main"} disabled={isSubmitting}>
                             {getLangText(lang, "O'zgarishlarni saqlash", "Сохранить изменения")}
                         </Button>
