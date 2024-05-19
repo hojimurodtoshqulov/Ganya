@@ -28,7 +28,7 @@ async function Tariflar({ id, lang }: { id: string, lang:'uz' | 'ru'}) {
   if (data instanceof Error) return <h2>Failed to fetch data.</h2>;
 
   return (
-    <div className="flex gap-6 px-6 flex-col pb-5 justify-center">
+    <div className="flex gap-6 px-5 flex-col justify-center">
       <h2 className="title text-h2  leading-[56px]">{lang==="ru" ? 'Тарифы':'Tariflar'}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 items-center justify-center lg:grid-cols-3 gap-5 md:gap-6">
         {data.map((t, i) => (
