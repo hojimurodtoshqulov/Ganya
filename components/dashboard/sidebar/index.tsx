@@ -1,28 +1,59 @@
 "use client";
 import { Locale } from "@/lib/i18n-config";
-import { LayoutGrid, LogOut, LucideIcon, UserRound, X } from "lucide-react";
+import {
+  LayoutGrid,
+  LogOut,
+  UserRound,
+  X,
+  Newspaper,
+  Image,
+} from "lucide-react";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { FC, memo } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Logo, SidebarButton, SidebarContact } from "../details";
 
-const links = [
-  {
-    icon: LayoutGrid,
-    label: "Обучение",
-    path: "edu",
-  },
-];
+
 
 interface SidebarProps {
   lang: Locale;
   handleClick: () => void;
+  role?: string;
+  dictionary: { label: string, path: string }[]
 }
 
-const SideBar: FC<SidebarProps> = ({ lang, handleClick }): JSX.Element => {
+const SideBar: FC<SidebarProps> = ({
+  lang,
+  handleClick,
+  role = "admin",
+  dictionary
+}): JSX.Element => {
+  const userLinks = [
+    {
+      icon: LayoutGrid,
+      label: lang==="ru" ? "Обучение" : "Ta'lim",
+      path: "edu",
+    },
+  ];
+
+  const adminLinks = [
+    {
+      icon: LayoutGrid,
+      ...dictionary[0]
+    },
+    {
+      icon: Newspaper,
+      ...dictionary[1]
+    },
+    {
+      icon: Image,
+      ...dictionary[2]
+    },
+  ];
   const paths = useSelectedLayoutSegments();
 
+ 
   return (
     <aside className="w-full h-full bg-white flex flex-col justify-between">
       <div className="space-y-9">
@@ -39,11 +70,11 @@ const SideBar: FC<SidebarProps> = ({ lang, handleClick }): JSX.Element => {
         </div>
 
         <nav className="flex flex-col text-base ">
-          {links.slice(0, 2).map((link) => {
+          {(role === "user" ? userLinks : adminLinks).map((link) => {
             const active = paths.includes(link.path);
             return (
               <Link
-                href={`/${lang}/dashboard/client/${link.path}`}
+                href={`/${lang}/dashboard/${role === "user" ? "client" : "admin"}/${link.path}`}
                 key={link.path}
               >
                 <SidebarButton {...link} active={active} />
@@ -53,20 +84,20 @@ const SideBar: FC<SidebarProps> = ({ lang, handleClick }): JSX.Element => {
           <Link href={`/${lang}/dashboard/profile`}>
             <SidebarButton
               icon={UserRound}
-              label="Профиль"
+              label={lang==='ru' ? "Профиль": "Profil"}
               active={paths.includes("profile")}
             />
           </Link>
           <button className="bg-none border-none">
             <SidebarButton
               icon={LogOut}
-              label={"Выйти"}
+              label={lang==="ru" ? "Выйти": "Chiqish"}
               className="text-destructive"
             />
           </button>
         </nav>
       </div>
-      <SidebarContact />
+      <SidebarContact lang={lang} />
     </aside>
   );
 };

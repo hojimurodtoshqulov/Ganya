@@ -1,6 +1,7 @@
 import { Status } from "@/components/dashboard/course-card";
 import { FC } from "react";
 import StatusForm from "./statusForm";
+import { cookies } from "next/headers";
 
 async function getData<T>(id: string): Promise<T | Error> {
   const res = await fetch(
@@ -35,7 +36,7 @@ const StatusChange: FC<{ id: string }> = async ({
       </div>
       <div className="flex items-center gap-5 text-sm">
         <p>Перед тем как опубликовать убедитесь что всё подготовили:</p>
-        <StatusForm id={id} />
+        <StatusForm id={id} accessToken={cookies().get("accessToken")?.value} />
       </div>
     </div>
   );

@@ -8,17 +8,17 @@ const Content: FC<{ params: { lang: 'uz' | 'ru' } }> = ({
 }): JSX.Element => {
   return (
     <div>
-      <h3 className="font-comfortaa font-bold text-[26px] text-main-300">
-        Kontentlar
+      <h3 className="font-comfortaa font-bold text-[26px] text-main-300 capitalize">
+        {lang === "ru" ? "контент" : "Kontent" }
       </h3>
 
       <Tabs defaultValue="banners">
         <TabsList className="mb-3 sm:mb-6">
-          <TabsTrigger value="banners">Bannerlar</TabsTrigger>
-          <TabsTrigger value="fikrlar">Fikrlar</TabsTrigger>
+          <TabsTrigger value="banners">{lang === "ru" ? "Баннеры" : "Bannerlar"}</TabsTrigger>
+          <TabsTrigger value="fikrlar">{lang === "ru" ? "Отзывы" : "Sharhlar"}</TabsTrigger>
         </TabsList>
         <TabsContent value="banners">
-          <Banner />
+          <Banner lang={lang} />
         </TabsContent>
         <TabsContent value="fikrlar">
           <Sharhlar lang={lang} />

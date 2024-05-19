@@ -46,8 +46,8 @@ const ArticlesPage = ({ data, lang }: dataProps): JSX.Element => {
         {filteredData?.map((element: any, i: number) => (
           <Link key={i} href={`/dashboard/admin/articles/${element?.id}`}>
             <CardArticls
-              title={lang === "uz" ? element?.titleRu : element.titleUz}
-              text={lang === "uz" ? element.textRu : element?.textUz}
+              title={lang === "uz" ? element?.titleUz : element.titleRu}
+              text={lang === "uz" ? element.textUz : element?.textRu}
               time={format(new Date(element.updatedAt), "MMMM dd, yyyy")}
               minut={9}
               width

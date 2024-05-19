@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { getAccessToken } from "@/lib/actions/token";
 
 interface Props {
   method?: "POST" | "PATCH";
@@ -21,6 +22,7 @@ interface Props {
     includeSupport: boolean;
     price: number;
   };
+  accessToken?: string;
 }
 
 const schema = z.object({
@@ -28,8 +30,10 @@ const schema = z.object({
   titleRu: z.string().min(1),
   // title: z.string().min(1),
   availablePeriod: z.number().min(1),
-  includeResources: z.boolean().default(false).optional(),
-  includeSupport: z.boolean().default(false).optional(),
+  includeResources: z.any(),
+  includeSupport: z.any(),
+  // includeResources: z.boolean().default(false).optional(),
+  // includeSupport: z.boolean().default(false).optional(),
   price: z.number().min(1),
 });
 
@@ -40,6 +44,7 @@ const CreateTarifForm: React.FC<Props> = ({
   method,
   planId,
   defaultValues,
+  accessToken,
 }) => {
   const {
     register,
@@ -50,28 +55,56 @@ const CreateTarifForm: React.FC<Props> = ({
     formState: { isSubmitting, errors },
   } = useForm<Schema>({
     resolver: zodResolver(schema),
-    defaultValues: defaultValues ?? {},
+    defaultValues:
+      method === "PATCH"
+        ? defaultValues
+        : {
+            titleUz: "",
+            titleRu: "",
+            availablePeriod: 0,
+            includeResources: "off",
+            includeSupport: "off",
+            price: 0,
+          },
   });
 
   const { toast } = useToast();
-  // const [support, setSupport] = useState(false);
-  // const [resources, setResources] = useState(false);
+
   const router = useRouter();
 
-  const onSubmit = async (data: Schema) => {
+  const onSubmit = async (val: Schema) => {
+    console.log(val);
+    const data = {
+      ...val,
+      includeResources: val.includeResources === "on" ? true : false,
+      includeSupport: val.includeSupport === "on" ? true : false,
+    };
+
     console.log(data);
     const api =
       process.env.NEXT_PUBLIC_BASE_URL +
       `/plans/${method === "POST" ? `create/${courseId}` : `update/${planId}`}`;
 
     try {
-      const res = await fetch(api, {
+      let res = await fetch(api, {
         method: method,
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
         },
       });
+      if (res.status === 401) {
+        let json = await getAccessToken();
+        res = await fetch(api, {
+          method: method,
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+          },
+        });
+      }
       if (!res.ok) {
         toast({
           description: "Tarif yaratishda muommo yuzaga keldi",
@@ -106,11 +139,10 @@ const CreateTarifForm: React.FC<Props> = ({
         <Input id="title" placeholder="Title" {...register("title")} />
       </div> */}
       <div className="grid w-full  items-center gap-1.5">
-        <Label htmlFor="titleUz">Title UZ</Label>
+        <Label htmlFor="titleUz">Title</Label>
         <Input id="titleUz" placeholder="Title uz" {...register("titleUz")} />
       </div>
       <div className="grid w-full  items-center gap-1.5">
-        <Label htmlFor="titleRu">Title RU</Label>
         <Input id="titleRu" placeholder="Title ru" {...register("titleRu")} />
       </div>
       <div className="grid w-full  items-center gap-1.5">
@@ -118,7 +150,7 @@ const CreateTarifForm: React.FC<Props> = ({
         <Input
           type="number"
           id="load"
-          defaultValue={defaultValues?.availablePeriod}
+          // defaultValue={defaultValues?.availablePeriod}
           placeholder="Kurs davomiyligi"
           {...register("availablePeriod", {
             setValueAs: (value) => Number(value),
@@ -128,10 +160,10 @@ const CreateTarifForm: React.FC<Props> = ({
       <div className="flex items-center space-x-2">
         <Checkbox
           id="resourses"
-          defaultChecked={getValues().includeResources}
-          onCheckedChange={(e) => setValue("includeResources", !!e)}
+          defaultChecked={defaultValues?.includeResources}
+          onCheckedChange={(e) => setValue("includeResources", e ? "on" : "of")}
           {...register("includeResources", {
-            setValueAs: (value: any) => Boolean(value),
+            // setValueAs: (value: any) => Boolean(value),
           })}
         />
         <label
@@ -144,10 +176,13 @@ const CreateTarifForm: React.FC<Props> = ({
       <div className="flex items-center space-x-2">
         <Checkbox
           id="support"
-          defaultChecked={getValues().includeSupport}
-          onCheckedChange={(e) => setValue("includeSupport", !!e)}
+          defaultChecked={defaultValues?.includeSupport}
+          onCheckedChange={(e) => {
+            console.log(e);
+            setValue("includeSupport", e ? "on" : "off");
+          }}
           {...register("includeSupport", {
-            setValueAs: (value: any) => Boolean(value),
+            // setValueAs: (value: any) => Boolean(value),
           })}
         />
         <label

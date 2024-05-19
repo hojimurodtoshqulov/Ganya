@@ -3,7 +3,7 @@
 import { navlink } from "@/constants";
 import Link from "next/link";
 import { FC, useEffect, useState, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import Image from "next/image";
 import Logo from "@/icons/Logo.svg";
 import { buttonVariants } from "@/components/ui/button";
@@ -16,8 +16,11 @@ interface NavLinkType {
   label: string;
   path: string;
 }
-
-const HomeNavbar: FC = () => {
+interface Lang {
+  lang: "uz" | "ru";
+  dictionary: any;
+}
+const HomeNavbar: FC<Lang> = ({ lang, dictionary }) => {
   const [currentHash, setCurrentHash] = useState("#about");
   const prevHashRef = useRef(currentHash);
   const pathname = usePathname();
@@ -60,7 +63,9 @@ const HomeNavbar: FC = () => {
                     href={`#${element.path}`}
                     className={`text-base leading-6 font-normal px-6 py-3 rounded-3xl ${isActive ? "text-main-300 bg-main-100 hover:bg-main-100" : ""} hover:bg-gray-200`} // Add hover effect
                   >
-                    {element.label}
+                    {lang === "ru"
+                      ? element.label
+                      : dictionary.home.navbar[element.label]}
                   </a>
                 );
               })}
@@ -74,9 +79,9 @@ const HomeNavbar: FC = () => {
             <div>
               <Link
                 className={`${buttonVariants({ variant: "main" })} flex gap-1`}
-                href={`${pathname}/auth/sign-in`}
+                href={`${lang}/auth/sign-in`}
               >
-                Войти
+                {dictionary.home.navbar.login}
                 <ArrowRight />
               </Link>
             </div>

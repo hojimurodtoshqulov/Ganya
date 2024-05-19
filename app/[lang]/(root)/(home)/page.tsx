@@ -15,6 +15,17 @@ import Stati from "@/components/shared/stati/stati";
 import CurseHelp from "@/components/shared/curs-helped";
 import { teamMembers } from "@/constants/team";
 import { getDictionary } from "@/lib/get-dictionary";
+interface Review {
+  id: string;
+  username: string;
+  occupationUz: string;
+  occupationRu: string;
+  textUz: string;
+  textRu: string;
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch(
@@ -49,8 +60,14 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
   }
 }
 
-export default async function Home({ params: { lang } }: { params: { lang: 'ru' | 'uz' } }) {
-  console.log()
+export default async function Home({
+  params: { lang },
+}: {
+  params: { lang: "ru" | "uz" };
+}) {
+  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all");
+  const dataComment = await res.json();
+  const dataComments = dataComment;
   const data = await getData<{
     id: string;
   }>();
@@ -69,14 +86,12 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
     courseStatus: string;
     Module: any[];
   }>(courseId);
-  console.log(course);
 
   if (course instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
   }
 
-  const dcitionary = await getDictionary(lang)
-
+  const dcitionary = await getDictionary(lang);
   return (
     <div>
       <div id="about">
@@ -88,22 +103,22 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
         </div>
       </div>
       <div className="container">
-        <Info {...about} />
+        <Info lang={lang} data={dcitionary.home.abaut} />
       </div>
       <div className="container">
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
       <div className="container">
-        <Info {...about1} sort={true} />
+        <Info sort={true} lang={lang} data={dcitionary.home.Lure} />
       </div>
 
       <div className="mt-20">
-        <CurseHelp />
+        <CurseHelp help={dcitionary.home.help} />
       </div>
       <div className="container">
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
-      <Fits />
+      <Fits fits={dcitionary.home.whocurse} />
 
       <div className="container my-20" id="courses">
         <Accordion type="single" collapsible>
@@ -113,15 +128,15 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
 
       <div className="container mb-16">
         <Carousel
-          title="Отзывы прошлых потоков:"
-          data={[...reviews, ...reviews].map((r, i) => (
-            <ReviewCard key={i} {...r} />
+          title={dcitionary.home.Reviews.title}
+          data={dataComments.map((r: Review, i: number) => (
+            <ReviewCard key={i} review={r} lang={lang} />
           ))}
         />
       </div>
       <div className="container mb-16" id="team">
         <Carousel
-          title="Команда"
+          title={dcitionary.home.team.title}
           data={[...teamMembers, ...teamMembers].map((team, i) => (
             <TeamCard key={i} data={team} />
           ))}
@@ -132,12 +147,19 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
       </div>
 
       <div className="container">
-        <Tariflar id={courseId} />
+        <Tariflar id={courseId} lang={lang} />
       </div>
-      <FAQ />
+      <FAQ
+        title={dcitionary.home.answear.title}
+        cards={dcitionary.home.answear.cards}
+      />
 
       <div id="articles">
-        <Stati container="container" />
+        <Stati
+          container="container"
+          lang={lang}
+          articles={dcitionary.home.articlesHome}
+        />
       </div>
 
       <div id="contacts">
