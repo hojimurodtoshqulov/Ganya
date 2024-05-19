@@ -54,8 +54,9 @@ const AddModul = async ({
   courseId, lang
 }: {
     courseId: string;
-    lang: string
+    lang: "uz" | "ru"
   }): Promise<JSX.Element> => {
+
   const accessToken = cookies().get("accessToken")?.value;
   const response = await getData<Response>(courseId);
   if (response instanceof Error) {
@@ -64,13 +65,13 @@ const AddModul = async ({
   return (
     <div>
       <h1 className="text-[26px] leading-[36px] text-[#5A7A2E] mb-4">
-        {response.titleUz}
+        {lang==="ru" ? response.titleRu: response.titleUz}
       </h1>
       <div className="flex flex-wrap">
         {response.Module.map((data: data, id: number) => (
           <Card key={id} bacData={data} id={id} lang={lang} accessToken={accessToken} />
         ))}
-        <AddCard id={courseId} accessToken={accessToken} />
+        <AddCard id={courseId} accessToken={accessToken} lang={lang} />
       </div>
     </div>
   );

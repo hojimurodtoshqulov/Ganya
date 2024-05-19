@@ -65,6 +65,7 @@ const FormEditArticle: FC<Props> = ({
 
   async function onSubmit(data: Schema) {
     const formData = new FormData();
+
     formData.append("bannerImageWeb", data.imageWeb[0]);
     formData.append("bannerImageMobile", data.imageMobile[0]);
     formData.append("articleImage", data.articleImage[0]);
@@ -75,6 +76,8 @@ const FormEditArticle: FC<Props> = ({
     formData.append("textRu", data.textRu);
     formData.append("textUz", data.textUz);
     formData.append("link", data.link);
+
+    console.log(data, "this is form data");
 
     const api =
       process.env.NEXT_PUBLIC_BASE_URL + `/articles/update/${articleId}`;
@@ -114,10 +117,12 @@ const FormEditArticle: FC<Props> = ({
       );
   };
 
+  // console.log(defaultValues, "this is default value");
+
   return (
     <div>
       <h1
-        className={`${buttonVariants({ variant: "link" })} flex gap-2 items-center`}
+        className={`${buttonVariants({ variant: "link" })} flex gap-2 items-center  cursor-pointer`}
         onClick={() => router.back()}
       >
         <FaChevronLeft className="font-normal" />
@@ -130,11 +135,45 @@ const FormEditArticle: FC<Props> = ({
         <div className="bg-white p-6 rounded-2xl mt-5 space-y-5">
           <div
             className={cn(
+              "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center mb-4",
+              { "border-destructive": errors?.imageMobile },
+            )}
+          >
+            <div className="flex items-center">
+              <div className="rounded-xl flex items-center gap-3 justify-center mr-8">
+                <Image
+                  src={defaultValues?.articleImage}
+                  alt="images"
+                  width={80}
+                  height={80}
+                  className="rounded w-[80px] h-[80px] object-cover"
+                />
+              </div>
+              <div className="flex ml-3 flex-col gap-1">
+                <h2 className="text-2xl font-normal">Обложка</h2>
+                <p className="text-base">
+                  Выберите или перетащите обложку для курса
+                </p>
+              </div>
+            </div>
+            <label className={buttonVariants({ variant: "filled" })}>
+              {articleImage?.name ? "редактировать" : "изменять"}
+
+              <Input
+                type="file"
+                accept="image/*"
+                className="w-0 h-0 opacity-0 hidden"
+                {...register("articleImage", { required: true })}
+              />
+            </label>
+          </div>
+          <div
+            className={cn(
               "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center mt-4 mb-2",
               { "border-destructive": errors.imageWeb || errors.imageMobile },
             )}
           >
-            <div className="flex items-center">
+            <div className="flex items-center gap-3">
               <div className="rounded-xl flex items-center gap-3 justify-center mr-8">
                 <Image
                   src={defaultValues?.imageMobile}
@@ -151,13 +190,11 @@ const FormEditArticle: FC<Props> = ({
                   className="rounded w-[80px] h-[80px] object-cover"
                 />
               </div>
-              <div className="flex ml-3 flex-col gap-1">
-                <h2 className="text-2xl font-normal">Обложка</h2>
-                <p className="text-base">
-                  Выберите или перетащите обложку для курса
-                </p>
+              <div className="text-2xl font-normal flex flex-col ">
+                <h1>Добавить рекламный баннер</h1>
               </div>
             </div>
+
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={"filled"}>
@@ -169,8 +206,11 @@ const FormEditArticle: FC<Props> = ({
               <DialogContent className="max-w-[650px] p-10">
                 <div
                   className={cn(
-                    "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
-                    { "border-destructive": errors?.imageMobile },
+                    "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center mt-4 mb-2",
+                    {
+                      "border-destructive":
+                        errors.imageWeb || errors.imageMobile,
+                    },
                   )}
                 >
                   <div className="flex items-center">
@@ -247,28 +287,6 @@ const FormEditArticle: FC<Props> = ({
               </DialogContent>
             </Dialog>
           </div>
-          <div
-            className={cn(
-              "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center mt-4 mb-2",
-              { "border-destructive": errors.imageWeb || errors.imageMobile },
-            )}
-          >
-            <div className="flex items-center gap-3">
-              <div className="text-2xl font-normal flex flex-col ">
-                <h1>Добавить рекламный баннер</h1>
-              </div>
-            </div>
-            <label className={buttonVariants({ variant: "filled" })}>
-              {articleImage?.name ? "редактировать" : "изменять"}
-
-              <Input
-                type="file"
-                accept="image/*"
-                className="w-0 h-0 opacity-0 hidden"
-                {...register("articleImage", { required: true })}
-              />
-            </label>
-          </div>
           <div className="grid w-full  items-center gap-1.5">
             <Label htmlFor="titleRu">Заголовок</Label>
             <Input
@@ -293,6 +311,15 @@ const FormEditArticle: FC<Props> = ({
             <Input
               type="text"
               id="headlineRu"
+              placeholder="Asosiy paket: Uz"
+              className={cn({ "border-destructive": errors?.headlineUz })}
+              {...register("headlineUz")}
+            />
+          </div>
+          <div className="grid w-full  items-center gap-1.5">
+            <Input
+              type="text"
+              id="headlineRu"
               placeholder="Базовый пакет: Ru"
               className={cn({
                 "border-destructive": errors?.headlineRu?.types,
@@ -300,15 +327,7 @@ const FormEditArticle: FC<Props> = ({
               {...register("headlineRu", { required: true })}
             />
           </div>
-          <div className="grid w-full  items-center gap-1.5">
-            <Input
-              type="text"
-              id="headlineRu"
-              placeholder="Asosiy paket: Uz"
-              className={cn({ "border-destructive": errors?.headlineUz })}
-              {...register("headlineUz")}
-            />
-          </div>
+
           <div className="grid w-full  items-center gap-1.5">
             <Label htmlFor={`textRu`}>Описание</Label>
             <Textarea

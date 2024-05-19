@@ -19,7 +19,7 @@ function CardStatya(props: CardProps) {
           {props.title}
         </h2>
         <p className="text-[22px] leading-[32px] text-csneutral-500">
-          {props.text}
+          {props.text}...
         </p>
       </div>
 

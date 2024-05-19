@@ -15,18 +15,17 @@ import Stati from "@/components/shared/stati/stati";
 import CurseHelp from "@/components/shared/curs-helped";
 import { teamMembers } from "@/constants/team";
 import { getDictionary } from "@/lib/get-dictionary";
-interface Review{
-  id: string,
-  username: string,
-  occupationUz: string,
-  occupationRu: string,
-  textUz: string,
-  textRu: string,
-  isPublished: boolean,
-  createdAt: string,
-  updatedAt: string
+interface Review {
+  id: string;
+  username: string;
+  occupationUz: string;
+  occupationRu: string;
+  textUz: string;
+  textRu: string;
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
-
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch(
@@ -61,11 +60,16 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
   }
 }
 
-export default async function Home({ params: { lang } }: { params: { lang: 'ru' | 'uz' } }) {
-
-  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all")
-  const dataComment = await res.json()
-  const dataComments = dataComment
+export default async function Home({
+  params: { lang },
+}: {
+  params: { lang: "ru" | "uz" };
+}) {
+  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all",
+    { cache: "no-store" }
+);
+  const dataComment = await res.json();
+  const dataComments = dataComment;
   const data = await getData<{
     id: string;
   }>();
@@ -89,50 +93,57 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
     return <h2>Failed to fetch data.</h2>;
   }
 
-  const dcitionary = await getDictionary(lang)
+  const dcitionary = await getDictionary(lang);
   return (
     <div>
       <div id="about">
         <Showcase dict={dcitionary.home} />
       </div>
+
       <div className="container">
-        <div className="my-10 md:my-32 bg-csneutral-100 rounded-2xl md:rounded-[40px] flex items-center justify-center w-full aspect-[3/2] md:aspect-[5/2]">
+        <div className="my-10 md:my-20 bg-csneutral-100 rounded-2xl md:rounded-[40px] flex items-center justify-center w-full aspect-[3/2] md:aspect-[5/2]">
           <Play size={60} fill="#D5D6D8" className="text-csneutral-300" />
         </div>
       </div>
+
       <div className="container">
         <Info lang={lang} data={dcitionary.home.abaut} />
       </div>
+
       <div className="container">
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
+
       <div className="container">
         <Info sort={true} lang={lang} data={dcitionary.home.Lure} />
       </div>
 
-      <div className="mt-20">
+      <div className=" mt-10 md:mt-20">
         <CurseHelp help={dcitionary.home.help} />
       </div>
+
       <div className="container">
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
+
       <Fits fits={dcitionary.home.whocurse} />
 
-      <div className="container my-20" id="courses">
+      <div className="container my-10 md:my-20" id="courses">
         <Accordion type="single" collapsible>
           <CourceCard data={course} lang={lang} />
         </Accordion>
       </div>
 
-      <div className="container mb-16">
+      <div className="container my-10 md:my-20">
         <Carousel
           title={dcitionary.home.Reviews.title}
-          data={dataComments.map((r:Review, i:number) => (
+          data={dataComments.map((r: Review, i: number) => (
             <ReviewCard key={i} review={r} lang={lang} />
           ))}
         />
       </div>
-      <div className="container mb-16" id="team">
+
+      <div className="container my-10 md:my-20" id="team">
         <Carousel
           title={dcitionary.home.team.title}
           data={[...teamMembers, ...teamMembers].map((team, i) => (
@@ -140,17 +151,26 @@ export default async function Home({ params: { lang } }: { params: { lang: 'ru' 
           ))}
         />
       </div>
+
       <div className="container">
         <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
       </div>
 
-      <div className="container">
+      <div className="container my-10 md:my-20">
         <Tariflar id={courseId} lang={lang} />
       </div>
-      <FAQ title={dcitionary.home.answear.title} cards={dcitionary.home.answear.cards} />
+
+      <FAQ
+        title={dcitionary.home.answear.title}
+        cards={dcitionary.home.answear.cards}
+      />
 
       <div id="articles">
-        <Stati container="container" articles={dcitionary.home.articlesHome} />
+        <Stati
+          container="container"
+          lang={lang}
+          articles={dcitionary.home.articlesHome}
+        />
       </div>
 
       <div id="contacts">

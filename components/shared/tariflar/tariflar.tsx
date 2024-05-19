@@ -25,37 +25,15 @@ async function Tariflar({ id, lang }: { id: string, lang:'uz' | 'ru'}) {
     id: string;
   }>(id);
 
-  console.log(data, "<--- home page plans");
-
   if (data instanceof Error) return <h2>Failed to fetch data.</h2>;
 
   return (
-    <div className="flex gap-6 px-6 flex-col pb-5 justify-center">
+    <div className="flex gap-6 px-5 flex-col justify-center">
       <h2 className="title text-h2  leading-[56px]">{lang==="ru" ? 'Тарифы':'Tariflar'}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 items-center justify-center lg:grid-cols-3 gap-5 md:gap-6">
         {data.map((t, i) => (
           <Card values={t} key={t.id} btn pro={i === 1} />
         ))}
-
-        {/* <Card
-          title="Стандартный"
-          price="850.000 UZS"
-          content={[
-            "Доступ ко всем видеоурокам в течение 6 месяцев с момента приобретения курса.",
-            "Дополнительные текстовые материалы.",
-          ]}
-          pro
-        />
-
-        <Card
-          title="Премиум пакет:"
-          price="1 200 000 UZS"
-          content={[
-            "Доступ ко всем видеоурокам в течение 1 года с момента приобретения курса.",
-            "Дополнительные текстовые материалы.",
-            "1 онлайн - консультации со мной.",
-          ]}
-        /> */}
       </div>
     </div>
   );

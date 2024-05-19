@@ -16,7 +16,8 @@ interface data {
 
 const Sharhlar = async ({lang}: {lang:'uz' | 'ru'}): Promise<JSX.Element> => {
       const accessToken = cookies().get("accessToken")?.value;
-      const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all")
+      const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all",
+      { cache: "no-store" })
       const data = await res.json()
 
       return (
