@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 import { Articlsall } from "@/types/auth";
 import CardStatya from "@/components/shared/stati/card-stati";
 import DeteleArticle from "./detelpage";
+import { getDictionary } from "@/lib/get-dictionary";
 
 interface propstype {
   params: {
     articleId: string;
-    lang: string;
+    lang: "uz" | "ru";
   };
 }
 async function getData(articlesId: string) {
@@ -37,5 +38,13 @@ export default async function SingleArticle({
 }: propstype) {
   const detel = await getData(articleId);
   const articlsall = await getDetel();
-  return <DeteleArticle detel={detel} articlsall={articlsall} lang={lang} />;
+  const langue = await getDictionary(lang);
+  return (
+    <DeteleArticle
+      detel={detel}
+      langue={langue}
+      articlsall={articlsall}
+      lang={lang}
+    />
+  );
 }

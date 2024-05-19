@@ -15,44 +15,46 @@ import Link from "next/link";
 import { Logo, SidebarButton, SidebarContact } from "../details";
 import { logout } from "@/lib/actions/user";
 
-const userLinks = [
-  {
-    icon: LayoutGrid,
-    label: "Обучение",
-    path: "edu",
-  },
-];
-const adminLinks = [
-  {
-    icon: LayoutGrid,
-    label: "Курсы",
-    path: "courses",
-  },
-  {
-    icon: Newspaper,
-    label: "Статьи",
-    path: "articles",
-  },
-  {
-    icon: Image,
-    label: "Контент",
-    path: "content",
-  },
-];
+
 
 interface SidebarProps {
   lang: Locale;
   handleClick: () => void;
   role?: string;
+  dictionary: { label: string, path: string }[]
 }
 
 const SideBar: FC<SidebarProps> = ({
   lang,
   handleClick,
   role = "admin",
+  dictionary
 }): JSX.Element => {
+  const userLinks = [
+    {
+      icon: LayoutGrid,
+      label: lang==="ru" ? "Обучение" : "Ta'lim",
+      path: "edu",
+    },
+  ];
+
+  const adminLinks = [
+    {
+      icon: LayoutGrid,
+      ...dictionary[0]
+    },
+    {
+      icon: Newspaper,
+      ...dictionary[1]
+    },
+    {
+      icon: Image,
+      ...dictionary[2]
+    },
+  ];
   const paths = useSelectedLayoutSegments();
 
+ 
   return (
     <aside className="w-full h-full bg-white flex flex-col justify-between">
       <div className="space-y-9">
@@ -83,7 +85,7 @@ const SideBar: FC<SidebarProps> = ({
           <Link href={`/${lang}/dashboard/profile`}>
             <SidebarButton
               icon={UserRound}
-              label="Профиль"
+              label={lang==='ru' ? "Профиль": "Profil"}
               active={paths.includes("profile")}
             />
           </Link>
@@ -95,13 +97,13 @@ const SideBar: FC<SidebarProps> = ({
           >
             <SidebarButton
               icon={LogOut}
-              label={"Выйти"}
+              label={lang==="ru" ? "Выйти": "Chiqish"}
               className="text-destructive"
             />
           </button>
         </nav>
       </div>
-      <SidebarContact />
+      <SidebarContact lang={lang} />
     </aside>
   );
 };

@@ -26,7 +26,7 @@ async function getData<T>(): Promise<T | Error> {
 }
 
 
-const Banner = async () => {
+const Banner = async ({lang}: {lang:"uz" | "ru"}) => {
   const accessToken = cookies().get("accessToken")?.value;
   const banners = await getData<banner[]>();
   if (banners instanceof Error) {
@@ -36,9 +36,9 @@ const Banner = async () => {
   return (
     <div className='bg-neutral-100 flex flex-wrap gap-5'>
       {banners.map((banner, id) => (
-        <BannerCard key={id} banner={banner} id={id} accessToken={accessToken} />
+        <BannerCard key={id} banner={banner} id={id} accessToken={accessToken} lang={lang} />
       ))}
-      <AddBanner accessToken={accessToken}/>
+      <AddBanner accessToken={accessToken} lang={lang} />
     </div>
   )
 }

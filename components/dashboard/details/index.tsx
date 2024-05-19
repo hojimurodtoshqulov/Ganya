@@ -14,7 +14,7 @@ export const Logo: FC = (): JSX.Element => {
   );
 };
 
-export const SidebarContact: FC = (): JSX.Element => {
+export const SidebarContact: FC<{ lang: 'ru' | 'uz' }> = ({lang}): JSX.Element => {
   return (
     <Link
       href={"#"}
@@ -28,8 +28,8 @@ export const SidebarContact: FC = (): JSX.Element => {
         className="flex-shrink-0"
       />
       <div>
-        <h5 className="font-bold text-sm font-comfortaa">Связаться с нами</h5>
-        <p className="text-xs text-csneutral-400">Ответим на все вопросы</p>
+        <h5 className="font-bold text-sm font-comfortaa">{lang === "ru" ? "Связаться с нами" : "Biz bilan bog'lanish" }</h5>
+        <p className="text-xs text-csneutral-400">{lang === "ru" ? "Ответим на все вопросы" : "Biz barcha savollarga javob beramiz"}</p>
       </div>
       <ChevronRight size={20} className="flex-shrink-0" />
     </Link>
