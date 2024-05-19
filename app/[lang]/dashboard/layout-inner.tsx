@@ -1,9 +1,17 @@
 "use client";
 import Header from "@/components/dashboard/header";
 import SideBar from "@/components/dashboard/sidebar";
-import { FC, ReactNode, useCallback, useLayoutEffect, useState } from "react";
+import {
+  FC,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { Locale } from "@/lib/i18n-config";
 import { cn } from "@/lib/utils";
+import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 
 interface Props {
   children: ReactNode;
@@ -14,7 +22,8 @@ const InnerLayout: FC<Props> = ({
   children,
   params: { lang, role },
 }): JSX.Element => {
-  console.log(role);
+  const pathname = useSelectedLayoutSegment();
+
   const [open, setOpen] = useState<boolean>(true);
   const handleClick = useCallback(() => setOpen((p) => !p), []);
   useLayoutEffect(() => {
@@ -22,6 +31,12 @@ const InnerLayout: FC<Props> = ({
       setOpen(false);
     } else setOpen(true);
   }, []);
+
+  useEffect(() => {
+    if (window.innerWidth < 1024 && open) {
+      setOpen(false);
+    }
+  }, [pathname]);
 
   return (
     <div className="flex relative">

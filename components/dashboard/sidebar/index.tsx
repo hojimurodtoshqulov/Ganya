@@ -8,11 +8,12 @@ import {
   Newspaper,
   Image,
 } from "lucide-react";
-import { useSelectedLayoutSegments } from "next/navigation";
+import { useParams, useSelectedLayoutSegments } from "next/navigation";
 import { FC, memo } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Logo, SidebarButton, SidebarContact } from "../details";
+import { logout } from "@/lib/actions/user";
 
 const userLinks = [
   {
@@ -86,7 +87,12 @@ const SideBar: FC<SidebarProps> = ({
               active={paths.includes("profile")}
             />
           </Link>
-          <button className="bg-none border-none">
+          <button
+            className="bg-none border-none"
+            onClick={async () => {
+              await logout(`/${lang}`);
+            }}
+          >
             <SidebarButton
               icon={LogOut}
               label={"Выйти"}
