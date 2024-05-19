@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import React, { useEffect, useState } from 'react'
 import { Switch } from "@/components/ui/switch";
 import Modal from '../modal1';
+import { useRouter } from 'next/navigation';
 interface banner {
     "id": string,
     "createdAt": string,
@@ -23,6 +24,7 @@ interface dictionary {
 const BannerCard = ({ banner, id, accessToken, lang, dictionary }: { banner: banner, id: number, accessToken: string | undefined , lang:'uz' | 'ru', dictionary: dictionary}) => {
     const [isOpen, setIsOpen] = useState(false)
     const [checked, setChecked] = useState(banner.isPublished)
+    const router = useRouter()
     const onClick = () => {
         setIsOpen(!isOpen)
     }
@@ -37,7 +39,8 @@ const BannerCard = ({ banner, id, accessToken, lang, dictionary }: { banner: ban
                 headers: {
                     Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
                 }
-            });
+             });
+            router.refresh()
         }
         updatedChecked()
     }, [checked])
