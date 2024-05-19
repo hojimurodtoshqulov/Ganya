@@ -1,8 +1,16 @@
 'use client'
 import React, { useState } from 'react'
 import Modal from '../modal1'
+interface dictionary {
+    wep: string,
+    mobile: string,
+    text: string,
+    link: string,
+    btn: string,
+    save: string
+}
 
-const AddBanner = ({ accessToken, lang }: { accessToken: string | undefined; lang: "uz" | "ru"}) => {
+const AddBanner = ({ accessToken, lang, dictionary }: { accessToken: string | undefined; lang: "uz" | "ru", dictionary: dictionary}) => {
     const [isOpen, setIsOpen] = useState(false)
     const onClick = () => {
         setIsOpen(!isOpen)
@@ -14,7 +22,7 @@ const AddBanner = ({ accessToken, lang }: { accessToken: string | undefined; lan
                 <p className='text-neutral-500 text-base'>{lang === "ru" ? "Баннер":"Banner"}</p>
                 <p className='text-[22px] leading-[32px] text-neutral-500'> {lang === "ru" ? "Добавить новый слайд" : "Yangi banner qo'shish"}</p>
             </div>
-            <Modal onClick={onClick} isOpen={isOpen} accessToken={accessToken} />
+            <Modal onClick={onClick} isOpen={isOpen} accessToken={accessToken} dictionary={dictionary} />
         </>
 
     )
