@@ -5,10 +5,11 @@ import { getAccessToken } from "@/lib/actions/token";
 import { useRouter } from "next/navigation";
 import { FC, FormEvent } from "react";
 
-const DeleteCourse: FC<{ id: string; accessToken?: string }> = ({
-  id,
-  accessToken,
-}): JSX.Element => {
+const DeleteCourse: FC<{
+  id: string;
+  accessToken?: string;
+  btnText: string;
+}> = ({ id, accessToken, btnText }): JSX.Element => {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -51,7 +52,7 @@ const DeleteCourse: FC<{ id: string; accessToken?: string }> = ({
   return (
     <form className="px-2 w-full" onSubmit={handleSubmit}>
       <button className="text-sm text-destructive bg-none border-none w-full text-left">
-        Удалить
+        {btnText}
       </button>
     </form>
   );

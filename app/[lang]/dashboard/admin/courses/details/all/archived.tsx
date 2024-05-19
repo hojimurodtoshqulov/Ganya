@@ -18,6 +18,7 @@ import AddCourseForm from "../add-course/form";
 import DeleteCourse from "./delete";
 import ArchiveCourse from "./archive";
 import { cookies } from "next/headers";
+import { getDictionary } from "@/lib/get-dictionary";
 
 export interface ICard {
   id: string;
@@ -56,6 +57,7 @@ const ArchivedCourses: FC<{
   if (data.length === 0) {
     return <h2>No data</h2>;
   }
+  const dict = await getDictionary(lang);
 
   return (
     <div className="grid grid-cols-4 gap-6">
@@ -84,17 +86,19 @@ const ArchivedCourses: FC<{
               </DropdownMenuTrigger>
               <DropdownMenuContent className="rounded-xl w-52 text-sm text-csneutral-500">
                 <LinkById href={`${id}/update`} className="px-2 block">
-                  Редактировать
+                  {dict.dashboard.admin.popover.text1}
                 </LinkById>
                 <DropdownMenuSeparator />
 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <p className="px-2 cursor-pointer">Переименовать</p>
+                    <p className="px-2 cursor-pointer">
+                      {dict.dashboard.admin.popover.text2}
+                    </p>
                   </DialogTrigger>
                   <DialogContent className="p-8 !rounded-2xl max-w-[648px]">
                     <DialogHeader className="text-2xl text-main-300 font-medium">
-                      Переименовать
+                      {dict.dashboard.admin.popover.text2}
                     </DialogHeader>
                     <AddCourseForm
                       method="PATCH"
@@ -107,6 +111,7 @@ const ArchivedCourses: FC<{
                         descriptionUz,
                         image,
                       }}
+                      dict={dict.dashboard.admin.curse.createmodal}
                     />
                   </DialogContent>
                 </Dialog>
@@ -116,6 +121,7 @@ const ArchivedCourses: FC<{
                 <DeleteCourse
                   id={id}
                   accessToken={cookies().get("accessToken")?.value}
+                  btnText={dict.dashboard.admin.popover.text5}
                 />
               </DropdownMenuContent>
             </DropdownMenu>

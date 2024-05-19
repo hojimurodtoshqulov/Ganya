@@ -5,9 +5,10 @@ import { getAccessToken } from "@/lib/actions/token";
 import { useRouter } from "next/navigation";
 import { FC, FormEvent } from "react";
 
-const StatusForm: FC<{ id: string; accessToken?: string }> = ({
+const StatusForm: FC<{ id: string; accessToken?: string; btnText: string }> = ({
   id,
   accessToken,
+  btnText,
 }): JSX.Element => {
   const router = useRouter();
   const { toast } = useToast();
@@ -54,7 +55,7 @@ const StatusForm: FC<{ id: string; accessToken?: string }> = ({
   return (
     <form onSubmit={(e) => submit(e)}>
       <Button variant={"main"} size={"sm"} className="text-sm px-6">
-        Опубликовать
+        {btnText}
       </Button>
     </form>
   );

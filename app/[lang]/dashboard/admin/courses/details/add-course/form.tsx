@@ -35,6 +35,7 @@ interface Props {
   };
   id?: string;
   accessToken?: string;
+  dict: any;
 }
 
 const AddCourseForm: FC<Props> = ({
@@ -42,6 +43,7 @@ const AddCourseForm: FC<Props> = ({
   id,
   defaultValues,
   accessToken,
+  dict,
 }): JSX.Element => {
   const router = useRouter();
   const pathname = usePathname();
@@ -120,36 +122,37 @@ const AddCourseForm: FC<Props> = ({
   return (
     <form className="space-y-6 w-full" onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-1">
-        <h6 className="text-sm text-csneutral-400">Kurs nomi</h6>
-        <Input
-          type="text"
-          {...register("titleUz")}
-          placeholder="Title UZ"
-          className={cn({ "border-destructive": inputErrors.titleUz })}
-        />
+        <h6 className="text-sm text-csneutral-400">{dict.text}</h6>
+
         <Input
           {...register("titleRu")}
           type="text"
           name="titleRu"
-          placeholder="Title RU"
+          placeholder={dict.text + " RU"}
           className={cn({ "border-destructive": inputErrors.titleRu })}
+        />
+        <Input
+          type="text"
+          {...register("titleUz")}
+          placeholder={dict.text + " UZ"}
+          className={cn({ "border-destructive": inputErrors.titleUz })}
         />
       </div>
       <div className="space-y-1">
-        <h6 className="text-sm text-csneutral-400">Kurs tarifi</h6>
-        <Input
-          {...register("descriptionUz")}
-          type="text"
-          name="descriptionUz"
-          placeholder="description UZ"
-          className={cn({ "border-destructive": inputErrors.descriptionUz })}
-        />
+        <h6 className="text-sm text-csneutral-400">{dict.desc}</h6>
         <Input
           {...register("descriptionRu")}
           type="text"
           name="descriptionRu"
-          placeholder="description RU"
+          placeholder={dict.desc + " RU"}
           className={cn({ "border-destructive": inputErrors.descriptionRu })}
+        />
+        <Input
+          {...register("descriptionUz")}
+          type="text"
+          name="descriptionUz"
+          placeholder={dict.desc + " UZ"}
+          className={cn({ "border-destructive": inputErrors.descriptionUz })}
         />
       </div>
 
@@ -164,9 +167,9 @@ const AddCourseForm: FC<Props> = ({
         </div>
         <div className="w-full">
           <h3 className="text-xl font-semibold">
-            {isImage ? "Ваша обложка загружено" : "Обложка"}
+            {isImage ? dict.imagetitle : dict.imagetitle}
           </h3>
-          <p className="mt-1">Выберите или перетащите обложку для курса</p>
+          <p className="mt-1">{dict.imagetext}</p>
         </div>
 
         <div
@@ -175,7 +178,7 @@ const AddCourseForm: FC<Props> = ({
             "h-10 font-normal rounded-lg cursor-pointer flex-shrink-0",
           )}
         >
-          {isImage ? "Изменить" : "Выбрать"}
+          {isImage ? dict.btnchange : dict.btn}
         </div>
         <Input
           className="absolute w-0 h-0 -z-50"
@@ -198,7 +201,7 @@ const AddCourseForm: FC<Props> = ({
         className="w-full"
         disabled={isSubmitting}
       >
-        Davom etish
+        {dict.button}
       </Button>
     </form>
   );

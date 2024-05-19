@@ -5,20 +5,22 @@ import { AlignJustify } from "lucide-react";
 import { UserButton } from "../details";
 import LocaleSwitcher from "@/components/shared/locale-switcher";
 
-const sidebarLinks = [
-  {
-    path: "edu",
-    label: "Обучение",
-  },
-  {
-    path: "profile",
-    label: "Профиль",
-  },
-];
 
-const Header: FC<{ handleClick: () => void }> = ({
-  handleClick,
+const Header: FC<{ handleClick: () => void, dictionary: { label: string, path: string }[] }> = ({
+  handleClick, dictionary
 }): JSX.Element => {
+  const sidebarLinks = [
+    {
+      ...dictionary[4]
+      // path: "edu",
+      // label: "Обучение",
+    },
+    {
+      ...dictionary[5]
+      // path: "profile",
+      // label: "Профиль",
+    },
+  ];
   const paths = useSelectedLayoutSegments();
 
   const activePath = sidebarLinks.find((i) => paths.includes(i.path));
