@@ -63,7 +63,7 @@ const InnerLayout: FC<Props> = ({
           <Header handleClick={handleClick} />
         </div>
         <main
-          className={`px-4 pt-3 md:p-6 md:pb-0 ${open ? "max-w-[calc(100vw_-_368px)]" : ""}`}
+          className={`px-4 pt-3 md:p-6 md:pb-0 ${open ? "max-w-[calc(100vw_-_350px)]" : ""}`}
         >
           {children}
         </main>
