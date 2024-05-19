@@ -38,7 +38,7 @@ export default function SubscriptionForm({ dict }: { dict: Awaited<ReturnType<ty
 
   return (
     <div className="container p-8 lg:p-20 rounded-[40px] bg-[#F4F1C6] flex flex-col items-center justify-center">
-      <h1 className="text-h1 lg:leading-[70px] text-center">
+      <h1 className="font-bold text-[32px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa text-center leading-7">
         {dict.contact.text}
       </h1>
 

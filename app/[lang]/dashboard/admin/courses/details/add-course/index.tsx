@@ -7,14 +7,20 @@ import {
 } from "@/components/ui/dialog";
 import { FC } from "react";
 import AddCourseForm from "./form";
+import { getDictionary } from "@/lib/get-dictionary";
 
 interface Props {
   accessToken?: string;
   lang: "uz" | "ru";
-  btn:string
+  btn: string;
 }
 
-const AddNewCourse: FC<Props> = ({ lang, accessToken, btn }): JSX.Element => {
+const AddNewCourse: FC<Props> = async ({
+  lang,
+  accessToken,
+  btn,
+}): Promise<JSX.Element> => {
+  const dict = await getDictionary(lang);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -24,9 +30,13 @@ const AddNewCourse: FC<Props> = ({ lang, accessToken, btn }): JSX.Element => {
       </DialogTrigger>
       <DialogContent className="p-8 !rounded-2xl max-w-[648px]">
         <DialogHeader className="text-2xl text-main-300 font-medium">
-          Yangi kurs qo&apos;shing
+          {dict.dashboard.admin.curse.createmodal.title}
         </DialogHeader>
-        <AddCourseForm method="POST" accessToken={accessToken} />
+        <AddCourseForm
+          method="POST"
+          accessToken={accessToken}
+          dict={dict.dashboard.admin.curse.createmodal}
+        />
       </DialogContent>
     </Dialog>
   );
