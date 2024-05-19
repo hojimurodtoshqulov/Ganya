@@ -1,20 +1,31 @@
 "use client";
 import Header from "@/components/dashboard/header";
 import SideBar from "@/components/dashboard/sidebar";
-import { FC, ReactNode, useCallback, useLayoutEffect, useState } from "react";
+import {
+  FC,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { Locale } from "@/lib/i18n-config";
 import { cn } from "@/lib/utils";
+import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 
 interface Props {
   children: ReactNode;
   params: { lang: Locale; role?: string };
-  dictionary: {label: string, path: string}[]
+  dictionary: { label: string; path: string }[];
 }
 
 const InnerLayout: FC<Props> = ({
   children,
-  params: { lang, role }, dictionary
+  params: { lang, role },
+  dictionary,
 }): JSX.Element => {
+  const pathname = useSelectedLayoutSegment();
+
   const [open, setOpen] = useState<boolean>(true);
   const handleClick = useCallback(() => setOpen((p) => !p), []);
   useLayoutEffect(() => {
@@ -23,6 +34,12 @@ const InnerLayout: FC<Props> = ({
     } else setOpen(true);
   }, []);
 
+  useEffect(() => {
+    if (window.innerWidth < 1024 && open) {
+      setOpen(false);
+    }
+  }, [pathname]);
+
   return (
     <div className="flex relative">
       <div
@@ -30,7 +47,12 @@ const InnerLayout: FC<Props> = ({
           `w-full sm:w-80 h-screen p-5 border-r border-csneutral-200 z-50 fixed bottom-0 top-0 ${open ? "left-0" : "-left-full"} bg-white transition-all animate-out`,
         )}
       >
-        <SideBar lang={lang} handleClick={handleClick} role={role} dictionary={dictionary} />
+        <SideBar
+          lang={lang}
+          handleClick={handleClick}
+          role={role}
+          dictionary={dictionary}
+        />
       </div>
       <div
         className={`transition-all relative animate-out hidden lg:block ${open ? "w-80" : "w-0"}`}
@@ -40,7 +62,11 @@ const InnerLayout: FC<Props> = ({
         <div className="sticky top-0 left-0 w-full z-10">
           <Header handleClick={handleClick} />
         </div>
-        <main className="px-4 pt-3 md:p-6 md:pb-0">{children}</main>
+        <main
+          className={`px-4 pt-3 md:p-6 md:pb-0 ${open ? "max-w-[calc(100vw_-_368px)]" : ""}`}
+        >
+          {children}
+        </main>
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import Loader from "@/components/shared/loader";
+import { getAccessToken } from "@/lib/actions/token";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -30,6 +32,12 @@ const Dashboard = async () => {
       redirect("/dashboard/client/edu");
     }
   }
+
+  return (
+    <div className="w-full h-full min-h-52 flex items-center justify-center">
+      <Loader />
+    </div>
+  );
 };
 
 export default Dashboard;

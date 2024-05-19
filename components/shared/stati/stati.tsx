@@ -28,7 +28,7 @@ async function Stati({
   const getdata = await Getpost();
 
   return (
-    <div className="bg-csneutral-100 py-20 my-16">
+    <div className="bg-csneutral-100 py-10 my-10 md:my-20">
       <div className={`${container}`}>
         <h2 className="title text-h2 leading-[56px] mb-8">{articles.title}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

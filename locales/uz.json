@@ -32,10 +32,7 @@
     "abaut": {
       "title": "Biz haqimizda",
       "text": "'Ongli ota-ona tarbiyasi akademiyasi' platformasi ikki farzandni tarbiyalashda haqiqiy tajribaga ega ona, tadbirkor va ta'sirchan Ganya Usmonova tomonidan yaratilgan. Platformada siz nafaqat shaxsiy tajribadan to'plangan bilim va tajribaga ega bo'lishingiz mumkin. ikki farzandni tarbiyalashda, balki so'nggi ilmiy tadqiqotlarni ham tasdiqladi.",
-      "tags": [
-        "ta'sir qiluvchi",
-        "ishbilarmon ayol"
-      ]
+      "tags": ["ta'sir qiluvchi", "ishbilarmon ayol"]
     },
     "Lure": {
       "title": "'Muammolarsiz qo'shimcha oziqlantirish' kursi",
@@ -201,13 +198,6 @@
       "sucsestitle": "Sizning Sorovingiz qabul qilindi",
       "sucsestext": "Menejerimiz tez orada siz bilan bog'lanadi",
       "sucsesbtn": "Yopish"
-    }
-  },
-  "dashboard": {
-    "saidbar": {
-      "text1": "trening",
-      "text2": "Profil",
-      "text3": "Chiqish"
     },
     "client": {
       "education": "Ta'lim",
@@ -219,8 +209,7 @@
       "backtext": "Homiladorlikka tayyorgarlik"
     },
     "admin": {
-
-    "saidbar": [
+      "saidbar": [
         {
           "label": "Kurslar",
           "path": "courses"
@@ -233,7 +222,7 @@
           "label": "Kontent",
           "path": "content"
         }
-    ],
+      ],
 
       "topbar": {
         "course": "Kurslar",

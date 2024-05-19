@@ -27,3 +27,9 @@ export const getUserData = async () => {
   }
   return user.json();
 };
+
+export const logout = async (e: string) => {
+  cookies().delete("accessToken");
+  cookies().delete("refreshToken");
+  redirect(e);
+};
