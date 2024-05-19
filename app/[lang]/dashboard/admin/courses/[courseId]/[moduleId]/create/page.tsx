@@ -1,19 +1,17 @@
 import { FC } from "react";
 import FormCreateLesson from "./FormCreateLesson";
 import { cookies } from "next/headers";
-
-interface Props {
-  params: any;
-}
+import { getDictionary } from "@/lib/get-dictionary";
 
 
-const CreateLesson: FC<Props> = ({ params }): JSX.Element => {
+
+export default async function CreateLesson({ params }: { params: any }) {
   const accessToken = cookies().get('accessToken')?.value;
-
+  const dictionary = await getDictionary(params.lang);
 
   return (
-    <div><FormCreateLesson params={params} accToken={accessToken} /></div>
-  )
-};
+    <><FormCreateLesson params={params} accToken={accessToken} dict={dictionary.dashboard} /></>
 
-export default CreateLesson;
+  );
+
+}

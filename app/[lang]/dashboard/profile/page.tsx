@@ -29,12 +29,11 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
   const user = await getUser();
   return (
     <div className="w-full">
-      {lang === "ru" ?
-        <Heading text="Профиль" />
-        :
-        <Heading text="Profile" />
-      }
-      <div className="mt-5 mx-6 p-4 md:p-6 rounded-2xl bg-white ">
+      <h1 className="text-2xl md:text-5xl font-bold text-main-300 font-comfortaa">
+        {lang === "ru" ? "Профиль" : "Profile"}
+      </h1>
+
+      <div className="mt-3 md:mt-5 mx-6 p-4 md:p-6 rounded-2xl bg-white ">
         <div className="flex gap-2 md:gap-4 lg:gap-5">
           {user.avatar ? (
             <div className="relative w-20 h-20 rounded-2xl">
@@ -57,7 +56,7 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
               <div className="flex md:py-3 md:px-5 py-1 px-3 bg-main-100 items-center rounded-[8px] mt-1 md:mt-3 cursor-pointer">
                 <HiOutlinePencilSquare />
                 <p className="text-sm text-main-300 ml-1">
-                  {lang === "ru" ? "Редактитровать профиль" : "Tahrirlash"}
+                  {lang === "ru" ? "Редактитровать" : "Tahrirlash"}
                 </p>
               </div>
             </div>
@@ -65,7 +64,7 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
         </div>
         <div>
           <h2 className="text-3xl font-normal text-[#585D65] my-5">
-            {lang === "ru" ? "Основная информация" : "Boshqa malumotlar"}
+            {lang === "ru" ? "Основная информация" : "Asosiy malumotlar"}
           </h2>
           <div className="flex mt-4 items-center sm:flex-row gap-3 sm:gap-0 flex-col">
             <div className="w-full sm:w-[500px]">
@@ -83,7 +82,7 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
