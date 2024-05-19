@@ -253,7 +253,9 @@
           "imagetext": "Kurs qopqog'ini tanlang yoki torting",
           "imagetitle": "Qopqoq",
           "btn": "Tanlash",
-          "tugma": "Davom etish"
+          "btnchange": "O'zgartirish",
+          "button": "Davom etish",
+          "desc": "Kurs tavsifi"
         },
         "changemodal": {
           "plecholder": "Homiladorlikka tayyorgarlik",
