@@ -28,14 +28,14 @@ const getUser = async () => {
 export default async function Profile({ params: { lang } }: { params: { lang: 'ru' | 'uz' } }) {
   const user = await getUser();
   return (
-    <div className="w-full max-w-[calc(100vw_-_368px)]">
+    <div className="w-full">
       {lang === "ru" ?
         <Heading text="Профиль" />
         :
         <Heading text="Profile" />
       }
-      <div className="mt-5 mx-6 p-6 rounded-2xl bg-white ">
-        <div className="flex gap-5">
+      <div className="mt-5 mx-6 p-4 md:p-6 rounded-2xl bg-white ">
+        <div className="flex gap-2 md:gap-4 lg:gap-5">
           {user.avatar ? (
             <div className="relative w-20 h-20 rounded-2xl">
               <Image
@@ -49,12 +49,12 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
             <User2Icon className="w-20 h-20" />
           </div>)
           }
-          <Link href={"/dashboard/profile/edit"}>
+          <Link href={`/${lang}/dashboard/profile/edit`}>
             <div>
               <h3 className="text-3xl font-normal text-[#585D65]">
                 {user.fullname}
               </h3>
-              <div className="flex py-3 px-5 bg-main-100 items-center rounded-[8px] mt-3 cursor-pointer">
+              <div className="flex md:py-3 md:px-5 py-1 px-3 bg-main-100 items-center rounded-[8px] mt-1 md:mt-3 cursor-pointer">
                 <HiOutlinePencilSquare />
                 <p className="text-sm text-main-300 ml-1">
                   {lang === "ru" ? "Редактитровать профиль" : "Tahrirlash"}
