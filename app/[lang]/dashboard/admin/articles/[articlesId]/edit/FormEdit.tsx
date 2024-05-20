@@ -19,11 +19,14 @@ import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { FaChevronLeft } from "react-icons/fa";
+import BackLink from "@/components/dashboard/back-link";
 
 interface Props {
   articleId?: string;
   defaultValues?: any;
   accessToken?: string;
+  langue: any;
+  lang: "uz" | "ru";
 }
 
 const schema = z.object({
@@ -45,6 +48,8 @@ const FormEditArticle: FC<Props> = ({
   articleId,
   defaultValues,
   accessToken,
+  langue,
+  lang,
 }) => {
   const router = useRouter();
   const {
@@ -115,19 +120,11 @@ const FormEditArticle: FC<Props> = ({
       );
   };
 
-  // console.log(defaultValues, "this is default value");
-
   return (
     <div>
-      <h1
-        className={`${buttonVariants({ variant: "link" })} flex gap-2 items-center  cursor-pointer`}
-        onClick={() => router.back()}
-      >
-        <FaChevronLeft className="font-normal" />
-        Orqaga
-      </h1>
+      <BackLink title={langue.dashboard.admin.articels.home.back} />
       <h2 className="text-[24px] leading-[36px] text-main-300">
-        {`(${watch("textUz") ? watch("titleUz") : "Maqola nomi"})`}
+        {`(${watch(lang === "ru" ? "textRu" : "textUz") ? watch(lang === "uz" ? "titleUz" : "titleRu") : `${langue.dashboard.admin.articels.home.defaulttext}`})`}
       </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-white p-6 rounded-2xl mt-5 space-y-5">
@@ -148,14 +145,18 @@ const FormEditArticle: FC<Props> = ({
                 />
               </div>
               <div className="flex ml-3 flex-col gap-1">
-                <h2 className="text-2xl font-normal">Обложка</h2>
+                <h2 className="text-2xl font-normal">
+                  {langue.dashboard.admin.articels.forms.image}
+                </h2>
                 <p className="text-base">
-                  Выберите или перетащите обложку для курса
+                  {langue.dashboard.admin.articels.forms.text}
                 </p>
               </div>
             </div>
             <label className={buttonVariants({ variant: "filled" })}>
-              {articleImage?.name ? "редактировать" : "изменять"}
+              {articleImage?.name
+                ? `${langue.dashboard.admin.articels.forms.btn1}`
+                : `${langue.dashboard.admin.articels.forms.btn}`}
 
               <Input
                 type="file"
@@ -189,16 +190,16 @@ const FormEditArticle: FC<Props> = ({
                 />
               </div>
               <div className="text-2xl font-normal flex flex-col ">
-                <h1>Добавить рекламный баннер</h1>
+                <h1>{langue.dashboard.admin.articels.forms.baner}</h1>
               </div>
             </div>
 
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={"filled"}>
-                  {imageMobile?.name && imageWeb?.name
-                    ? "редактировать"
-                    : "изменять"}
+                  {imageMobile?.name
+                    ? `${langue.dashboard.admin.articels.forms.btn1}`
+                    : `${langue.dashboard.admin.articels.forms.btn}`}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-[650px] p-10">
@@ -216,7 +217,9 @@ const FormEditArticle: FC<Props> = ({
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">Для мобильного</h2>
+                      <h2 className="text-2xl font-normal">
+                        {langue.dashboard.admin.articels.forms.banertel}
+                      </h2>
                       <p className="text-base">
                         {imageMobile
                           ? (imageMobile?.name as string)
@@ -228,7 +231,9 @@ const FormEditArticle: FC<Props> = ({
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file1"
                   >
-                    {imageMobile?.name ? "редактировать" : "изменять"}
+                    {imageMobile?.name
+                      ? `${langue.dashboard.admin.articels.forms.btn1}`
+                      : `${langue.dashboard.admin.articels.forms.btn}`}
                   </label>
                   <Input
                     type="file"
@@ -249,7 +254,9 @@ const FormEditArticle: FC<Props> = ({
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">Для компьютера</h2>
+                      <h2 className="text-2xl font-normal">
+                        {langue.dashboard.admin.articels.forms.banerwep}
+                      </h2>
                       <p className="text-base">
                         {imageWeb
                           ? (imageWeb?.name as string)
@@ -261,7 +268,9 @@ const FormEditArticle: FC<Props> = ({
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file2"
                   >
-                    {imageWeb?.name ? "редактировать" : "изменять"}
+                    {imageWeb?.name
+                      ? `${langue.dashboard.admin.articels.forms.btn1}`
+                      : `${langue.dashboard.admin.articels.forms.btn}`}
                   </label>
                   <Input
                     type="file"
@@ -280,17 +289,21 @@ const FormEditArticle: FC<Props> = ({
                   />
                 </div>
                 <DialogClose asChild>
-                  <Button variant={"main"}>Опубликовать</Button>
+                  <Button variant={"main"}>
+                    {langue.dashboard.admin.articels.forms.sent}
+                  </Button>
                 </DialogClose>
               </DialogContent>
             </Dialog>
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="titleRu">Заголовок</Label>
+            <Label htmlFor="titleRu">
+              {langue.dashboard.admin.articels.forms.heading}
+            </Label>
             <Input
               type="text"
               id="titleRu"
-              placeholder="Базовый пакет: Ru"
+              placeholder={langue.dashboard.admin.articels.forms.plecholder1}
               className={cn({ "border-destructive": errors?.titleRu })}
               {...register("titleRu", { required: true })}
             />
@@ -299,47 +312,55 @@ const FormEditArticle: FC<Props> = ({
             <Input
               type="text"
               id="titleRu"
-              placeholder="Asosiy paket: Uz"
+              placeholder={langue.dashboard.admin.articels.forms.plecholder2}
               className={cn({ "border-destructive": errors?.titleUz })}
               {...register("titleUz", { required: true })}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="headlineRu">Подзаголовок</Label>
+            <Label htmlFor="titleRu">
+              {langue.dashboard.admin.articels.forms.title}
+            </Label>
+
             <Input
               type="text"
               id="headlineRu"
-              placeholder="Asosiy paket: Uz"
+              placeholder={langue.dashboard.admin.articels.forms.plecholder3}
               className={cn({ "border-destructive": errors?.headlineUz })}
-              {...register("headlineUz")}
+              {...register("headlineRu")}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Input
               type="text"
               id="headlineRu"
-              placeholder="Базовый пакет: Ru"
+              placeholder={langue.dashboard.admin.articels.forms.plecholder4}
               className={cn({
                 "border-destructive": errors?.headlineRu?.types,
               })}
-              {...register("headlineRu", { required: true })}
+              {...register("headlineUz", { required: true })}
             />
           </div>
-
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor={`textRu`}>Описание</Label>
+            <Label htmlFor={`textRu`}>
+              {langue.dashboard.admin.articels.forms.desck}
+            </Label>
             <Textarea
               id="textRu"
-              placeholder="Преимущество 1 Ru"
-              className={cn({ "border-destructive": errors?.textRu })}
+              placeholder={langue.dashboard.admin.articels.forms.plecholder5}
+              className={cn(`placeholder:text-csneutral-400`, {
+                "border-destructive": errors?.textRu,
+              })}
               {...register("textRu")}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Textarea
               id="textRu"
-              placeholder="Преимущество 1 Uz"
-              className={cn({ "border-destructive": errors?.textUz })}
+              placeholder={langue.dashboard.admin.articels.forms.plecholder6}
+              className={cn(`placeholder:text-csneutral-400`, {
+                "border-destructive": errors?.textUz,
+              })}
               {...register("textUz")}
             />
           </div>
@@ -351,10 +372,10 @@ const FormEditArticle: FC<Props> = ({
               variant={"main"}
               className="bg-red-500 hover:bg-red-400 transition-colors"
             >
-              {"O'chirish"}
-            </Button>{" "}
+              {langue.dashboard.admin.articels.forms.delete}
+            </Button>
             <Button disabled={isSubmitting} type="submit" variant={"main"}>
-              Nashr qilish
+              {langue.dashboard.admin.articels.forms.sent}
             </Button>
           </div>
         </div>

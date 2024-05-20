@@ -1,13 +1,11 @@
-import { buttonVariants } from "@/components/ui/button";
-import { FaSquarePen } from "react-icons/fa6";
-import Link from "next/link";
-import { FaChevronLeft } from "react-icons/fa";
 import DetelCard from "./detelpage";
+import BackLink from "@/components/dashboard/back-link";
+import { getDictionary } from "@/lib/get-dictionary";
 
 interface propstype {
   params: {
     articlesId: string;
-    lang: string;
+    lang: "uz" | "ru";
   };
 }
 
@@ -26,18 +24,11 @@ export default async function DetelPage({
   params: { lang, articlesId },
 }: propstype) {
   const data = await getData(articlesId);
-
-  console.log(lang, "uzb");
+  const langue = await getDictionary(lang);
 
   return (
     <div>
-      <Link
-        href={"/dashboard/admin/articles/"}
-        className={`${buttonVariants({ variant: "link" })} flex gap-2 items-center`}
-      >
-        <FaChevronLeft className="font-normal" />
-        Orqaga
-      </Link>
+      <BackLink title={langue.dashboard.admin.articels.home.back} />
       <DetelCard data={data} lang={lang} articlesId={articlesId} />
     </div>
   );

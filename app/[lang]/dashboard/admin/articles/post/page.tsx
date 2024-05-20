@@ -1,15 +1,19 @@
 import { cookies } from "next/headers";
 import FormPostArticle from "./formPost";
+import { getDictionary } from "@/lib/get-dictionary";
 
-interface PageProps {}
+interface PageProps {
+  params: {
+    lang: "uz" | "ru";
+  };
+}
 
-const Page: React.FC<PageProps> = ({}) => {
+export default async function Page({ params: { lang } }: PageProps) {
   const accessToken = cookies().get("accessToken")?.value;
+  const langue = await getDictionary(lang);
   return (
     <>
-      <FormPostArticle accessToken={accessToken} />
+      <FormPostArticle lang={lang} langue={langue} accessToken={accessToken} />
     </>
   );
-};
-
-export default Page;
+}
