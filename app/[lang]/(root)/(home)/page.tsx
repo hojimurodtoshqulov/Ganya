@@ -15,6 +15,7 @@ import Stati from "@/components/shared/stati/stati";
 import CurseHelp from "@/components/shared/curs-helped";
 import { teamMembers } from "@/constants/team";
 import { getDictionary } from "@/lib/get-dictionary";
+import MainVideo from "@/components/shared/main-video";
 interface Review {
   id: string;
   username: string;
@@ -101,9 +102,7 @@ export default async function Home({
       </div>
 
       <div className="container">
-        <div className="my-10 md:my-20 bg-csneutral-100 rounded-2xl md:rounded-[40px] flex items-center justify-center w-full aspect-[3/2] md:aspect-[5/2]">
-          <Play size={60} fill="#D5D6D8" className="text-csneutral-300" />
-        </div>
+        <MainVideo />
       </div>
 
       <div className="container">
