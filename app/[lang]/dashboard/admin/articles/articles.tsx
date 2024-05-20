@@ -13,16 +13,15 @@ import { format } from "date-fns";
 interface dataProps {
   lang: string;
   data?: any;
+  langue: any;
 }
 
-const ArticlesPage = ({ data, lang }: dataProps): JSX.Element => {
+const ArticlesPage = ({ data, lang, langue }: dataProps): JSX.Element => {
   const [searchText, setSearchText] = useState<string>("");
 
   const filteredData = data?.filter((element: Articlsall) =>
     element.titleUz?.toLowerCase().includes(searchText.toLowerCase()),
   );
-
-  console.log(data, "this is data");
 
   return (
     <div>
@@ -31,7 +30,7 @@ const ArticlesPage = ({ data, lang }: dataProps): JSX.Element => {
           <Search className="absolute top-[10px] left-2" />
           <Input
             onChange={(e) => setSearchText(e.target.value)}
-            placeholder="Поиск статьей"
+            placeholder={langue.dashboard.admin.articels?.home?.search}
             className="w-full pl-[35px]"
           />
         </div>
@@ -39,7 +38,7 @@ const ArticlesPage = ({ data, lang }: dataProps): JSX.Element => {
           className={buttonVariants({ variant: "main" })}
           href={"/dashboard/admin/articles/post"}
         >
-          {"Yangi maqola qo'shing"}
+          {langue.dashboard.admin.articels?.home?.text}
         </Link>
       </div>
       <div className="grid lg:grid-cols-4 gap-6 mt-10 md:grid-cols-2 grid-cols-1">

@@ -65,9 +65,9 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all",
-    { cache: "no-store" }
-);
+  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all", {
+    cache: "no-store",
+  });
   const dataComment = await res.json();
   const dataComments = dataComment;
   const data = await getData<{

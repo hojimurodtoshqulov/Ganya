@@ -1,3 +1,4 @@
+import { getDictionary } from "@/lib/get-dictionary";
 import ArticlesPage from "./articles";
 
 async function getData<T>(): Promise<T[] | Error> {
@@ -10,7 +11,14 @@ async function getData<T>(): Promise<T[] | Error> {
   return res.json();
 }
 
-export default async function Articles({ params: { lang } }: any) {
+interface propstype {
+  params: {
+    lang: "uz" | "ru";
+  };
+}
+
+export default async function Articles({ params: { lang } }: propstype) {
   const data = await getData();
-  return <ArticlesPage data={data} lang={lang} />;
+  const langue = await getDictionary(lang);
+  return <ArticlesPage data={data} lang={lang} langue={langue} />;
 }

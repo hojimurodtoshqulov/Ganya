@@ -26,6 +26,7 @@
     "cookies-next": "^4.1.1",
     "date-and-time": "^3.2.0",
     "date-fns": "^3.6.0",
+    "flag-icons": "^7.2.1",
     "input-otp": "^1.2.4",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.366.0",

@@ -4,15 +4,15 @@ import userImage2 from "@/images/about2.png";
 
 interface InfoProps {
   data: {
-    title: string,
-    text: string,
-    tags?: string[]
-  }
+    title: string;
+    text: string;
+    tags?: string[];
+  };
   sort?: boolean;
   lang: "uz" | "ru";
 }
 
-async function Info(props: InfoProps){
+async function Info(props: InfoProps) {
   return (
     <>
       <div
@@ -22,7 +22,7 @@ async function Info(props: InfoProps){
           <div className="flex flex-col gap-2 md:gap-4">
             <h2 className="text-h2">{props.data.title}</h2>
             <p className="text-base md:text-[22px] md:leading-8 text-main-200 font-roboto">
-              {props.data.text }
+              {props.data.text}
             </p>
           </div>
           {props.data.tags && (
