@@ -40,10 +40,10 @@ export default function DeteleArticle({
         <div className="flex lg:flex-row flex-col-reverse  justify-between container w-full gap-6">
           <div className="bg-csneutral-100 w-full p-10 rounded-[40px]">
             <Heading text={lang === "ru" ? detel?.titleRu : detel.titleUz} />
-            <h2 className="font-normal  text-[26px] md:text-[32px] leading-[44px] mb-4 font-comfortaa mt-8">
+            <h2 className="font-normal  text-[20px] md:text-[32px] leading-[44px] mb-4 font-comfortaa mt-8">
               {lang === "ru" ? detel.headlineRu : detel.headlineUz}
             </h2>
-            <p className="font-normal w-full text-2xl text-[#585D65]">
+            <p className="font-normal w-full text-1xl md:text-2xl text-[#585D65]">
               {lang === "ru" ? detel?.textRu : detel.textUz}
             </p>
           </div>
