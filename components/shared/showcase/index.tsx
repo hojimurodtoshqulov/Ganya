@@ -11,14 +11,14 @@ export default function Showcase({
 }) {
   return (
     <div className="w-full h-screen showcase-image bg-[#A9C26A]">
-      <div className="container pt-64 pb-6 md:pb-16">
+      <div className="container pt-28 pb-6 md:pb-16">
         <div className="w-1/2">
           <h1 className="font-bold md:text-[67px] font-comfortaa text-[40px] md:leading-[100px] leading-[48px] text-white">
             {dict.showcase.title}
           </h1>
 
           <FormModal dict={dict} />
-          <div className="md:mt-32 mt-[200px] mb-[30px]">
+          <div className="md:mt-32 mt-[300px] mb-[30px]">
             <Media />
           </div>
         </div>
