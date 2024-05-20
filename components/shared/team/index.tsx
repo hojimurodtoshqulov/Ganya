@@ -12,7 +12,7 @@ const TeamCard = ({data:{image,job,name}}:{data:typeof teamMembers[0]}) => {
         height={320}
         className="bg-main-100 md:rounded-3xl rounded-xl"
       />
-      <h3 className="font-bold text-2xl md:text-3xl mt-5 font-comfortaa text-csneutral-600">
+      <h3 className="font-bold text-2xl  mt-5 font-comfortaa text-csneutral-600">
         {name}
       </h3>
       <p className="text-base md:text-[22px]">{job}</p>
