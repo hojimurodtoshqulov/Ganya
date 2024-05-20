@@ -29,7 +29,7 @@ export default function LocaleSwitcher() {
       <DropdownMenuTrigger>
         <Image src={Globo} width={20} height={20} alt="lang icon" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="">
+      <DropdownMenuContent className="min-w-[50px] flex flex-col gap-2 relative top-2">
         {i18n.locales.map((locale) => (
           <DropdownMenuItem className="cursor-pointer p-0" key={locale}>
             <Link
