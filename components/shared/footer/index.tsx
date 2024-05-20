@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "/public/icons/Logo.svg";
+import Logo from "/public/icons/Logo2.svg";
 import { FC } from "react";
 import Media from "../media";
 

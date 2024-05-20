@@ -18,7 +18,7 @@ export default function Showcase({
           </h1>
 
           <FormModal dict={dict} />
-          <div className="md:mt-32 mt-[400px] mb-[30px]">
+          <div className="md:mt-32 mt-[200px] mb-[30px]">
             <Media />
           </div>
         </div>

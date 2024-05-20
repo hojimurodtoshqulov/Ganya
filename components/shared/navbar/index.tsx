@@ -98,7 +98,7 @@ const HomeNavbar: FC<Lang> = ({ lang, dictionary }) => {
             <div>
               <Link
                 className={`${buttonVariants({ variant: "main" })} flex gap-1`}
-                href={`${lang}/auth/sign-in`}
+                href={`/auth/sign-in`}
               >
                 {dictionary.home.navbar.login}
                 <ArrowRight />
