@@ -9,7 +9,7 @@
       "login": "Kirish"
     },
     "showcase": {
-      "title": "Ongli Onalik Akademiyasi",
+      "title": "Mehribon Onalar Akademiyasi",
       "showcasModul": {
         "btn": "Ariza Qoldirish",
         "title": "Ariza Qoldirish",
@@ -346,19 +346,33 @@
         "home": {
           "search": "Maqolalar qidirish",
           "text": "Yangi maqola qo'shish",
-          "title": "Aloqador maqolalar"
+          "title": "Aloqador maqolalar",
+          "back": "Orqaga",
+          "defaulttext": "Maqola nomi"
         },
         "forms": {
-          "image": "Qopqoq",
-          "text": "Kurs uchun qopqoqni tanlang yoki torting",
-          "btn": "Tanlash",
-          "heading": "sarlavha",
+          "image": "Muqova",
+          "text": "Kurs uchun muqova tanlang yoki torting",
+          "btn": "o'zgartirish",
+          "btn1": "tahrirlash",
+          "btn2": "Tanlash",
+          "banertel": "Mobil uchun",
+          "banerwep": "Kompyuter uchun",
+          "heading": "Sarlavha",
+          "plecholder1": "Maqola sarlavhasini kiriting: Ru",
+          "plecholder2": "Maqola sarlavhasini kiriting: Uz",
+          "plecholder3": "Maqola taglavhasini kiriting: Ru",
+          "plecholder4": "Maqola taglavhasini kiriting: Uz",
+          "plecholder5": "Maqola tavsifini kiriting: Ru",
+          "plecholder6": "Maqola tavsifini kiriting: Uz",
+
           "title": "Subtitr",
           "desck": "Ta'rif",
           "baner": "Reklama bannerini qo'shish",
           "banerbtn": "Qo'shish",
           "save": "Ko'rib chiqish",
-          "sent": "Nashr qilish"
+          "sent": "Nashr qilish",
+          "delete": "O'chirish"
         },
         "modal": {
           "wep": "Kompyuter uchun",

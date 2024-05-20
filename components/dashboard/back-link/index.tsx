@@ -5,7 +5,7 @@ import { FC } from "react";
 
 interface Props {
   title: string;
-  heading: string;
+  heading?: string;
 }
 
 const BackLink: FC<Props> = ({ title, heading }): JSX.Element => {

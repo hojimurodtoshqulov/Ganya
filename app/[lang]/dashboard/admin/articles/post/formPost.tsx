@@ -18,9 +18,12 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import { FaChevronLeft } from "react-icons/fa";
+import BackLink from "@/components/dashboard/back-link";
 
 interface Props {
   accessToken?: string;
+  lang: "uz" | "ru";
+  langue: any;
 }
 
 const schema = z.object({
@@ -38,7 +41,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const FormPostArticle: FC<Props> = ({ accessToken }) => {
+const FormPostArticle: FC<Props> = ({ accessToken, lang, langue }) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -92,15 +95,9 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
   }
   return (
     <div>
-      <h1
-        className={`${buttonVariants({ variant: "link" })} flex gap-2 items-center cursor-pointer`}
-        onClick={() => router.back()}
-      >
-        <FaChevronLeft className="font-normal" />
-        Orqaga
-      </h1>
+      <BackLink title={langue.dashboard.admin.articels.home.back} />
       <h2 className="text-[24px] leading-[36px] text-main-300">
-        {`(${watch("textUz") ? watch("titleUz") : "Maqola nomi"})`}
+        {`(${watch(lang === "ru" ? "textRu" : "textUz") ? watch(lang === "uz" ? "titleUz" : "titleRu") : `${langue.dashboard.admin.articels.home.defaulttext}`})`}
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="bg-white p-6 rounded-2xl mt-5 space-y-5">
@@ -116,15 +113,19 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
                   <ImageIcon />
                 </div>
                 <div className="flex ml-3 flex-col gap-1">
-                  <h2 className="text-2xl font-normal">Обложка</h2>
+                  <h2 className="text-2xl font-normal">
+                    {langue.dashboard.admin.articels.forms.image}
+                  </h2>
                   <p className="text-base">
-                    Выберите или перетащите обложку для курса
+                    {langue.dashboard.admin.articels.forms.text}
                   </p>
                 </div>
               </div>
             </div>
             <label className={buttonVariants({ variant: "filled" })}>
-              {articleImage?.name ? "редактировать" : "Добавить"}
+              {articleImage?.name
+                ? `${langue.dashboard.admin.articels.forms.btn1}`
+                : `${langue.dashboard.admin.articels.forms.btn}`}
               <Input
                 type="file"
                 accept="image/*"
@@ -146,9 +147,9 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={"filled"}>
-                  {imageMobile?.name && imageWeb?.name
-                    ? "редактировать"
-                    : "Выбрать"}
+                  {imageMobile?.name
+                    ? `${langue.dashboard.admin.articels.forms.btn1}`
+                    : `${langue.dashboard.admin.articels.forms.btn}`}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-[650px] p-10">
@@ -163,7 +164,9 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">Для мобильного</h2>
+                      <h2 className="text-2xl font-normal">
+                        {langue.dashboard.admin.articels.forms.banertel}
+                      </h2>
                       <p className="text-base">
                         {imageMobile
                           ? (imageMobile?.name as string)
@@ -175,7 +178,9 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file1"
                   >
-                    {imageMobile?.name ? "редактировать" : "Выбрать"}
+                    {imageMobile?.name
+                      ? `${langue.dashboard.admin.articels.forms.btn1}`
+                      : `${langue.dashboard.admin.articels.forms.btn}`}
                   </label>
                   <Input
                     type="file"
@@ -196,7 +201,9 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
                       <ImageIcon />
                     </div>
                     <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">Для компьютера</h2>
+                      <h2 className="text-2xl font-normal">
+                        {langue.dashboard.admin.articels.forms.banerwep}
+                      </h2>
                       <p className="text-base">
                         {imageWeb
                           ? (imageWeb?.name as string)
@@ -208,7 +215,9 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
                     className={buttonVariants({ variant: "filled" })}
                     htmlFor="file2"
                   >
-                    {imageWeb?.name ? "редактировать" : "Выбрать"}
+                    {imageWeb?.name
+                      ? `${langue.dashboard.admin.articels.forms.btn1}`
+                      : `${langue.dashboard.admin.articels.forms.btn}`}
                   </label>
                   <Input
                     type="file"
@@ -227,18 +236,22 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
                   />
                 </div>
                 <DialogClose asChild>
-                  <Button variant={"main"}>Опубликовать</Button>
+                  <Button variant={"main"}>
+                    {langue.dashboard.admin.articels.forms.sent}
+                  </Button>
                 </DialogClose>
               </DialogContent>
             </Dialog>
           </div>
 
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="titleRu">Заголовок</Label>
+            <Label htmlFor="titleRu">
+              {langue.dashboard.admin.articels.forms.heading}
+            </Label>
             <Input
               type="text"
               id="titleRu"
-              placeholder="Базовый пакет: Ru"
+              placeholder={langue.dashboard.admin.articels.forms.plecholder1}
               className={cn({ "border-destructive": errors?.titleRu })}
               {...register("titleRu", { required: true })}
             />
@@ -247,55 +260,64 @@ const FormPostArticle: FC<Props> = ({ accessToken }) => {
             <Input
               type="text"
               id="titleRu"
-              placeholder="Asosiy paket: Uz"
+              placeholder={langue.dashboard.admin.articels.forms.plecholder2}
               className={cn({ "border-destructive": errors?.titleUz })}
               {...register("titleUz", { required: true })}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="headlineUz">Подзаголовок</Label>
+            <Label htmlFor="titleRu">
+              {langue.dashboard.admin.articels.forms.title}
+            </Label>
+
             <Input
               type="text"
               id="headlineUz"
-              placeholder="Asosiy paket: Ru"
+              placeholder={langue.dashboard.admin.articels.forms.plecholder3}
               className={cn({
                 "border-destructive": errors?.headlineUz,
-              })}
-              {...register("headlineUz")}
-            />
-          </div>
-          <div className="grid w-full  items-center gap-1.5">
-            <Input
-              type="text"
-              id="headlineUz"
-              placeholder="Базовый пакет: Uz"
-              className={cn({
-                "border-destructive": errors?.headlineRu,
               })}
               {...register("headlineRu")}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor={`textRu`}>Описание</Label>
+            <Input
+              type="text"
+              id="headlineUz"
+              placeholder={langue.dashboard.admin.articels.forms.plecholder4}
+              className={cn({
+                "border-destructive": errors?.headlineRu,
+              })}
+              {...register("headlineUz")}
+            />
+          </div>
+          <div className="grid w-full  items-center gap-1.5">
+            <Label htmlFor={`textRu`}>
+              {langue.dashboard.admin.articels.forms.desck}
+            </Label>
             <Textarea
               id="textRu"
-              placeholder="Преимущество 1 Ru"
-              className={cn({ "border-destructive": errors?.textRu })}
+              placeholder={langue.dashboard.admin.articels.forms.plecholder5}
+              className={cn(`placeholder:text-csneutral-400`, {
+                "border-destructive": errors?.textRu,
+              })}
               {...register("textRu")}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Textarea
               id="textRu"
-              placeholder="Преимущество 1 Uz"
-              className={cn({ "border-destructive": errors?.textUz })}
+              placeholder={langue.dashboard.admin.articels.forms.plecholder6}
+              className={cn(`placeholder:text-csneutral-400`, {
+                "border-destructive": errors?.textUz,
+              })}
               {...register("textUz")}
             />
           </div>
 
           <div className="flex sm:justify-end mt-5 justify-center">
             <Button disabled={isSubmitting} type="submit" variant={"main"}>
-              Nashr qilish
+              {langue.dashboard.admin.articels.forms.sent}
             </Button>
           </div>
         </div>

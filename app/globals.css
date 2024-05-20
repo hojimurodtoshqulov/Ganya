@@ -66,6 +66,10 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 0;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -91,9 +95,9 @@
   max-width: 1400px;
 }
 @media screen and (max-width: 900px) {
-.about{
-  margin-bottom:-80px;
-}
+  .about {
+    margin-bottom: -80px;
+  }
 }
 /* .card:hover .card-title {
   color: #f4f1c6;

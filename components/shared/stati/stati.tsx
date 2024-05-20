@@ -36,7 +36,7 @@ async function Stati({
             <Link key={article.id} href={`/articles/${article.id}`}>
               <CardStatya
                 key={article.id}
-                title={lang === "ru" ? article.headlineRu : article.headlineUz}
+                title={lang === "ru" ? article.titleRu : article.titleUz}
                 text={lang === "uz" ? article.textUz : article.textRu}
                 time={format(new Date(article.updatedAt), "MMMM dd, yyyy")}
               />
