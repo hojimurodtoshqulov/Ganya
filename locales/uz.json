@@ -233,7 +233,7 @@
       "topbar": {
         "course": "Kurslar",
         "text1": "Barcha kurslar",
-        "text2": "ishlab chiqilmoqda",
+        "text2": "Ishlab chiqilmoqda",
         "text3": "Arxivda",
         "btn": "Yangi kurs qo'shish"
       },
@@ -273,7 +273,7 @@
           "title": "modul qo'shish",
           "addtext": "Modul tavsifini qo'shish"
         },
-        "tarif": {
+        "tarifi": {
           "title": "Tariflar",
           "btn": "Tarif qo'shish"
         },
@@ -320,6 +320,26 @@
         "tost": {
           "title": "Dars muvaffaqiyatli saqlandi",
           "text": "'1-dars: Kirish' video darsidagi barcha ma'lumotlar muvaffaqiyatli saqlandi"
+        }
+      },
+      "createLesson": {
+        "videoLable": "Video Tanlash",
+        "videoDescription": "Videoni tanlang yoki torting",
+        "title": "Sarlavha",
+        "title1": "Tavsif",
+        "placeholder": "Dars uchun tavsif qo'shing",
+        "btnSave": "Saqlash",
+        "btnSelect": "Tanlash",
+        "btnEdit": "O'zgartirish",
+        "btnDelete": "O'chirish",
+        "toast": {
+          "save": "Video darsdagi barcha ma'lumotlar muvaffaqiyatli saqlandi",
+          "update": "Dars muvaffaqiyatli yangilandi",
+          "delete": "muvaffaqiyatli o'chirildi",
+          "updateError": "Darsni yangilab bo‘lmadi.",
+          "createError": "Yangi dars. Yuklashda muammo.",
+          "videoError": "Iltimos vide tanlang",
+          "deleteError": "Darsni o'chirishda muammo yuzaga keldi"
         }
       },
       "articels": {

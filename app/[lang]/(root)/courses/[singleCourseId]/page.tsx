@@ -5,66 +5,66 @@ import { Accordion } from "@/components/shared/cource-card/accordian-card";
 import { FC } from "react";
 
 async function getCourse<T>(id: string): Promise<T | Error> {
-    const res = await fetch(
-        process.env.NEXT_PUBLIC_BASE_URL + "/courses/single/" + id,
-        {
-            cache: "no-store",
-        },
-    );
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/courses/single/" + id,
+    {
+      cache: "no-store",
+    },
+  );
 
-    if (!res.ok) {
-        return new Error("Failed to fetch data");
-    }
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
 
-    return res.json();
+  return res.json();
 }
 async function getPlans<T>(id: string): Promise<T[] | Error> {
-    const res = await fetch(
-        process.env.NEXT_PUBLIC_BASE_URL + "/plans/all/" + id,
-        {
-            cache: "no-store",
-        },
-    );
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/plans/all/" + id,
+    {
+      cache: "no-store",
+    },
+  );
 
-    if (!res.ok) {
-        return new Error("Failed to fetch data");
-    }
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
 
-    return res.json();
+  return res.json();
 }
 const SingleCourse: FC<{
-    params: { singleCourseId: string; lang: string };
+  params: { singleCourseId: string; lang: "uz" | "ru" };
 }> = async ({ params: { singleCourseId, lang } }): Promise<JSX.Element> => {
-    const course = await getCourse(singleCourseId);
-    const plans = await getPlans<{
-        availablePeriod: number;
-        includeResources: boolean;
-        includeSupport: boolean;
-        price: number;
-        titleUz: string;
-        titleRu: string;
-        id: string;
-    }>(singleCourseId);
+  const course = await getCourse(singleCourseId);
+  const plans = await getPlans<{
+    availablePeriod: number;
+    includeResources: boolean;
+    includeSupport: boolean;
+    price: number;
+    titleUz: string;
+    titleRu: string;
+    id: string;
+  }>(singleCourseId);
 
-    if (course instanceof Error || plans instanceof Error)
-        return <h2>Failed to fetch course data.</h2>;
-    return (
-        <div className="p-8">
+  if (course instanceof Error || plans instanceof Error)
+    return <h2>Failed to fetch course data.</h2>;
+  return (
+    <div className="p-8">
+      <Accordion type="single" collapsible>
+        <CourceCard data={course} lang={lang} />
+      </Accordion>
 
-            <Accordion type="single" collapsible>
-                <CourceCard data={course} lang={lang} />
-            </Accordion>
-
-
-            <div className="bg-white rounded-2xl pt-6 mt-10">
-                <h2 className="text-main-300 text-2xl font-medium mb-5">Тарифы</h2>
-                <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-5">
-                    {plans?.map((plan: any) => (
-                        <PlanCard key={plan.id} values={plan} small />
-                    ))}
-                </div>
-            </div>
+      <div className="bg-white rounded-2xl pt-6 mt-10">
+        <h2 className="text-main-300 text-2xl md:text-4xl font-medium mb-5">
+          {lang === "ru" ? "Тарифы" : "Tariflar"}
+        </h2>
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-5">
+          {plans?.map((plan: any) => (
+            <PlanCard key={plan.id} values={plan} lang={lang} btn />
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 export default SingleCourse;

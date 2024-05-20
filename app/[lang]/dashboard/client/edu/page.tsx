@@ -28,7 +28,7 @@ const ClientEdu: FC<Props> = async ({
         <MyCourses />
       </TabsContent>
       <TabsContent value="all-courses">
-        <AllCourses />
+        <AllCourses lang={lang} />
       </TabsContent>
     </Tabs>
   );

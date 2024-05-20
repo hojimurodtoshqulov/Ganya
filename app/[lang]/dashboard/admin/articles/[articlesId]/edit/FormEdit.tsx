@@ -82,8 +82,6 @@ const FormEditArticle: FC<Props> = ({
     formData.append("textUz", data.textUz);
     formData.append("link", data.link);
 
-    console.log(data, "this is form data");
-
     const api =
       process.env.NEXT_PUBLIC_BASE_URL + `/articles/update/${articleId}`;
 

@@ -28,7 +28,9 @@ async function getData<T>(): Promise<T[] | Error> {
 
   return res.json();
 }
-const AllCourses: FC = async (): Promise<JSX.Element> => {
+const AllCourses: FC<{ lang: "uz" | "ru" }> = async ({
+  lang,
+}): Promise<JSX.Element> => {
   const data = await getData<ICard>();
   if (data instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
@@ -41,7 +43,12 @@ const AllCourses: FC = async (): Promise<JSX.Element> => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {data.map((c) => (
         <LinkById href={`all-courses/${c.id}`} key={c.id}>
-          <ModuleCard title={c.titleUz} id={c.id} image={c.image} />
+          <ModuleCard
+            title={lang === "uz" ? c.titleUz : c.titleRu}
+            id={c.id}
+            image={c.image}
+            lang={lang}
+          />
         </LinkById>
       ))}
     </div>
