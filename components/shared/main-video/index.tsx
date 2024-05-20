@@ -7,6 +7,7 @@ const MainVideo: FC = (): JSX.Element => {
       <video
         className="rounded-2xl md:rounded-[40px] w-full h-full object-contain absolute top-0 left-0"
         controls
+        preload
         preload="none"
       >
         <source src={VideoLink} type="video/mp4" />
