@@ -16,6 +16,7 @@ import CurseHelp from "@/components/shared/curs-helped";
 import { teamMembers } from "@/constants/team";
 import { getDictionary } from "@/lib/get-dictionary";
 import MainVideo from "@/components/shared/main-video";
+import Banner from "@/components/shared/banner";
 interface Review {
   id: string;
   username: string;
@@ -110,7 +111,9 @@ export default async function Home({
       </div>
 
       <div className="container">
-        <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
+        <div className="my-10 md:my-20">
+          <Banner />
+        </div>
       </div>
 
       <div className="container">
@@ -122,7 +125,9 @@ export default async function Home({
       </div>
 
       <div className="container">
-        <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
+        <div className="my-10 md:my-20">
+          <Banner />
+        </div>
       </div>
 
       <Fits fits={dcitionary.home.whocurse} />
@@ -152,7 +157,9 @@ export default async function Home({
       </div>
 
       <div className="container">
-        <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
+        <div className="my-10 md:my-20">
+          <Banner />
+        </div>
       </div>
 
       <div className="container my-10 md:my-20">
