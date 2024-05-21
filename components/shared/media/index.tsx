@@ -3,17 +3,30 @@ import { FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import Link from "next/link";
 
-const Media: FC = () => {
+interface propstype {
+  color?: boolean;
+}
+
+const Media = ({ color }: propstype) => {
   return (
-    <div className="flex gap-5 items-center text-main-100">
+    <div className={`flex gap-5 items-center text-main-100`}>
       <Link href={"#"}>
-        <FaYoutube size={35} />
+        <FaYoutube
+          className={`text-main-100 ${!color && "text-main-200"}`}
+          size={35}
+        />
       </Link>
       <Link href={"#"}>
-        <FaInstagram size={35} />
+        <FaInstagram
+          size={35}
+          className={`text-main-100 ${!color && "text-main-200"}`}
+        />
       </Link>
       <Link href={"#"}>
-        <FaTelegram size={35} />
+        <FaTelegram
+          size={35}
+          className={`text-main-100 ${!color && "text-main-200"}`}
+        />
       </Link>
     </div>
   );

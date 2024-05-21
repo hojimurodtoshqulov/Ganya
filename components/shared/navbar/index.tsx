@@ -59,7 +59,9 @@ const HomeNavbar: FC<Lang> = ({ lang, dictionary }) => {
 
   return (
     <Headroom className={`fixed w-full`}>
-      <nav className={`py-2 ${isScrolled ? "bg-white shadow-lg" : ""} `}>
+      <nav
+        className={`${pathname.includes("articles") ? "bg-main-300 shadow-sm" : ""} py-2 ${isScrolled ? "bg-white shadow-lg" : ""}`}
+      >
         <div className="container flex justify-between items-center">
           <div>
             <Link href={"/"}>
@@ -72,7 +74,9 @@ const HomeNavbar: FC<Lang> = ({ lang, dictionary }) => {
             </Link>
           </div>
           {!pathname.includes("articles") ? (
-            <div className="hidden gap-5 bg-slate-100 p-1 rounded-[30px] md:flex">
+            <div
+              className={`hidden gap-5 bg-slate-100 p-1 rounded-[30px] md:flex`}
+            >
               {navlink.map((element: NavLinkType) => {
                 const isActive = currentHash.replace("#", "") === element.path;
                 return (
