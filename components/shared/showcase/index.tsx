@@ -11,15 +11,16 @@ export default function Showcase({
 }) {
   return (
     <div className="w-full h-screen showcase-image bg-[#A9C26A]">
-      <div className="container pt-28 pb-6 md:pb-16">
-        <div className="w-1/2">
-          <h1 className="font-bold md:text-[67px] font-comfortaa text-[40px] md:leading-[100px] leading-[48px] text-white">
-            {dict.showcase.title}
-          </h1>
-
-          <FormModal dict={dict} />
-          <div className="md:mt-32 mt-[300px] mb-[30px]">
-            <Media />
+      <div className="container pt-28 pb-6 md:pb-16 h-full">
+        <div className="w-1/2 flex flex-col justify-between h-full">
+          <div>
+            <h1 className="font-bold w-80 md:text-[67px] font-comfortaa text-[40px] md:leading-[100px] leading-[48px] text-white">
+              {dict.showcase.title}
+            </h1>
+            <FormModal dict={dict} />
+          </div>
+          <div>
+            <Media color />
           </div>
         </div>
       </div>
