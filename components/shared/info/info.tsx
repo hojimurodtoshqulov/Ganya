@@ -41,7 +41,7 @@ async function Info(props: InfoProps) {
 
         <div className="flex-2 max-[900px]:w-full">
           <Image
-            className="w-full h-full rounded-[40px] min-w-[343px] max-[370px]:min-w-[300px] max-w-[536px] max-[900px]:h-[416px] max-[900px]:max-w-full"
+            className="w-full h-full max-sm:object-cover rounded-[40px] min-w-[343px] max-[370px]:min-w-[300px] max-w-[536px] max-[900px]:h-[416px] max-[900px]:max-w-full"
             priority
             src={props.sort ? userImage2 : userImage1}
             alt="Picture of the author"
