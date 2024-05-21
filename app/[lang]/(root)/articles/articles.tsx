@@ -26,7 +26,7 @@ export default function ArticlesPage({ articls, lang, langue }: props) {
   );
 
   return (
-    <div className="container pt-20">
+    <div className="container pt-24">
       <div className="container">
         <Image
           className="w-full aspect-[66/17] h-[340px] object-cover rounded-[40px]"

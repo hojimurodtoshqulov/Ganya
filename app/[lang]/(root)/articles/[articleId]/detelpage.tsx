@@ -25,7 +25,7 @@ export default function DeteleArticle({
 
   return (
     <div>
-      <div className="pt-20 ">
+      <div className="pt-24 ">
         <div className="container">
           <Image
             className="w-full aspect-[66/17] h-[340px] object-cover rounded-[40px]"
