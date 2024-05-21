@@ -16,7 +16,15 @@ interface banner {
     "link": string,
     "isPublished": boolean
 }
-const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, isOpen: boolean, banner?: banner, accessToken: string | undefined }) => {
+interface dictionary {
+    wep: string,
+    mobile: string,
+    text: string,
+    link: string,
+    btn: string,
+    save: string
+}
+const Modal = ({ onClick, isOpen, banner, accessToken, dictionary }: { onClick: () => void, isOpen: boolean, banner?: banner, accessToken: string | undefined, dictionary:dictionary }) => {
     const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm();
     const router = useRouter()
     const ref = useRef<HTMLFormElement>(null);
@@ -103,7 +111,7 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                 >
                     <div className="p-10 bg-white rounded-2xl absolute z-[100]">
                         <form ref={ref} onSubmit={handleSubmit(onSubmitHandle)}>
-                            <p className=" text-neutral-500 text-lg  font-semibold mb-3">Desktop Image</p>
+                            <p className=" text-neutral-500 text-lg  font-semibold mb-3">{ dictionary.wep}</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px] mb-4">
                                 <div className="flex items-center">
                                     <div
@@ -137,7 +145,7 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                                 <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb")} />
 
                             </div>
-                            <p className=" text-neutral-500 text-lg font-semibold mb-3">Mobile Image</p>
+                            <p className=" text-neutral-500 text-lg font-semibold mb-3">{dictionary.mobile}</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px]">
                                 <div className="flex items-center">
                                     <div
@@ -169,7 +177,7 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                                 <Input type="file" accept="image/*" className="hidden" id="fayl2"  {...register("imageMobile")} />
                             </div>
                             <div className="relative">
-                                <Link className="absolute top-2 left-3" />
+                                <Link className="absolute top-3 left-3" />
                                 <Input placeholder="Ссылка" className={`mt-4 pl-12 ${errors.link ? "border-destructive focus-visible:!border-destructive" : ""}`}  {...register("link", {required:true})} defaultValue={banner.link} />
 
                             </div>
@@ -204,7 +212,7 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                 >
                     <div className="p-10 bg-white rounded-2xl absolute z-[100]">
                             <form ref={ref} onSubmit={handleSubmit(onSubmitHandle)}>
-                                <p className=" text-neutral-500 text-lg font-semibold mb-3">Desktop Image</p>
+                                <p className=" text-neutral-500 text-lg font-semibold mb-3">{dictionary.wep}</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px] mb-4">
                                 <div className="flex items-center">
                                     <div
@@ -238,7 +246,7 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                                 <Input type="file" accept="image/*" className="hidden" id="fayl" {...register("imageWeb", { required: true })} />
 
                                 </div>
-                                <p className=" text-neutral-500 text-lg font-semibold mb-3">Mobile Image</p>
+                                <p className=" text-neutral-500 text-lg font-semibold mb-3">{ dictionary.mobile}</p>
                             <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px]">
                                 <div className="flex items-center">
                                     <div
@@ -270,7 +278,7 @@ const Modal = ({ onClick, isOpen, banner, accessToken }: { onClick: () => void, 
                                 <Input type="file" accept="image/*" className="hidden" id="fayl2"  {...register("imageMobile", { required: true })} />
                             </div>
                             <div className="relative">
-                                <Link className="absolute top-2 left-3" />
+                                <Link className="absolute top-3 left-3" />
                                 <Input placeholder="Ссылка" className={`mt-4 pl-12 ${errors.link ? "border-destructive focus-visible:!border-destructive" : ""}`}  {...register("link", {required:true})} />
 
                             </div>

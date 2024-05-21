@@ -3,6 +3,7 @@ import icon from "@/icons/Bolt.svg";
 import icon2 from "@/icons/Vector.svg";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 interface PlanCardProps {
   values: {
     availablePeriod: number;
@@ -11,10 +12,12 @@ interface PlanCardProps {
     price: number;
     titleUz: string;
     titleRu: string;
+    id: string;
   };
   pro?: boolean;
   small?: boolean;
   btn?: boolean;
+  lang: "uz" | "ru";
 }
 function PlanCard(props: PlanCardProps): JSX.Element {
   return (
@@ -27,7 +30,7 @@ function PlanCard(props: PlanCardProps): JSX.Element {
         <h2
           className={`title ${props.small ? "text-xl" : "text-2xl md:text-[32px]"} font-comfortaa font-semibold ${props.pro ? "text-main-100" : "text-csneutral-600"}`}
         >
-          {props.values?.titleRu}
+          {props.lang === "uz" ? props.values?.titleUz : props.values?.titleRu}
         </h2>
         <ul className="flex flex-col gap-2">
           <li className="flex gap-2 items-start">
@@ -42,9 +45,13 @@ function PlanCard(props: PlanCardProps): JSX.Element {
             <p
               className={`${props.small ? "text-sm" : "text-base"} font-roboto ${props.pro ? "text-csneutral-100" : ""}`}
             >
-              Доступ ко всем видеоурокам в течение{" "}
-              {props.values?.availablePeriod} месяцев с момента приобретения
-              курса.
+              {props.lang === "ru"
+                ? "Доступ ко всем видеоурокам в течение "
+                : "Kursni sotib olgan kundan boshlab "}
+              {props.values?.availablePeriod / 30}
+              {props.lang === "ru"
+                ? " месяцев с момента приобретения курса."
+                : " oy ichida barcha video darslarga kirish."}
             </p>
           </li>
           {props.values?.includeResources && (
@@ -60,7 +67,9 @@ function PlanCard(props: PlanCardProps): JSX.Element {
               <p
                 className={`${props.small ? "text-sm" : "text-base"} font-roboto ${props.pro ? "text-csneutral-100" : ""}`}
               >
-                Дополнительные текстовые материалы.
+                {props.lang === "uz"
+                  ? "Qo'shimcha matn materiallari."
+                  : "Дополнительные текстовые материалы."}
               </p>
             </li>
           )}
@@ -77,7 +86,9 @@ function PlanCard(props: PlanCardProps): JSX.Element {
               <p
                 className={`${props.small ? "text-sm" : "text-base"} font-roboto ${props.pro ? "text-csneutral-100" : ""}`}
               >
-                1 онлайн - консультации со мной.
+                {props.lang === "ru"
+                  ? "1 онлайн - консультации со мей."
+                  : "1 men bilan onlayn maslahat."}
               </p>
             </li>
           )}
@@ -88,15 +99,21 @@ function PlanCard(props: PlanCardProps): JSX.Element {
         <p
           className={`price ${props.small ? "text-[22px]" : "text-[32px]"} ${props.pro ? "text-main-100" : "text-main-300"}`}
         >
-          {props.values?.price} UZS
+          {props.values?.price} {props.lang === "ru" ? "УЗС" : "UZS"}
         </p>
         {props.btn && (
-          <Button
-            variant={props.pro ? "filled" : "outline"}
-            size={props.small ? "sm" : "default"}
+          <Link
+            className="block w-full"
+            href={`/${props.lang}/dashboard/client/buy/${props.values.id}`}
           >
-            Выбрать
-          </Button>
+            <Button
+              variant={props.pro ? "filled" : "outline"}
+              size={props.small ? "sm" : "default"}
+              className="w-full"
+            >
+              {props.lang === "ru" ? "Выбрать" : "Tanlash"}
+            </Button>
+          </Link>
         )}
       </div>
     </div>

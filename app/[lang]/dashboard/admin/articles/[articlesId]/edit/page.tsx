@@ -2,12 +2,15 @@ import React from "react";
 import FormEditArticle from "./FormEdit";
 import { cookies } from "next/headers";
 import { date } from "zod";
+import { getDictionary } from "@/lib/get-dictionary";
 
 interface Props {
   params: {
     articlesId: string;
+    lang: any;
   };
 }
+
 async function getData(id: string) {
   const response = await fetch(
     `https://oar-api.onrender.com/api/v1/articles/single/${id}`,
@@ -23,20 +26,22 @@ async function getData(id: string) {
   return response.json();
 }
 
-const Post: React.FC<Props> = async ({ params }) => {
-  const data = await getData(params.articlesId);
+export default async function Post({ params: { articlesId, lang } }: Props) {
+  const data = await getData(articlesId);
 
   if (data instanceof Error) return <div>{data.message}</div>;
   const accessToken = cookies().get("accessToken")?.value;
+  const langue = await getDictionary(lang);
+
   return (
     <>
       <FormEditArticle
-        articleId={params.articlesId}
+        lang={lang}
+        langue={langue}
+        articleId={articlesId}
         defaultValues={data}
         accessToken={accessToken}
       />
     </>
   );
-};
-
-export default Post;
+}

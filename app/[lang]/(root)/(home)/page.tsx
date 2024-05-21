@@ -15,6 +15,8 @@ import Stati from "@/components/shared/stati/stati";
 import CurseHelp from "@/components/shared/curs-helped";
 import { teamMembers } from "@/constants/team";
 import { getDictionary } from "@/lib/get-dictionary";
+import MainVideo from "@/components/shared/main-video";
+import Banner from "@/components/shared/banner";
 interface Review {
   id: string;
   username: string;
@@ -65,9 +67,9 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all",
-    { cache: "no-store" }
-);
+  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all", {
+    cache: "no-store",
+  });
   const dataComment = await res.json();
   const dataComments = dataComment;
   const data = await getData<{
@@ -101,9 +103,7 @@ export default async function Home({
       </div>
 
       <div className="container">
-        <div className="my-10 md:my-20 bg-csneutral-100 rounded-2xl md:rounded-[40px] flex items-center justify-center w-full aspect-[3/2] md:aspect-[5/2]">
-          <Play size={60} fill="#D5D6D8" className="text-csneutral-300" />
-        </div>
+        <MainVideo />
       </div>
 
       <div className="container">
@@ -111,7 +111,9 @@ export default async function Home({
       </div>
 
       <div className="container">
-        <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
+        <div className="my-10 md:my-20">
+          <Banner />
+        </div>
       </div>
 
       <div className="container">
@@ -123,7 +125,9 @@ export default async function Home({
       </div>
 
       <div className="container">
-        <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
+        <div className="my-10 md:my-20">
+          <Banner />
+        </div>
       </div>
 
       <Fits fits={dcitionary.home.whocurse} />
@@ -153,7 +157,9 @@ export default async function Home({
       </div>
 
       <div className="container">
-        <div className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] my-10 md:my-20" />
+        <div className="my-10 md:my-20">
+          <Banner />
+        </div>
       </div>
 
       <div className="container my-10 md:my-20">

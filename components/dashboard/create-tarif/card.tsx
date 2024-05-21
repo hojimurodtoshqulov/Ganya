@@ -19,6 +19,7 @@ interface CardProps {
   pro?: boolean;
   small?: boolean;
   planId: string;
+  lang: "uz" | "ru";
 }
 function Card(props: CardProps): JSX.Element {
   return (
@@ -31,7 +32,7 @@ function Card(props: CardProps): JSX.Element {
         <h2
           className={`title ${props.small ? "text-xl" : "text-2xl md:text-[32px]"} font-comfortaa font-semibold ${props.pro ? "text-main-100" : "text-csneutral-600"}`}
         >
-          {props.values.titleUz}
+          {props.lang === "uz" ? props.values?.titleUz : props.values?.titleRu}
         </h2>
         <ul className="flex flex-col gap-2">
           <li className="flex gap-2 items-start">
@@ -46,9 +47,13 @@ function Card(props: CardProps): JSX.Element {
             <p
               className={`${props.small ? "text-sm" : "text-base"} font-roboto ${props.pro ? "text-csneutral-100" : ""}`}
             >
-              Доступ ко всем видеоурокам в течение{" "}
-              {props.values.availablePeriod} месяцев с момента приобретения
-              курса.
+              {props.lang === "ru"
+                ? "Доступ ко всем видеоурокам в течение "
+                : "Kursni sotib olgan kundan boshlab "}
+              {props.values?.availablePeriod / 30}
+              {props.lang === "ru"
+                ? " месяцев с момента приобретения курса."
+                : " oy ichida barcha video darslarga kirish."}
             </p>
           </li>
           {props.values.includeResources && (
@@ -64,7 +69,9 @@ function Card(props: CardProps): JSX.Element {
               <p
                 className={`${props.small ? "text-sm" : "text-base"} font-roboto ${props.pro ? "text-csneutral-100" : ""}`}
               >
-                Дополнительные текстовые материалы.
+                {props.lang === "uz"
+                  ? "Qo'shimcha matn materiallari."
+                  : "Дополнительные текстовые материалы."}
               </p>
             </li>
           )}
@@ -81,7 +88,9 @@ function Card(props: CardProps): JSX.Element {
               <p
                 className={`${props.small ? "text-sm" : "text-base"} font-roboto ${props.pro ? "text-csneutral-100" : ""}`}
               >
-                1 онлайн - консультации со мной.
+                {props.lang === "ru"
+                  ? "1 онлайн - консультации со мей."
+                  : "1 men bilan onlayn maslahat."}
               </p>
             </li>
           )}
@@ -92,7 +101,7 @@ function Card(props: CardProps): JSX.Element {
         <p
           className={`price ${props.small ? "text-[22px]" : "text-[32px]"} ${props.pro ? "text-main-100" : "text-main-300"}`}
         >
-          {props.values.price} UZS
+          {props.values.price} {props.lang === "ru" ? "УЗС" : "UZS"}
         </p>
         <Dialog>
           <DialogTrigger asChild>
@@ -103,7 +112,7 @@ function Card(props: CardProps): JSX.Element {
               className={props.small ? "text-sm" : "text-base md:text-lg"}
               //   className=" rounded-[14px] py-5 text-lg bg-main-100 w-full "
             >
-              Изменить
+              {props.lang === "ru" ? "Изменить" : "O'zgartirish"}
             </Button>
           </DialogTrigger>
 

@@ -9,7 +9,7 @@
       "login": "Kirish"
     },
     "showcase": {
-      "title": "Ongli Onalik Akademiyasi",
+      "title": "Mehribon Onalar Akademiyasi",
       "showcasModul": {
         "btn": "Ariza Qoldirish",
         "title": "Ariza Qoldirish",
@@ -168,7 +168,6 @@
     "auth": {
       "title": "So'rov qoldiring",
       "name": "Ismi Familiya",
-
       "btn": "So'rov qoldiring"
     }
   },
@@ -221,17 +220,23 @@
         {
           "label": "Kontent",
           "path": "content"
+        },
+        {
+          "label": "Ta'lim",
+          "path": "edu"
+        },
+        {
+          "label": "Profil",
+          "path": "profile"
         }
       ],
-
       "topbar": {
         "course": "Kurslar",
         "text1": "Barcha kurslar",
-        "text2": "ishlab chiqilmoqda",
+        "text2": "Ishlab chiqilmoqda",
         "text3": "Arxivda",
         "btn": "Yangi kurs qo'shish"
       },
-
       "popover": {
         "text1": "Tahrirlash",
         "text2": "Nomini o'zgartirish",
@@ -239,12 +244,10 @@
         "text4": "Arxivga o'tkazish",
         "text5": "O'chirish"
       },
-
       "helpcenter": {
         "title": "Biz bilan bog'laning",
         "matn": "Biz barcha savollarga javob beramiz"
       },
-
       "curse": {
         "createmodal": {
           "title": "Yangi kurs qo'shish",
@@ -253,7 +256,9 @@
           "imagetext": "Kurs qopqog'ini tanlang yoki torting",
           "imagetitle": "Qopqoq",
           "btn": "Tanlash",
-          "tugma": "Davom etish"
+          "btnchange": "O'zgartirish",
+          "button": "Davom etish",
+          "desc": "Kurs tavsifi"
         },
         "changemodal": {
           "plecholder": "Homiladorlikka tayyorgarlik",
@@ -268,7 +273,7 @@
           "title": "modul qo'shish",
           "addtext": "Modul tavsifini qo'shish"
         },
-        "tarif": {
+        "tarifi": {
           "title": "Tariflar",
           "btn": "Tarif qo'shish"
         },
@@ -295,7 +300,6 @@
           "btn": "Nashr qilish"
         }
       },
-
       "createcourse": {
         "title": "Dars qo'shish",
         "popover": {
@@ -318,24 +322,57 @@
           "text": "'1-dars: Kirish' video darsidagi barcha ma'lumotlar muvaffaqiyatli saqlandi"
         }
       },
-
+      "createLesson": {
+        "videoLable": "Video Tanlash",
+        "videoDescription": "Videoni tanlang yoki torting",
+        "title": "Sarlavha",
+        "title1": "Tavsif",
+        "placeholder": "Dars uchun tavsif qo'shing",
+        "btnSave": "Saqlash",
+        "btnSelect": "Tanlash",
+        "btnEdit": "O'zgartirish",
+        "btnDelete": "O'chirish",
+        "toast": {
+          "save": "Video darsdagi barcha ma'lumotlar muvaffaqiyatli saqlandi",
+          "update": "Dars muvaffaqiyatli yangilandi",
+          "delete": "muvaffaqiyatli o'chirildi",
+          "updateError": "Darsni yangilab bo‘lmadi.",
+          "createError": "Yangi dars. Yuklashda muammo.",
+          "videoError": "Iltimos vide tanlang",
+          "deleteError": "Darsni o'chirishda muammo yuzaga keldi"
+        }
+      },
       "articels": {
         "home": {
           "search": "Maqolalar qidirish",
           "text": "Yangi maqola qo'shish",
-          "title": "Aloqador maqolalar"
+          "title": "Aloqador maqolalar",
+          "back": "Orqaga",
+          "defaulttext": "Maqola nomi"
         },
         "forms": {
-          "image": "Qopqoq",
-          "text": "Kurs uchun qopqoqni tanlang yoki torting",
-          "btn": "Tanlash",
-          "heading": "sarlavha",
+          "image": "Muqova",
+          "text": "Kurs uchun muqova tanlang yoki torting",
+          "btn": "o'zgartirish",
+          "btn1": "tahrirlash",
+          "btn2": "Tanlash",
+          "banertel": "Mobil uchun",
+          "banerwep": "Kompyuter uchun",
+          "heading": "Sarlavha",
+          "plecholder1": "Maqola sarlavhasini kiriting: Ru",
+          "plecholder2": "Maqola sarlavhasini kiriting: Uz",
+          "plecholder3": "Maqola taglavhasini kiriting: Ru",
+          "plecholder4": "Maqola taglavhasini kiriting: Uz",
+          "plecholder5": "Maqola tavsifini kiriting: Ru",
+          "plecholder6": "Maqola tavsifini kiriting: Uz",
+
           "title": "Subtitr",
           "desck": "Ta'rif",
           "baner": "Reklama bannerini qo'shish",
           "banerbtn": "Qo'shish",
           "save": "Ko'rib chiqish",
-          "sent": "Nashr qilish"
+          "sent": "Nashr qilish",
+          "delete": "O'chirish"
         },
         "modal": {
           "wep": "Kompyuter uchun",
@@ -346,7 +383,6 @@
           "save": "Nashr qilish"
         }
       },
-
       "baner": {
         "heading": "Tarkib",
         "text1": "Foto-video",

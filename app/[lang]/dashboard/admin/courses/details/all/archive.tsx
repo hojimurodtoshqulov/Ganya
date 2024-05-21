@@ -5,10 +5,11 @@ import { getAccessToken } from "@/lib/actions/token";
 import { useRouter } from "next/navigation";
 import { FC, FormEvent } from "react";
 
-const ArchiveCourse: FC<{ id: string; accessToken?: string }> = ({
-  id,
-  accessToken,
-}): JSX.Element => {
+const ArchiveCourse: FC<{
+  id: string;
+  accessToken?: string;
+  btnText: string;
+}> = ({ id, accessToken, btnText }): JSX.Element => {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -58,7 +59,7 @@ const ArchiveCourse: FC<{ id: string; accessToken?: string }> = ({
   return (
     <form className="text-sm px-2 w-full" onSubmit={handleSubmit}>
       <button className="bg-none border-none w-full text-left">
-        Переместить на архив
+        {btnText}
       </button>
     </form>
   );

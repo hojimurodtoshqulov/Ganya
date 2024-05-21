@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,6 +15,7 @@ import BackLink from "@/components/dashboard/back-link";
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import { getLangText } from "@/lib/utils";
+import { getDictionary } from "@/lib/get-dictionary";
 interface Props {
   params: {
     courseId: string;
@@ -24,6 +25,7 @@ interface Props {
   };
   data: any;
   accToken?: string;
+  dict: Awaited<ReturnType<typeof getDictionary>>['dashboard'];
 }
 
 const schema = z.object({
@@ -40,8 +42,8 @@ const FormLessonEdit: FC<Props> = ({
   params: { lang, lessonId, moduleId },
   data,
   accToken,
+  dict
 }): JSX.Element => {
-  console.log(data);
   const {
     register,
     handleSubmit,
@@ -72,11 +74,18 @@ const FormLessonEdit: FC<Props> = ({
   const onSubmit = async (values: Schema) => {
     try {
       const formData = new FormData();
-      if (values.video instanceof FileList) {
-        formData.append("video", values.video[0], values.video[0].name);
+      if (!videoName) {
+        formData.append('video', data.video)
+
       } else {
-        formData.append("video", values.video);
+        if (values.video instanceof FileList) {
+          formData.append("video", values.video[0], values.video[0].name);
+        } else {
+          formData.append("video", values.video);
+        }
       }
+
+
 
       formData.append("titleUz", values.titleUz);
       formData.append("titleRu", values.titleRu);
@@ -94,15 +103,15 @@ const FormLessonEdit: FC<Props> = ({
         },
       });
 
-      if (!req.ok) throw new Error("что-то пошло не так");
+      if (!req.ok) throw new Error(`${dict.admin.createLesson.toast.updateError}`);
       reset();
       const res = req.json();
-      toast.success("Урок успешно обновлен");
+      toast.success(dict.admin.createLesson.toast.update);
       router.refresh();
       setLesson(null);
       router.back();
-    } catch (error: any) {
-      toast.error("Не удалось обновить урок.");
+    } catch (err: any) {
+      toast.error(err.message);
     }
   };
 
@@ -118,10 +127,10 @@ const FormLessonEdit: FC<Props> = ({
         },
       });
 
-      if (!req.ok) throw new Error("Не удалось удалить курс");
+      if (!req.ok) throw new Error(`${dict.admin.createLesson.toast.deleteError}`);
 
       const res = await req.json();
-      toast.success("Удален успешно");
+      toast.success(dict.admin.createLesson.toast.delete);
       router.refresh();
       router.back();
     } catch (error: any) {
@@ -165,23 +174,18 @@ const FormLessonEdit: FC<Props> = ({
                 <h1 className="text-[22px] font-medium">
                   {videoName
                     ? getLangText(lang, "Video Tanlandi", "Видео выбрано")
-                    : getLangText(lang, "Video Tanlash", "Добавить видео")}
+                    : dict.admin.createLesson.videoLable}
                 </h1>
                 <p className="text-base font-normal">
                   {videoName
                     ? videoName
-                    : getLangText(
-                        lang,
-                        "Videoni tanlang yoki torting",
-                        "Перетащите или выберите ваще видео",
-                      )}
+                    : dict.admin.createLesson.videoDescription}
                 </p>
               </div>
             </div>
             <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">
               {videoName
-                ? getLangText(lang, "O'zgartirish", "Редактировать")
-                : getLangText(lang, "Tanlash", "Выбрать")}
+                ? dict.admin.createLesson.btnEdit : dict.admin.createLesson.btnSelect}
             </span>
           </Label>
           <Input
@@ -197,22 +201,22 @@ const FormLessonEdit: FC<Props> = ({
         <div className="rounded-2xl  bg-white flex flex-col gap-4 p-6">
           <div className="grid w-full  items-center gap-1.5">
             <Label htmlFor="titleRu">
-              {getLangText(lang, "Sarlavha", "Подзаголовок")}
+              {dict.admin.createLesson.title}
             </Label>
             <Input
               type="text"
               id="titleRu"
-              placeholder="Ru"
+              placeholder={`${dict.admin.createLesson.title} RU`}
               className={cn({ "border-destructive": inputErrors.titleRu })}
               {...register("titleRu", { required: true })}
-              // defaultValue={data?.titleRu}
+            // defaultValue={data?.titleRu}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Input
               type="text"
               id="titleUz"
-              placeholder="Uz"
+              placeholder={`${dict.admin.createLesson.title} UZ`}
               className={cn({ "border-destructive": inputErrors.titleUz })}
               {...register("titleUz", { required: true })}
               defaultValue={data?.titleUz}
@@ -220,10 +224,10 @@ const FormLessonEdit: FC<Props> = ({
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Label htmlFor={`descriptionRu`}>
-              {getLangText(lang, "Tavsif", "Описание")}
+              {dict.admin.createLesson.title1}
             </Label>
             <Textarea
-              placeholder="Ru"
+              placeholder={`${dict.admin.createLesson.placeholder} RU`}
               className={cn({
                 "border-destructive": inputErrors.descriptionRu,
               })}
@@ -233,7 +237,7 @@ const FormLessonEdit: FC<Props> = ({
           </div>
           <div className="grid w-full  items-center gap-1.5">
             <Textarea
-              placeholder="Uz"
+              placeholder={`${dict.admin.createLesson.placeholder} UZ`}
               className={cn({
                 "border-destructive": inputErrors.descriptionUz,
               })}
@@ -249,7 +253,7 @@ const FormLessonEdit: FC<Props> = ({
               className="bg-red-400 hover:bg-red-300 transition-colors text-sm font-normal py3 px-5"
               variant={"main"}
             >
-              {getLangText(lang, "O'chirish", "Удалить")}
+              {dict.admin.createLesson.btnDelete}
             </Button>
 
             <Button
@@ -258,7 +262,7 @@ const FormLessonEdit: FC<Props> = ({
               className="disabled:bg-main-200 text-sm font-normal py3 px-5"
               variant={"main"}
             >
-              {getLangText(lang, "Saqlash", "Сохранить")}
+              {dict.admin.createLesson.btnSave}
             </Button>
           </div>
         </div>

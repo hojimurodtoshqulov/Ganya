@@ -19,10 +19,9 @@ function CardArticls(props: CardProps) {
           {props.title}
         </h2>
         <p className="text-[12px] leading-[18px] text-csneutral-500">
-          {props.text}
+          {props.text.slice(0, 80)}...
         </p>
       </div>
-
       <div className="flex gap-2 text-lg">
         <p>{props.time}</p>
       </div>

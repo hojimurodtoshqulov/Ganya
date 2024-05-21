@@ -4,9 +4,11 @@ import { FC } from "react";
 import CreateTarifForm from "./form";
 import Card from "./card";
 import { cookies } from "next/headers";
+import { getDictionary } from "@/lib/get-dictionary";
 
 interface Props {
   courseId: string;
+  lang: "uz" | "ru";
 }
 async function getData<T>(id: string): Promise<T[] | Error> {
   const res = await fetch(
@@ -22,7 +24,10 @@ async function getData<T>(id: string): Promise<T[] | Error> {
 
   return res.json();
 }
-const CreateTarif: FC<Props> = async ({ courseId }): Promise<JSX.Element> => {
+const CreateTarif: FC<Props> = async ({
+  courseId,
+  lang,
+}): Promise<JSX.Element> => {
   const response = await getData<{
     id: string;
     availablePeriod: number;
@@ -35,16 +40,18 @@ const CreateTarif: FC<Props> = async ({ courseId }): Promise<JSX.Element> => {
   if (response instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
   }
-  console.log(response);
+  const dict = await getDictionary(lang);
   return (
     <>
       <div className="flex flex-row justify-between items-center bg-white rounded-2xl p-6">
-        <h1 className="text-[26px] text-main-300">Тарифы</h1>
+        <h1 className="text-[26px] text-main-300">
+          {dict.dashboard.admin.curse.tarifi.title}
+        </h1>
 
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="main" className="text-sm py-2 px-5 font-normal">
-              Добавить тариф
+              {dict.dashboard.admin.curse.tarifi.btn}
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -59,7 +66,13 @@ const CreateTarif: FC<Props> = async ({ courseId }): Promise<JSX.Element> => {
 
       <div className="grid grid-cols-3 gap-5 p-5">
         {response.map((data) => (
-          <Card values={data} key={data.id} small planId={data.id} />
+          <Card
+            values={data}
+            key={data.id}
+            small
+            planId={data.id}
+            lang={lang}
+          />
         ))}
       </div>
     </>

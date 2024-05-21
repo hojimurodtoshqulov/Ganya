@@ -42,7 +42,6 @@ const Form: FC<{
       ...values,
       sessionId: sms.sessionId,
     };
-    console.log(data, "<----");
   };
   return (
     <form onSubmit={handleSubmit(submit)} className="w-full space-y-4">

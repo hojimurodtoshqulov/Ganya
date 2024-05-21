@@ -21,9 +21,11 @@ export default function DeteleArticle({
   lang,
   langue,
 }: Props) {
+  console.log(detel, "ths is data");
+
   return (
     <div>
-      <div className="pt-10 ">
+      <div className="pt-20 ">
         <div className="container">
           <Image
             className="w-full aspect-[66/17] h-[340px] object-cover rounded-[40px]"
@@ -37,13 +39,11 @@ export default function DeteleArticle({
       <div className="py-10 lg:py28">
         <div className="flex lg:flex-row flex-col-reverse  justify-between container w-full gap-6">
           <div className="bg-csneutral-100 w-full p-10 rounded-[40px]">
-            <Heading
-              text={lang === "ru" ? detel?.headlineRu : detel.headlineUz}
-            />
-            <h2 className="font-normal text-[32px] leading-[44px] mb-4 font-comfortaa mt-8">
-              {langue.articles.text}
+            <Heading text={lang === "ru" ? detel?.titleRu : detel.titleUz} />
+            <h2 className="font-normal  text-[20px] md:text-[32px] leading-[44px] mb-4 font-comfortaa mt-8">
+              {lang === "ru" ? detel.headlineRu : detel.headlineUz}
             </h2>
-            <p className="font-normal w-full text-2xl text-[#585D65]">
+            <p className="font-normal w-full text-1xl md:text-2xl text-[#585D65]">
               {lang === "ru" ? detel?.textRu : detel.textUz}
             </p>
           </div>
@@ -83,9 +83,7 @@ export default function DeteleArticle({
               <Link key={article.id} href={`/articles/${article.id}`}>
                 <CardStatya
                   key={article.id}
-                  title={
-                    lang === "ru" ? article.headlineRu : article.headlineUz
-                  }
+                  title={lang === "ru" ? article.titleRu : article.titleUz}
                   text={lang === "ru" ? article.textRu : article.titleUz}
                   time={format(new Date(article.updatedAt), "MMMM dd, yyyy")}
                 />

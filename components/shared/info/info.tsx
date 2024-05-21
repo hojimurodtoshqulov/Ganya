@@ -4,15 +4,15 @@ import userImage2 from "@/images/about2.png";
 
 interface InfoProps {
   data: {
-    title: string,
-    text: string,
-    tags?: string[]
-  }
+    title: string;
+    text: string;
+    tags?: string[];
+  };
   sort?: boolean;
   lang: "uz" | "ru";
 }
 
-async function Info(props: InfoProps){
+async function Info(props: InfoProps) {
   return (
     <>
       <div
@@ -22,7 +22,7 @@ async function Info(props: InfoProps){
           <div className="flex flex-col gap-2 md:gap-4">
             <h2 className="text-h2">{props.data.title}</h2>
             <p className="text-base md:text-[22px] md:leading-8 text-main-200 font-roboto">
-              {props.data.text }
+              {props.data.text}
             </p>
           </div>
           {props.data.tags && (
@@ -41,7 +41,7 @@ async function Info(props: InfoProps){
 
         <div className="flex-2 max-[900px]:w-full">
           <Image
-            className="w-full h-full rounded-[40px] min-w-[343px] max-[370px]:min-w-[300px] max-w-[536px] max-[900px]:h-[416px] max-[900px]:max-w-full"
+            className="w-full h-full max-sm:object-cover rounded-[40px] min-w-[343px] max-[370px]:min-w-[300px] max-w-[536px] max-[900px]:h-[416px] max-[900px]:max-w-full"
             priority
             src={props.sort ? userImage2 : userImage1}
             alt="Picture of the author"

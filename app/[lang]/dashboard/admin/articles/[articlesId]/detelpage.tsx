@@ -1,6 +1,6 @@
+import { SquarePen } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { FaSquarePen } from "react-icons/fa6";
 
 const DetelCard = ({ data, articlesId, lang }: any) => {
   return (
@@ -10,7 +10,7 @@ const DetelCard = ({ data, articlesId, lang }: any) => {
           {lang === "ru" ? data?.titleRu : data.titleUz}
         </h2>
         <Link href={`/dashboard/admin/articles/${articlesId}/edit`}>
-          <FaSquarePen className="cursor-pointer text-3xl" />
+          <SquarePen className="cursor-pointer text-3xl" />
         </Link>
       </div>
       <h4 className="text-lg text-main-300 mt-5">
