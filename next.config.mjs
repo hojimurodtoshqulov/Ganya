@@ -2,6 +2,7 @@
 import withVideos from "next-videos";
 
 const nextConfig = {
+  output: "standalone",
   env: {
     BOT_TOKEN: process.env.BOT_TOKEN,
     BOT_CHAT_ID: process.env.BOT_CHAT_ID,
