@@ -13,7 +13,7 @@ interface Props {
 
 async function getData(id: string) {
   const response = await fetch(
-    `https://oar-api.onrender.com/api/v1/articles/single/${id}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/articles/single/${id}`,
     {
       cache: "no-store",
     },

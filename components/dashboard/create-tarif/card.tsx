@@ -89,7 +89,7 @@ function Card(props: CardProps): JSX.Element {
                 className={`${props.small ? "text-sm" : "text-base"} font-roboto ${props.pro ? "text-csneutral-100" : ""}`}
               >
                 {props.lang === "ru"
-                  ? "1 онлайн - консультации со мей."
+                  ? "1 онлайн - консультации со мной."
                   : "1 men bilan onlayn maslahat."}
               </p>
             </li>

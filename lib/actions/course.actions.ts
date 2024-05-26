@@ -5,7 +5,7 @@ export const postAction = async (formData: FormData) => {
   console.log(formData);
   console.log(formData.get("image"));
   const res = await fetch(
-    "https://oar-api.onrender.com/api/v1/courses/create",
+    `${process.env.NEXT_PUBLIC_BASE_URL}/courses/create`,
     {
       method: "POST",
       body: formData,

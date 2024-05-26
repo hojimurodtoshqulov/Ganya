@@ -61,8 +61,24 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
           console.log(result?.message);
         }
       }}
-      className="flex flex-col justify-center gap-6"
+      className="flex flex-col justify-center gap-2.5"
     >
+      <Input
+        type="text"
+        name="name"
+        placeholder={"Имя"}
+        className={cn({
+          "border-destructive": emailOrPhoneErr,
+        })}
+      />
+      <Input
+        type="text"
+        name="surname"
+        placeholder={"Фамилия"}
+        className={cn({
+          "border-destructive": emailOrPhoneErr,
+        })}
+      />
       <Input
         type="text"
         name="emailOrPhone"
@@ -115,10 +131,9 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
             { "text-destructive": termsErr },
           )}
         >
-          Я даю согласие на{" "}
-          <Link href={"/"} className="underline">
-            обработку персональных данных
-          </Link>
+          Я даю согласие на {/* <Link href={"/"} className="underline"> */}
+          обработку персональных данных
+          {/* </Link> */}
         </label>
       </div>
       <SubmitBtn className="text-base">Регистрация</SubmitBtn>
