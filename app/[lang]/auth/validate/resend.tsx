@@ -32,7 +32,7 @@ const ResendCode: FC<{
       });
     } else {
       toast({
-        description: res?.message,
+        description: res?.message ?? "Something went wrong!",
         variant: "destructive",
       });
     }

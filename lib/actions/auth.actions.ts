@@ -10,6 +10,8 @@ import { cookies } from "next/headers";
 
 export const registerAction = async (formData: FormData) => {
   const validatedFields = registerSchema.safeParse({
+    name: formData.get("name"),
+    surname: formData.get("surname"),
     emailOrPhone: formData.get("emailOrPhone"),
     password: formData.get("password"),
     confirmPassword: formData.get("confirmPassword"),
@@ -19,7 +21,7 @@ export const registerAction = async (formData: FormData) => {
   if (validatedFields.success) {
     console.log(validatedFields.data);
     try {
-      const { emailOrPhone, password } = validatedFields.data;
+      const { emailOrPhone, password, name, surname } = validatedFields.data;
       const link = validateInput(emailOrPhone) as "email" | "phone";
       console.log("start", link);
       const res = await fetch(
@@ -29,7 +31,12 @@ export const registerAction = async (formData: FormData) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ [link]: emailOrPhone, password }),
+          body: JSON.stringify({
+            [link]: emailOrPhone,
+            password,
+            name,
+            surname,
+          }),
         },
       );
       const json = await res.json();
@@ -145,7 +152,6 @@ export const smsValidateAction = async (formData: FormData) => {
           maxAge: 60 * 60 * 24 * 1000,
         });
 
-        // cookies().delete("sms")
         return {
           successMessage: "Code successfuly posted",
         };

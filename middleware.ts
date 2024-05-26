@@ -56,14 +56,13 @@ export async function middleware(request: NextRequest) {
       ),
     );
   }
-
+  // protect routes
   const refreshToken = request.cookies.get("refreshToken")?.value ?? "";
   if (!refreshToken && pathname.indexOf("/dashboard") > -1) {
     return NextResponse.redirect(new URL("/auth/sign-in", request.url));
   }
   const accessToken = request.cookies.get("accessToken")?.value ?? "";
   if (!accessToken && pathname.includes("/dashboard")) {
-    console.log("ref", refreshToken);
     const data = {
       refreshToken: refreshToken,
     };
@@ -76,7 +75,7 @@ export async function middleware(request: NextRequest) {
       },
     );
     const json = await res.json();
-    console.log(json);
+
     if (!res.ok) {
       return NextResponse.redirect(new URL("/auth/sign-in", request.url));
     }
@@ -91,35 +90,14 @@ export async function middleware(request: NextRequest) {
     return response;
   }
   if (pathname.includes("/dashboard")) {
-    console.log(accessToken);
     let res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/users/profile", {
       cache: "no-store",
       headers: {
         Authorization: `Bearer ${JSON.parse(accessToken)}`,
       },
     });
-    // if (res.status === 401) {
-    //   console.log("su ishladi");
-    //   const nr = await fetch(
-    //     process.env.NEXT_PUBLIC_BASE_URL + "/auth/refresh-access-token",
-    //     {
-    //       method: "POST",
-    //       body: JSON.stringify({ refreshToken: refreshToken }),
-    //     },
-    //   );
-    //   if (nr.ok) {
-    //     const j = await nr.json();
-    //     console.log(j);
-    //   }
-    //   res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/users/profile", {
-    //     cache: "no-store",
-    //     headers: {
-    //       Authorization: `Bearer ${accessToken}`,
-    //     },
-    //   });
-    // }
+
     const json = await res.json();
-    console.log("jeejejeejej", json);
     if (pathname.includes("/admin") && json?.role === "admin") {
       return NextResponse.next();
     } else if (pathname.includes("/client") && json?.role === "user") {
