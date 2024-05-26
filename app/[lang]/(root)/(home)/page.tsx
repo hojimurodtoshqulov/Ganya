@@ -4,7 +4,6 @@ import Fits from "@/components/shared/fits";
 import CourceCard from "@/components/shared/cource-card/courceCard";
 import Showcase from "@/components/shared/showcase";
 import SubscribtionForm from "@/components/shared/subscribtion-form/subscribtionForm";
-import { about, about1, reviews } from "@/constants";
 import { Accordion } from "@/components/shared/cource-card/accordian-card";
 import { Play } from "lucide-react";
 import Info from "@/components/shared/info/info";
