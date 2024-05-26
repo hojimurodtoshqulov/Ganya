@@ -9,7 +9,7 @@ import { format } from "date-fns";
 
 async function Getpost() {
   const response = await fetch(
-    "https://oar-api.onrender.com/api/v1/articles/all",
+    `${process.env.NEXT_PUBLIC_BASE_URL}/articles/all`,
     { method: "GET" },
   );
 

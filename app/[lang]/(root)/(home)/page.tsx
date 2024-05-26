@@ -66,7 +66,7 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/all`, {
     cache: "no-store",
   });
   const dataComment = await res.json();

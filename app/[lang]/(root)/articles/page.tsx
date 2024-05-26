@@ -2,7 +2,7 @@ import { getDictionary } from "@/lib/get-dictionary";
 import ArticlesPage from "./articles";
 
 async function getData<T>(): Promise<T[] | Error> {
-  const res = await fetch("https://oar-api.onrender.com/api/v1/articles/all", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/articles/all`, {
     cache: "no-store",
   });
   if (!res.ok) {

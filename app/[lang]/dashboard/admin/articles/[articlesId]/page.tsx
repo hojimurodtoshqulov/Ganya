@@ -11,7 +11,7 @@ interface propstype {
 
 async function getData(paramsId: string) {
   const res = await fetch(
-    `https://oar-api.onrender.com/api/v1/articles/single/${paramsId}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/articles/single/${paramsId}`,
     {
       cache: "no-store",
     },

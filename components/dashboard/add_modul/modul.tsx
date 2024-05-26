@@ -19,7 +19,17 @@ interface data {
   courseId: string | null;
 }
 
-const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; lang: string; accessToken: string | undefined }) => {
+const Card = ({
+  bacData,
+  id,
+  lang,
+  accessToken,
+}: {
+  bacData: data;
+  id: number;
+  lang: string;
+  accessToken: string | undefined;
+}) => {
   const {
     register,
     handleSubmit,
@@ -36,7 +46,7 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
   const onSubmitHandle = async (data: FormData | unknown) => {
     if (method && method === "PATCH") {
       const res = await fetch(
-        `https://oar-api.onrender.com/api/v1/modules/update/${bacData.id}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/modules/update/${bacData.id}`,
         {
           method: "PATCH",
           body: JSON.stringify(data),
@@ -53,12 +63,12 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
     }
     if (method && method === "DELETE") {
       const res = await fetch(
-        `https://oar-api.onrender.com/api/v1/modules/delete/${bacData.id}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/modules/delete/${bacData.id}`,
         {
           method: "DELETE",
-          headers:{
-          Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
-          }
+          headers: {
+            Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+          },
         },
       );
       if (res.ok) {
@@ -85,9 +95,13 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
             onClick={() => onClickHandle()}
           />
 
-          <p className="text-neutral-500 text-base">{id + 1} - {lang === "ru" ? "модуль" : "modul"}</p>
+          <p className="text-neutral-500 text-base">
+            {id + 1} - {lang === "ru" ? "модуль" : "modul"}
+          </p>
           <p className="text-[22px] leading-[32px] text-neutral-500">
-            <Link href={bacData.id + ""}>{lang==='ru'? bacData.titleRu : bacData.titleUz}</Link>
+            <Link href={bacData.id + ""}>
+              {lang === "ru" ? bacData.titleRu : bacData.titleUz}
+            </Link>
           </p>
         </div>
       </div>
@@ -112,7 +126,6 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
           style={{ scrollbarWidth: "none" }}
         >
           <div className="flex flex-col gap-4 ">
-
             <div className="flex flex-col gap-2">
               <label className="font-normal text-sm text-neutral-400">
                 Название модуля
@@ -137,7 +150,6 @@ const Card = ({ bacData, id, lang, accessToken }: { bacData: data; id: number; l
                 className={`text-neutral-500 ${errors.titleUz ? "border-destructive focus-visible:!border-destructive" : ""}`}
               />
             </div>
-
 
             <div className="flex flex-col gap-2">
               <label className=" font-normal text-sm text-neutral-400">
