@@ -38,7 +38,7 @@ interface Response {
 
 async function getData<T>(id: string): Promise<T | Error> {
   const res = await fetch(
-    `https://oar-api.onrender.com/api/v1/courses/single/${id}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/courses/single/${id}`,
     {
       cache: "no-store",
     },
@@ -51,12 +51,12 @@ async function getData<T>(id: string): Promise<T | Error> {
   return res.json();
 }
 const AddModul = async ({
-  courseId, lang
+  courseId,
+  lang,
 }: {
-    courseId: string;
-    lang: "uz" | "ru"
-  }): Promise<JSX.Element> => {
-
+  courseId: string;
+  lang: "uz" | "ru";
+}): Promise<JSX.Element> => {
   const accessToken = cookies().get("accessToken")?.value;
   const response = await getData<Response>(courseId);
   if (response instanceof Error) {
@@ -65,11 +65,17 @@ const AddModul = async ({
   return (
     <div>
       <h1 className="text-[26px] leading-[36px] text-[#5A7A2E] mb-4">
-        {lang==="ru" ? response.titleRu: response.titleUz}
+        {lang === "ru" ? response.titleRu : response.titleUz}
       </h1>
       <div className="flex flex-wrap">
         {response.Module.map((data: data, id: number) => (
-          <Card key={id} bacData={data} id={id} lang={lang} accessToken={accessToken} />
+          <Card
+            key={id}
+            bacData={data}
+            id={id}
+            lang={lang}
+            accessToken={accessToken}
+          />
         ))}
         <AddCard id={courseId} accessToken={accessToken} lang={lang} />
       </div>

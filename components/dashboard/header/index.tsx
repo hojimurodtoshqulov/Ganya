@@ -1,22 +1,22 @@
 "use client";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { AlignJustify } from "lucide-react";
-import { UserButton } from "../details";
 import LocaleSwitcher from "@/components/shared/locale-switcher";
 
-
-const Header: FC<{ handleClick: () => void, dictionary: { label: string, path: string }[] }> = ({
-  handleClick, dictionary
-}): JSX.Element => {
+const Header: FC<{
+  handleClick: () => void;
+  dictionary: { label: string; path: string }[];
+  userButton: ReactNode;
+}> = ({ handleClick, dictionary, userButton: UserButton }): JSX.Element => {
   const sidebarLinks = [
     {
-      ...dictionary[4]
+      ...dictionary[4],
       // path: "edu",
       // label: "Обучение",
     },
     {
-      ...dictionary[5]
+      ...dictionary[5],
       // path: "profile",
       // label: "Профиль",
     },
@@ -40,7 +40,7 @@ const Header: FC<{ handleClick: () => void, dictionary: { label: string, path: s
         <div className="p-3 bg-csneutral-100 rounded-xl cursor-pointer flex items-center justify-center">
           <LocaleSwitcher />
         </div>
-        <UserButton />
+        {UserButton}
       </div>
     </header>
   );

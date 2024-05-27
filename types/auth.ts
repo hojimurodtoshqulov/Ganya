@@ -12,6 +12,8 @@ export const passwordSchema = z
 
 export const registerSchema = z
   .object({
+    name: z.string().min(1),
+    surname: z.string().min(1),
     emailOrPhone: z.union([emailSchema, phoneSchema]),
     password: passwordSchema,
     confirmPassword: passwordSchema,

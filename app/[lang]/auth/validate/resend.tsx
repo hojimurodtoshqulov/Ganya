@@ -18,6 +18,8 @@ const ResendCode: FC<{
     setDisBtn(true);
 
     const formData = new FormData();
+    formData.append("name", smsData?.[smsData?.name]);
+    formData.append("surname", smsData?.[smsData?.surname]);
     formData.append("emailOrPhone", smsData?.[smsData?.path]);
     formData.append("password", smsData?.password);
     formData.append("confirmPassword", smsData?.password);
@@ -32,7 +34,7 @@ const ResendCode: FC<{
       });
     } else {
       toast({
-        description: res?.message,
+        description: res?.message ?? "Something went wrong!",
         variant: "destructive",
       });
     }

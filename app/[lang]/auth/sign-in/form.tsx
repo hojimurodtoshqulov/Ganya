@@ -61,12 +61,12 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
             "border-destructive": passwordErr,
           })}
         />
-        <Link
+        {/* <Link
           href={"/"}
           className="block text-xs text-main-200 font-normal px-1 mt-2"
         >
           Забыли пароль?
-        </Link>
+        </Link> */}
       </div>
       <SubmitBtn className="text-base">Войти</SubmitBtn>
     </form>

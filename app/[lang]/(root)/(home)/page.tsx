@@ -4,7 +4,6 @@ import Fits from "@/components/shared/fits";
 import CourceCard from "@/components/shared/cource-card/courceCard";
 import Showcase from "@/components/shared/showcase";
 import SubscribtionForm from "@/components/shared/subscribtion-form/subscribtionForm";
-import { about, about1, reviews } from "@/constants";
 import { Accordion } from "@/components/shared/cource-card/accordian-card";
 import { Play } from "lucide-react";
 import Info from "@/components/shared/info/info";
@@ -72,8 +71,7 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-  const api = process.env.NEXT_PUBLIC_BASE_URL + "/comments/all";
-  const res = await fetch(api, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/all`, {
     cache: "no-store",
   });
 
