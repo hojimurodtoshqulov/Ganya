@@ -35,7 +35,7 @@ async function getPlans<T>(id: string): Promise<T[] | Error> {
 const SingleCourse: FC<{
   params: { singleCourseId: string; lang: "uz" | "ru" };
 }> = async ({ params: { singleCourseId, lang } }): Promise<JSX.Element> => {
-  const course = await getCourse(singleCourseId);
+  const course = await getCourse<any>(singleCourseId);
   const plans = await getPlans<{
     availablePeriod: number;
     includeResources: boolean;
@@ -51,7 +51,7 @@ const SingleCourse: FC<{
   return (
     <div className="p-8">
       <Accordion type="single" collapsible>
-        <CourceCard data={course} lang={lang} />
+        <CourceCard id={singleCourseId} lang={lang} />
       </Accordion>
 
       <div className="bg-white rounded-2xl pt-6 mt-10">
