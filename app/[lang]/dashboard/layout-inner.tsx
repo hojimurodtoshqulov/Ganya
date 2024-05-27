@@ -11,18 +11,20 @@ import {
 } from "react";
 import { Locale } from "@/lib/i18n-config";
 import { cn } from "@/lib/utils";
-import { usePathname, useSelectedLayoutSegment } from "next/navigation";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 interface Props {
   children: ReactNode;
   params: { lang: Locale; role?: string };
   dictionary: { label: string; path: string }[];
+  userButton: ReactNode;
 }
 
 const InnerLayout: FC<Props> = ({
   children,
   params: { lang, role },
   dictionary,
+  userButton,
 }): JSX.Element => {
   const pathname = useSelectedLayoutSegment();
 
@@ -60,7 +62,11 @@ const InnerLayout: FC<Props> = ({
 
       <div className="relative w-full flex-1">
         <div className="sticky top-0 left-0 w-full z-10">
-          <Header handleClick={handleClick} dictionary={dictionary} />
+          <Header
+            handleClick={handleClick}
+            dictionary={dictionary}
+            userButton={userButton}
+          />
         </div>
         <main
           className={`px-4 pt-3 md:p-6 md:pb-0 ${open ? "max-w-[calc(100vw_-_350px)]" : ""}`}
