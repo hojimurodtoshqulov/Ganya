@@ -57,38 +57,12 @@ export async function middleware(request: NextRequest) {
     );
   }
   // protect routes
-  const refreshToken = request.cookies.get("refreshToken")?.value ?? "";
-  if (!refreshToken && pathname.indexOf("/dashboard") > -1) {
+
+  const accessToken = request.cookies.get("accessToken")?.value ?? "";
+  if (!accessToken && pathname.indexOf("/dashboard") > -1) {
     return NextResponse.redirect(new URL("/auth/sign-in", request.url));
   }
-  const accessToken = request.cookies.get("accessToken")?.value ?? "";
-  if (!accessToken && pathname.includes("/dashboard")) {
-    const data = {
-      refreshToken: refreshToken,
-    };
-    const response = NextResponse.next();
-    const res = await fetch(
-      process.env.NEXT_PUBLIC_BASE_URL + "/auth/refresh-access-token",
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-      },
-    );
-    const json = await res.json();
 
-    if (!res.ok) {
-      return NextResponse.redirect(new URL("/auth/sign-in", request.url));
-    }
-    response.cookies.set({
-      name: "accessToken",
-      value: JSON.stringify(json.accessToken),
-      httpOnly: true,
-      maxAge: 60 * 60 * 24 * 1000,
-      path: "/",
-    });
-
-    return response;
-  }
   if (pathname.includes("/dashboard")) {
     let res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/users/profile", {
       cache: "no-store",
@@ -108,18 +82,7 @@ export async function middleware(request: NextRequest) {
     } else if (pathname.includes("/admin") && json?.role !== "admin") {
       return NextResponse.redirect(new URL("/auth/sign-in", request.url));
     }
-    if (json?.refreshToken) {
-      const response = NextResponse.next();
 
-      response.cookies.set({
-        name: "refreshToken",
-        value: json?.refreshToken,
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 * 6.5,
-        path: "/",
-      });
-      return response;
-    }
     if (!res.ok) {
       return NextResponse.redirect(new URL("/auth/sign-in", request.url));
     }
