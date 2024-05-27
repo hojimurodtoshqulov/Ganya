@@ -9,16 +9,7 @@ const nextConfig = {
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "d3cc8vm8tev909.cloudfront.net",
-      },
-      {
-        protocol: "https",
-        hostname: "d26he8z3dqi9fb.cloudfront.net",
-      },
-    ],
+    domains: ["d1j8y44xwwy6mv.cloudfront.net", "d26he8z3dqi9fb.cloudfront.net"],
   },
 
   webpack(config, options) {
