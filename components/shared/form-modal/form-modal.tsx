@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSchema, FormSchemaType } from "@/lib/types";
 import { fetchSendMessage } from "@/lib/utils";
+import toast from "react-hot-toast";
 
 function FormModal({ dict }: { dict: any }) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -34,8 +35,12 @@ function FormModal({ dict }: { dict: any }) {
     fetchSendMessage(data)
       .then((d) => {
         if (d.ok) setIsSuccess(d.ok);
+        toast.success(dict.admin.createLesson.toast.delete);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        toast.error(dict.admin.createLesson.toast.delete);
+        console.log(e)
+      });
 
     reset();
   };

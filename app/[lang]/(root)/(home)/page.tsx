@@ -17,6 +17,7 @@ import { teamMembers } from "@/constants/team";
 import { getDictionary } from "@/lib/get-dictionary";
 import MainVideo from "@/components/shared/main-video";
 import Banner from "@/components/shared/banner";
+import { Toaster } from "react-hot-toast";
 interface Review {
   id: string;
   username: string;
@@ -37,6 +38,8 @@ async function getData<T>(): Promise<T[] | Error> {
     },
   );
 
+
+
   if (!res.ok) {
     return new Error("Failed to fetch data");
   }
@@ -51,6 +54,8 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
         cache: "no-store",
       },
     );
+
+
 
     if (!res.ok) {
       return new Error("Failed to fetch data");
@@ -67,9 +72,11 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-  const res = await fetch("https://oar-api.onrender.com/api/v1/comments/all", {
+  const api = process.env.NEXT_PUBLIC_BASE_URL + "/comments/all";
+  const res = await fetch(api, {
     cache: "no-store",
   });
+
   const dataComment = await res.json();
   const dataComments = dataComment;
   const data = await getData<{
@@ -97,6 +104,8 @@ export default async function Home({
 
   const dcitionary = await getDictionary(lang);
   return (
+
+
     <div>
       <div id="about">
         <Showcase dict={dcitionary.home} />
@@ -134,9 +143,14 @@ export default async function Home({
 
       <div className="container my-10 md:my-20" id="courses">
         <Accordion type="single" collapsible>
-          <CourceCard data={course} lang={lang} />
+          <CourceCard id={"66546dae8914c17f245e754c"} lang={lang} />
         </Accordion>
       </div>
+
+      <div id="contacts">
+        <SubscribtionForm dict={dcitionary.home} />
+      </div>
+
 
       <div className="container my-10 md:my-20">
         <Carousel
@@ -177,10 +191,6 @@ export default async function Home({
           lang={lang}
           articles={dcitionary.home.articlesHome}
         />
-      </div>
-
-      <div id="contacts">
-        <SubscribtionForm dict={dcitionary.home} />
       </div>
     </div>
   );

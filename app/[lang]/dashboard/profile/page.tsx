@@ -35,11 +35,11 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
 
       <div className="mt-3 md:mt-5 mx-6 p-4 md:p-6 rounded-2xl bg-white ">
         <div className="flex gap-2 md:gap-4 lg:gap-5">
-          {user.avatar ? (
+          {user.avatar.includes('https://') ? (
             <div className="relative w-20 h-20 rounded-2xl">
               <Image
                 className="bg-slate-600  object-contain rounded-2xl"
-                src={user.avatar}
+                src={`https://${user.avatar}`}
                 fill={true}
                 alt="Profile image"
               />
@@ -51,7 +51,7 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
           <Link href={`/${lang}/dashboard/profile/edit`}>
             <div>
               <h3 className="text-3xl font-normal text-[#585D65]">
-                {user.fullname}
+                {user.name} {user.surname}
               </h3>
               <div className="flex md:py-3 md:px-5 py-1 px-3 bg-main-100 items-center rounded-[8px] mt-1 md:mt-3 cursor-pointer">
                 <HiOutlinePencilSquare />
