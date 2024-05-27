@@ -35,11 +35,11 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
 
       <div className="mt-3 md:mt-5 mx-6 p-4 md:p-6 rounded-2xl bg-white ">
         <div className="flex gap-2 md:gap-4 lg:gap-5">
-          {user.avatar.includes('https://') ? (
+          {user.avatar ? (
             <div className="relative w-20 h-20 rounded-2xl">
               <Image
                 className="bg-slate-600  object-contain rounded-2xl"
-                src={`https://${user.avatar}`}
+                src={user.avatar}
                 fill={true}
                 alt="Profile image"
               />

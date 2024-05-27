@@ -35,10 +35,10 @@ function FormModal({ dict }: { dict: any }) {
     fetchSendMessage(data)
       .then((d) => {
         if (d.ok) setIsSuccess(d.ok);
-        toast.success(dict.admin.createLesson.toast.delete);
+        toast.success(dict.showcase.showcasModul.success.title);
       })
       .catch((e) => {
-        toast.error(dict.admin.createLesson.toast.delete);
+        toast.error(dict.showcase.showcasModul.success.error);
         console.log(e)
       });
 

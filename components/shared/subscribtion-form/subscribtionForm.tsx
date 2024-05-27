@@ -12,6 +12,7 @@ import { useState } from "react";
 import { fetchSendMessage } from "@/lib/utils";
 import { FormSchema, FormSchemaType } from "@/lib/types";
 import { getDictionary } from "@/lib/get-dictionary";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function SubscriptionForm({ dict }: { dict: Awaited<ReturnType<typeof getDictionary>>['home'] }) {
   const [show, setShow] = useState(false);
@@ -29,15 +30,31 @@ export default function SubscriptionForm({ dict }: { dict: Awaited<ReturnType<ty
       .then((d) => {
         if (d.ok) {
           setShow(d.ok);
+          toast.success(dict.showcase.showcasModul.success.title)
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e)
+        toast.success(dict.showcase.showcasModul.success.error)
+      }
+      );
 
     reset();
   };
 
   return (
     <div className="container p-8 lg:p-20 rounded-[40px] bg-[#F4F1C6] flex flex-col items-center justify-center">
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            backgroundColor: "white",
+            borderRadius: "16px",
+            padding: "16px",
+            boxShadow: "box-shadow: 0px 24px 36px 0px #DEDEDE7A",
+          },
+        }}
+      />
       <h1 className="font-bold text-xl md:text-3xl lg:text-4xl text-main-300 font-comfortaa text-center leading-7">
         {dict.contact.text}
       </h1>

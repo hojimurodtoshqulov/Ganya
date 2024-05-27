@@ -102,8 +102,6 @@ export default async function Home({
 
   const dcitionary = await getDictionary(lang);
   return (
-
-
     <div>
       <div id="about">
         <Showcase dict={dcitionary.home} />
@@ -141,7 +139,7 @@ export default async function Home({
 
       <div className="container my-10 md:my-20" id="courses">
         <Accordion type="single" collapsible>
-          <CourceCard id={"66546dae8914c17f245e754c"} lang={lang} />
+          <CourceCard id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
         </Accordion>
       </div>
 

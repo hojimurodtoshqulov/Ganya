@@ -131,11 +131,11 @@ const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="">
                         <div className="flex gap-4 ">
-                            {defaultValue && defaultValue?.avatar.includes('https://') ? (
+                            {defaultValue && defaultValue?.avatar ? (
                                 <div className="relative w-20 h-20 rounded-2xl">
                                     <Image
                                         className="bg-slate-600  object-contain rounded-2xl"
-                                        src={`https://${defaultValue.avatar}`}
+                                        src={defaultValue.avatar}
                                         fill={true}
                                         alt="Profile image"
                                     />
