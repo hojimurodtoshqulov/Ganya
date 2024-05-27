@@ -15,6 +15,7 @@ export default function Showcase({
       <Toaster
         position="top-right"
         toastOptions={{
+          duration: 5000,
           style: {
             backgroundColor: "white",
             borderRadius: "16px",

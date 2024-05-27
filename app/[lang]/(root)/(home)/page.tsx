@@ -29,22 +29,23 @@ interface Review {
   updatedAt: string;
 }
 
-async function getData<T>(): Promise<T[] | Error> {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=completed",
-    {
-      cache: "no-store",
-    },
-  );
+// async function getData<T>(): Promise<T[] | Error> {
+//   const res = await fetch(
+//     process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=completed",
+//     {
+//       cache: "no-store",
+//     },
+//   );
 
 
 
-  if (!res.ok) {
-    return new Error("Failed to fetch data");
-  }
+//   if (!res.ok) {
+//     return new Error("Failed to fetch data");
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
+
 async function getCourse<T>(id: string): Promise<T[] | Error> {
   try {
     const res = await fetch(
@@ -77,28 +78,28 @@ export default async function Home({
 
   const dataComment = await res.json();
   const dataComments = dataComment;
-  const data = await getData<{
-    id: string;
-  }>();
+  // const data = await getData<{
+  //   id: string;
+  // }>();
 
-  if (data instanceof Error) {
-    return <h2>Failed to fetch data.</h2>;
-  }
-  const courseId = data.pop()?.id ?? "";
-  const course = await getCourse<{
-    id: string;
-    titleUz: string;
-    titleRu: string;
-    image: string;
-    descriptionUz: string;
-    descriptionRu: string;
-    courseStatus: string;
-    Module: any[];
-  }>(courseId);
+  // if (data instanceof Error) {
+  //   return <h2>Failed to fetch data.</h2>;
+  // }
+  // // const courseId = data.pop()?.id ?? "";
+  // const course = await getCourse<{
+  //   id: string;
+  //   titleUz: string;
+  //   titleRu: string;
+  //   image: string;
+  //   descriptionUz: string;
+  //   descriptionRu: string;
+  //   courseStatus: string;
+  //   Module: any[];
+  // }>(courseId);
 
-  if (course instanceof Error) {
-    return <h2>Failed to fetch data.</h2>;
-  }
+  // if (course instanceof Error) {
+  //   return <h2>Failed to fetch data.</h2>;
+  // }
 
   const dcitionary = await getDictionary(lang);
   return (
@@ -173,7 +174,7 @@ export default async function Home({
       </div>
 
       <div className="container my-10 md:my-20">
-        <Tariflar id={courseId} lang={lang} />
+        <Tariflar id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
       </div>
 
       <FAQ

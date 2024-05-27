@@ -32,7 +32,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
   useEffect(() => {
     async function getData() {
       const res = await fetch(
-        process.env.NEXT_PUBLIC_BASE_URL + `/courses/snigle/${id}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/courses/single/${id}`,
         {
           cache: "no-store",
         },
@@ -41,13 +41,12 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
       if (!res.ok) {
         return new Error("Failed to fetch data");
       }
-
-      setData(res.json())
-      // return res.json();
+      const a = await res.json()
+      setData(a)
     }
 
     getData()
-  }, [])
+  }, [id])
 
   if (type === "grid") {
     return (
@@ -114,7 +113,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
 
           <div className="grow flex flex-col justify-between space-y-8">
             <div className="flex flex-row items-center justify-between gap-4">
-              <Link href={`/${lang}/courses/${data?.id}`} className="flex justify-between grow">
+              <Link href={`/${lang}/courses/${id}`} className="flex justify-between grow">
                 <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
                   {lang === 'ru' ? data?.titleRu : data?.titleUz}
                 </h2>

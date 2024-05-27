@@ -34,7 +34,7 @@ function FormModal({ dict }: { dict: any }) {
   const onSubmit = async (data: FormSchemaType) => {
     fetchSendMessage(data)
       .then((d) => {
-        if (d.ok) setIsSuccess(d.ok);
+        if (d.ok) setIsSuccess(false);
         toast.success(dict.showcase.showcasModul.success.title);
       })
       .catch((e) => {
@@ -45,46 +45,54 @@ function FormModal({ dict }: { dict: any }) {
     reset();
   };
 
-  if (isSuccess)
-    return (
-      <Dialog
-        onOpenChange={(e) => {
-          if (isSuccess && !e) setIsSuccess(false);
-        }}
-      >
-        <DialogTrigger asChild>
-          <Button
-            className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8"
-            variant={"main"}
-          >
-            Оставить заявку
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] md:max-w-[648px]  ">
-          <div className="flex items-center justify-center flex-col">
-            <h2 className="text-h2">{dict.showcase.showcasModul.success.title}</h2>
-            <p className="text-csneutral-500 py-4">
-              {dict.showcase.showcasModul.success.paragraph}
-            </p>
+  // if (false)
+  //   return (
+  //     <Dialog
+  //       onOpenChange={(e) => {
+  //         if (isSuccess && !e) setIsSuccess(false);
+  //       }}
+  //     >
+  //       <DialogTrigger asChild>
+  //         <Button
+  //           className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8"
+  //           variant={"main"}
+  //         >
+  //           Оставить заявку
+  //         </Button>
+  //       </DialogTrigger>
+  //       <DialogContent className="sm:max-w-[425px] md:max-w-[648px]  ">
+  //         <div className="flex items-center justify-center flex-col">
+  //           <h2 className="text-h2">{dict.showcase.showcasModul.success.title}</h2>
+  //           <p className="text-csneutral-500 py-4">
+  //             {dict.showcase.showcasModul.success.paragraph}
+  //           </p>
 
-            <Image src={successIcon} alt="scuccess" />
-          </div>
+  //           <Image src={successIcon} alt="scuccess" />
+  //         </div>
 
-          <DialogClose asChild>
-            <Button className="text-lg font-normal" variant={"main"}>
-              {dict.showcase.showcasModul.success.close}
-            </Button>
-          </DialogClose>
-        </DialogContent>
-      </Dialog>
-    );
+  //         <DialogClose asChild>
+  //           <Button className="text-lg font-normal" variant={"main"}>
+  //             {dict.showcase.showcasModul.success.close}
+  //           </Button>
+  //         </DialogClose>
+  //       </DialogContent>
+  //     </Dialog>
+  //   );
+
+
+
+  // onOpenChange={(e) => {
+  // if (isSuccess && !e) setIsSuccess(false);
+  // }}
+
 
   return (
-    <Dialog>
+    <Dialog open={isSuccess} onOpenChange={setIsSuccess} >
       <DialogTrigger asChild>
         <Button
           className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8 text-main-300"
           variant={"filled"}
+          onChange={() => setIsSuccess(p => !p)}
         >
           {dict.showcase.showcasModul.btn}
         </Button>

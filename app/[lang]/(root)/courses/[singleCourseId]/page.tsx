@@ -3,6 +3,7 @@ import PlanCard from "@/components/shared/tariflar/card";
 import { Accordion } from "@/components/shared/cource-card/accordian-card";
 
 import { FC } from "react";
+import BackLink from "@/components/dashboard/back-link";
 
 async function getCourse<T>(id: string): Promise<T | Error> {
   const res = await fetch(
@@ -49,7 +50,10 @@ const SingleCourse: FC<{
   if (course instanceof Error || plans instanceof Error)
     return <h2>Failed to fetch course data.</h2>;
   return (
-    <div className="p-8">
+    <div className="px-8 pb-8 pt-28">
+      <div className="pb-4">
+        <BackLink title={lang === 'ru' ? "Назад" : "Orqaga"} heading="" />
+      </div>
       <Accordion type="single" collapsible>
         <CourceCard id={singleCourseId} lang={lang} />
       </Accordion>

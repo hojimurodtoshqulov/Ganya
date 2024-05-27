@@ -29,7 +29,7 @@ export default function SubscriptionForm({ dict }: { dict: Awaited<ReturnType<ty
     fetchSendMessage(data)
       .then((d) => {
         if (d.ok) {
-          setShow(d.ok);
+          setShow(false);
           toast.success(dict.showcase.showcasModul.success.title)
         }
       })
@@ -47,6 +47,7 @@ export default function SubscriptionForm({ dict }: { dict: Awaited<ReturnType<ty
       <Toaster
         position="top-right"
         toastOptions={{
+          duration: 5000,
           style: {
             backgroundColor: "white",
             borderRadius: "16px",
