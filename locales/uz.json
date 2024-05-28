@@ -20,7 +20,8 @@
         "success": {
           "title": "Sizning arizangiz qabul qilindi",
           "paragraph": "Tez orada menejerimiz siz bilan bog'lanadi",
-          "close": "Yopish"
+          "close": "Yopish",
+          "error": "Nimadur xato ketdi"
         }
       },
       "contact": {

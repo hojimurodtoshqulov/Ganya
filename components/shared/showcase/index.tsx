@@ -3,6 +3,7 @@ import FormModal from "../form-modal/form-modal";
 import showcaseHero from "@/images/showcase-hero1.png";
 import Media from "../media";
 import { type getDictionary } from "../../../lib/get-dictionary";
+import { Toaster } from "react-hot-toast";
 
 export default function Showcase({
   dict,
@@ -11,6 +12,18 @@ export default function Showcase({
 }) {
   return (
     <div className="w-full h-screen showcase-image bg-[#A9C26A]">
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 5000,
+          style: {
+            backgroundColor: "white",
+            borderRadius: "16px",
+            padding: "16px",
+            boxShadow: "box-shadow: 0px 24px 36px 0px #DEDEDE7A",
+          },
+        }}
+      />
       <div className="container pt-28 pb-6 md:pb-16 h-full">
         <div className="w-1/2 flex flex-col justify-between h-full">
           <div>

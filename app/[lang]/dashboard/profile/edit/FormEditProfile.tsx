@@ -12,14 +12,18 @@ import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 import { User2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { getLangText } from "@/lib/utils";
+import { cn, getLangText } from "@/lib/utils";
 import { emailSchema, phoneSchema, validateInput, passwordSchema } from "@/types/auth";
+import { Label } from "@radix-ui/react-dropdown-menu";
 
 
 
 const FormSchema = z.object({
-    fullName: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
+    name: z.string().min(2, {
+        message: "Name must be at least 2 characters.",
+    }),
+    surname: z.string().min(2, {
+        message: "Surname must be at least 2 characters.",
     }),
     emailOrPhone: z.union([emailSchema, phoneSchema]),
     avatar: z.union([z.string(), z.instanceof(FileList)]),
@@ -40,7 +44,7 @@ const passwordSch = z.object({
 
 
 const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", defaultValue: any, accToken: any }) => {
-    const { handleSubmit, register, reset, formState: { isSubmitting }
+    const { handleSubmit, register, reset, formState: { isSubmitting, errors: inputErrors }
     } = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: defaultValue ?? {}
@@ -56,7 +60,8 @@ const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         const api = process.env.NEXT_PUBLIC_BASE_URL + '/users/profile';
         const formData = new FormData()
-        formData.append('fullname', data.fullName)
+        formData.append('name', data.name)
+        formData.append('surname', data.surname)
 
         const type = validateInput(data.emailOrPhone) as "email" | "phone";
         formData.append(type, data.emailOrPhone)
@@ -149,7 +154,7 @@ const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", 
                                 <div className="flex py-1 px-3 md:py-3 md:px-5 bg-main-100 items-center rounded-[8px] mt-3 cursor-pointer">
                                     <label
                                         htmlFor="picture"
-                                        className="text-sm text-main-300 ml-1 cursor-pointer"
+                                        className={`text-sm text-main-300 ml-1 cursor-pointer ${inputErrors.avatar ? " border-destructive" : ""}`}
                                     >
                                         {getLangText(lang, "Rasmni tahrirlash", "Изменить фото профиля")}
                                     </label>
@@ -158,22 +163,47 @@ const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", 
                             </div>
                         </div>
                         <div >
-                            <div className="mt-5 md:grid grid-cols-2 gap-4 grid-rows-1 items-end space-y-3 md:space-y-0">
-                                <div className="">
-                                    <h3 className="text-xl md:text-3xl font-normal text-[#585D65] mb-2 md:mb-3">
-                                        {getLangText(lang, "Assosiy Malumotlar", "Основная информация")}
-                                    </h3>
-                                    <Input placeholder="Фамилия" {...register('fullName')} defaultValue={defaultValue?.fullname} />
+                            <div className="mt-5  space-y-3 md:space-y-0">
+                                <h3 className="text-xl md:text-3xl font-normal text-[#585D65] mb-2 md:mb-3">
+                                    {getLangText(lang, "Assosiy Malumotlar", "Основная информация")}
+                                </h3>
+                                <div className="flex flex-col md:flex-row gap-3">
+                                    <div className="grid w-full  items-center gap-1.5">
+                                        <Label>{getLangText(lang, "Ism", "Имя")}</Label>
+                                        <Input
+                                            placeholder={getLangText(lang, "Ism", "Имя")}
+                                            {...register('name')}
+                                            defaultValue={defaultValue?.name}
+                                        />
+                                    </div>
+                                    <div className="grid w-full  items-center gap-1.5">
+                                        <Label>{getLangText(lang, "Familya", "Фамилия")}</Label>
+                                        <Input
+                                            placeholder={getLangText(lang, "Familya", "Фамилия")}
+                                            {...register('surname')}
+                                            defaultValue={defaultValue?.surname} />
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 className=" text-xl md:text-3xl font-normal text-[#585D65] mb-2 md:mb-3">
-                                        {getLangText(lang, "Kontakt malumotlari", "Контактная информация")}
-                                    </h3>
-                                    {defaultValue?.phone ? (
-                                        <Input placeholder="Телефон" {...register("emailOrPhone", { required: false })} defaultValue={defaultValue?.phone} />
-                                    ) : (
-                                        <Input placeholder="Email" {...register('emailOrPhone', { required: false })} defaultValue={defaultValue?.email} />
-                                    )}
+                            </div>
+
+                            <div className="mt-5  space-y-3 md:space-y-0">
+                                <h3 className=" text-xl md:text-3xl font-normal text-[#585D65] mb-2 md:mb-3">
+                                    {getLangText(lang, "Kontakt malumotlari", "Контактная информация")}
+                                </h3>
+                                <div className="flex flex-col md:flex-row gap-3">
+                                    <div className="grid w-full  items-center gap-1.5">
+                                        <Label>{getLangText(lang, "Telefon", "Телефон")}</Label>
+                                        <Input
+                                            placeholder={getLangText(lang, "Telefon", "Телефон")}
+                                            {...register("emailOrPhone")}
+                                            defaultValue={defaultValue?.phone}
+                                            disabled={!defaultValue.phone} />
+                                    </div>
+                                    <div className="grid w-full  items-center gap-1.5">
+                                        <Label>Email</Label>
+                                        <Input placeholder="Email" {...register('emailOrPhone')} defaultValue={defaultValue.email} disabled={!defaultValue.email}
+                                        />
+                                    </div>
                                 </div>
                             </div>
 
@@ -187,8 +217,10 @@ const FormEditProfile = ({ lang, defaultValue, accToken }: { lang: "ru" | "uz", 
                 </form>
                 <form onSubmit={form.handleSubmit(passwordSubmit)}>
                     <div className="md:grid md:grid-cols-2 py-3 flex flex-col gap-3 pt-7">
-                        <Input type="password" {...form.register("password")} placeholder="Password" />
-                        <Input type="password" {...form.register('passwordCheck')} placeholder="Password Check" />
+                        <Input type="password" {...form.register("password")} placeholder="Password" className={`${form.formState.errors.password ? "border-destructive" : ""}`} />
+                        <Input type="password" {...form.register('passwordCheck')} placeholder="Password Check"
+                            className={`${form.formState.errors.passwordCheck ? "border-destructive" : ""}`} />
+
                     </div>
                     <div className="flex justify-end  mt-3 ">
                         <Button type="submit" variant={"main"} disabled={isSubmitting}>
