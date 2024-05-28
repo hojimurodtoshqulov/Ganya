@@ -7,7 +7,6 @@ import SubscribtionForm from "@/components/shared/subscribtion-form/subscribtion
 import { Accordion } from "@/components/shared/cource-card/accordian-card";
 import { Play } from "lucide-react";
 import Info from "@/components/shared/info/info";
-import ReviewCard from "@/components/shared/review";
 import TeamCard from "@/components/shared/team";
 import Tariflar from "@/components/shared/tariflar/tariflar";
 import Stati from "@/components/shared/stati/stati";
@@ -17,17 +16,7 @@ import { getDictionary } from "@/lib/get-dictionary";
 import MainVideo from "@/components/shared/main-video";
 import Banner from "@/components/shared/banner";
 import { Toaster } from "react-hot-toast";
-interface Review {
-  id: string;
-  username: string;
-  occupationUz: string;
-  occupationRu: string;
-  textUz: string;
-  textRu: string;
-  isPublished: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+import Reviews from "@/components/shared/review/reviews";
 
 // async function getData<T>(): Promise<T[] | Error> {
 //   const res = await fetch(
@@ -72,12 +61,6 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/all`, {
-    cache: "no-store",
-  });
-
-  const dataComment = await res?.json();
-  const dataComments = dataComment;
   // const data = await getData<{
   //   id: string;
   // }>();
@@ -150,12 +133,7 @@ export default async function Home({
 
 
       <div className="container my-10 md:my-20">
-        <Carousel
-          title={dcitionary.home.Reviews.title}
-          data={dataComments.map((r: Review, i: number) => (
-            <ReviewCard key={i} review={r} lang={lang} />
-          ))}
-        />
+        <Reviews lang={lang} />
       </div>
 
       <div className="container my-10 md:my-20" id="team">
