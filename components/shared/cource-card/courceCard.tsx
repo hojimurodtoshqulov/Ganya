@@ -13,6 +13,7 @@ import {
   AccordionTrigger,
 } from "./accordian-card";
 import { ImageIcon } from "lucide-react";
+import { getLangText } from "@/lib/utils";
 
 interface Props {
   gridData?: any;
@@ -23,7 +24,7 @@ interface Props {
 
 
 const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
   const [data, setData] = useState<any>([])
   const totalModules = data?.Module?.length;
   const gridDataModules = gridData?.Module?.length;
@@ -91,10 +92,10 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
   }
 
   return (
-    <AccordionItem value={data?.id} className="border-none ">
+    <AccordionItem value={data?.id} className="border-none">
       <div className=" rounded-[20px] md:rounded-[40px] overflow-hidden  bg-csneutral-100">
         <div
-          className={` ${toggle ? "bg-main-100" : "bg-csneutral-100"} transition-colors   flex flex-col md:flex-row w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px] lg:h-[320px]`}
+          className={` ${toggle ? "bg-main-100" : "bg-csneutral-100"} transition-colors   flex flex-col md:grid md:grid-cols-[2fr_3fr] w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px] lg:h-[320px]`}
         >
           <div className=" md:h-56 md:w-[370px] lg:h-60 lg:w-[485px]  h-[180px] w-full relative">
             {data?.image ? (
@@ -111,8 +112,8 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
             )}
           </div>
 
-          <div className="grow flex flex-col justify-between space-y-8">
-            <div className="flex flex-row items-center justify-between gap-4">
+          <div className="grow flex flex-col justify-between">
+            <div className="flex flex-col  justify-between gap-4">
               <Link href={`/${lang}/courses/${id}`} className="flex justify-between grow">
                 <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
                   {lang === 'ru' ? data?.titleRu : data?.titleUz}
@@ -123,10 +124,10 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
                   className="hidden md:block"
                 />
               </Link>
-
+              <p className="text-sm md:text-base"> {getLangText(lang, data?.descriptionUz, data?.descriptionRu)} </p>
               <AccordionTrigger
                 onClick={() => setToggle((e) => !e)}
-                className={`${buttonVariants({ variant: "main" })}  md:hidden w-11 h-11 md:w-14 md:h-14`}
+                className={`${buttonVariants({ variant: "main" })} hidden  w-11 h-11 md:w-14 md:h-14`}
               ></AccordionTrigger>
             </div>
 
@@ -139,13 +140,13 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
 
               <AccordionTrigger
                 onClick={() => setToggle((e) => !e)}
-                className={`${buttonVariants({ variant: "main" })}  hidden md:flex w-11 h-11 md:w-14 md:h-14 `}
+                className={`${buttonVariants({ variant: "main" })} w-11 h-11 md:w-14 md:h-14 `}
               ></AccordionTrigger>
             </div>
           </div>
         </div>
 
-        <AccordionContent>
+        <AccordionContent >
           <div className="p-4 lg:p-10 xl:py-12 xl:px-10  w-full  overflow-hidden ">
             <div className="flex flex-col md:grid md:grid-cols-2 gap-5  relative">
               {data?.Module?.map((item: any, index: any) => (
@@ -168,29 +169,23 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
               ))}
             </div>
 
-            <div className="bg-main-100 rounded-3xl p-3 md:p-5 md:grid md:grid-rows-2 md:grid-cols-6 md:gap-4 md:mt-8 mt-5 justify-start items-center h-auto">
-              <div className="md:row-span-2 md:col-span-1 md:flex md:justify-center">
-                <Image
-                  src={childrensSchedule}
-                  alt="salom"
-                  className="w-16 h-20 md:w-24 md:h-30"
-                />
-              </div>
-              <div className="md:col-span-5">
-                <h4 className="text-lg font-normal text-main-300 md:hidden">
-                  Подарок для каждой участницы курса:
-                </h4>
-                <h1 className="font-comfortaa font-bold text-2xl sm:text-3xl text-main-300 md:hidden">
-                  Книга рецептов для малышей до года и т.д.
-                </h1>
-                <h4 className="text-lg font-normal text-main-300 hidden md:block">
-                  Подарок для каждой участницы курса:
-                </h4>
-                <h1 className="font-comfortaa font-bold text-2xl sm:text-3xl text-main-300 hidden md:block">
-                  Книга рецептов для малышей до года и т.д.
-                </h1>
-              </div>
+            <div className="grid bg-main-100 rounded-3xl p-3 h-[202px] justify-start items-center md:grid-cols-[70px_1fr] gap-2 md:p-5  md:grid-rows-2 md:mt-8 mt-5  md:gap-4  md:items-center sm:h-auto">
+              <Image
+                src={childrensSchedule}
+                alt="salom"
+                className="md:row-span-3 row-span-1 col-span-1"
+                width={69}
+                height={86}
+              />
+              <h4 className="text-lg font-normal text-main-300 row-span-1 col-start-2 col-span-4">
+                Подарок для каждой участницы курса:
+              </h4>
+              <h1 className="w-full font-comfortaa font-bold text-[20px] leading-6 sm:text-[22px] sm:leading-7 md:text-3xl text-main-300 row-span-2 col-start-1 col-span-4  md:row-span-2 md:col-span-2">
+                Книга рецептов для малышей до года и тд
+              </h1>
             </div>
+
+
 
 
           </div>
