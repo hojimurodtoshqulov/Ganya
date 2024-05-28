@@ -6,7 +6,7 @@ import siblingsHero from "@/images/siblings-hero.png";
 import childrensSchedule from "@/images/childrens-schedule.png";
 import arrowCorner from "@/icons/arrowleftCorner.svg";
 import { buttonVariants } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AccordionContent,
   AccordionItem,
@@ -15,14 +15,38 @@ import {
 import { ImageIcon } from "lucide-react";
 
 interface Props {
-  data?: any;
+  gridData?: any;
+  id?: string;
   type?: string;
   lang: string
 }
 
-const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
+
+const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
   const [toggle, setToggle] = useState(false);
+  const [data, setData] = useState<any>([])
   const totalModules = data?.Module?.length;
+  const gridDataModules = gridData?.Module?.length;
+
+
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/courses/single/${id}`,
+        {
+          cache: "no-store",
+        },
+      );
+
+      if (!res.ok) {
+        return new Error("Failed to fetch data");
+      }
+      const a = await res.json()
+      setData(a)
+    }
+
+    getData()
+  }, [id])
 
   if (type === "grid") {
     return (
@@ -30,10 +54,10 @@ const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
         className={`bg-csneutral-100 transition-colors   flex flex-col w-full  gap-4 lg:gap-10  p-4 lg:p-6 xl:p-7 rounded-[20px] xl:rounded-[40px] justify-between `}
       >
         <div className="relative w-full h-56 ">
-          {data?.image ? (
+          {gridData?.image ? (
             <Image
-              src={data.image}
-              alt={data?.descriptionRu}
+              src={gridData.image}
+              alt={gridData?.descriptionRu}
               className="rounded-[20px] xl:rounded-[40px] h-auto w-auto  overflow-hidden"
               fill={true}
             />
@@ -47,9 +71,9 @@ const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
         <div className="flex flex-col justify-between space-y-8">
           <div className="flex flex-row items-center justify-between gap-4 grow">
             <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
-              {lang === 'ru' ? data?.titleRu : data?.titleUz}
+              {lang === 'ru' ? gridData?.titleRu : gridData?.titleUz}
             </h2>
-            <Link href={`/${lang}/courses/${data?.id}`} className="flex justify-end">
+            <Link href={`/${lang}/courses/${gridData?.id}`} className="flex justify-end">
               <Image src={arrowCorner} alt="salom" className="md:block" />
             </Link>
           </div>
@@ -57,7 +81,7 @@ const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
           <div className="flex flex-row items-center justify-between gap-2">
             <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
               <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">
-                {totalModules} {lang === 'ru' ? 'Модуля' : 'Modul'}
+                {gridDataModules} {lang === 'ru' ? 'Модуля' : 'Modul'}
               </p>
             </div>
           </div>
@@ -89,7 +113,7 @@ const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
 
           <div className="grow flex flex-col justify-between space-y-8">
             <div className="flex flex-row items-center justify-between gap-4">
-              <Link href={`/${lang}/courses/${data?.id}`} className="flex justify-between grow">
+              <Link href={`/${lang}/courses/${id}`} className="flex justify-between grow">
                 <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
                   {lang === 'ru' ? data?.titleRu : data?.titleUz}
                 </h2>
@@ -144,7 +168,7 @@ const CourceCard: React.FC<Props> = ({ data, type, lang }) => {
               ))}
             </div>
 
-            <div className="hidden bg-main-100 rounded-3xl p-3 md:p-5  md:grid-rows-2 grid-rows-2 md:mt-8 mt-5 grid-flow-col gap-2 md:gap-4 justify-start items-center md:items-center h-[202px] sm:h-auto">
+            <div className=" bg-main-100 rounded-3xl p-3 md:p-5  md:grid-rows-2 grid-rows-2 md:mt-8 mt-5 grid-flow-col gap-2 md:gap-4 justify-start items-center md:items-center h-[202px] sm:h-auto">
               <Image
                 src={childrensSchedule}
                 alt="salom"

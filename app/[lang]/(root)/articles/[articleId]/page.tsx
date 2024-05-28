@@ -16,7 +16,7 @@ interface propstype {
 }
 async function getData(articlesId: string) {
   const res = await fetch(
-    `https://oar-api.onrender.com/api/v1/articles/single/${articlesId}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/articles/single/${articlesId}`,
     {
       cache: "no-cache",
     },
@@ -26,7 +26,7 @@ async function getData(articlesId: string) {
 }
 
 async function getDetel() {
-  const res = await fetch(`https://oar-api.onrender.com/api/v1/articles/all`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/articles/all`, {
     cache: "no-cache",
   });
 

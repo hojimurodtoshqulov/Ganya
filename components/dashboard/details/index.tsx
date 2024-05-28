@@ -3,7 +3,7 @@ import Link from "next/link";
 import LogoImg from "@/images/dashboard-logo.svg";
 import Message from "@/images/message.svg";
 import { FC } from "react";
-import { ChevronRight, LucideIcon, UserCircle } from "lucide-react";
+import { ChevronRight, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const Logo: FC = (): JSX.Element => {
@@ -14,7 +14,9 @@ export const Logo: FC = (): JSX.Element => {
   );
 };
 
-export const SidebarContact: FC<{ lang: 'ru' | 'uz' }> = ({lang}): JSX.Element => {
+export const SidebarContact: FC<{ lang: "ru" | "uz" }> = ({
+  lang,
+}): JSX.Element => {
   return (
     <Link
       href={"#"}
@@ -28,8 +30,14 @@ export const SidebarContact: FC<{ lang: 'ru' | 'uz' }> = ({lang}): JSX.Element =
         className="flex-shrink-0"
       />
       <div>
-        <h5 className="font-bold text-sm font-comfortaa">{lang === "ru" ? "Связаться с нами" : "Biz bilan bog'lanish" }</h5>
-        <p className="text-xs text-csneutral-400">{lang === "ru" ? "Ответим на все вопросы" : "Biz barcha savollarga javob beramiz"}</p>
+        <h5 className="font-bold text-sm font-comfortaa">
+          {lang === "ru" ? "Связаться с нами" : "Biz bilan bog'lanish"}
+        </h5>
+        <p className="text-xs text-csneutral-400">
+          {lang === "ru"
+            ? "Ответим на все вопросы"
+            : "Biz barcha savollarga javob beramiz"}
+        </p>
       </div>
       <ChevronRight size={20} className="flex-shrink-0" />
     </Link>
@@ -61,18 +69,6 @@ export const SidebarButton: FC<SidebarBtnProps> = ({
     >
       <Icon width={24} height={24} />
       <span>{label}</span>
-    </div>
-  );
-};
-
-export const UserButton: FC = (): JSX.Element => {
-  return (
-    <div className="flex gap-2 items-center">
-      <UserCircle size={40} className="rounded-full" />
-      <div className="hidden sm:block">
-        <h5 className="font-bold text-sm font-comfortaa">John Doe</h5>
-        <p className="text-xs text-csneutral-400">Ученик</p>
-      </div>
     </div>
   );
 };

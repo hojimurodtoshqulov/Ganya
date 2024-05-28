@@ -1,21 +1,21 @@
-import React from 'react'
-import AddBanner from './addCard'
-import BannerCard from './card'
-import { cookies } from 'next/headers';
-import { getDictionary } from '@/lib/get-dictionary';
+import React from "react";
+import AddBanner from "./addCard";
+import BannerCard from "./card";
+import { cookies } from "next/headers";
+import { getDictionary } from "@/lib/get-dictionary";
 
 interface banner {
-  "id": string,
-  "createdAt": string,
-  "updatedAt": string,
-  "imageWeb": string,
-  "imageMobile": string,
-  "link": string,
-  "isPublished": boolean
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  imageWeb: string;
+  imageMobile: string;
+  link: string;
+  isPublished: boolean;
 }
 
 async function getData<T>(): Promise<T | Error> {
-  const res = await fetch("https://oar-api.onrender.com/api/v1/banners/all", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/banners/all`, {
     cache: "no-store",
   });
 
@@ -29,7 +29,7 @@ async function getData<T>(): Promise<T | Error> {
 const Banner = async ({ lang }: { lang: "uz" | "ru" }) => {
   const accessToken = cookies().get("accessToken")?.value;
 
-  const dictionary = await getDictionary(lang)
+  const dictionary = await getDictionary(lang);
 
   const banners = await getData<banner[]>();
   if (banners instanceof Error) {
@@ -37,13 +37,24 @@ const Banner = async ({ lang }: { lang: "uz" | "ru" }) => {
   }
 
   return (
-    <div className='bg-neutral-100 flex flex-wrap gap-5'>
+    <div className="bg-neutral-100 flex flex-wrap gap-5">
       {banners.map((banner, id) => (
-        <BannerCard key={id} banner={banner} id={id} accessToken={accessToken} lang={lang} dictionary={dictionary.dashboard.admin.baner.modal} />
+        <BannerCard
+          key={id}
+          banner={banner}
+          id={id}
+          accessToken={accessToken}
+          lang={lang}
+          dictionary={dictionary.dashboard.admin.baner.modal}
+        />
       ))}
-      <AddBanner accessToken={accessToken} lang={lang} dictionary={dictionary.dashboard.admin.baner.modal} />
+      <AddBanner
+        accessToken={accessToken}
+        lang={lang}
+        dictionary={dictionary.dashboard.admin.baner.modal}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;

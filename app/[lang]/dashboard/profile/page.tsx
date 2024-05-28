@@ -51,7 +51,7 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
           <Link href={`/${lang}/dashboard/profile/edit`}>
             <div>
               <h3 className="text-3xl font-normal text-[#585D65]">
-                {user.fullname}
+                {user.name} {user.surname}
               </h3>
               <div className="flex md:py-3 md:px-5 py-1 px-3 bg-main-100 items-center rounded-[8px] mt-1 md:mt-3 cursor-pointer">
                 <HiOutlinePencilSquare />

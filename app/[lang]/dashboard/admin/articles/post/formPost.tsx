@@ -74,7 +74,7 @@ const FormPostArticle: FC<Props> = ({ accessToken, lang, langue }) => {
     formData.append("textUz", data.textUz);
     formData.append("link", data.link);
 
-    const api = "https://oar-api.onrender.com/api/v1" + "/articles/create";
+    const api = process.env.NEXT_PUBLIC_BASE_URL + "/articles/create";
     try {
       const req = await fetch(api, {
         method: "POST",
