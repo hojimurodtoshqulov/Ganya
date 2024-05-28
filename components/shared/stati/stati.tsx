@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import CardStatya from "./card-stati";
 import { buttonVariants } from "@/components/ui/button";
