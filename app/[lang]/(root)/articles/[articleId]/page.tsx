@@ -18,7 +18,7 @@ async function getData(articlesId: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/articles/single/${articlesId}`,
     {
-      cache: "no-cache",
+      cache: "no-store",
     },
   );
 
@@ -27,7 +27,7 @@ async function getData(articlesId: string) {
 
 async function getDetel() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/articles/all`, {
-    cache: "no-cache",
+    cache: "no-store",
   });
 
   return res.json();
