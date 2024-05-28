@@ -168,21 +168,31 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
               ))}
             </div>
 
-            <div className=" bg-main-100 rounded-3xl p-3 md:p-5  md:grid-rows-2 grid-rows-2 md:mt-8 mt-5 grid-flow-col gap-2 md:gap-4 justify-start items-center md:items-center h-[202px] sm:h-auto">
-              <Image
-                src={childrensSchedule}
-                alt="salom"
-                className="md:row-span-3 row-span-1 col-span-1"
-                width={69}
-                height={86}
-              />
-              <h4 className="text-lg font-normal text-main-300 row-span-1 col-start-2 col-span-4">
-                Подарок для каждой участницы курса:
-              </h4>
-              <h1 className="w-full font-comfortaa font-bold text-[20px] leading-6 sm:text-[22px] sm:leading-7 md:text-3xl text-main-300 row-span-2 col-start-1 col-span-4  md:row-span-2 md:col-span-2">
-                Книга рецептов для малышей до года и тд
-              </h1>
+            <div className="bg-main-100 rounded-3xl p-3 md:p-5 md:grid md:grid-rows-2 md:grid-cols-6 md:gap-4 md:mt-8 mt-5 justify-start items-center h-auto">
+              <div className="md:row-span-2 md:col-span-1 md:flex md:justify-center">
+                <Image
+                  src={childrensSchedule}
+                  alt="salom"
+                  className="w-16 h-20 md:w-24 md:h-30"
+                />
+              </div>
+              <div className="md:col-span-5">
+                <h4 className="text-lg font-normal text-main-300 md:hidden">
+                  Подарок для каждой участницы курса:
+                </h4>
+                <h1 className="font-comfortaa font-bold text-2xl sm:text-3xl text-main-300 md:hidden">
+                  Книга рецептов для малышей до года и т.д.
+                </h1>
+                <h4 className="text-lg font-normal text-main-300 hidden md:block">
+                  Подарок для каждой участницы курса:
+                </h4>
+                <h1 className="font-comfortaa font-bold text-2xl sm:text-3xl text-main-300 hidden md:block">
+                  Книга рецептов для малышей до года и т.д.
+                </h1>
+              </div>
             </div>
+
+
           </div>
         </AccordionContent>
       </div>
