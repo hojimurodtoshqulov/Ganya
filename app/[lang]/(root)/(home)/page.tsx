@@ -76,7 +76,7 @@ export default async function Home({
     cache: "no-store",
   });
 
-  const dataComment = await res.json();
+  const dataComment = await res?.json();
   const dataComments = dataComment;
   // const data = await getData<{
   //   id: string;
