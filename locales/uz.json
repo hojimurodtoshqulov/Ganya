@@ -66,23 +66,23 @@
       "cards": [
         {
           "id": 1,
-          "text": "Ota-onalar qo'shimcha oziqlantirishni joriy qilishni rejalashtirmoqda va ma'lumotlarning ko'pligidan hayratda."
+          "text": "Qo'shimcha ovqatlarni to'g'ri kiritishni xohlaydigan va ma'lumot dengizini tushuna olmaydigan ota-onalar uchun."
         },
         {
           "id": 2,
-          "text": "Farzandlarida to'g'ri ovqatlanish odatlarini rivojlantirmoqchi bo'lgan va oziq-ovqatga qiziqishini rivojlantirmoqchi bo'lgan ota-onalar."
+          "text": "Bolalarda sog'lom ovqatlanish odatlarini shakllantirishga va turli xil ovqatlarga qiziqishni rivojlantirishga intilayotganlar uchun."
         },
         {
           "id": 3,
-          "text": "Bolasini butun oila bilan mustaqil ovqatlanishga o'rgatmoqchi bo'lgan ota-onalar."
+          "text": "Farzandini oilasi bilan mustaqil ovqatlanishga o'rgatmoqchi bo'lgan ota-onalar uchun."
         },
         {
           "id": 4,
-          "text": "Qo'shimcha oziqlantirishni joriy etishda muammolarga duch kelgan va samarali echimlarni izlayotgan ota-onalar."
+          "text": "Qo'shimcha oziq-ovqatlarni kiritishda qiyinchiliklarga duch kelgan va ishonchli va tasdiqlangan echimlarni izlayotganlar uchun."
         },
         {
           "id": 5,
-          "text": "Stress va tashvishlardan qochib, o'z farzandining ovqatlanishini tabiiy va beparvo qilishni xohlaydigan ota-onalar"
+          "text": "Farzandini oziqlantirishni tabiiy va xotirjam jarayonga aylantirmoqchi bo'lgan ota-onalar uchun, stress va tashvishlardan qochadi."
         }
       ]
     },

@@ -7,25 +7,29 @@ import { User2Icon } from "lucide-react";
 
 const getUser = async () => {
   const api = process.env.NEXT_PUBLIC_BASE_URL + "/users/profile";
-  const accessToken = cookies().get('accessToken')?.value
+  const accessToken = cookies().get("accessToken")?.value;
   try {
     const req = await fetch(api, {
       cache: "no-store",
       headers: {
-        Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`
-      }
-    })
+        Authorization: `Bearer ${JSON.parse(accessToken ?? "")}`,
+      },
+    });
 
-    if (!req.ok) throw new Error('Не удалось получить')
+    if (!req.ok) throw new Error("Не удалось получить");
 
-    const res = await req.json()
-    return res
+    const res = await req.json();
+    return res;
   } catch (error: any) {
     console.log(error.message);
   }
-}
+};
 
-export default async function Profile({ params: { lang } }: { params: { lang: 'ru' | 'uz' } }) {
+export default async function Profile({
+  params: { lang },
+}: {
+  params: { lang: "ru" | "uz" };
+}) {
   const user = await getUser();
   return (
     <div className="w-full">
@@ -44,10 +48,11 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
                 alt="Profile image"
               />
             </div>
-          ) : (<div className="rounded-2xl bg-gray-100 flex items-center justify-center p-5">
-            <User2Icon className="w-20 h-20" />
-          </div>)
-          }
+          ) : (
+            <div className="rounded-2xl bg-gray-100 flex items-center justify-center p-5">
+              <User2Icon className="w-20 h-20" />
+            </div>
+          )}
           <Link href={`/${lang}/dashboard/profile/edit`}>
             <div>
               <h3 className="text-3xl font-normal text-[#585D65]">
@@ -82,7 +87,6 @@ export default async function Profile({ params: { lang } }: { params: { lang: 'r
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
-};
-
+}
