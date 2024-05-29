@@ -19,16 +19,14 @@ interface Props {
   gridData?: any;
   id?: string;
   type?: string;
-  lang: string
+  lang: string;
 }
-
 
 const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
   const [toggle, setToggle] = useState(true);
-  const [data, setData] = useState<any>([])
+  const [data, setData] = useState<any>([]);
   const totalModules = data?.Module?.length;
   const gridDataModules = gridData?.Module?.length;
-
 
   useEffect(() => {
     async function getData() {
@@ -42,12 +40,12 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
       if (!res.ok) {
         return new Error("Failed to fetch data");
       }
-      const a = await res.json()
-      setData(a)
+      const a = await res.json();
+      setData(a);
     }
 
-    getData()
-  }, [id])
+    getData();
+  }, [id]);
 
   if (type === "grid") {
     return (
@@ -72,9 +70,12 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
         <div className="flex flex-col justify-between space-y-8">
           <div className="flex flex-row items-center justify-between gap-4 grow">
             <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
-              {lang === 'ru' ? gridData?.titleRu : gridData?.titleUz}
+              {lang === "ru" ? gridData?.titleRu : gridData?.titleUz}
             </h2>
-            <Link href={`/${lang}/courses/${gridData?.id}`} className="flex justify-end">
+            <Link
+              href={`/${lang}/courses/${gridData?.id}`}
+              className="flex justify-end"
+            >
               <Image src={arrowCorner} alt="salom" className="md:block" />
             </Link>
           </div>
@@ -82,7 +83,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
           <div className="flex flex-row items-center justify-between gap-2">
             <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
               <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">
-                {gridDataModules} {lang === 'ru' ? 'Модуля' : 'Modul'}
+                {gridDataModules} {lang === "ru" ? "Модуля" : "Modul"}
               </p>
             </div>
           </div>
@@ -114,9 +115,12 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
 
           <div className="grow flex flex-col justify-between">
             <div className="flex flex-col  justify-between gap-4">
-              <Link href={`/${lang}/courses/${id}`} className="flex justify-between grow">
+              <Link
+                href={`/${lang}/courses/${id}`}
+                className="flex justify-between grow"
+              >
                 <h2 className="font-bold text-[22px] md:text-4xl lg:text-[44px] text-main-300 font-comfortaa">
-                  {lang === 'ru' ? data?.titleRu : data?.titleUz}
+                  {lang === "ru" ? data?.titleRu : data?.titleUz}
                 </h2>
                 <Image
                   src={arrowCorner}
@@ -124,7 +128,9 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
                   className="hidden md:block"
                 />
               </Link>
-              <p className="text-sm md:text-base"> {getLangText(lang, data?.descriptionUz, data?.descriptionRu)} </p>
+              <p className="mt-0 sm:mt-2  md::mt-6 font-normal text-[14px] md:text-xl lg:text-[20px] md:leading-[28px] text-main-300 font-comfortaa">
+                {getLangText(lang, data?.descriptionUz, data?.descriptionRu)}{" "}
+              </p>
               <AccordionTrigger
                 onClick={() => setToggle((e) => !e)}
                 className={`${buttonVariants({ variant: "main" })} hidden  w-11 h-11 md:w-14 md:h-14`}
@@ -134,7 +140,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
             <div className="flex flex-row items-center justify-between gap-2">
               <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
                 <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">
-                  {totalModules} {lang === 'ru' ? 'Модуля' : 'Modul'}
+                  {totalModules} {lang === "ru" ? "Модуля" : "Modul"}
                 </p>
               </div>
 
@@ -146,7 +152,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
           </div>
         </div>
 
-        <AccordionContent >
+        <AccordionContent>
           <div className="p-4 lg:p-10 xl:py-12 xl:px-10  w-full  overflow-hidden ">
             <div className="flex flex-col md:grid md:grid-cols-2 gap-5  relative">
               {data?.Module?.map((item: any, index: any) => (
@@ -155,14 +161,14 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
                     className={` md:border-b-0 md:my-4 border-csneutral-200 ${index % 2 === 1 ? "md:border-l  md:pl-5 border-csneutral-200" : ""}  ${index < totalModules - 1 ? "border-b  pb-3 md:pb-0" : "border-b-0"}`}
                   >
                     <h3 className="text-2xl md:text-[32px] mb-4 text-csneutral-600 font-bold font-comfortaa">
-                      {lang === 'ru' ? item.titleRu : item?.titleUz}
+                      {lang === "ru" ? item.titleRu : item?.titleUz}
                     </h3>
                     <p className="text-base md:text-lg text-csneutral-500 font-normal">
-                      {lang === 'ru' ? item.descriptionRu : item.descriptionUz}
+                      {lang === "ru" ? item.descriptionRu : item.descriptionUz}
                     </p>
                   </div>
                   {index % 2 === 1 &&
-                    (index < totalModules - 2 || index < totalModules - 1) ? (
+                  (index < totalModules - 2 || index < totalModules - 1) ? (
                     <span className=" my-3 md:absolute  right-0 h-[1px] w-[100%] bg-csneutral-200"></span>
                   ) : null}
                 </div>
@@ -184,10 +190,6 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
                 Книга рецептов для малышей до года и тд
               </h1>
             </div>
-
-
-
-
           </div>
         </AccordionContent>
       </div>
