@@ -16,7 +16,9 @@ import { getDictionary } from "@/lib/get-dictionary";
 import MainVideo from "@/components/shared/main-video";
 import Banner from "@/components/shared/banner";
 import { Toaster } from "react-hot-toast";
+
 import Reviews from "@/components/shared/review/reviews";
+import Partners from "@/components/shared/Partners";
 
 // async function getData<T>(): Promise<T[] | Error> {
 //   const res = await fetch(
@@ -25,8 +27,6 @@ import Reviews from "@/components/shared/review/reviews";
 //       cache: "no-store",
 //     },
 //   );
-
-
 
 //   if (!res.ok) {
 //     return new Error("Failed to fetch data");
@@ -44,8 +44,6 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
       },
     );
 
-
-
     if (!res.ok) {
       return new Error("Failed to fetch data");
     }
@@ -61,6 +59,7 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
+
   // const data = await getData<{
   //   id: string;
   // }>();
@@ -131,7 +130,6 @@ export default async function Home({
         <SubscribtionForm dict={dcitionary.home} />
       </div>
 
-
       <div className="container my-10 md:my-20">
         <Reviews lang={lang} />
       </div>
@@ -166,6 +164,9 @@ export default async function Home({
           lang={lang}
           articles={dcitionary.home.articlesHome}
         />
+      </div>
+      <div>
+        <Partners lang={lang} dcitionary={dcitionary} />
       </div>
     </div>
   );
