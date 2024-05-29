@@ -59,30 +59,6 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-
-  // const data = await getData<{
-  //   id: string;
-  // }>();
-
-  // if (data instanceof Error) {
-  //   return <h2>Failed to fetch data.</h2>;
-  // }
-  // // const courseId = data.pop()?.id ?? "";
-  // const course = await getCourse<{
-  //   id: string;
-  //   titleUz: string;
-  //   titleRu: string;
-  //   image: string;
-  //   descriptionUz: string;
-  //   descriptionRu: string;
-  //   courseStatus: string;
-  //   Module: any[];
-  // }>(courseId);
-
-  // if (course instanceof Error) {
-  //   return <h2>Failed to fetch data.</h2>;
-  // }
-
   const dcitionary = await getDictionary(lang);
   return (
     <div>
@@ -121,11 +97,10 @@ export default async function Home({
       <Fits fits={dcitionary.home.whocurse} />
 
       <div className="container my-10 md:my-20" id="courses">
-        <Accordion type="multiple" defaultValue={['66549f7c1eaeb378fe5fe9cb']}>
+        <Accordion type="multiple" defaultValue={["66549f7c1eaeb378fe5fe9cb"]}>
           <CourceCard id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
         </Accordion>
       </div>
-
 
       <div className="container my-10 md:my-20">
         <Reviews lang={lang} />
@@ -153,7 +128,6 @@ export default async function Home({
       <div id="contacts" className="my-10 md:my-20">
         <SubscribtionForm dict={dcitionary.home} />
       </div>
-
 
       <FAQ
         title={dcitionary.home.answear.title}

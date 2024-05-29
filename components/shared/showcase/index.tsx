@@ -11,7 +11,7 @@ export default function Showcase({
   dict: Awaited<ReturnType<typeof getDictionary>>["home"];
 }) {
   return (
-    <div className="w-full h-screen showcase-image bg-[#A9C26A]">
+    <div className="w-full md:h-screen h-[80vh] showcase-image bg-[#A9C26A]">
       <Toaster
         position="top-right"
         toastOptions={{
@@ -24,7 +24,7 @@ export default function Showcase({
           },
         }}
       />
-      <div className="container pt-28 pb-6 md:pb-16 h-full">
+      <div className="container pt-36 md:pt-40 pb-6 md:pb-16 h-full">
         <div className="w-1/2 flex flex-col justify-between h-full">
           <div>
             <h1 className="font-bold w-80 md:text-[67px] font-comfortaa text-[40px] md:leading-[100px] leading-[48px] text-white">

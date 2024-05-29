@@ -34,8 +34,8 @@ export const UserButton: FC<{
         <p className="text-xs text-csneutral-400">
           {user?.role === "user"
             ? lang === "ru"
-              ? "Ученик"
-              : "O'quvchi"
+              ? ""
+              : ""
             : lang === "uz"
               ? "Admin"
               : "Администратор"}

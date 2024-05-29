@@ -39,7 +39,7 @@ function FormModal({ dict }: { dict: any }) {
       })
       .catch((e) => {
         toast.error(dict.showcase.showcasModul.success.error);
-        console.log(e)
+        console.log(e);
       });
 
     reset();
@@ -79,20 +79,17 @@ function FormModal({ dict }: { dict: any }) {
   //     </Dialog>
   //   );
 
-
-
   // onOpenChange={(e) => {
   // if (isSuccess && !e) setIsSuccess(false);
   // }}
 
-
   return (
-    <Dialog open={isSuccess} onOpenChange={setIsSuccess} >
+    <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
       <DialogTrigger asChild>
         <Button
           className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8 text-main-300"
           variant={"filled"}
-          onChange={() => setIsSuccess(p => !p)}
+          onChange={() => setIsSuccess((p) => !p)}
         >
           {dict.showcase.showcasModul.btn}
         </Button>
