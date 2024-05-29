@@ -17,6 +17,7 @@ import { getDictionary } from "@/lib/get-dictionary";
 import MainVideo from "@/components/shared/main-video";
 import Banner from "@/components/shared/banner";
 import { Toaster } from "react-hot-toast";
+import Partners from "@/components/shared/Partners";
 interface Review {
   id: string;
   username: string;
@@ -37,8 +38,6 @@ interface Review {
 //     },
 //   );
 
-
-
 //   if (!res.ok) {
 //     return new Error("Failed to fetch data");
 //   }
@@ -54,8 +53,6 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
         cache: "no-store",
       },
     );
-
-
 
     if (!res.ok) {
       return new Error("Failed to fetch data");
@@ -78,28 +75,6 @@ export default async function Home({
 
   const dataComment = await res.json();
   const dataComments = dataComment;
-  // const data = await getData<{
-  //   id: string;
-  // }>();
-
-  // if (data instanceof Error) {
-  //   return <h2>Failed to fetch data.</h2>;
-  // }
-  // // const courseId = data.pop()?.id ?? "";
-  // const course = await getCourse<{
-  //   id: string;
-  //   titleUz: string;
-  //   titleRu: string;
-  //   image: string;
-  //   descriptionUz: string;
-  //   descriptionRu: string;
-  //   courseStatus: string;
-  //   Module: any[];
-  // }>(courseId);
-
-  // if (course instanceof Error) {
-  //   return <h2>Failed to fetch data.</h2>;
-  // }
 
   const dcitionary = await getDictionary(lang);
   return (
@@ -148,7 +123,6 @@ export default async function Home({
         <SubscribtionForm dict={dcitionary.home} />
       </div>
 
-
       <div className="container my-10 md:my-20">
         <Carousel
           title={dcitionary.home.Reviews.title}
@@ -188,6 +162,9 @@ export default async function Home({
           lang={lang}
           articles={dcitionary.home.articlesHome}
         />
+      </div>
+      <div>
+        <Partners lang={lang} dcitionary={dcitionary} />
       </div>
     </div>
   );
