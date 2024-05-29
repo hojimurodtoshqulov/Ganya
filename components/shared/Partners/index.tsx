@@ -6,6 +6,7 @@ import { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -44,19 +45,38 @@ const Partners = ({ dcitionary }: partners) => {
         spaceBetween={"24px"}
         slidesPerView={sliderPerView}
         loop
+        autoplay
         onSwiper={(swiper) => (swiperRef.current = swiper)}
       >
         <SwiperSlide className="h-full flex justify-center">
-          <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          <Link href={"/"}>
+            <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          </Link>
         </SwiperSlide>
         <SwiperSlide className="h-full">
-          <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          <Link href={"/"}>
+            <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          </Link>
         </SwiperSlide>
         <SwiperSlide className="h-full">
-          <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          <Link href={"/"}>
+            <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          </Link>
         </SwiperSlide>
         <SwiperSlide className="h-full">
-          <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          <Link href={"/"}>
+            <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          </Link>
+        </SwiperSlide>
+        <SwiperSlide className="h-full">
+          <Link href={"/"}>
+            <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          </Link>
+        </SwiperSlide>
+        <SwiperSlide className="h-full">
+          <Link href={"/"}>
+            <div className=" h-[160px] bg-main-100 rounded-3xl"></div>
+          </Link>
         </SwiperSlide>
       </Swiper>
     </div>
