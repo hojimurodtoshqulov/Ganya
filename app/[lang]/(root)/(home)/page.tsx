@@ -121,14 +121,11 @@ export default async function Home({
       <Fits fits={dcitionary.home.whocurse} />
 
       <div className="container my-10 md:my-20" id="courses">
-        <Accordion type="single" collapsible>
+        <Accordion type="multiple" defaultValue={['66549f7c1eaeb378fe5fe9cb']}>
           <CourceCard id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
         </Accordion>
       </div>
 
-      <div id="contacts">
-        <SubscribtionForm dict={dcitionary.home} />
-      </div>
 
       <div className="container my-10 md:my-20">
         <Reviews lang={lang} />
@@ -152,6 +149,11 @@ export default async function Home({
       <div className="container my-10 md:my-20">
         <Tariflar id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
       </div>
+
+      <div id="contacts" className="my-10 md:my-20">
+        <SubscribtionForm dict={dcitionary.home} />
+      </div>
+
 
       <FAQ
         title={dcitionary.home.answear.title}
