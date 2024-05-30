@@ -31,7 +31,7 @@ export const UserButton: FC<{
         <h5 className="font-bold text-sm font-comfortaa">
           {user?.name + " " + user?.surname}
         </h5>
-        <p className="text-xs text-csneutral-400">
+        {/* <p className="text-xs text-csneutral-400">
           {user?.role === "user"
             ? lang === "ru"
               ? ""
@@ -39,7 +39,7 @@ export const UserButton: FC<{
             : lang === "uz"
               ? "Admin"
               : "Администратор"}
-        </p>
+        </p> */}
       </div>
     </Link>
   );
