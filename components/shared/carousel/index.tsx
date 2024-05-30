@@ -57,6 +57,7 @@ const Carousel: FC<Props> = ({ title, data }): JSX.Element => {
           spaceBetween={"24px"}
           slidesPerView={sliderPerView}
           loop
+          autoplay
           onSwiper={(swiper) => (swiperRef.current = swiper)}
         >
           {data.map((item, i) => (

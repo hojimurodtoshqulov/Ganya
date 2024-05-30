@@ -1,5 +1,6 @@
 import { getUserData } from "@/lib/actions/user";
 import { UserCircle } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 
@@ -8,12 +9,22 @@ export const UserButton: FC<{
 }> = async ({ lang }): Promise<JSX.Element> => {
   const user = await getUserData();
 
+  console.log(user, "<--- this is user data");
+
   return (
     <Link
       href={`/${lang}/dashboard/profile`}
       className="flex gap-2 items-center"
     >
-      {user?.image ? null : ( // <Image />
+      {user?.avatar ? (
+        <Image
+          src={user?.avatar}
+          alt="user image"
+          width={40}
+          height={40}
+          className="rounded-full"
+        />
+      ) : (
         <UserCircle size={40} className="rounded-full" />
       )}
       <div className="hidden sm:block">
@@ -23,8 +34,8 @@ export const UserButton: FC<{
         {/* <p className="text-xs text-csneutral-400">
           {user?.role === "user"
             ? lang === "ru"
-              ? "Ученик"
-              : "O'quvchi"
+              ? ""
+              : ""
             : lang === "uz"
               ? "Admin"
               : "Администратор"}

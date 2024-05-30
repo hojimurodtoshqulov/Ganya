@@ -7,7 +7,6 @@ import SubscribtionForm from "@/components/shared/subscribtion-form/subscribtion
 import { Accordion } from "@/components/shared/cource-card/accordian-card";
 import { Play } from "lucide-react";
 import Info from "@/components/shared/info/info";
-import ReviewCard from "@/components/shared/review";
 import TeamCard from "@/components/shared/team";
 import Tariflar from "@/components/shared/tariflar/tariflar";
 import Stati from "@/components/shared/stati/stati";
@@ -17,17 +16,9 @@ import { getDictionary } from "@/lib/get-dictionary";
 import MainVideo from "@/components/shared/main-video";
 import Banner from "@/components/shared/banner";
 import { Toaster } from "react-hot-toast";
-interface Review {
-  id: string;
-  username: string;
-  occupationUz: string;
-  occupationRu: string;
-  textUz: string;
-  textRu: string;
-  isPublished: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+
+import Reviews from "@/components/shared/review/reviews";
+import Partners from "@/components/shared/Partners";
 
 // async function getData<T>(): Promise<T[] | Error> {
 //   const res = await fetch(
@@ -36,8 +27,6 @@ interface Review {
 //       cache: "no-store",
 //     },
 //   );
-
-
 
 //   if (!res.ok) {
 //     return new Error("Failed to fetch data");
@@ -55,8 +44,6 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
       },
     );
 
-
-
     if (!res.ok) {
       return new Error("Failed to fetch data");
     }
@@ -72,35 +59,6 @@ export default async function Home({
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/all`, {
-    cache: "no-store",
-  });
-
-  const dataComment = await res?.json();
-  const dataComments = dataComment;
-  // const data = await getData<{
-  //   id: string;
-  // }>();
-
-  // if (data instanceof Error) {
-  //   return <h2>Failed to fetch data.</h2>;
-  // }
-  // // const courseId = data.pop()?.id ?? "";
-  // const course = await getCourse<{
-  //   id: string;
-  //   titleUz: string;
-  //   titleRu: string;
-  //   image: string;
-  //   descriptionUz: string;
-  //   descriptionRu: string;
-  //   courseStatus: string;
-  //   Module: any[];
-  // }>(courseId);
-
-  // if (course instanceof Error) {
-  //   return <h2>Failed to fetch data.</h2>;
-  // }
-
   const dcitionary = await getDictionary(lang);
   return (
     <div>
@@ -139,23 +97,13 @@ export default async function Home({
       <Fits fits={dcitionary.home.whocurse} />
 
       <div className="container my-10 md:my-20" id="courses">
-        <Accordion type="single" collapsible>
+        <Accordion type="multiple" defaultValue={["66549f7c1eaeb378fe5fe9cb"]}>
           <CourceCard id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
         </Accordion>
       </div>
 
-      <div id="contacts">
-        <SubscribtionForm dict={dcitionary.home} />
-      </div>
-
-
       <div className="container my-10 md:my-20">
-        <Carousel
-          title={dcitionary.home.Reviews.title}
-          data={dataComments.map((r: Review, i: number) => (
-            <ReviewCard key={i} review={r} lang={lang} />
-          ))}
-        />
+        <Reviews lang={lang} />
       </div>
 
       <div className="container my-10 md:my-20" id="team">
@@ -177,6 +125,10 @@ export default async function Home({
         <Tariflar id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
       </div>
 
+      <div id="contacts" className="my-10 md:my-20">
+        <SubscribtionForm dict={dcitionary.home} />
+      </div>
+
       <FAQ
         title={dcitionary.home.answear.title}
         cards={dcitionary.home.answear.cards}
@@ -188,6 +140,9 @@ export default async function Home({
           lang={lang}
           articles={dcitionary.home.articlesHome}
         />
+      </div>
+      <div>
+        <Partners lang={lang} dcitionary={dcitionary} />
       </div>
     </div>
   );
