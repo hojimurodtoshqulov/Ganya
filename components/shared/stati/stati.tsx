@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import CardStatya from "./card-stati";
 import { buttonVariants } from "@/components/ui/button";
@@ -7,7 +5,7 @@ import { Articlsall } from "@/types/auth";
 import Link from "next/link";
 import { format } from "date-fns";
 
-async function Getpost() {
+async function getPost() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/articles/all`,
     { method: "GET" },
@@ -25,7 +23,7 @@ async function Stati({
   container?: string;
   lang: string;
 }) {
-  const getdata = await Getpost();
+  const getdata = await getPost();
 
   return (
     <div className="bg-csneutral-100 py-10 my-10 md:my-20">

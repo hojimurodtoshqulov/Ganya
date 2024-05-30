@@ -16,7 +16,6 @@ const Layout: FC<Props> = async ({ children, params: { lang } }) => {
     <div className="bg-white">
       <Header lang={lang} dictionary={dictionary} />
       <main>{children}</main>
-
       <Footer />
     </div>
   );

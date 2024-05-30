@@ -16,6 +16,7 @@ import { teamMembers } from "@/constants/team";
 import { getDictionary } from "@/lib/get-dictionary";
 import MainVideo from "@/components/shared/main-video";
 import Banner from "@/components/shared/banner";
+import { Toaster } from "react-hot-toast";
 interface Review {
   id: string;
   username: string;
@@ -28,20 +29,23 @@ interface Review {
   updatedAt: string;
 }
 
-async function getData<T>(): Promise<T[] | Error> {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=completed",
-    {
-      cache: "no-store",
-    },
-  );
+// async function getData<T>(): Promise<T[] | Error> {
+//   const res = await fetch(
+//     process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=completed",
+//     {
+//       cache: "no-store",
+//     },
+//   );
 
-  if (!res.ok) {
-    return new Error("Failed to fetch data");
-  }
 
-  return res.json();
-}
+
+//   if (!res.ok) {
+//     return new Error("Failed to fetch data");
+//   }
+
+//   return res.json();
+// }
+
 async function getCourse<T>(id: string): Promise<T[] | Error> {
   try {
     const res = await fetch(
@@ -50,6 +54,8 @@ async function getCourse<T>(id: string): Promise<T[] | Error> {
         cache: "no-store",
       },
     );
+
+
 
     if (!res.ok) {
       return new Error("Failed to fetch data");
@@ -69,30 +75,31 @@ export default async function Home({
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/all`, {
     cache: "no-store",
   });
-  const dataComment = await res.json();
+
+  const dataComment = await res?.json();
   const dataComments = dataComment;
-  const data = await getData<{
-    id: string;
-  }>();
+  // const data = await getData<{
+  //   id: string;
+  // }>();
 
-  if (data instanceof Error) {
-    return <h2>Failed to fetch data.</h2>;
-  }
-  const courseId = data.pop()?.id ?? "";
-  const course = await getCourse<{
-    id: string;
-    titleUz: string;
-    titleRu: string;
-    image: string;
-    descriptionUz: string;
-    descriptionRu: string;
-    courseStatus: string;
-    Module: any[];
-  }>(courseId);
+  // if (data instanceof Error) {
+  //   return <h2>Failed to fetch data.</h2>;
+  // }
+  // // const courseId = data.pop()?.id ?? "";
+  // const course = await getCourse<{
+  //   id: string;
+  //   titleUz: string;
+  //   titleRu: string;
+  //   image: string;
+  //   descriptionUz: string;
+  //   descriptionRu: string;
+  //   courseStatus: string;
+  //   Module: any[];
+  // }>(courseId);
 
-  if (course instanceof Error) {
-    return <h2>Failed to fetch data.</h2>;
-  }
+  // if (course instanceof Error) {
+  //   return <h2>Failed to fetch data.</h2>;
+  // }
 
   const dcitionary = await getDictionary(lang);
   return (
@@ -133,9 +140,14 @@ export default async function Home({
 
       <div className="container my-10 md:my-20" id="courses">
         <Accordion type="single" collapsible>
-          <CourceCard data={course} lang={lang} />
+          <CourceCard id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
         </Accordion>
       </div>
+
+      <div id="contacts">
+        <SubscribtionForm dict={dcitionary.home} />
+      </div>
+
 
       <div className="container my-10 md:my-20">
         <Carousel
@@ -162,7 +174,7 @@ export default async function Home({
       </div>
 
       <div className="container my-10 md:my-20">
-        <Tariflar id={courseId} lang={lang} />
+        <Tariflar id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
       </div>
 
       <FAQ
@@ -176,10 +188,6 @@ export default async function Home({
           lang={lang}
           articles={dcitionary.home.articlesHome}
         />
-      </div>
-
-      <div id="contacts">
-        <SubscribtionForm dict={dcitionary.home} />
       </div>
     </div>
   );
