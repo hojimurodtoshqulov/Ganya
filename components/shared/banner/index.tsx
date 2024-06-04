@@ -10,7 +10,7 @@ async function getBanners<T>(): Promise<T[] | Error> {
   );
 
   const data = await res.json();
-  console.log(data);
+
   if (!res.ok) {
     return new Error("Failed to fetch data");
   }

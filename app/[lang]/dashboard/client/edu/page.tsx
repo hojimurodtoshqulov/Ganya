@@ -25,7 +25,7 @@ const ClientEdu: FC<Props> = async ({
         </TabsTrigger>
       </TabsList>
       <TabsContent value="my-courses">
-        <MyCourses />
+        <MyCourses lang={lang} />
       </TabsContent>
       <TabsContent value="all-courses">
         <AllCourses lang={lang} />

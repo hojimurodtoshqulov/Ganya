@@ -3,7 +3,9 @@ import React from "react";
 import Icon2 from "@/icons/Vector-dars2.svg";
 import Icon1 from "@/icons/Vector-dars1.svg";
 
-const DarsList = ({ isActive }: { isActive?: boolean }) => {
+type Props = { isActive?: boolean; title: string };
+
+const DarsList = ({ isActive, title }: Props) => {
   return (
     <div>
       <div className=" w-full p-4 flex gap-3 rounded-2xl bg-white">
@@ -21,7 +23,7 @@ const DarsList = ({ isActive }: { isActive?: boolean }) => {
           <p
             className={`text-sm font-normal leading- flex justify-between ${isActive ? "text-csneutral-400" : "text-csneutral-500"}`}
           >
-            <span>Урок 1</span>
+            {/* <span>Урок 1</span> */}
             <span className={` ${isActive ? "max-sm:hidden" : "hidden"} `}>
               Есть домашнее задание
             </span>
@@ -29,7 +31,7 @@ const DarsList = ({ isActive }: { isActive?: boolean }) => {
           <p
             className={` sm:text-[22px] text-lg font-normal leading-8  ${isActive ? "text-csneutral-400" : "text-csneutral-500"}`}
           >
-            Ознакомление
+            {title}
           </p>
         </div>
       </div>

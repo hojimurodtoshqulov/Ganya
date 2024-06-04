@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { getAccessToken } from "./token";
 import { redirect } from "next/navigation";
 
 export const getUserData = async () => {

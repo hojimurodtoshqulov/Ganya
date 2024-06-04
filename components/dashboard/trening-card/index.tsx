@@ -3,7 +3,14 @@ import React from "react";
 import Images from "@/images/mobile-baner.png";
 import Link from "./link";
 
-const Trening = () => {
+type Props = {
+  title: string;
+  description: string;
+  btn: string;
+  courseId: string;
+};
+
+const Trening = ({ title, description, btn, courseId }: Props) => {
   return (
     <div className="flex sm:flex-row justify-between bg-white rounded-2xl sm:p-6 p-4 flex-col gap-4">
       <div className="w-full flex gap-6 sm:flex-row flex-col">
@@ -12,14 +19,12 @@ const Trening = () => {
         </div>
         <div>
           <h2 className="text-main-300 text-2xl mb-2 font-comfortaa font-bold">
-            Прикорм без проблем
+            {title}
           </h2>
-          <p className="text-base font-normal font-comfortaa">
-            Небольшое описание про этот курс в 1 строк!
-          </p>
+          <p className="text-base font-normal font-comfortaa">{description}</p>
         </div>
       </div>
-      <Link />
+      <Link btn={btn} courseId={courseId} />
     </div>
   );
 };

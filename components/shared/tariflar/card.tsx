@@ -17,6 +17,7 @@ interface PlanCardProps {
   pro?: boolean;
   small?: boolean;
   btn?: boolean;
+  courseId: string;
   lang: "uz" | "ru";
 }
 function PlanCard(props: PlanCardProps): JSX.Element {
@@ -104,7 +105,7 @@ function PlanCard(props: PlanCardProps): JSX.Element {
         {props.btn && (
           <Link
             className="block w-full"
-            href={`/${props.lang}/dashboard/client/buy/${props.values.id}`}
+            href={`/${props.lang}/dashboard/client/buy/${props.courseId}/${props.values.id}`}
           >
             <Button
               variant={props.pro ? "filled" : "outline"}

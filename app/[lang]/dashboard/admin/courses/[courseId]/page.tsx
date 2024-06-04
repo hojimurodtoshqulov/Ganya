@@ -55,7 +55,13 @@ const SingleCourse: FC<{
         <h2 className="text-main-300 text-2xl font-medium mb-5">Тарифы</h2>
         <div className="grid grid-cols-3 gap-5">
           {plans.map((plan) => (
-            <PlanCard key={plan.id} values={plan} small lang={lang} />
+            <PlanCard
+              key={plan.id}
+              values={plan}
+              small
+              lang={lang}
+              courseId={courseId}
+            />
           ))}
         </div>
       </div>
