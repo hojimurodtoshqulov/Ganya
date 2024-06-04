@@ -1,20 +1,27 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 import Play from "@/icons/Play.svg";
 
-const Dars = () => {
+type Props = {
+  videoLink: string;
+};
+const Dars = ({ videoLink }: Props) => {
   return (
     <div className="w-full p-6 rounded-2xl bg- flex gap-4 flex-col bg-white">
-      <div className="w-full aspect-[5/3] bg-csneutral-100 rounded-xl flex justify-center items-center">
-        <Image
+      <div className="w-full aspect-[5/3] bg-csneutral-100 rounded-xl flex justify-center items-center relative">
+        {/* <Image
           src={Play}
           alt="image"
           className="w-8 h-8 md:w-20 md:h-20"
           priority
-        />
+        /> */}
+        <video controls className="w-full h-full rounded-sm">
+          <source src={videoLink} type="video/mp4" />
+        </video>
       </div>
-      <div className="btn-container flex justify-end">
+      <div className="btn-container flex justify-end xs:hidden">
         <Button
           variant={"main"}
           size={"default"}

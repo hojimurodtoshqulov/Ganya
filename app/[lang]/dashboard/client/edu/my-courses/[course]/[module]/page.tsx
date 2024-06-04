@@ -2,48 +2,29 @@ import BackLink from "@/components/dashboard/back-link";
 import DarsList from "@/components/dashboard/dars-list";
 import LinkById from "@/components/dashboard/link-by-id";
 import { FC } from "react";
+import { modules } from "@/constants/buyed-course";
 
 interface Props {
   params: {
     module: string;
+    lang: "ru" | "uz";
   };
 }
 
-const lessons = [
-  {
-    lessonNumber: 1,
-    title: "Tanishuv",
-  },
-  {
-    lessonNumber: 2,
-    title: "Tanishuv",
-  },
-  {
-    lessonNumber: 3,
-    title: "Tanishuv",
-  },
-  {
-    lessonNumber: 4,
-    title: "Tanishuv",
-  },
-];
-
-const SingleModule: FC<Props> = ({ params: { module } }): JSX.Element => {
+const SingleModule: FC<Props> = ({ params: { module, lang } }): JSX.Element => {
+  const moduleData = modules.find((m) => m.id === module);
+  if (!moduleData) return <div>Module not found</div>;
   return (
     <div>
       <BackLink
-        title="Qo'shimcha muammosiz ovqatlar"
-        heading="1-modul: Kichkintoyingiz uchun birinchi qo'shimcha ovqatlarni kiritish"
+        title={lang === "ru" ? moduleData?.titleRu : moduleData?.titleUz}
+        heading={lang === "ru" ? moduleData?.titleRu : moduleData?.titleUz}
       />
 
       <div className="space-y-5 mt-5">
-        {lessons.map((lesson) => (
-          <LinkById
-            href={lesson.lessonNumber}
-            className="block"
-            key={lesson.lessonNumber}
-          >
-            <DarsList />
+        {moduleData?.lessons.map((lesson) => (
+          <LinkById href={lesson.id} className="block" key={lesson.id}>
+            <DarsList title={lang === "ru" ? lesson.titleRu : lesson.titleUz} />
           </LinkById>
         ))}
       </div>

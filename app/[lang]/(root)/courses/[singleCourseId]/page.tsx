@@ -52,7 +52,7 @@ const SingleCourse: FC<{
   return (
     <div className="px-8 pb-8 pt-28">
       <div className="pb-4">
-        <BackLink title={lang === 'ru' ? "Назад" : "Orqaga"} heading="" />
+        <BackLink title={lang === "ru" ? "Назад" : "Orqaga"} heading="" />
       </div>
       <Accordion type="multiple" defaultValue={[singleCourseId]}>
         <CourceCard id={singleCourseId} lang={lang} />
@@ -64,7 +64,13 @@ const SingleCourse: FC<{
         </h2>
         <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-5">
           {plans?.map((plan: any) => (
-            <PlanCard key={plan.id} values={plan} lang={lang} btn />
+            <PlanCard
+              key={plan.id}
+              values={plan}
+              lang={lang}
+              btn
+              courseId={singleCourseId}
+            />
           ))}
         </div>
       </div>

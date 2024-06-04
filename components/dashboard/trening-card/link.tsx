@@ -5,20 +5,23 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 
-interface Props {}
+interface Props {
+  courseId: string;
+  btn: string;
+}
 
-const Link: FC<Props> = ({}): JSX.Element => {
+const Link: FC<Props> = ({ courseId, btn }): JSX.Element => {
   const pathname = usePathname();
 
   return (
     <NextLink
-      href={`${pathname}/my-courses/nimadir-course`}
+      href={`${pathname}/my-courses/${courseId}`}
       className={cn(
         buttonVariants({ variant: "main" }),
         "w-full sm:w-max px-8 text-sm md:text-base",
       )}
     >
-      Treningga o&apos;tish
+      {btn}
     </NextLink>
   );
 };
