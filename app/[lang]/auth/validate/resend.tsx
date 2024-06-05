@@ -8,7 +8,7 @@ const ResendCode: FC<{
   sms?: RequestCookie;
 }> = ({ sms }): JSX.Element => {
   const smsData = JSON.parse(sms?.value ?? "{}");
-  console.log(smsData, new Date());
+
   const { toast } = useToast();
 
   const [time, setTime] = useState(59);

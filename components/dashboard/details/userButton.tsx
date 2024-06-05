@@ -9,8 +9,6 @@ export const UserButton: FC<{
 }> = async ({ lang }): Promise<JSX.Element> => {
   const user = await getUserData();
 
-  console.log(user, "<--- this is user data");
-
   return (
     <Link
       href={`/${lang}/dashboard/profile`}

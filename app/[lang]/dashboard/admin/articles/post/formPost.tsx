@@ -52,8 +52,6 @@ const FormPostArticle: FC<Props> = ({ accessToken, lang, langue }) => {
     resolver: zodResolver(schema),
   });
 
-  console.log(accessToken, "this is access token");
-
   const imageWeb: any = watch("imageWeb") && (watch("imageWeb")[0] ?? {});
   const imageMobile: any =
     watch("imageMobile") && (watch("imageMobile")[0] ?? {});

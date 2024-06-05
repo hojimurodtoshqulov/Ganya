@@ -1,9 +1,6 @@
 "use server";
 
 export const postAction = async (formData: FormData) => {
-  console.log("start");
-  console.log(formData);
-  console.log(formData.get("image"));
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/courses/create`,
     {
@@ -16,6 +13,4 @@ export const postAction = async (formData: FormData) => {
     },
   );
   const data = await res.json();
-  console.log(data);
-  console.log("end");
 };

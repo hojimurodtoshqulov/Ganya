@@ -62,7 +62,7 @@ const AddCourseForm: FC<Props> = ({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData = new FormData();
-    // console.log(values);
+
     if (typeof values.image === "object") {
       formData.append("image", values?.image?.[0], values?.image?.[0]?.name);
     } else {
@@ -88,7 +88,7 @@ const AddCourseForm: FC<Props> = ({
     const data = await res.json();
     if (res.status === 401) {
       const json = await getAccessToken();
-      console.log(json);
+
       res = await fetch(
         process.env.NEXT_PUBLIC_BASE_URL +
           "/courses/" +
