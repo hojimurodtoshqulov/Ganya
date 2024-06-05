@@ -11,7 +11,7 @@ interface Props {
 const BackLink: FC<Props> = ({ title, heading }): JSX.Element => {
   const router = useRouter();
   const pathname = usePathname();
-  console.log(pathname, "<----patname");
+
   // router.push()
   return (
     <>

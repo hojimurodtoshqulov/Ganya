@@ -24,7 +24,6 @@ interface Props {
 const Form: FC<Props> = ({ action, sms }): JSX.Element => {
   const [state, setState] = useState<ActionReturn>();
   const router = useRouter();
-  console.log(state);
 
   if (!sms) {
     redirect("/auth/sign-up");
@@ -40,7 +39,7 @@ const Form: FC<Props> = ({ action, sms }): JSX.Element => {
         data.append("sessionId", smsData?.sessionId);
         const res = await action(e);
         setState(res);
-        console.log(res, "res");
+
         if (res?.successMessage) {
           router.push("/dashboard/client/edu");
         }

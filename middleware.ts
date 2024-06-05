@@ -75,7 +75,6 @@ export async function middleware(request: NextRequest) {
     if (pathname.includes("/admin") && json?.role === "admin") {
       return NextResponse.next();
     } else if (pathname.includes("/client") && json?.role === "user") {
-      console.log("user");
       return NextResponse.next();
     } else if (pathname.includes("/client") && json?.role !== "user") {
       return NextResponse.redirect(new URL("/auth/sign-in", request.url));

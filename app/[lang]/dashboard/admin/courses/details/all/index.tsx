@@ -51,7 +51,7 @@ const AllCourses: FC<{
   if (data instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
   }
-  console.log(data);
+
   const dict = await getDictionary(lang);
 
   return (

@@ -21,8 +21,6 @@ export default function DeteleArticle({
   lang,
   langue,
 }: Props) {
-  console.log(detel, "ths is data");
-
   return (
     <div>
       <div className="pt-24 ">

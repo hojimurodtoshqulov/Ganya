@@ -91,15 +91,14 @@ export default async function BuyCourse({
           </a>
           <a
             target="_blank"
-            href={`https://checkout.paycom.uz/base64(m=587f72c72cac0d162c722ae2;ac.order_id=197;a=500)`}
+            href={`https://checkout.paycom.uz/${btoa(`m=6628f4dc2eb76ec81b6969eb;ac.user_id=${userId};ac.planId=${planId};a=${plan.price * 100}`)}`}
             className="border rounded-xl px-6 py-4 w-full flex justify-center md:w-[180px]"
           >
             <Image src={pay2} width={100} height={100} alt="Pay with Payme" />
           </a>
           <a
             target="_blank"
-            href={`https://www.apelsin.uz/open-service?serviceId=498615742&planId=${planId}&userId=${userId}&amount=1000`}
-            // href={`https://www.apelsin.uz/open-service?serviceId=498615742&planId=6638aa5401b216a93f4920ca&userId=662e1c8cfbff3f90210cc860&amount=100000`}
+            href={`https://www.apelsin.uz/open-service?serviceId=498615742&planId=${planId}&userId=${userId}&amount=${plan.price * 100}`}
             className="border rounded-xl px-6 py-4 w-full flex justify-center md:w-[180px]"
           >
             <Image src={pay3} width={100} height={100} alt="Pay with Uzum" />

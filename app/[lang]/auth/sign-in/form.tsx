@@ -40,7 +40,6 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
             description: result?.errorMessage,
             variant: "destructive",
           });
-          console.log(result?.errorMessage);
         }
       }}
       className="flex flex-col justify-center gap-6"

@@ -53,12 +53,11 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
           router.push("/auth/validate");
         } else {
           // error toast
-          console.log(result, "result error");
+
           toast({
             description: result?.message,
             variant: "destructive",
           });
-          console.log(result?.message);
         }
       }}
       className="flex flex-col justify-center gap-2.5"

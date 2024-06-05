@@ -25,8 +25,6 @@ export async function fetchSendMessage(data: FormSchemaType) {
   const chatId = process.env.BOT_CHAT_ID;
   // const chatId = '
 
-  console.log(chatId)
-
   try {
     const req = await fetch(`${BASE_URL}/bot${TOKEN}/sendMessage`, {
       method: "POST",

@@ -5,12 +5,12 @@ import { redirect } from "next/navigation";
 
 export const getAccessToken = async () => {
   const refreshToken = cookies().get("refreshToken")?.value;
-  console.log(refreshToken, "refreshToken");
+
   if (!refreshToken) {
     redirect("/auth/sign-in");
   } else {
     const data = { refreshToken: JSON.parse(refreshToken) };
-    console.log(data);
+
     const res = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + "/auth/refresh-access-token",
       {
@@ -23,7 +23,6 @@ export const getAccessToken = async () => {
     );
     if (!res.ok) {
       redirect("/auth/sign-in");
-      // console.log("token pge error");
     }
     const json = await res.json();
     console.log(json);

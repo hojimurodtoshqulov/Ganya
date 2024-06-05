@@ -73,14 +73,12 @@ const CreateTarifForm: React.FC<Props> = ({
   const router = useRouter();
 
   const onSubmit = async (val: Schema) => {
-    console.log(val);
     const data = {
       ...val,
       includeResources: val.includeResources === "on" ? true : false,
       includeSupport: val.includeSupport === "on" ? true : false,
     };
 
-    console.log(data);
     const api =
       process.env.NEXT_PUBLIC_BASE_URL +
       `/plans/${method === "POST" ? `create/${courseId}` : `update/${planId}`}`;

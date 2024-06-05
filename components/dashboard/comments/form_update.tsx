@@ -52,7 +52,7 @@ const FormUpdate = ({
           },
         },
       );
-      console.log(res.ok);
+
       if (res.ok) {
         router.refresh();
         closeFunc();

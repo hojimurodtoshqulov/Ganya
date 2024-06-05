@@ -19,11 +19,10 @@ export const registerAction = async (formData: FormData) => {
   });
 
   if (validatedFields.success) {
-    console.log(validatedFields.data);
     try {
       const { emailOrPhone, password, name, surname } = validatedFields.data;
       const link = validateInput(emailOrPhone) as "email" | "phone";
-      console.log("start", link);
+
       const res = await fetch(
         process.env.NEXT_PUBLIC_BASE_URL + `/auth/${link}/register`,
         {
@@ -40,7 +39,7 @@ export const registerAction = async (formData: FormData) => {
         },
       );
       const json = await res.json();
-      console.log("end", json);
+
       cookies().set({
         name: "sms",
         value: JSON.stringify({
@@ -74,7 +73,7 @@ export const loginAction = async (formData: FormData) => {
     try {
       const { emailOrPhone, password } = validatedFields.data;
       const link = validateInput(emailOrPhone) as "email" | "phone";
-      console.log("start", link);
+
       const res = await fetch(
         process.env.NEXT_PUBLIC_BASE_URL + `/auth/${link}/login`,
         {
@@ -86,7 +85,7 @@ export const loginAction = async (formData: FormData) => {
         },
       );
       const json = await res.json();
-      console.log(json, "<--------------------------- bu login json");
+
       cookies().set({
         name: "accessToken",
         value: JSON.stringify(json.accessToken),
