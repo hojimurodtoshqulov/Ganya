@@ -18,7 +18,7 @@ const Link: FC<Props> = ({ courseId, btn }): JSX.Element => {
       href={`${pathname}/my-courses/${courseId}`}
       className={cn(
         buttonVariants({ variant: "main" }),
-        "w-full sm:w-max px-8 text-sm md:text-base",
+        "w-full  sm:w-max px-8 text-sm md:text-base",
       )}
     >
       {btn}

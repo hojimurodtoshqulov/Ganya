@@ -15,7 +15,7 @@ export const getUserData = async () => {
     redirect("/auth/sign-in");
   }
   const json = await user.json();
-
+  // console.log(json);
   return json;
 };
 
