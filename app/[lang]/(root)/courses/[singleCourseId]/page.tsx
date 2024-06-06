@@ -30,8 +30,9 @@ async function getPlans<T>(id: string): Promise<T[] | Error> {
   if (!res.ok) {
     return new Error("Failed to fetch data");
   }
+  const json = res.json();
 
-  return res.json();
+  return json;
 }
 const SingleCourse: FC<{
   params: { singleCourseId: string; lang: "uz" | "ru" };
