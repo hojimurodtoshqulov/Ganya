@@ -46,7 +46,7 @@ function PlanCard(props: PlanCardProps): JSX.Element {
   return (
     <div
       className={cn(
-        `flex flex-col justify-between h-full w-full ${props.small ? "p-4 rounded-xl" : "py-4 px-5 sm:p-6 lg:p-10 rounded-[20px] md:rounded-[32px]"}  gap-10 ${props.pro ? "bg-main-200" : "bg-csneutral-100"}  h-full justify-between`,
+        `grid grid-rows-2 w-full ${props.small ? "p-4 rounded-xl" : "py-4 px-5 sm:p-6 lg:p-10 rounded-[20px] md:rounded-[32px]"}  ${props.pro ? "bg-main-200" : "bg-csneutral-100"}`,
       )}
     >
       <div className="flex flex-col gap-3">
