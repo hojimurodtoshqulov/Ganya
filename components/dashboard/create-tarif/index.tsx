@@ -33,9 +33,16 @@ const CreateTarif: FC<Props> = async ({
     availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
+    includePrivateGroupAccess: boolean;
     price: number;
+    discount?: number;
+    discountExpiredAt?: string;
     titleUz: string;
     titleRu: string;
+    detailsUz: string;
+    detailsRu: string;
+    descriptionUz: string;
+    descriptionRu: string;
   }>(courseId);
   if (response instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
@@ -54,7 +61,7 @@ const CreateTarif: FC<Props> = async ({
               {dict.dashboard.admin.curse.tarifi.btn}
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="max-w-4xl overflow-auto max-h-screen">
             <CreateTarifForm
               courseId={courseId}
               method="POST"

@@ -11,7 +11,7 @@ import {
 } from "react";
 import { Locale } from "@/lib/i18n-config";
 import { cn } from "@/lib/utils";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 
 interface Props {
   children: ReactNode;
@@ -26,7 +26,7 @@ const InnerLayout: FC<Props> = ({
   dictionary,
   userButton,
 }): JSX.Element => {
-  const pathname = useSelectedLayoutSegment();
+  const pathname = usePathname();
 
   const [open, setOpen] = useState<boolean>(true);
   const handleClick = useCallback(() => setOpen((p) => !p), []);
@@ -38,6 +38,7 @@ const InnerLayout: FC<Props> = ({
 
   useEffect(() => {
     if (window.innerWidth < 1024 && open) {
+      // console.log("pathname changed", pathname);
       setOpen(false);
     }
   }, [pathname]);

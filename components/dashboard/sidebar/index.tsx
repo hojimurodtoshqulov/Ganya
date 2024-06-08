@@ -36,7 +36,8 @@ const SideBar: FC<SidebarProps> = ({
     },
     {
       icon: Newspaper,
-      ...dictionary[1],
+      label: lang === "ru" ? "Статьи" : "Maqola",
+      path: "articles",
     },
   ];
 

@@ -40,9 +40,16 @@ const SingleCourse: FC<{
     availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
+    includePrivateGroupAccess: boolean;
     price: number;
+    discount?: number;
+    discountExpiredAt?: string;
     titleUz: string;
     titleRu: string;
+    descriptionUz: string;
+    descriptionRu: string;
+    detailsUz: string;
+    detailsRu: string;
     id: string;
   }>(courseId);
   if (course instanceof Error || plans instanceof Error)
