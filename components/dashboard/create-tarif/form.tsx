@@ -112,6 +112,12 @@ const CreateTarifForm: React.FC<Props> = ({
       includePrivateGroupAccess:
         val.includePrivateGroupAccess === "on" ? true : false,
     };
+    if (!data?.discountExpiredAt) {
+      delete data.discountExpiredAt;
+    }
+    if (!data?.discount) {
+      delete data.discount;
+    }
 
     const api =
       process.env.NEXT_PUBLIC_BASE_URL +
