@@ -57,8 +57,8 @@ function Card(props: CardProps): JSX.Element {
           {props.lang === "uz" ? props.values?.titleUz : props.values?.titleRu}
         </h2>
         <ul className="flex flex-col gap-2">
-          {accesses?.map((acs) => (
-            <li className="flex gap-2 items-start">
+          {accesses?.map((acs, i) => (
+            <li className="flex gap-2 items-start" key={i}>
               <span className="w-5 h-5 relative flex-shrink-0">
                 <Image
                   fill

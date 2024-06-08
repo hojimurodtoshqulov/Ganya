@@ -62,6 +62,13 @@ const OneOfAllCourses: FC<Props> = async ({
     titleRu: string;
     includeSupport: boolean;
     includeResources: boolean;
+    includePrivateGroupAccess: boolean;
+    descriptionUz: string;
+    descriptionRu: string;
+    detailsUz: string;
+    detailsRu: string;
+    discount?: number;
+    discountExpiredAt?: string;
   }>(course);
   if (plans instanceof Error) return <h2>Failed to fetch data.</h2>;
 
@@ -73,13 +80,14 @@ const OneOfAllCourses: FC<Props> = async ({
           Тарифы
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 items-center justify-center lg:grid-cols-3 gap-5 md:gap-6">
-          {plans.map((plan) => (
+          {plans.map((plan, i) => (
             <Card
               key={plan.id}
               values={plan}
               btn
               small
               lang={lang}
+              pro={i === 1}
               courseId={course}
             />
           ))}

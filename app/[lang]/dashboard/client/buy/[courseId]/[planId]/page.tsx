@@ -40,6 +40,10 @@ export default async function BuyCourse({
     titleRu: string;
     includeSupport: boolean;
     includeResources: boolean;
+    includePrivateGroupAccess: boolean;
+    descriptionUz: string;
+    descriptionRu: string;
+    discount?: number;
   }>(courseId);
   if (plans instanceof Error) return <h2>Failed to fetch data.</h2>;
 
@@ -50,6 +54,7 @@ export default async function BuyCourse({
   }
 
   const userData = await getUserData();
+
   const userId = userData?.id;
 
   return (
@@ -84,21 +89,21 @@ export default async function BuyCourse({
         <div className="flex flex-col md:flex-row justify-center gap-4 items-center">
           <a
             target="_blank"
-            href={`https://my.click.uz/services/pay?service_id=33448&merchant_id=25047&amount=${plan.price}&transaction_param=${planId}&additional_param3=${userId}`}
+            href={`https://my.click.uz/services/pay?service_id=33448&merchant_id=25047&amount=${plan?.discount ? plan?.discount : plan.price}&transaction_param=${planId}&additional_param3=${userId}`}
             className="border rounded-xl px-6 py-4 w-full flex justify-center md:w-[180px]"
           >
             <Image src={pay1} width={100} height={100} alt="Pay with Click" />
           </a>
           <a
             target="_blank"
-            href={`https://checkout.paycom.uz/${btoa(`m=6628f4dc2eb76ec81b6969eb;ac.user_id=${userId};ac.planId=${planId};a=${plan.price * 100}`)}`}
+            href={`https://checkout.paycom.uz/${btoa(`m=6628f4dc2eb76ec81b6969eb;ac.user_id=${userId};ac.planId=${planId};a=${(plan?.discount ? plan?.discount : plan.price) * 100}`)}`}
             className="border rounded-xl px-6 py-4 w-full flex justify-center md:w-[180px]"
           >
             <Image src={pay2} width={100} height={100} alt="Pay with Payme" />
           </a>
           <a
             target="_blank"
-            href={`https://www.apelsin.uz/open-service?serviceId=498615742&planId=${planId}&userId=${userId}&amount=${plan.price * 100}`}
+            href={`https://www.apelsin.uz/open-service?serviceId=498615742&planId=${planId}&userId=${userId}&amount=${(plan?.discount ? plan.discount : plan?.price) * 100}`}
             className="border rounded-xl px-6 py-4 w-full flex justify-center md:w-[180px]"
           >
             <Image src={pay3} width={100} height={100} alt="Pay with Uzum" />
