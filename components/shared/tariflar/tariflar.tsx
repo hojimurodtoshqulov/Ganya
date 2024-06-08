@@ -19,9 +19,16 @@ async function Tariflar({ id, lang }: { id: string; lang: "uz" | "ru" }) {
     availablePeriod: number;
     includeResources: boolean;
     includeSupport: boolean;
+    includePrivateGroupAccess: boolean;
     price: number;
+    discount?: number;
+    discountExpiredAt?: string;
     titleUz: string;
     titleRu: string;
+    detailsUz: string;
+    detailsRu: string;
+    descriptionUz: string;
+    descriptionRu: string;
     id: string;
   }>(id);
 

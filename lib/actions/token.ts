@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 
 export const getAccessToken = async () => {
   const refreshToken = cookies().get("refreshToken")?.value;
-
-  if (!refreshToken) {
+  const accessToken = cookies().get("accessToken")?.value;
+  if (!refreshToken || !accessToken) {
     redirect("/auth/sign-in");
   } else {
     const data = { refreshToken: JSON.parse(refreshToken) };

@@ -81,8 +81,7 @@ const SingleLesson: FC<Props> = async ({
   return (
     <>
       <BackLink
-        title={"back"}
-        // title={lang === "ru" ? moduleData?.titleRu : moduleData?.titleUz}
+        title={lang === "ru" ? "Назад" : "Orqaga"}
         heading={lang === "ru" ? lessonData?.titleRu : lessonData?.titleUz}
       />
       <div className="mt-5">
