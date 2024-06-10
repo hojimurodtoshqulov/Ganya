@@ -7,6 +7,7 @@ import {
   X,
   Newspaper,
   Image,
+  Users,
 } from "lucide-react";
 import { useParams, useSelectedLayoutSegments } from "next/navigation";
 import { FC, memo } from "react";
@@ -53,6 +54,11 @@ const SideBar: FC<SidebarProps> = ({
     {
       icon: Image,
       ...dictionary[2],
+    },
+    {
+      icon: Users,
+      label: lang === "ru" ? "Пользователи" : "Foydalanuvchilar",
+      path: "users",
     },
   ];
   const paths = useSelectedLayoutSegments();
