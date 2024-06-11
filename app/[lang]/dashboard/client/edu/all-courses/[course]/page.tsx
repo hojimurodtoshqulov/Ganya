@@ -77,9 +77,9 @@ const OneOfAllCourses: FC<Props> = async ({
       <Modules data={data} lang={lang} />
       <div className="flex gap-6 flex-col justify-center p-6 bg-white mt-5 rounded-2xl">
         <h2 className="font-comfortaa text-main-300 font-semibold text-[26px]">
-          Тарифы
+          {lang === "ru" ? "Тарифы" : "Tariflar"}
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 items-center justify-center lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 justify-center lg:grid-cols-3 gap-5 md:gap-6">
           {plans.map((plan, i) => (
             <Card
               key={plan.id}

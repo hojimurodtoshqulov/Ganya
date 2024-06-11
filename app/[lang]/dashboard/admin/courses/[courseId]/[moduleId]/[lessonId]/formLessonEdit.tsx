@@ -25,11 +25,12 @@ interface Props {
   };
   data: any;
   accToken?: string;
-  dict: Awaited<ReturnType<typeof getDictionary>>['dashboard'];
+  dict: Awaited<ReturnType<typeof getDictionary>>["dashboard"];
 }
 
 const schema = z.object({
-  video: z.union([z.string(), z.instanceof(FileList)]),
+  videoUz: z.union([z.string(), z.instanceof(FileList)]),
+  videoRu: z.union([z.string(), z.instanceof(FileList)]),
   titleRu: z.string().min(1),
   titleUz: z.string().min(1),
   descriptionRu: z.string().min(1),
@@ -42,7 +43,7 @@ const FormLessonEdit: FC<Props> = ({
   params: { lang, lessonId, moduleId },
   data,
   accToken,
-  dict
+  dict,
 }): JSX.Element => {
   const {
     register,
@@ -58,34 +59,45 @@ const FormLessonEdit: FC<Props> = ({
         descriptionUz: data?.descriptionUz,
         titleRu: data?.titleRu,
         titleUz: data?.titleUz,
-        video: "",
+        videoUz: "",
+        videoRu: "",
       } ?? {},
   });
   const [lesson, setLesson] = useState<Object | any>(null);
   const router = useRouter();
 
-  const { video: videoFile } = watch();
+  const { videoUz: videoUzFile, videoRu: videoRuFile } = watch();
 
-  const videoName =
-    videoFile &&
-    videoFile.length >= 0 &&
-    (typeof videoFile !== "string" ? videoFile[0]?.name : "");
+  const videoUzName =
+    videoUzFile &&
+    videoUzFile.length >= 0 &&
+    (typeof videoUzFile !== "string" ? videoUzFile[0]?.name : "");
+  const videoRuName =
+    videoRuFile &&
+    videoRuFile.length >= 0 &&
+    (typeof videoRuFile !== "string" ? videoRuFile[0]?.name : "");
 
   const onSubmit = async (values: Schema) => {
     try {
       const formData = new FormData();
-      if (!videoName) {
-        formData.append('video', data.video)
-
+      if (!videoUzName) {
+        formData.append("videoUz", data.videoUz);
       } else {
-        if (values.video instanceof FileList) {
-          formData.append("video", values.video[0], values.video[0].name);
+        if (values.videoUz instanceof FileList) {
+          formData.append("videoUz", values.videoUz[0], values.videoUz[0].name);
         } else {
-          formData.append("video", values.video);
+          formData.append("videoUz", values.videoUz);
         }
       }
-
-
+      if (!videoRuName) {
+        formData.append("videoUz", data.videoRu);
+      } else {
+        if (values.videoRu instanceof FileList) {
+          formData.append("videoRu", values.videoRu[0], values.videoRu[0].name);
+        } else {
+          formData.append("videoRu", values.videoRu);
+        }
+      }
 
       formData.append("titleUz", values.titleUz);
       formData.append("titleRu", values.titleRu);
@@ -103,7 +115,8 @@ const FormLessonEdit: FC<Props> = ({
         },
       });
 
-      if (!req.ok) throw new Error(`${dict.admin.createLesson.toast.updateError}`);
+      if (!req.ok)
+        throw new Error(`${dict.admin.createLesson.toast.updateError}`);
       reset();
       const res = req.json();
       toast.success(dict.admin.createLesson.toast.update);
@@ -127,7 +140,8 @@ const FormLessonEdit: FC<Props> = ({
         },
       });
 
-      if (!req.ok) throw new Error(`${dict.admin.createLesson.toast.deleteError}`);
+      if (!req.ok)
+        throw new Error(`${dict.admin.createLesson.toast.deleteError}`);
 
       const res = await req.json();
       toast.success(dict.admin.createLesson.toast.delete);
@@ -160,10 +174,10 @@ const FormLessonEdit: FC<Props> = ({
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div className="relative">
           <Label
-            htmlFor="videoUpload"
+            htmlFor="videoUzUpload"
             className={clsx(
               "relative rounded-2xl p-4 flex items-center justify-between gap-3 border-dashed border-2",
-              inputErrors.video && "border-destructive",
+              inputErrors.videoUz && "border-destructive",
             )}
           >
             <div className="flex items-center gap-3">
@@ -172,44 +186,86 @@ const FormLessonEdit: FC<Props> = ({
               </div>
               <div className="flex flex-col text-csneutral-500 gap-1">
                 <h1 className="text-[22px] font-medium">
-                  {videoName
+                  {videoUzName
                     ? getLangText(lang, "Video Tanlandi", "Видео выбрано")
-                    : dict.admin.createLesson.videoLable}
+                    : dict.admin.createLesson.videoLable}{" "}
+                  {lang === "ru" ? "УЗ" : "UZ"}
                 </h1>
                 <p className="text-base font-normal">
-                  {videoName
-                    ? videoName
+                  {videoUzName
+                    ? videoUzName
                     : dict.admin.createLesson.videoDescription}
                 </p>
               </div>
             </div>
             <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">
-              {videoName
-                ? dict.admin.createLesson.btnEdit : dict.admin.createLesson.btnSelect}
+              {videoUzName
+                ? dict.admin.createLesson.btnEdit
+                : dict.admin.createLesson.btnSelect}
             </span>
           </Label>
           <Input
-            id="videoUpload"
+            id="videoUzUpload"
             type="file"
             accept="video/*"
             className="absolute inset-0 opacity-0"
             // defaultValue={data?.video}
-            {...register("video", { required: true })}
+            {...register("videoUz", { required: true })}
+          />
+        </div>
+
+        <div className="relative">
+          <Label
+            htmlFor="videoRuUpload"
+            className={clsx(
+              "relative rounded-2xl p-4 flex items-center justify-between gap-3 border-dashed border-2",
+              inputErrors.videoRu && "border-destructive",
+            )}
+          >
+            <div className="flex items-center gap-3">
+              <div className="rounded-xl w-[60px] h-[60px] flex items-center justify-center bg-white">
+                <CiCirclePlus className="w-7 h-7" />
+              </div>
+              <div className="flex flex-col text-csneutral-500 gap-1">
+                <h1 className="text-[22px] font-medium">
+                  {videoRuName
+                    ? getLangText(lang, "Video Tanlandi", "Видео выбрано")
+                    : dict.admin.createLesson.videoLable}{" "}
+                  {lang === "ru" ? "РУ" : "RU"}
+                </h1>
+                <p className="text-base font-normal">
+                  {videoRuName
+                    ? videoRuName
+                    : dict.admin.createLesson.videoDescription}
+                </p>
+              </div>
+            </div>
+            <span className="rounded-[8px] py-3 px-5 bg-main-100 text-primary-300 text-sm font-normal">
+              {videoRuName
+                ? dict.admin.createLesson.btnEdit
+                : dict.admin.createLesson.btnSelect}
+            </span>
+          </Label>
+          <Input
+            id="videoRuUpload"
+            type="file"
+            accept="video/*"
+            className="absolute inset-0 opacity-0"
+            // defaultValue={data?.video}
+            {...register("videoRu", { required: true })}
           />
         </div>
 
         <div className="rounded-2xl  bg-white flex flex-col gap-4 p-6">
           <div className="grid w-full  items-center gap-1.5">
-            <Label htmlFor="titleRu">
-              {dict.admin.createLesson.title}
-            </Label>
+            <Label htmlFor="titleRu">{dict.admin.createLesson.title}</Label>
             <Input
               type="text"
               id="titleRu"
               placeholder={`${dict.admin.createLesson.title} RU`}
               className={cn({ "border-destructive": inputErrors.titleRu })}
               {...register("titleRu", { required: true })}
-            // defaultValue={data?.titleRu}
+              // defaultValue={data?.titleRu}
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">

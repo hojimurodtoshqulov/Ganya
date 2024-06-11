@@ -6,6 +6,8 @@ import pay3 from "@/icons/pay-3.png";
 import { getDictionary } from "@/lib/get-dictionary";
 import { cn } from "@/lib/utils";
 import { getUserData } from "@/lib/actions/user";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 interface Props {
   params: {
@@ -28,9 +30,60 @@ async function getPlans<T>(id: string): Promise<T[] | Error> {
 
   return res.json();
 }
+interface ICard {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  titleUz: string;
+  titleRu: string;
+  image: string;
+  descriptionUz: string;
+  descriptionRu: string;
+  courseStatus: string;
+}
+
+interface FullCourses {
+  id: string;
+  courseId: string;
+  planId: string;
+  userId: string;
+  purchaseDate: string;
+  expirationDate: string;
+  createdAt: string;
+  updatedAt: string;
+  course: ICard;
+}
+async function getData<T>(): Promise<T[] | Error> {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/courses/my-courses",
+    {
+      cache: "no-store",
+      headers: {
+        Authorization: `Bearer ${JSON.parse(cookies().get("accessToken")?.value ?? "")}`,
+      },
+    },
+  );
+
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
 export default async function BuyCourse({
   params: { lang, planId, courseId },
 }: Props) {
+  const data = await getData<FullCourses>();
+
+  if (data instanceof Error) {
+    return <h2>Failed to fetch data.</h2>;
+  }
+
+  const isBuyed = data.some((course) => course.courseId === courseId);
+  if (isBuyed) {
+    redirect(`/${lang}/dashboard/client/edu`);
+  }
+
   const langue = await getDictionary(lang);
   const plans = await getPlans<{
     id: string;
