@@ -52,7 +52,8 @@ const SingleLesson: FC<Props> = async ({
     id: string;
     titleUz: string;
     titleRu: string;
-    video: string;
+    videoUz: string;
+    videoRu: string;
     descriptionUz: string;
     attachedFiles: [];
     moduleId: string;
@@ -86,7 +87,7 @@ const SingleLesson: FC<Props> = async ({
       />
       <div className="mt-5">
         <Dars
-          videoLink={lessonData.video}
+          videoLink={lang === "ru" ? lessonData.videoRu : lessonData.videoUz}
           next={moduleData.Lesson[currentLessonIndex + 1]?.id}
           prev={moduleData.Lesson[currentLessonIndex - 1]?.id}
           lang={lang}
