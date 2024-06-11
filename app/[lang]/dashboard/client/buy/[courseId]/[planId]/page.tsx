@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { getUserData } from "@/lib/actions/user";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import DelCookie from "./delCookie";
 
 interface Props {
   params: {
@@ -120,6 +121,7 @@ export default async function BuyCourse({
         },
       )}
     >
+      <DelCookie />
       <div className="bg-white p-10 rounded-2xl w-[650px]">
         <h1 className="text-main-300 text-[32px] font-bold leading-[44px] font-comfortaa mb-8">
           {langue.pay.heading}
@@ -135,7 +137,8 @@ export default async function BuyCourse({
           <div className="flex items-center justify-between">
             <p className="text-lg font-normal">{langue.pay.pay}</p>
             <h2 className="text-[22px] leading-[32px] text-main-300 font-semibold">
-              {lang === "uz" ? plan.price + " UZS" : plan.price + " УЗС"}
+              {plan?.discount ? plan?.discount : plan.price}{" "}
+              {lang === "uz" ? "UZS" : "УЗС"}
             </h2>
           </div>
         </div>

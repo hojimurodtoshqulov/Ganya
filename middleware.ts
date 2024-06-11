@@ -5,7 +5,6 @@ import { i18n } from "./lib/i18n-config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import { getAccessToken } from "./lib/actions/token";
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -62,6 +61,8 @@ export async function middleware(request: NextRequest) {
   if (!accessToken && pathname.indexOf("/dashboard") > -1) {
     return NextResponse.redirect(new URL("/auth/sign-in", request.url));
   }
+  // console.log(pathname.split("/").toString(), pathname);
+  const lang = pathname.split("/")[1];
 
   if (pathname.includes("/dashboard")) {
     let res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/users/profile", {
@@ -77,13 +78,19 @@ export async function middleware(request: NextRequest) {
     } else if (pathname.includes("/client") && json?.role === "user") {
       return NextResponse.next();
     } else if (pathname.includes("/client") && json?.role !== "user") {
-      return NextResponse.redirect(new URL("/auth/sign-in", request.url));
+      return NextResponse.redirect(
+        new URL(`/${lang}/auth/sign-in`, request.url),
+      );
     } else if (pathname.includes("/admin") && json?.role !== "admin") {
-      return NextResponse.redirect(new URL("/auth/sign-in", request.url));
+      return NextResponse.redirect(
+        new URL(`/${lang}/auth/sign-in`, request.url),
+      );
     }
 
     if (!res.ok) {
-      return NextResponse.redirect(new URL("/auth/sign-in", request.url));
+      return NextResponse.redirect(
+        new URL(`${lang}/auth/sign-in`, request.url),
+      );
     }
   }
 }

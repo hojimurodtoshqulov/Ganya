@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import HashMain from "@/icons/hash-main.svg";
 import HashSecond from "@/icons/hash-second.svg";
@@ -7,6 +8,7 @@ import Star3 from "@/icons/star-3.svg";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { saveLink } from "@/lib/actions/user";
 interface PlanCardProps {
   values: {
     availablePeriod: number;
@@ -140,6 +142,14 @@ function PlanCard(props: PlanCardProps): JSX.Element {
               variant={props.pro ? "filled" : "outline"}
               size={props.small ? "sm" : "default"}
               className="w-full"
+              onClick={() => {
+                const f = async () => {
+                  await saveLink(
+                    `/${props.lang}/dashboard/client/buy/${props.courseId}/${props.values.id}`,
+                  );
+                };
+                f();
+              }}
             >
               {props.lang === "ru" ? "Выбрать" : "Tanlash"}
             </Button>

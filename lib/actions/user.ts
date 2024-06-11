@@ -24,3 +24,17 @@ export const logout = async (e: string) => {
   cookies().delete("refreshToken");
   redirect(e);
 };
+
+export const saveLink = async (str: string) => {
+  cookies().set({
+    name: "coursePlanLink",
+    value: str,
+    httpOnly: true,
+    secure: true,
+    maxAge: 10 * 60 * 24 * 1000,
+  });
+};
+
+export const deleteLink = async () => {
+  cookies().delete("coursePlanLink");
+};
