@@ -100,7 +100,8 @@ export const loginAction = async (formData: FormData) => {
       });
 
       return {
-        successMessage: "Successfuly posted",
+        successMessage:
+          cookies().get("coursePlanLink")?.value ?? "link-expired",
       };
     } catch (e) {
       console.log(e);

@@ -49,10 +49,16 @@ const MyCourses: FC<{ lang: "uz" | "ru" }> = async ({
   const data = await getData<FullCourses>();
   // console.log(data, "my coruse");
   if (data instanceof Error) {
-    return <h2>Failed to fetch data.</h2>;
+    return <h2>Something went wrong</h2>;
   }
   if (data.length === 0) {
-    return <h2>No courses</h2>;
+    return (
+      <h2>
+        {lang === "uz"
+          ? "Hozirda sizda sotib olingan kurslar yoq"
+          : "У вас нет купленных курсов"}
+      </h2>
+    );
   }
   return (
     <div className="space-y-2.5">

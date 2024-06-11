@@ -9,7 +9,7 @@ export async function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "Ganya",
+  title: "Академия родителей",
   description: "Online courses",
 };
 

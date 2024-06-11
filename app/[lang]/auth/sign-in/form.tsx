@@ -5,7 +5,7 @@ import { cn, getActionErrors } from "@/lib/utils";
 import { PasswordInput } from "../password-input";
 import Link from "next/link";
 import { ZodIssue } from "zod";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import SubmitBtn from "../submit-button";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -17,14 +17,17 @@ type ActionReturn = {
 
 interface Props {
   action: (params: FormData) => Promise<ActionReturn>;
+  lang: "uz" | "ru";
 }
 
-const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
+const SignInForm: FC<Props> = ({ action, lang }): JSX.Element => {
   const [state, setState] = useState<ActionReturn>();
   const { toast } = useToast();
 
   const emailOrPhoneErr = getActionErrors("emailOrPhone", state?.errors)?.[0];
   const passwordErr = getActionErrors("password", state?.errors)?.[0];
+
+  // console.log(window.history.back());
 
   return (
     <form
@@ -33,7 +36,9 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
         if (result?.errors) {
           setState((p) => ({ ...p, errors: result.errors }));
         } else if (result?.successMessage) {
-          redirect("/dashboard");
+          if (result?.successMessage === "link-expired") {
+            redirect(`/${lang}/dashboard`);
+          } else redirect(result?.successMessage);
         } else {
           // error toast
           toast({
@@ -47,7 +52,9 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
       <Input
         type="text"
         name="emailOrPhone"
-        placeholder={"Телефон или E-mail"}
+        placeholder={
+          lang === "uz" ? "Telefon yoki E-mail" : "Телефон или E-mail"
+        }
         className={cn({
           "border-destructive": emailOrPhoneErr,
         })}
@@ -55,21 +62,23 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
       <div>
         <PasswordInput
           name="password"
-          placeholder={"Введите пароль"}
+          placeholder={lang === "uz" ? "Parol" : "Введите пароль"}
           className={cn({
             "border-destructive": passwordErr,
           })}
         />
         {/* <Link
-          href={"/"}
-          className="block text-xs text-main-200 font-normal px-1 mt-2"
+          href={`/${lang}/auth/forgot-password`}
+          className="block text-sm text-main-200 font-normal px-1 mt-2"
         >
-          Забыли пароль?
+          {lang === "uz" ? "Parolni unutdingizmi?" : "Забыли пароль?"}
         </Link> */}
       </div>
-      <SubmitBtn className="text-base">Войти</SubmitBtn>
+      <SubmitBtn className="text-base">
+        {lang === "uz" ? "Kirish" : "Войти"}
+      </SubmitBtn>
     </form>
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
