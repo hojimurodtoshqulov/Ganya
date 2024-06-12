@@ -3,7 +3,9 @@ import { cookies } from "next/headers";
 import Form from "./form";
 import { smsValidateAction } from "@/lib/actions/auth.actions";
 
-const ValidateSMS: FC = (): JSX.Element => {
+const ValidateSMS: FC<{ params: { lang: "uz" | "ru" } }> = ({
+  params: { lang },
+}): JSX.Element => {
   const sms = cookies().get("sms");
 
   return (
@@ -12,7 +14,7 @@ const ValidateSMS: FC = (): JSX.Element => {
         <h2 className="text-h2">Регистрация</h2>
         <p className="text-lg">Займет всего минуту</p>
       </div>
-      <Form action={smsValidateAction} sms={sms} />
+      <Form action={smsValidateAction} sms={sms} lang={lang} />
     </div>
   );
 };
