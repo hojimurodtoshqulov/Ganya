@@ -153,11 +153,12 @@ export const smsValidateAction = async (formData: FormData) => {
         });
 
         return {
-          successMessage: "Code successfuly posted",
+          successMessage:
+            cookies().get("coursePlanLink")?.value ?? "link-expired",
         };
       } else {
         return {
-          errorMessage: json.message,
+          errorMessage: json.message ?? "something went wrong",
         };
       }
     } catch (err) {

@@ -19,9 +19,10 @@ type ActionReturn = {
 interface Props {
   action: (params: FormData) => Promise<ActionReturn>;
   sms?: RequestCookie;
+  lang: "uz" | "ru";
 }
 
-const Form: FC<Props> = ({ action, sms }): JSX.Element => {
+const Form: FC<Props> = ({ action, sms, lang }): JSX.Element => {
   const [state, setState] = useState<ActionReturn>();
   const router = useRouter();
 
@@ -41,7 +42,11 @@ const Form: FC<Props> = ({ action, sms }): JSX.Element => {
         setState(res);
 
         if (res?.successMessage) {
-          router.push("/dashboard/client/edu");
+          if (res?.successMessage === "link-expired") {
+            router.push(`/${lang}/dashboard/client/edu`);
+          } else {
+            router.push(res?.successMessage);
+          }
         }
       }}
     >
