@@ -87,7 +87,7 @@ const OneOfAllCourses: FC<Props> = async ({
               btn
               small
               lang={lang}
-              pro={i === 1}
+              // pro={i === 1}
               courseId={course}
             />
           ))}
