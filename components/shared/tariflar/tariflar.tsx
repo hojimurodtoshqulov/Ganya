@@ -40,15 +40,8 @@ async function Tariflar({ id, lang }: { id: string; lang: "uz" | "ru" }) {
         {lang === "ru" ? "Тарифы" : "Tariflar"}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 justify-center lg:grid-cols-3 gap-5 md:gap-6">
-        {data.map((t, i) => (
-          <Card
-            values={t}
-            key={t.id}
-            btn
-            pro={i === 1}
-            lang={lang}
-            courseId={id}
-          />
+        {data.map((t) => (
+          <Card values={t} key={t.id} btn lang={lang} courseId={id} />
         ))}
       </div>
     </div>

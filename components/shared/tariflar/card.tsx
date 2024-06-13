@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { saveLink } from "@/lib/actions/user";
+import { useState } from "react";
 interface PlanCardProps {
   values: {
     availablePeriod: number;
@@ -26,7 +27,7 @@ interface PlanCardProps {
     descriptionRu: string;
     id: string;
   };
-  pro?: boolean;
+  // pro?: boolean;
   small?: boolean;
   btn?: boolean;
   courseId: string;
@@ -45,15 +46,20 @@ function PlanCard(props: PlanCardProps): JSX.Element {
 
     return obj;
   });
+
+  const [pro, setPro] = useState(false);
+
   return (
     <div
+      onMouseEnter={() => setPro(true)}
+      onMouseLeave={() => setPro(false)}
       className={cn(
-        `grid grid-rows-2 w-full ${props.small ? "p-4 rounded-xl" : "py-4 px-5 sm:p-6 lg:p-10 rounded-[20px] md:rounded-[32px]"}  ${props.pro ? "bg-main-200" : "bg-csneutral-100"}`,
+        `grid grid-rows-2 w-full transition-all duration-200 ${props.small ? "p-4 rounded-xl" : "py-4 px-5 sm:p-6 lg:p-10 rounded-[20px] md:rounded-[32px]"}  ${pro ? "bg-main-200" : "bg-csneutral-100"}`,
       )}
     >
       <div className="flex flex-col gap-3">
         <h2
-          className={`title ${props.small ? "text-xl" : "text-2xl md:text-[32px]"} font-comfortaa font-semibold ${props.pro ? "text-main-100" : "text-csneutral-600"}`}
+          className={`title ${props.small ? "text-xl" : "text-2xl md:text-[32px]"} font-comfortaa font-semibold ${pro ? "text-main-100" : "text-csneutral-600"}`}
         >
           {props.lang === "uz" ? props.values?.titleUz : props.values?.titleRu}
         </h2>
@@ -65,14 +71,14 @@ function PlanCard(props: PlanCardProps): JSX.Element {
                   fill
                   src={
                     acs?.icon === "#"
-                      ? props.pro || acs?.del
+                      ? pro || acs?.del
                         ? HashSecond
                         : HashMain
-                      : acs?.icon === "*" && props.pro && !acs?.del
+                      : acs?.icon === "*" && pro && !acs?.del
                         ? Star2
-                        : acs?.icon === "*" && props.pro && acs?.del
+                        : acs?.icon === "*" && pro && acs?.del
                           ? Star3
-                          : acs?.icon === "*" && !props.pro && !acs?.del
+                          : acs?.icon === "*" && !pro && !acs?.del
                             ? Star1
                             : Star2
                   }
@@ -81,7 +87,7 @@ function PlanCard(props: PlanCardProps): JSX.Element {
               </span>
               <p
                 className={cn(
-                  `${props.pro && acs?.del ? "text-csneutral-300" : !props.pro && acs.del ? "text-csneutral-400" : props.pro ? "text-white" : "text-csneutral-500"}`,
+                  `${pro && acs?.del ? "text-csneutral-300" : !pro && acs.del ? "text-csneutral-400" : pro ? "text-white" : "text-csneutral-500"}`,
                   { "line-through": acs?.del },
                 )}
               >
@@ -95,26 +101,26 @@ function PlanCard(props: PlanCardProps): JSX.Element {
       <div className="flex flex-col gap-2">
         <div className="flex flex-col gap-0.5">
           <div
-            className={`price text-sm w-max p-2 rounded-lg ${!props.pro ? "text-main-100" : "text-main-300"} ${props.pro ? "bg-main-100" : "bg-main-300"}`}
+            className={`price text-sm w-max p-2 rounded-lg ${!pro ? "text-main-100" : "text-main-300"} ${pro ? "bg-main-100" : "bg-main-300"}`}
           >
             {props.lang === "ru"
               ? `Доступ к курсу ${props.values.availablePeriod / 30} месяцев`
               : `Kursga ${props.values.availablePeriod / 30} oy ruxsat`}
           </div>
           <p
-            className={`price ${props.small ? "text-[22px]" : "text-[32px]"} ${props.pro ? "text-main-100" : "text-main-300"} ${props.values.discount ? "line-through" : ""}`}
+            className={`price ${props.small ? "text-[22px]" : "text-[32px]"} ${pro ? "text-main-100" : "text-main-300"} ${props.values.discount ? "line-through" : ""}`}
           >
             {props.values?.price} {props.lang === "ru" ? "УЗС" : "UZS"}
           </p>
           {props.values?.discount && (
             <p
-              className={`price ${props.small ? "text-[22px]" : "text-[32px]"} ${props.pro ? "text-main-100" : "text-main-300"}`}
+              className={`price ${props.small ? "text-[22px]" : "text-[32px]"} ${pro ? "text-main-100" : "text-main-300"}`}
             >
               {props.values?.discount} {props.lang === "ru" ? "УЗС" : "UZS"}
             </p>
           )}
           {props.values.discountExpiredAt && (
-            <span className={props.pro ? "text-white" : "text-csneutral-500"}>
+            <span className={pro ? "text-white" : "text-csneutral-500"}>
               {props.lang === "ru"
                 ? `Повышение цен ${new Date(
                     props.values.discountExpiredAt,
@@ -139,7 +145,7 @@ function PlanCard(props: PlanCardProps): JSX.Element {
             href={`/${props.lang}/dashboard/client/buy/${props.courseId}/${props.values.id}`}
           >
             <Button
-              variant={props.pro ? "filled" : "outline"}
+              variant={pro ? "filled" : "outline"}
               size={props.small ? "sm" : "default"}
               className="w-full"
               onClick={() => {
@@ -156,7 +162,7 @@ function PlanCard(props: PlanCardProps): JSX.Element {
           </Link>
         )}
 
-        <p className={props.pro ? "text-white" : "text-csneutral-500"}>
+        <p className={pro ? "text-white" : "text-csneutral-500"}>
           {props.lang === "ru"
             ? props.values.descriptionRu
             : props.values.descriptionUz}

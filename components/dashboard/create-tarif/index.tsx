@@ -65,6 +65,7 @@ const CreateTarif: FC<Props> = async ({
             <CreateTarifForm
               courseId={courseId}
               method="POST"
+              lang={lang}
               accessToken={cookies().get("accessToken")?.value}
             />
           </DialogContent>
