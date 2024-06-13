@@ -85,7 +85,7 @@ export const loginAction = async (formData: FormData) => {
         },
       );
       const json = await res.json();
-
+      console.log(json);
       cookies().set({
         name: "accessToken",
         value: JSON.stringify(json.accessToken),

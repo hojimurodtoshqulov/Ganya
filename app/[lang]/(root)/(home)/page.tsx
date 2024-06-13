@@ -20,39 +20,39 @@ import { Toaster } from "react-hot-toast";
 import Reviews from "@/components/shared/review/reviews";
 import Partners from "@/components/shared/Partners";
 
-// async function getData<T>(): Promise<T[] | Error> {
-//   const res = await fetch(
-//     process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=completed",
-//     {
-//       cache: "no-store",
-//     },
-//   );
+async function getData<T>(): Promise<T[] | Error> {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=completed",
+    {
+      cache: "no-store",
+    },
+  );
 
-//   if (!res.ok) {
-//     return new Error("Failed to fetch data");
-//   }
-
-//   return res.json();
-// }
-
-async function getCourse<T>(id: string): Promise<T[] | Error> {
-  try {
-    const res = await fetch(
-      process.env.NEXT_PUBLIC_BASE_URL + "/courses/single/" + id,
-      {
-        cache: "no-store",
-      },
-    );
-
-    if (!res.ok) {
-      return new Error("Failed to fetch data");
-    }
-
-    return res.json();
-  } catch (e) {
+  if (!res.ok) {
     return new Error("Failed to fetch data");
   }
+
+  return res.json();
 }
+
+// async function getCourse<T>(id: string): Promise<T[] | Error> {
+//   try {
+//     const res = await fetch(
+//       process.env.NEXT_PUBLIC_BASE_URL + "/courses/single/" + id,
+//       {
+//         cache: "no-store",
+//       },
+//     );
+
+//     if (!res.ok) {
+//       return new Error("Failed to fetch data");
+//     }
+
+//     return res.json();
+//   } catch (e) {
+//     return new Error("Failed to fetch data");
+//   }
+// }
 
 export default async function Home({
   params: { lang },
@@ -60,6 +60,19 @@ export default async function Home({
   params: { lang: "ru" | "uz" };
 }) {
   const dcitionary = await getDictionary(lang);
+
+  const data = await getData<{ id: string }>();
+  if (data instanceof Error)
+    return (
+      <div className="w-full h-full text-center text-2xl">
+        {lang === "ru"
+          ? "Произошла ошибка. Повторите попытку позже."
+          : "Nimadir noto'g'ri ketdi. Keyinroq urinib ko'ring"}
+      </div>
+    );
+
+  const courceId = data?.[0]?.id;
+
   return (
     <div>
       <div id="about">
@@ -97,8 +110,8 @@ export default async function Home({
       <Fits fits={dcitionary.home.whocurse} />
 
       <div className="container my-10 md:my-20" id="courses">
-        <Accordion type="multiple" defaultValue={["66549f7c1eaeb378fe5fe9cb"]}>
-          <CourceCard id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
+        <Accordion type="multiple" defaultValue={[courceId]}>
+          <CourceCard id={courceId} lang={lang} />
         </Accordion>
       </div>
 
@@ -110,7 +123,7 @@ export default async function Home({
         <Carousel
           title={dcitionary.home.team.title}
           data={[...teamMembers, ...teamMembers].map((team, i) => (
-            <TeamCard key={i} data={team} />
+            <TeamCard key={i} data={team} lang={lang} />
           ))}
         />
       </div>
@@ -122,7 +135,7 @@ export default async function Home({
       </div>
 
       <div className="container my-10 md:my-20">
-        <Tariflar id={"66549f7c1eaeb378fe5fe9cb"} lang={lang} />
+        <Tariflar id={courceId} lang={lang} />
       </div>
 
       <div id="contacts" className="my-10 md:my-20">

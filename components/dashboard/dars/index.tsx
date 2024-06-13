@@ -21,7 +21,7 @@ const Dars = ({ videoLink, next, prev, lang }: Props) => {
           <source src={videoLink} type="video/mp4" />
         </video>
       </div>
-      <div className="btn-container flex justify-between xs:hidden">
+      <div className="btn-container flex justify-between items-center">
         <Button
           variant={"main"}
           size={"default"}

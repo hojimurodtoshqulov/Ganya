@@ -1,27 +1,35 @@
-import Image1 from '@/images/team1.png'
-import Image2 from '@/images/team2.png'
-import Image3 from '@/images/team3.png'
-import Image4 from '@/images/team4.png'
+import Image1 from "@/images/team1.png";
+import Image2 from "@/images/team2.png";
+import Image3 from "@/images/team3.png";
+import Image4 from "@/images/team4.png";
 
 export const teamMembers = [
   {
-    name: "Динара Гизатуллина",
-    job: "Психолог-расстановщик",
-    image: Image1
+    nameUz: "Dinara Gizatullina",
+    nameRu: "Динара Гизатуллина",
+    jobUz: "Psixolog",
+    jobRu: "Психолог-расстановщик",
+    image: Image1,
   },
   {
-    name: "Артем Батманов",
-    job: "Педиатр",
-    image: Image2
+    nameRu: "Артем Батманов",
+    nameUz: "Artyom Batmanov",
+    jobUz: "Pediatr",
+    jobRu: "Педиатр",
+    image: Image2,
   },
   {
-    name: "Виктория Вершковская ",
-    job: "Нутрициолог",
-    image: Image3
+    nameUz: "Viktoriya Vershkovskaya",
+    nameRu: "Виктория Вершковская",
+    jobRu: "Нутрициолог",
+    jobUz: "Dietolog",
+    image: Image3,
   },
   {
-    name: "Умида Насирова",
-    job: "Педиатр",
-    image: Image4
+    nameUz: "Umida Nasirova",
+    nameRu: "Умида Насирова",
+    jobRu: "Педиатр",
+    jobUz: "Pediatr",
+    image: Image4,
   },
-]
+];

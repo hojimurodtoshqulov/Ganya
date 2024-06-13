@@ -20,12 +20,13 @@ const Form: FC<{
     sessionId: string;
     path: string;
   };
-}> = ({ sms }): JSX.Element => {
+  lang: "uz" | "ru";
+}> = ({ sms, lang }): JSX.Element => {
   const { toast } = useToast();
   const router = useRouter();
 
   if (!sms.sessionId || !sms.path) {
-    router.push("/auth/forgot-password");
+    router.push(`/${lang}/auth/forgot-password`);
   }
 
   const {
@@ -35,25 +36,49 @@ const Form: FC<{
     reset,
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      confirmationCode: "",
+      newPassword: "",
+    },
   });
 
   const submit = async (values: z.infer<typeof schema>) => {
     const data = {
-      ...values,
+      newPassword: values.newPassword,
+      confirmationCode: Number(values.confirmationCode),
       sessionId: sms.sessionId,
     };
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + `/auth/reset-user-password`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    const json = await res.json();
+    if (res.ok) {
+      router.push(`/${lang}/auth/sign-in`);
+    } else {
+      toast({
+        description: json.message ?? "Something went wrong",
+        variant: "destructive",
+      });
+    }
   };
   return (
     <form onSubmit={handleSubmit(submit)} className="w-full space-y-4">
       <div>
         <PasswordInput
           {...register("newPassword")}
-          placeholder="New password"
-          className={errors.newPassword ? "border-destructive" : ""}
+          placeholder={lang === "uz" ? "Yangi parol" : "Новый пароль"}
+          className={errors?.newPassword ? "border-destructive" : ""}
         />
-        {errors.newPassword && (
+        {errors?.newPassword && (
           <p className="text-sm text-destructive">
-            {errors.newPassword.message}
+            {errors?.newPassword.message}
           </p>
         )}
       </div>
@@ -61,10 +86,10 @@ const Form: FC<{
         {...register("confirmationCode")}
         type="number"
         placeholder="SMS code"
-        className={errors.confirmationCode ? "border-destructive" : ""}
+        className={errors?.confirmationCode ? "border-destructive" : ""}
       />
       <Button className="w-full" variant={"main"} disabled={isSubmitting}>
-        Send
+        {lang === "ru" ? "Отправлять" : "Jo'natish"}
       </Button>
     </form>
   );
