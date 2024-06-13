@@ -100,7 +100,7 @@ const SideBar: FC<SidebarProps> = ({
           <button
             className="bg-none border-none"
             onClick={async () => {
-              await logout(`/${lang}`);
+              await logout(`/${lang}/auth/sign-in`);
             }}
           >
             <SidebarButton
