@@ -11,6 +11,11 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { getAccessToken } from "@/lib/actions/token";
 import { Textarea } from "@/components/ui/textarea";
+import { ArrowRight, MoveRight } from "lucide-react";
+import Image from "next/image";
+
+import HashMain from "@/icons/hash-main.svg";
+import Star1 from "@/icons/star-1.svg";
 
 interface Props {
   method?: "POST" | "PATCH";
@@ -31,7 +36,7 @@ interface Props {
     includeSupport?: any;
     includePrivateGroupAccess?: any;
   };
-
+  lang: "uz" | "ru";
   accessToken?: string;
 }
 
@@ -61,6 +66,7 @@ const CreateTarifForm: React.FC<Props> = ({
   planId,
   defaultValues,
   accessToken,
+  lang,
 }) => {
   const {
     register,
@@ -174,12 +180,22 @@ const CreateTarifForm: React.FC<Props> = ({
     >
       <div className="flex flex-col gap-4 w-full">
         <div className="grid w-full items-center gap-1.5">
-          <Label htmlFor="titleUz">Title</Label>
-          <Input id="titleUz" placeholder="Title uz" {...register("titleUz")} />
-          <Input id="titleRu" placeholder="Title ru" {...register("titleRu")} />
+          <Label htmlFor="titleUz">{lang === "ru" ? "Название" : "Nomi"}</Label>
+          <Input
+            id="titleUz"
+            placeholder={lang === "ru" ? "Название uz" : "Nomi uz"}
+            {...register("titleUz")}
+          />
+          <Input
+            id="titleRu"
+            placeholder={lang === "ru" ? "Название ru" : "Nomi ru"}
+            {...register("titleRu")}
+          />
         </div>
         <div className="grid w-full  items-center gap-1.5">
-          <Label htmlFor="load">Davomiyligi</Label>
+          <Label htmlFor="load">
+            {lang === "ru" ? "Длительность" : "Davomiyligi"}
+          </Label>
           <Input
             type="number"
             id="load"
@@ -202,7 +218,9 @@ const CreateTarifForm: React.FC<Props> = ({
             htmlFor="resourses"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            Дополнительные текстовые материалы.
+            {lang === "ru"
+              ? "Дополнительные текстовые материалы."
+              : "Qo'llanma ma'lumotlari."}
           </label>
         </div>
         <div className="flex items-center space-x-2">
@@ -218,7 +236,7 @@ const CreateTarifForm: React.FC<Props> = ({
             htmlFor="support"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            Онлайн консультации.
+            {lang === "ru" ? "Онлайн консультации." : "Onlayn konsultatsiya."}
           </label>
         </div>
         <div className="flex items-center space-x-2">
@@ -234,11 +252,11 @@ const CreateTarifForm: React.FC<Props> = ({
             htmlFor="vip"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            VIP group
+            {lang === "ru" ? "VIP группа" : "VIP guruh"}
           </label>
         </div>
         <div className="grid w-full  items-center gap-1.5">
-          <Label htmlFor="price">Сумма</Label>
+          <Label htmlFor="price">{lang === "ru" ? "Сумма" : "Summa"}</Label>
           <Input
             type="number"
             id="price"
@@ -250,7 +268,9 @@ const CreateTarifForm: React.FC<Props> = ({
         </div>
         <div className="w-full items-center gap-1.5 flex">
           <div>
-            <Label htmlFor="discount">Discount</Label>
+            <Label htmlFor="discount">
+              {lang === "ru" ? "Скидка" : "Chegirma"}
+            </Label>
             <Input
               type="number"
               id="discount"
@@ -261,7 +281,9 @@ const CreateTarifForm: React.FC<Props> = ({
             />
           </div>
           <div>
-            <Label htmlFor="discounExpiredAt">Discount expired </Label>
+            <Label htmlFor="discounExpiredAt">
+              {lang === "ru" ? "Срок действия" : "Amal qilish muddati"}
+            </Label>
             <Input
               type="date"
               id="discountExpiredAt"
@@ -278,20 +300,59 @@ const CreateTarifForm: React.FC<Props> = ({
       </div>
       <div className="flex flex-col gap-4 w-full">
         <div className="w-full flex flex-col gap-2">
-          <Label>Description</Label>
+          <Label>{lang === "ru" ? "Описание" : "Tavsif"}</Label>
           <Textarea
             {...register("descriptionRu")}
-            placeholder="Description ru"
+            placeholder={lang === "ru" ? "Описание ru" : "Tavsif ru"}
           />
           <Textarea
             {...register("descriptionUz")}
-            placeholder="Description uz"
+            placeholder={lang === "ru" ? "Описание uz" : "Tavsif uz"}
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <Label>Details</Label>
-          <Textarea {...register("detailsRu")} placeholder="Details ru" />
-          <Textarea {...register("detailsUz")} placeholder="Details uz" />
+          <div>
+            <p>{lang === "uz" ? "Qo'llanma" : "Руководство"}</p>
+            <ul>
+              <li className="flex items-center  gap-2.5">
+                <span>#+text.</span> <MoveRight />
+                <span className="flex items-center gap-2">
+                  <Image src={HashMain} alt="light icon" />
+                  text
+                </span>
+              </li>
+              <li className="flex items-center  gap-2.5">
+                <span>#-text.</span> <MoveRight />
+                <span className="flex items-center gap-2 line-through">
+                  <Image src={HashMain} alt="light icon" />
+                  text
+                </span>
+              </li>
+              <li className="flex items-center  gap-2.5">
+                <span>*+text.</span> <MoveRight />
+                <span className="flex items-center gap-2 ">
+                  <Image src={Star1} alt="light icon" />
+                  text
+                </span>
+              </li>
+              <li className="flex items-center  gap-2.5">
+                <span>*-text.</span> <MoveRight />
+                <span className="flex items-center gap-2 line-through">
+                  <Image src={Star1} alt="light icon" />
+                  text
+                </span>
+              </li>
+            </ul>
+          </div>
+          <Label>{lang === "ru" ? "Подробности" : "Ma'lumotlar"}</Label>
+          <Textarea
+            {...register("detailsRu")}
+            placeholder={lang === "ru" ? "Подробности ru" : "Ma'lumotlar ru"}
+          />
+          <Textarea
+            {...register("detailsUz")}
+            placeholder={lang === "ru" ? "Подробности uz" : "Ma'lumotlar uz"}
+          />
         </div>
       </div>
       <Button
@@ -300,7 +361,7 @@ const CreateTarifForm: React.FC<Props> = ({
         type="submit"
         disabled={isSubmitting}
       >
-        Сохранить
+        {lang === "ru" ? "Сохранить" : "Saqlash"}
       </Button>
     </form>
   );

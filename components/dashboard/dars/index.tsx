@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -11,11 +11,13 @@ type Props = {
 };
 const Dars = ({ videoLink, next, prev, lang }: Props) => {
   const router = useRouter();
+
   return (
     <div className="w-full p-6 rounded-2xl bg- flex gap-4 flex-col bg-white">
       <div className="w-full aspect-[5/3] bg-csneutral-100 rounded-xl flex justify-center items-center relative">
         <video
           controls
+          controlsList="nodownload"
           className="w-full h-full rounded-sm absolute top-0 left-0"
         >
           <source src={videoLink} type="video/mp4" />

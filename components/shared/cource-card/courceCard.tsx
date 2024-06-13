@@ -57,7 +57,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
             <Image
               src={gridData.image}
               alt={gridData?.descriptionRu}
-              className="rounded-[20px] xl:rounded-[40psx] h-auto w-auto  overflow-hidden"
+              className="rounded-[20px] xl:rounded-[40px] h-auto w-auto  overflow-hidden"
               fill={true}
             />
           ) : (
@@ -96,14 +96,14 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
     <AccordionItem value={data?.id} className="border-none">
       <div className=" rounded-[20px] md:rounded-[40px] overflow-hidden  bg-csneutral-100">
         <div
-          className={` ${toggle ? "bg-main-100" : "bg-csneutral-100"} transition-colors   flex flex-col md:grid md:grid-cols-[2fr_3fr] w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px] lg:h-[320px]`}
+          className={` ${toggle ? "bg-main-100" : "bg-csneutral-100"} transition-colors   flex flex-col md:grid md:grid-cols-[2fr_3fr] w-full  gap-4 lg:gap-10  p-4 lg:p-8 xl:p-10 rounded-[20px] xl:rounded-[40px] `}
         >
-          <div className=" md:h-56 md:w-[370px] lg:h-60 lg:w-[485px]  h-[180px] w-full relative">
+          <div className="h-56 sm:h-auto md:w-[370px] lg:w-[485px] w-full relative">
             {data?.image ? (
               <Image
                 src={data?.image}
                 alt={data?.descriptionRu}
-                className="rounded-[20px]  xl:rounded-[40px] h-auto w-auto overflow-hidden"
+                className="rounded-[20px] h-full w-full xl:rounded-[40px] overflow-hidden"
                 fill={true}
               />
             ) : (

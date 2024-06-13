@@ -154,6 +154,7 @@ function Card(props: CardProps): JSX.Element {
 
           <DialogContent className="max-w-4xl overflow-auto max-h-screen">
             <CreateTarifForm
+              lang={props.lang}
               method="PATCH"
               planId={props.planId}
               defaultValues={props.values}
