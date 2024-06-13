@@ -50,14 +50,14 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
   if (type === "grid") {
     return (
       <div
-        className={`bg-csneutral-100 transition-colors   flex flex-col w-full  gap-4 lg:gap-10  p-4 lg:p-6 xl:p-7 rounded-[20px] xl:rounded-[40px] justify-between `}
+        className={`bg-csneutral-100 transition-colors flex flex-col w-full  gap-4 lg:gap-10  p-4 lg:p-6 xl:p-7 rounded-[20px] xl:rounded-[40px] justify-between `}
       >
         <div className="relative w-full h-56 ">
           {gridData?.image ? (
             <Image
               src={gridData.image}
               alt={gridData?.descriptionRu}
-              className="rounded-[20px] xl:rounded-[40px] h-auto w-auto  overflow-hidden"
+              className="rounded-[20px] xl:rounded-[40psx] h-auto w-auto  overflow-hidden"
               fill={true}
             />
           ) : (
@@ -83,7 +83,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
           <div className="flex flex-row items-center justify-between gap-2">
             <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
               <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">
-                {gridDataModules} {lang === "ru" ? "Модуля" : "Modul"}
+                {gridDataModules} {lang === "ru" ? "Модули" : "Modul"}{" "}
               </p>
             </div>
           </div>
@@ -128,8 +128,9 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
                   className="hidden md:block"
                 />
               </Link>
-              <p className="mt-0 sm:mt-2  md::mt-6 font-normal text-[14px] md:text-xl lg:text-[20px] md:leading-[28px] text-main-300 font-comfortaa">
-                {getLangText(lang, data?.descriptionUz, data?.descriptionRu)}{" "}
+              <p className="mt-0 sm:mt-2  md::mt-6 font-normal text-[14px] md:text-xl lg:text-[20px] md:leading-[28px] text-main-300 font-comfortaa line-clamp-4">
+                {getLangText(lang, data?.descriptionUz, data?.descriptionRu)}
+                ...
               </p>
               <AccordionTrigger
                 onClick={() => setToggle((e) => !e)}
@@ -140,7 +141,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
             <div className="flex flex-row items-center justify-between gap-2">
               <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
                 <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">
-                  {totalModules} {lang === "ru" ? "Модуля" : "Modul"}
+                  {totalModules} {lang === "ru" ? "Модули" : "Modul"}
                 </p>
               </div>
 

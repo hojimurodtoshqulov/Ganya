@@ -32,16 +32,16 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 justify-between text-left font-bold font-comfortaa text-csneutral-600 text-xl md:text-3xl transition-all [&[data-state=open]>div>svg]:rotate-180 data-[state=open]:text-main-300 data-[state=open]:md:mb-5 data-[state=open]:mb-4",
+        "flex flex-1 justify-between text-left font-bold font-comfortaa text-csneutral-600 text-xl md:text-3xl transition-all [&[data-state=open]>div>svg]:rotate-180 data-[state=open]:text-main-300 data-[state=open]:md:mb-5 data-[state=open]:mb-4 ",
         className,
       )}
       {...props}
     >
-      {children}
+      <div className="w-[90%]">{children}</div>
       <div
         className={cn(
           buttonVariants({ variant: "main", size: "icon" }),
-          "shrink-0",
+          "shrink-0 ml-10",
         )}
       >
         <ChevronDown className="h-5 w-5 md:h-6 md:w-6 shrink-0 transition-transform duration-200" />

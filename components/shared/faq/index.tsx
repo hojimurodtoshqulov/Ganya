@@ -6,11 +6,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { faq } from "@/constants/faq";
-interface FAQ{
-  title: string,
-  cards: {title:string, text?:string}[]
+interface FAQ {
+  title: string;
+  cards: { title: string; text?: string }[];
 }
-const FAQ: FC<FAQ> = ({title, cards}): JSX.Element => {
+const FAQ: FC<FAQ> = ({ title, cards }): JSX.Element => {
   return (
     <div className="w-full container">
       <h2 className="text-h2 mb-10">{title}</h2>
