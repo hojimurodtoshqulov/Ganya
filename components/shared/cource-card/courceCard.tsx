@@ -184,10 +184,14 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
                 height={86}
               />
               <h4 className="text-lg font-normal text-main-300 row-span-1 col-start-2 col-span-4">
-                Подарок для каждой участницы курса:
+                {lang === "ru"
+                  ? "Подарок для каждой участницы курса:"
+                  : "Har bir kurs ishtirokchisiga sovg'a:"}
               </h4>
               <h1 className="w-full font-comfortaa font-bold text-[20px] leading-6 sm:text-[22px] sm:leading-7 md:text-3xl text-main-300 row-span-2 col-start-1 col-span-4  md:row-span-2 md:col-span-2">
-                Книга рецептов для малышей до года и тд
+                {lang === "ru"
+                  ? "Книга рецептов для малышей до года"
+                  : "Bir yoshgacha bo'lgan chaqaloqlar uchun retseptlar kitobi"}
               </h1>
             </div>
           </div>

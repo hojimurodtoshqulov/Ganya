@@ -15,7 +15,7 @@ const schema = z.object({
   emailOrPhone: z.union([emailSchema, phoneSchema]),
 });
 
-const Form: FC = (): JSX.Element => {
+const Form: FC<{ lang: "uz" | "ru" }> = ({ lang }): JSX.Element => {
   const { toast } = useToast();
   const router = useRouter();
   const {
@@ -66,7 +66,7 @@ const Form: FC = (): JSX.Element => {
       </Label>
 
       <Button className="w-full" variant={"main"} disabled={isSubmitting}>
-        Submit
+        {lang === "ru" ? "Отправлять" : "Jo'natish"}
       </Button>
     </form>
   );

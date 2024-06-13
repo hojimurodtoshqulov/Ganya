@@ -67,12 +67,12 @@ const SignInForm: FC<Props> = ({ action, lang }): JSX.Element => {
             "border-destructive": passwordErr,
           })}
         />
-        {/* <Link
+        <Link
           href={`/${lang}/auth/forgot-password`}
           className="block text-sm text-main-200 font-normal px-1 mt-2"
         >
           {lang === "uz" ? "Parolni unutdingizmi?" : "Забыли пароль?"}
-        </Link> */}
+        </Link>
       </div>
       <SubmitBtn className="text-base">
         {lang === "uz" ? "Kirish" : "Войти"}

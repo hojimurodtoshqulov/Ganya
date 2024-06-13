@@ -27,7 +27,7 @@ export default function Showcase({
       <div className="container pt-36 md:pt-40 pb-6 md:pb-16 h-full">
         <div className="w-1/2 flex flex-col justify-between h-full">
           <div>
-            <h1 className="font-bold w-80 md:text-[67px] font-comfortaa text-[40px] md:leading-[100px] leading-[48px] text-white">
+            <h1 className="font-bold w-80 sm:w-96 md:text-[67px] font-comfortaa text-[40px] md:leading-[70px] leading-[48px] text-white">
               {dict.showcase.title}
             </h1>
             <FormModal dict={dict} />
