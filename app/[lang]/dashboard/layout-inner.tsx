@@ -12,6 +12,7 @@ import {
 import { Locale } from "@/lib/i18n-config";
 import { cn } from "@/lib/utils";
 import { usePathname, useSelectedLayoutSegment } from "next/navigation";
+import DelCookie from "./client/buy/[courseId]/[planId]/delCookie";
 
 interface Props {
   children: ReactNode;
@@ -45,6 +46,7 @@ const InnerLayout: FC<Props> = ({
 
   return (
     <div className="flex relative">
+      <DelCookie />
       <div
         className={cn(
           `w-full sm:w-80 h-screen p-5 border-r border-csneutral-200 z-50 fixed bottom-0 top-0 ${open ? "left-0" : "-left-full"} bg-white transition-all animate-out`,

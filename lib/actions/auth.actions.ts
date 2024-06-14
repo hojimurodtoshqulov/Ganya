@@ -85,19 +85,20 @@ export const loginAction = async (formData: FormData) => {
         },
       );
       const json = await res.json();
-      console.log(json);
+      // console.log(json);
       cookies().set({
         name: "accessToken",
         value: JSON.stringify(json.accessToken),
         httpOnly: true,
-        maxAge: 60 * 60 * 24 * 1000,
+        maxAge: 60 * 60 * 24,
+        path: "/",
       });
-      cookies().set({
-        name: "refreshToken",
-        value: JSON.stringify(json.refreshToken),
-        httpOnly: true,
-        maxAge: 60 * 60 * 24 * 1000,
-      });
+      // cookies().set({
+      //   name: "refreshToken",
+      //   value: JSON.stringify(json.refreshToken),
+      //   httpOnly: true,
+      //   maxAge: 60 * 60 * 24 * 1000,
+      // });
 
       return {
         successMessage:
@@ -143,14 +144,15 @@ export const smsValidateAction = async (formData: FormData) => {
           name: "accessToken",
           value: JSON.stringify(json.accessToken),
           httpOnly: true,
-          maxAge: 60 * 60 * 24 * 1000,
+          maxAge: 24 * 60 * 60,
+          path: "/",
         });
-        cookies().set({
-          name: "refreshToken",
-          value: JSON.stringify(json.refreshToken),
-          httpOnly: true,
-          maxAge: 60 * 60 * 24 * 1000,
-        });
+        // cookies().set({
+        //   name: "refreshToken",
+        //   value: JSON.stringify(json.refreshToken),
+        //   httpOnly: true,
+        //   maxAge: 60 * 60 * 24 * 1000,
+        // });
 
         return {
           successMessage:
@@ -173,4 +175,8 @@ export const smsValidateAction = async (formData: FormData) => {
       errorMessage: validatedFields.error + "",
     };
   }
+};
+
+export const clearCookie = async () => {
+  cookies().delete("accessToken");
 };
