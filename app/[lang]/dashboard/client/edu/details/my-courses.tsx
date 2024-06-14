@@ -67,7 +67,7 @@ const MyCourses: FC<{ lang: "uz" | "ru" }> = async ({
           key={c.id}
           title={lang === "uz" ? c.titleUz : c.titleRu}
           description={lang === "uz" ? c.descriptionUz : c.descriptionRu}
-          btn={lang === "uz" ? "Trenigga o'tish" : "Перейти к обучению"}
+          btn={lang === "uz" ? "Treningga o'tish" : "Перейти к обучению"}
           courseId={c.id}
           image={c.image}
         />
