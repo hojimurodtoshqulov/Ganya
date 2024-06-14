@@ -1,8 +1,8 @@
 import BackLink from "@/components/dashboard/back-link";
-import Dars from "@/components/dashboard/dars";
+// import Dars from "@/components/dashboard/dars";
 import { FC } from "react";
-import { modules } from "@/constants/buyed-course";
 import { cookies } from "next/headers";
+import dynamic from "next/dynamic";
 
 interface Props {
   params: {
@@ -11,7 +11,9 @@ interface Props {
     lang: "ru" | "uz";
   };
 }
-
+const Dars = dynamic(() => import("@/components/dashboard/dars"), {
+  ssr: false,
+});
 async function getData<T>(id: string): Promise<T | Error> {
   const api = process.env.NEXT_PUBLIC_BASE_URL + `/lessons/single/${id}`;
   const req = await fetch(api, {

@@ -124,7 +124,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
                 </h2>
                 <Image
                   src={arrowCorner}
-                  alt="salom"
+                  alt="arrow"
                   className="hidden md:block"
                 />
               </Link>
@@ -141,7 +141,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
             <div className="flex flex-row items-center justify-between gap-2">
               <div className="flex flex-row items-center justify-between gap-3 md:gap-5">
                 <p className="border-main-300 border text-main-300 rounded-[30px]  text-base md:text-[22px] px-2 py-[4px]  md:px-4 md:py-2 ">
-                  {totalModules} {lang === "ru" ? "Модули" : "Modul"}
+                  {lang === "ru" ? "Модули" : "Modullar"}
                 </p>
               </div>
 
@@ -186,8 +186,8 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
               />
               <h4 className="text-lg font-normal text-main-300 row-span-1 col-start-2 col-span-4">
                 {lang === "ru"
-                  ? "Подарок для каждой участницы курса:"
-                  : "Har bir kurs ishtirokchisiga sovg'a:"}
+                  ? "Подарок для участниц стандартного и ВИП-тарифа"
+                  : "Standart va VIP tarif ishtirokchilari uchun sovg'a"}
               </h4>
               <h1 className="w-full font-comfortaa font-bold text-[20px] leading-6 sm:text-[22px] sm:leading-7 md:text-3xl text-main-300 row-span-2 col-start-1 col-span-4  md:row-span-2 md:col-span-2">
                 {lang === "ru"
