@@ -31,7 +31,7 @@ export const saveLink = async (str: string) => {
     value: str,
     httpOnly: true,
     secure: true,
-    maxAge: 10 * 60 * 24 * 1000,
+    maxAge: 10 * 60,
   });
 };
 

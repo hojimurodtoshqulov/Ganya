@@ -25,13 +25,13 @@ export const getAccessToken = async () => {
       redirect("/auth/sign-in");
     }
     const json = await res.json();
-    console.log(json);
+    // console.log(json);
     cookies().set({
       name: "accessToken",
       value: JSON.stringify(json.accessToken),
       httpOnly: true,
       secure: true,
-      maxAge: 60 * 60 * 24 * 1000,
+      maxAge: 60 * 60 * 24,
     });
     return json;
   }

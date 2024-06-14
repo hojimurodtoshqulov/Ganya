@@ -1,6 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { cn, getActionErrors } from "@/lib/utils";
 import { PasswordInput } from "../password-input";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import { ZodIssue } from "zod";
 import { redirect, useRouter } from "next/navigation";
 import SubmitBtn from "../submit-button";
 import { useToast } from "@/components/ui/use-toast";
+import { clearCookie } from "@/lib/actions/auth.actions";
 
 type ActionReturn = {
   errors?: ZodIssue[];
@@ -27,7 +28,13 @@ const SignInForm: FC<Props> = ({ action, lang }): JSX.Element => {
   const emailOrPhoneErr = getActionErrors("emailOrPhone", state?.errors)?.[0];
   const passwordErr = getActionErrors("password", state?.errors)?.[0];
 
-  // console.log(window.history.back());
+  // useEffect(() => {
+  //   const f = async () => await clearCookie();
+  //   f();
+  //   return () => {
+  //     f();
+  //   };
+  // }, []);
 
   return (
     <form
@@ -42,7 +49,7 @@ const SignInForm: FC<Props> = ({ action, lang }): JSX.Element => {
         } else {
           // error toast
           toast({
-            description: result?.errorMessage,
+            description: result?.errorMessage ?? "Something went wrong!",
             variant: "destructive",
           });
         }
