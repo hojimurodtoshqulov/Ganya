@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import devtoolsDetect from "devtools-detect";
 
 type Props = {
   videoLink: string;
@@ -11,6 +12,39 @@ type Props = {
 };
 const Dars = ({ videoLink, next, prev, lang }: Props) => {
   const router = useRouter();
+
+  const [isDevToolsOpen, setIsDevToolsOpen] = useState(
+    window && devtoolsDetect.isOpen,
+  );
+
+  useEffect(() => {
+    const handleChange = (event: any) => {
+      setIsDevToolsOpen(event.detail.isOpen);
+    };
+
+    window.addEventListener("devtoolschange", handleChange);
+
+    return () => {
+      window.removeEventListener("devtoolschange", handleChange);
+    };
+  }, []);
+  useEffect(() => {
+    const removeCode = () => {
+      if (isDevToolsOpen) {
+        const body = document.querySelector("body");
+        if (!body) return;
+        while (body.firstChild) {
+          body.removeChild(body.firstChild);
+        }
+        body.innerHTML += `<h2 style="text-align: center; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+        Oops! You must not use devtools in this page
+      </h2>`;
+      }
+    };
+    removeCode();
+
+    return () => removeCode();
+  }, [isDevToolsOpen]);
 
   return (
     <div className="w-full p-6 rounded-2xl bg- flex gap-4 flex-col bg-white">

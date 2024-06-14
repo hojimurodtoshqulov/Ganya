@@ -11,24 +11,28 @@ interface propstype {
 const Media = ({ color }: propstype) => {
   return (
     <div className={`flex gap-5 items-center text-main-100`}>
-      <Link href={"#"}>
+      <a href={"https://www.facebook.com/profile.php?id=61560078971181"}>
         <FaFacebook
           className={`text-main-100 ${!color && "text-main-200"}`}
           size={35}
         />
-      </Link>
-      <Link href={"#"}>
+      </a>
+      <a
+        href={
+          "https://www.instagram.com/academia_roditelstva?igsh=MTlvM2plMWM1ZjBuMA=="
+        }
+      >
         <FaInstagram
           size={35}
           className={`text-main-100 ${!color && "text-main-200"}`}
         />
-      </Link>
-      <Link href={"#"}>
+      </a>
+      <a href={"#"}>
         <FaTelegram
           size={35}
           className={`text-main-100 ${!color && "text-main-200"}`}
         />
-      </Link>
+      </a>
     </div>
   );
 };
