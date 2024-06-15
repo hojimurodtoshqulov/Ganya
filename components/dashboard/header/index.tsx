@@ -37,9 +37,8 @@ const Header: FC<{
         {activePath?.label}
       </div>
       <div className="flex items-center gap-2">
-        <div className="p-3 bg-csneutral-100 rounded-xl cursor-pointer flex items-center justify-center">
-          <LocaleSwitcher />
-        </div>
+        <LocaleSwitcher />
+
         {UserButton}
       </div>
     </header>

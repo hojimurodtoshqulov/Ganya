@@ -14,6 +14,8 @@ import {
 } from "../../ui/dropdown-menu";
 import Image from "next/image";
 import Globo from "@/icons/lang.svg";
+import { saveLang } from "./act";
+import { useEffect } from "react";
 
 export default function LocaleSwitcher() {
   const pathName = usePathname();
@@ -24,10 +26,27 @@ export default function LocaleSwitcher() {
     return segments.join("/");
   };
 
+  useEffect(() => {
+    const segments = pathName.split("/");
+
+    if (segments[1] === "uz" || segments[1] === "ru") {
+      const f = async () => {
+        await saveLang(segments[1] as "uz" | "ru");
+      };
+      f();
+    }
+  }, []);
+
+  const handleClick = async (lang: "uz" | "ru") => {
+    await saveLang(lang);
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Image src={Globo} width={20} height={20} alt="lang icon" />
+        <div className="p-3 bg-slate-100 rounded-xl cursor-pointer flex items-center justify-center">
+          <Image src={Globo} width={20} height={20} alt="lang icon" />
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-[50px] flex flex-col gap-2 relative top-2">
         {i18n.locales.map((locale) => (
@@ -35,6 +54,7 @@ export default function LocaleSwitcher() {
             <Link
               className="px-2 py-1.5 w-full block"
               href={redirectedPathName(locale)}
+              onClick={() => handleClick(locale)}
             >
               <Image
                 width={30}

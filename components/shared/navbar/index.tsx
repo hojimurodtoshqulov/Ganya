@@ -64,7 +64,7 @@ const HomeNavbar: FC<Lang> = ({ lang, dictionary }) => {
       >
         <div className="container flex justify-between items-center">
           <div>
-            <Link href={"/"}>
+            <Link href={"/" + lang}>
               <Image
                 width={38}
                 height={47}
@@ -96,13 +96,11 @@ const HomeNavbar: FC<Lang> = ({ lang, dictionary }) => {
           ) : null}
 
           <div className="flex items-center gap-5">
-            <div className="p-3 bg-slate-100 rounded-xl cursor-pointer flex items-center justify-center">
-              <LocaleSwitcher />
-            </div>
+            <LocaleSwitcher />
             <div>
               <Link
                 className={`${buttonVariants({ variant: "main" })} flex gap-1`}
-                href={`/auth/sign-in`}
+                href={`/${lang}/auth/sign-in`}
               >
                 {dictionary.home.navbar.login}
                 <ArrowRight />
