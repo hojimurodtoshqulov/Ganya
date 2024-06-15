@@ -1,7 +1,7 @@
 "use client";
 import { FC } from "react";
 import VideoLink from "@/videos/ganyaVideo.mp4";
-import imaes from "@/images/video-image.jpg";
+import images from "../../../public/images/videoimage.jpg";
 
 const MainVideo: FC = (): JSX.Element => {
   return (
@@ -10,7 +10,7 @@ const MainVideo: FC = (): JSX.Element => {
         className="rounded-2xl md:rounded-[40px] w-full h-full object-fill absolute top-0 left-0"
         controls
         preload="auto"
-        // poster="./videoimage.jpg"
+        poster={images.src}
       >
         <source src={VideoLink} type="video/mp4" />
       </video>
