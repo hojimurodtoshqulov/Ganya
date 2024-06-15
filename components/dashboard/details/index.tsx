@@ -19,7 +19,7 @@ export const SidebarContact: FC<{ lang: "ru" | "uz" }> = ({
 }): JSX.Element => {
   return (
     <Link
-      href={"#"}
+      href={"https://t.me/academiaroditeley"}
       className="h-[68px] w-full bg-csneutral-100 rounded-xl px-6 py-4 flex gap-3 items-center"
     >
       <Image

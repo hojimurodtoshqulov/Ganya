@@ -27,7 +27,7 @@ const Media = ({ color }: propstype) => {
           className={`text-main-100 ${!color && "text-main-200"}`}
         />
       </a>
-      <a href={"#"}>
+      <a href={"https://t.me/academia_prikorm"}>
         <FaTelegram
           size={35}
           className={`text-main-100 ${!color && "text-main-200"}`}
