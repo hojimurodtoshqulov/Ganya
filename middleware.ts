@@ -5,6 +5,7 @@ import { i18n } from "./lib/i18n-config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
+import { cookies } from "next/headers";
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -50,7 +51,7 @@ export async function middleware(request: NextRequest) {
 
     return NextResponse.redirect(
       new URL(
-        `/${locale ?? "ru"}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
+        `/${cookies().get("lang")?.value ?? "ru"}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
         request.url,
       ),
     );

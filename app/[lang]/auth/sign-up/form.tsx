@@ -11,12 +11,20 @@ import Link from "next/link";
 import SubmitBtn from "../submit-button";
 import { useToast } from "@/components/ui/use-toast";
 
-const conditions = [
+const conditionsRu = [
   "Не менее 8 символов",
   "Большие только латинские буквы",
   "Маленькие только латинские буквы",
   "Цифры",
   "Символы ~!@#№$%^?&*(){}[]<>'`-_+=|/:;,.",
+];
+
+const conditionsUz = [
+  "8 dan ko’p harf",
+  "Birinchi harf katta",
+  "Birinchi harf kichik",
+  "Raqamlar",
+  "Simvollar ~!@#$%^&*(){}[]<>'`-_+=|/:;,.",
 ];
 
 type ActionReturn = {
@@ -28,9 +36,10 @@ type ActionReturn = {
 
 interface Props {
   action: (params: FormData) => Promise<ActionReturn>;
+  lang: "uz" | "ru";
 }
 
-const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
+const SignUpForm: FC<Props> = ({ action, lang }): JSX.Element => {
   const router = useRouter();
   const { toast } = useToast();
   const [state, setState] = useState<ActionReturn>();
@@ -42,6 +51,8 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
     "confirmPassword",
     state?.errors,
   )?.[0];
+
+  const conditions = lang === "uz" ? conditionsUz : conditionsRu;
 
   return (
     <form
@@ -65,7 +76,7 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
       <Input
         type="text"
         name="name"
-        placeholder={"Имя"}
+        placeholder={lang === "uz" ? "Ism" : "Имя"}
         className={cn({
           "border-destructive": emailOrPhoneErr,
         })}
@@ -73,7 +84,7 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
       <Input
         type="text"
         name="surname"
-        placeholder={"Фамилия"}
+        placeholder={lang === "uz" ? "Familiya" : "Фамилия"}
         className={cn({
           "border-destructive": emailOrPhoneErr,
         })}
@@ -81,7 +92,9 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
       <Input
         type="text"
         name="emailOrPhone"
-        placeholder={"Телефон или E-mail"}
+        placeholder={
+          lang === "uz" ? "Telefon yoki E-mail" : "Телефон или E-mail"
+        }
         className={cn({
           "border-destructive": emailOrPhoneErr,
         })}
@@ -89,7 +102,7 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
 
       <div className="space-y-3">
         <PasswordInput
-          placeholder={"Придумайте пароль"}
+          placeholder={lang === "uz" ? "Parol" : "Придумайте пароль"}
           name="password"
           className={cn({
             "border-destructive": passwordErr,
@@ -107,7 +120,9 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
         </ul>
 
         <PasswordInput
-          placeholder={"Повторите пароль"}
+          placeholder={
+            lang === "uz" ? "Parolni tasdiqlang" : "Повторите пароль"
+          }
           name="confirmPassword"
           className={cn({
             "border-destructive": confirmPasswordErr,
@@ -130,12 +145,14 @@ const SignUpForm: FC<Props> = ({ action }): JSX.Element => {
             { "text-destructive": termsErr },
           )}
         >
-          Я даю согласие на {/* <Link href={"/"} className="underline"> */}
-          обработку персональных данных
-          {/* </Link> */}
+          {lang === "uz"
+            ? "Men shaxsiy ma'lumotlarni qayta ishlashga rozilik beraman"
+            : "Я даю согласие на обработку персональных данных"}
         </label>
       </div>
-      <SubmitBtn className="text-base">Регистрация</SubmitBtn>
+      <SubmitBtn className="text-base">
+        {lang === "uz" ? "Ro'yxatdan o'tish" : "Регистрация"}
+      </SubmitBtn>
     </form>
   );
 };
