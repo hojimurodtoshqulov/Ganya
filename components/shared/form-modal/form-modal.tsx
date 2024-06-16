@@ -19,7 +19,7 @@ import { FormSchema, FormSchemaType } from "@/lib/types";
 import { fetchSendMessage } from "@/lib/utils";
 import toast from "react-hot-toast";
 
-function FormModal({ dict }: { dict: any }) {
+function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const {
@@ -36,6 +36,9 @@ function FormModal({ dict }: { dict: any }) {
       .then((d) => {
         if (d.ok) setIsSuccess(false);
         toast.success(dict.showcase.showcasModul.success.title);
+        if (window) {
+          window.location.href = "https://t.me/academia_prikorm";
+        }
       })
       .catch((e) => {
         toast.error(dict.showcase.showcasModul.success.error);
@@ -97,7 +100,7 @@ function FormModal({ dict }: { dict: any }) {
       <DialogContent className="sm:max-w-[425px] md:max-w-[648px]">
         <h2 className="text-h2">{dict.showcase.showcasModul.title}</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
-          <div className="space-y-3">
+          <div className="space-y-1">
             <Label htmlFor="name" className="text-right">
               {dict.showcase.showcasModul.label}
             </Label>
@@ -108,10 +111,12 @@ function FormModal({ dict }: { dict: any }) {
               {...register("fullName", { required: true })}
             />
             {errors.fullName && (
-              <span className="text-red-500">{errors.fullName.message}</span>
+              <span className="text-red-500">
+                {lang === "ru" ? "Неправильное имя" : "Noto'g'ri ism"}
+              </span>
             )}
           </div>
-          <div className=" space-y-3">
+          <div className=" space-y-1">
             <Label htmlFor="username" className="text-right">
               {dict.showcase.showcasModul.phoneLabel}
             </Label>
@@ -123,7 +128,9 @@ function FormModal({ dict }: { dict: any }) {
               {...register("number", { required: true })}
             />
             {errors.number && (
-              <span className="text-red-500">{errors.number.message}</span>
+              <span className="text-red-500">
+                {lang === "ru" ? "Неправильный номер" : "Noto'g'ri raqam"}
+              </span>
             )}
           </div>
           <Button
