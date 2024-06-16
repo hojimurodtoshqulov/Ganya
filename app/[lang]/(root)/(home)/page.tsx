@@ -76,7 +76,7 @@ export default async function Home({
   return (
     <div>
       <div id="about">
-        <Showcase dict={dcitionary.home} />
+        <Showcase dict={dcitionary.home} lang={lang} />
       </div>
 
       <div className="container">

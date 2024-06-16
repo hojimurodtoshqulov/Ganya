@@ -7,8 +7,10 @@ import { Toaster } from "react-hot-toast";
 
 export default function Showcase({
   dict,
+  lang,
 }: {
   dict: Awaited<ReturnType<typeof getDictionary>>["home"];
+  lang: "uz" | "ru";
 }) {
   return (
     <div className="w-full md:h-screen h-[100vh] showcase-image bg-[#A9C26A]">
@@ -30,7 +32,7 @@ export default function Showcase({
             <h1 className="font-bold capitalize w-80 sm:w-96 md:text-[67px] font-comfortaa text-[40px] md:leading-[70px] leading-[48px] text-white">
               {dict.showcase.title}
             </h1>
-            <FormModal dict={dict} />
+            <FormModal dict={dict} lang={lang} />
           </div>
           <div>
             <Media color />

@@ -14,9 +14,9 @@
       "showcasModul": {
         "btn": "Ariza qoldirish",
         "title": "Ariza Qoldirish",
-        "lable": "Ism Familiyasi",
+        "label": "Ism Familiya",
         "placeholder": "Ismingizni va familiyangizni kiriting",
-        "phoneLabel": "Telfon raqami",
+        "phoneLabel": "Telefon raqami",
         "submit": "Yuborish",
         "success": {
           "title": "Sizning arizangiz qabul qilindi",
