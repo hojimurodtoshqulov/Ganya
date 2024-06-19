@@ -1,6 +1,7 @@
 import DetelCard from "./detelpage";
 import BackLink from "@/components/dashboard/back-link";
 import { getDictionary } from "@/lib/get-dictionary";
+import Image from "next/image";
 
 interface propstype {
   params: {
@@ -29,6 +30,18 @@ export default async function DetelPage({
   return (
     <div>
       <BackLink title={langue.dashboard.admin.articels.home.back} />
+      {/* <Image
+        src={data?.articleImageMobile ?? ""}
+        alt="image"
+        width={400}
+        height={400}
+      />
+      <Image
+        src={data?.articleImageWeb ?? ""}
+        alt="image"
+        width={400}
+        height={400}
+      /> */}
       <DetelCard data={data} lang={lang} articlesId={articlesId} />
     </div>
   );

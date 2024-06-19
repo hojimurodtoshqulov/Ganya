@@ -18,17 +18,25 @@ export default function DeteleArticle({
   lang,
   langue,
 }: Props) {
+  // console.log(detel, "<<<<<<<<<<<<<<<<<<<<<<");
   return (
     <div>
       <div className="pt-24 ">
         <div className="container">
-          <Image
-            className="w-full aspect-[66/17] lg:aspect-[66/17] object-cover rounded-3xl lg:rounded-[40px]"
-            src={detel?.imageWeb}
-            width={1320}
-            height={340}
-            alt="images"
-          />
+          <div className="w-full aspect-[2/1] lg:aspect-[66/17] relative">
+            <Image
+              src={detel?.articleImageWeb ?? ""}
+              fill
+              alt="images"
+              className="rounded-3xl lg:rounded-[40px] object-cover hidden md:block"
+            />
+            <Image
+              src={detel?.articleImageMobile ?? ""}
+              fill
+              alt="images"
+              className="rounded-3xl lg:rounded-[40px] object-cover md:hidden block"
+            />
+          </div>
         </div>
       </div>
       <div className="py-10 lg:py28">

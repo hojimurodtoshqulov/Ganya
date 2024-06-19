@@ -13,11 +13,11 @@ const DetelCard = ({ data, articlesId, lang }: any) => {
           <SquarePen className="cursor-pointer text-3xl" />
         </Link>
       </div>
-      <h4 className="text-lg text-main-300 mt-5">
+      {/* <h4 className="text-lg text-main-300 mt-5">
         {lang === "ru" ? data?.textRu : data.textUz}
-      </h4>
+      </h4> */}
       <p className="text-sm mt-1">
-        {lang === "ru" ? data?.textRu : data.tuextUz}
+        {lang === "ru" ? data?.textRu : data.textUz}
       </p>
     </div>
   );
