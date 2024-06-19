@@ -34,7 +34,8 @@ const schema = z.object({
   textUz: z.string().min(1),
   textRu: z.string().min(1),
   link: z.string().min(1),
-  articleImage: z.union([z.string(), z.instanceof(FileList)]),
+  articleImageWeb: z.union([z.string(), z.instanceof(FileList)]),
+  articleImageMobile: z.union([z.string(), z.instanceof(FileList)]),
   imageWeb: z.union([z.string(), z.instanceof(FileList)]),
   imageMobile: z.union([z.string(), z.instanceof(FileList)]),
 });
@@ -56,14 +57,17 @@ const FormPostArticle: FC<Props> = ({ accessToken, lang, langue }) => {
   const imageMobile: any =
     watch("imageMobile") && (watch("imageMobile")[0] ?? {});
 
-  const articleImage: any =
-    watch("articleImage") && (watch("articleImage")[0] ?? {});
+  const articleImageWeb: any =
+    watch("articleImageWeb") && (watch("articleImageWeb")[0] ?? {});
+  const articleImageMobile: any =
+    watch("articleImageMobile") && (watch("articleImageMobile")[0] ?? {});
 
   async function onSubmit(data: Schema) {
     const formData = new FormData();
     formData.append("bannerImageWeb", data.imageWeb[0]);
     formData.append("bannerImageMobile", data.imageMobile[0]);
-    formData.append("articleImage", data.articleImage[0]);
+    formData.append("articleImageWeb", data.articleImageWeb[0]);
+    formData.append("articleImageMobile", data.articleImageMobile[0]);
     formData.append("titleRu", data.titleRu);
     formData.append("titleUz", data.titleUz);
     formData.append("headlineRu", data.headlineRu);
@@ -99,7 +103,7 @@ const FormPostArticle: FC<Props> = ({ accessToken, lang, langue }) => {
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="bg-white p-6 rounded-2xl mt-5 space-y-5">
-          <div
+          {/* <div
             className={cn(
               "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
               { "border-destructive": errors.articleImage },
@@ -131,7 +135,118 @@ const FormPostArticle: FC<Props> = ({ accessToken, lang, langue }) => {
                 {...register("articleImage", { required: true })}
               />
             </label>
+          </div> */}
+          {/* article image */}
+
+          <div
+            className={cn(
+              "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
+              {
+                "border-destructive":
+                  errors?.articleImageMobile || errors.articleImageWeb,
+              },
+            )}
+          >
+            <div className="text-2xl font-normal flex flex-col ">
+              <h1>
+                {lang === "ru" ? "Обложка статьи" : "Maqolaning muqovasi"}
+              </h1>
+            </div>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant={"filled"}>
+                  {articleImageMobile?.name
+                    ? `${langue.dashboard.admin.articels.forms.btn1}`
+                    : `${langue.dashboard.admin.articels.forms.btn}`}
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-[650px] p-10">
+                <div
+                  className={cn(
+                    "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
+                    { "border-destructive": errors?.articleImageMobile },
+                  )}
+                >
+                  <div className="flex items-center">
+                    <div className=" rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
+                      <ImageIcon />
+                    </div>
+                    <div className="flex ml-3 flex-col gap-1">
+                      <h2 className="text-2xl font-normal">
+                        {langue.dashboard.admin.articels.forms.banertel}
+                      </h2>
+                      <p className="text-base">
+                        {articleImageMobile
+                          ? (articleImageMobile?.name as string)
+                          : "Выберите или перетащите обложку для курса"}
+                      </p>
+                    </div>
+                  </div>
+                  <label
+                    className={buttonVariants({ variant: "filled" })}
+                    htmlFor="file1"
+                  >
+                    {articleImageMobile?.name
+                      ? `${langue.dashboard.admin.articels.forms.btn1}`
+                      : `${langue.dashboard.admin.articels.forms.btn}`}
+                  </label>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    className="w-0 h-0 opacity-0 hidden"
+                    id="file1"
+                    {...register("articleImageMobile", { required: true })}
+                  />
+                </div>
+                <div
+                  className={cn(
+                    "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center ",
+                    { "border-destructive": errors?.articleImageWeb },
+                  )}
+                >
+                  <div className="flex items-center">
+                    <div className="rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
+                      <ImageIcon />
+                    </div>
+                    <div className="flex ml-3 flex-col gap-1">
+                      <h2 className="text-2xl font-normal">
+                        {langue.dashboard.admin.articels.forms.banerwep}
+                      </h2>
+                      <p className="text-base">
+                        {articleImageWeb
+                          ? (articleImageWeb?.name as string)
+                          : "Выберите или перетащите обложку для курса"}
+                      </p>
+                    </div>
+                  </div>
+                  <label
+                    className={buttonVariants({ variant: "filled" })}
+                    htmlFor="file2"
+                  >
+                    {articleImageWeb?.name
+                      ? `${langue.dashboard.admin.articels.forms.btn1}`
+                      : `${langue.dashboard.admin.articels.forms.btn}`}
+                  </label>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    className="w-0 h-0 opacity-0 hidden"
+                    {...register("articleImageWeb", { required: true })}
+                    id="file2"
+                  />
+                </div>
+
+                <DialogClose asChild>
+                  <Button variant={"main"}>
+                    {langue.dashboard.admin.articels.forms.sent}
+                  </Button>
+                </DialogClose>
+              </DialogContent>
+            </Dialog>
           </div>
+
+          {/* banner image */}
           <div
             className={cn(
               "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
