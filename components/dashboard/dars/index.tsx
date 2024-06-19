@@ -10,12 +10,11 @@ type Props = {
   prev?: string;
   lang: "uz" | "ru";
 };
+
 const Dars = ({ videoLink, next, prev, lang }: Props) => {
   const router = useRouter();
 
-  const [isDevToolsOpen, setIsDevToolsOpen] = useState(
-    window && devtoolsDetect.isOpen,
-  );
+  const [isDevToolsOpen, setIsDevToolsOpen] = useState(false);
 
   useEffect(() => {
     const handleChange = (event: any) => {
@@ -24,10 +23,16 @@ const Dars = ({ videoLink, next, prev, lang }: Props) => {
 
     window.addEventListener("devtoolschange", handleChange);
 
+    // Initial check for devtools state
+    if (devtoolsDetect?.isOpen && window) {
+      setIsDevToolsOpen(true);
+    }
+
     return () => {
       window.removeEventListener("devtoolschange", handleChange);
     };
   }, []);
+
   useEffect(() => {
     const removeCode = () => {
       if (isDevToolsOpen) {
@@ -37,7 +42,7 @@ const Dars = ({ videoLink, next, prev, lang }: Props) => {
           body.removeChild(body.firstChild);
         }
         body.innerHTML += `<h2 style="text-align: center; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
-        Oops! You must not use devtools in this page
+        Oops! You must not use devtools on this page
       </h2>`;
       }
     };
@@ -77,15 +82,8 @@ const Dars = ({ videoLink, next, prev, lang }: Props) => {
           {lang === "ru" ? "Следующий урок" : "Keyingi dars"}
         </Button>
       </div>
-      {/* <div className="text flex flex-col gap-5">
-        <p className=" text-csneutral-500 font-normal text-[22px] leading-8 ">
-          Подзаголовок
-        </p>
-        <p className=" text-sm font-normal leading-5">
-          Тут будет домашнее задание
-        </p>
-      </div> */}
     </div>
   );
 };
+
 export default Dars;
