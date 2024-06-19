@@ -26,10 +26,10 @@ export default function DeteleArticle({
       <div className="pt-24 ">
         <div className="container">
           <Image
-            className="w-full aspect-[66/17] h-[340px] object-cover rounded-[40px]"
-            src={detel?.articleImage}
+            className="w-full aspect-[66/17] lg:aspect-[66/17] object-cover rounded-3xl lg:rounded-[40px]"
+            src={detel?.imageWeb}
             width={1320}
-            height={328}
+            height={340}
             alt="images"
           />
         </div>
@@ -50,8 +50,8 @@ export default function DeteleArticle({
             href={`${detel?.link}`}
           >
             <Image
-              src={detel?.imageWeb}
-              className="lg:w-[450px] w-full lg:h-[620px] h-[250px] object-cover rounded-[40px] bg-slate-400 "
+              src={detel?.imageMobile}
+              className="lg:w-[450px] w-full lg:h-[620px] h-[250px] object-cover rounded-[25px] bg-slate-400 "
               width={425}
               height={620}
               alt="Image baner"
