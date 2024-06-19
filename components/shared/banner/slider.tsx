@@ -18,7 +18,7 @@ const Slider: FC<Props> = ({ data }): JSX.Element => {
           <a
             href={link}
             target="_blank"
-            className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[2/1] md:aspect-[4/1] relative overflow-hidden block"
+            className="w-full bg-csneutral-100 rounded-2xl md:rounded-[40px] aspect-[343/164] md:aspect-[1320/328] relative overflow-hidden block"
           >
             <Image
               src={imageWeb}

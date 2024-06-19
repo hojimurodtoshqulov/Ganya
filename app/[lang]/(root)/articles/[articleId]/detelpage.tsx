@@ -1,10 +1,7 @@
-"use client";
-
 import Heading from "@/components/ui/heading";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
 import { Articlsall } from "@/types/auth";
 import CardStatya from "@/components/shared/stati/card-stati";
 
@@ -26,10 +23,10 @@ export default function DeteleArticle({
       <div className="pt-24 ">
         <div className="container">
           <Image
-            className="w-full aspect-[66/17] h-[340px] object-cover rounded-[40px]"
-            src={detel?.articleImage}
+            className="w-full aspect-[66/17] lg:aspect-[66/17] object-cover rounded-3xl lg:rounded-[40px]"
+            src={detel?.imageWeb}
             width={1320}
-            height={328}
+            height={340}
             alt="images"
           />
         </div>
@@ -38,10 +35,10 @@ export default function DeteleArticle({
         <div className="flex lg:flex-row flex-col-reverse  justify-between container w-full gap-6">
           <div className="bg-csneutral-100 w-full p-10 rounded-[40px]">
             <Heading text={lang === "ru" ? detel?.titleRu : detel.titleUz} />
-            <h2 className="font-normal  text-[20px] md:text-[32px] leading-[44px] mb-4 font-comfortaa mt-8">
+            <h2 className="font-normal  text-[20px] md:text-[32px] leading-8 md:leading-[44px] mb-4 font-comfortaa mt-8">
               {lang === "ru" ? detel.headlineRu : detel.headlineUz}
             </h2>
-            <p className="font-normal w-full text-1xl md:text-2xl text-[#585D65]">
+            <p className="font-normal w-full text-xl md:text-2xl text-[#585D65] leading-9">
               {lang === "ru" ? detel?.textRu : detel.textUz}
             </p>
           </div>
@@ -50,8 +47,8 @@ export default function DeteleArticle({
             href={`${detel?.link}`}
           >
             <Image
-              src={detel?.imageWeb}
-              className="lg:w-[450px] w-full lg:h-[620px] h-[250px] object-cover rounded-[40px] bg-slate-400 "
+              src={detel?.imageMobile}
+              className="lg:w-[450px] w-full lg:h-[620px] h-[250px] object-cover rounded-[25px] bg-slate-400 "
               width={425}
               height={620}
               alt="Image baner"
