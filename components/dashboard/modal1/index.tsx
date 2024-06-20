@@ -149,6 +149,7 @@ const Modal = ({
               <p className=" text-neutral-500 text-lg  font-semibold mb-3">
                 {dictionary.wep}
               </p>
+              <span>1320 / 328</span>
               <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px] mb-4">
                 <div className="flex items-center">
                   <div className="bg-neutral-100 rounded-xl w-16 h-16 flex items-center justify-center">
@@ -188,6 +189,7 @@ const Modal = ({
               <p className=" text-neutral-500 text-lg font-semibold mb-3">
                 {dictionary.mobile}
               </p>
+              <span>343 / 164</span>
               <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px]">
                 <div className="flex items-center">
                   <div className="bg-neutral-100 rounded-xl w-16 h-16 flex items-center justify-center">
@@ -271,6 +273,7 @@ const Modal = ({
               <p className=" text-neutral-500 text-lg font-semibold mb-3">
                 {dictionary.wep}
               </p>
+              <span>1320 / 328</span>
               <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px] mb-4">
                 <div className="flex items-center">
                   <div className="bg-neutral-100 rounded-xl w-16 h-16 flex items-center justify-center">
@@ -310,6 +313,7 @@ const Modal = ({
               <p className=" text-neutral-500 text-lg font-semibold mb-3">
                 {dictionary.mobile}
               </p>
+              <span>343 / 164</span>
               <div className="border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center w-[568px]">
                 <div className="flex items-center">
                   <div className="bg-neutral-100 rounded-xl w-16 h-16 flex items-center justify-center">

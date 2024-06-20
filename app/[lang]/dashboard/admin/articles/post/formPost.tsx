@@ -162,79 +162,86 @@ const FormPostArticle: FC<Props> = ({ accessToken, lang, langue }) => {
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-[650px] p-10">
-                <div
-                  className={cn(
-                    "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
-                    { "border-destructive": errors?.articleImageMobile },
-                  )}
-                >
-                  <div className="flex items-center">
-                    <div className=" rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
-                      <ImageIcon />
-                    </div>
-                    <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">
-                        {langue.dashboard.admin.articels.forms.banertel}
-                      </h2>
-                      <p className="text-base">
-                        {articleImageMobile
-                          ? (articleImageMobile?.name as string)
-                          : "Выберите или перетащите обложку для курса"}
-                      </p>
-                    </div>
-                  </div>
-                  <label
-                    className={buttonVariants({ variant: "filled" })}
-                    htmlFor="file1"
+                <div>
+                  <span>343 / 180</span>
+                  <div
+                    className={cn(
+                      "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
+                      { "border-destructive": errors?.articleImageMobile },
+                    )}
                   >
-                    {articleImageMobile?.name
-                      ? `${langue.dashboard.admin.articels.forms.btn1}`
-                      : `${langue.dashboard.admin.articels.forms.btn}`}
-                  </label>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    className="w-0 h-0 opacity-0 hidden"
-                    id="file1"
-                    {...register("articleImageMobile", { required: true })}
-                  />
+                    <div className="flex items-center">
+                      <div className=" rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
+                        <ImageIcon />
+                      </div>
+                      <div className="flex ml-3 flex-col gap-1">
+                        <h2 className="text-2xl font-normal">
+                          {langue.dashboard.admin.articels.forms.banertel}
+                        </h2>
+                        <p className="text-base">
+                          {articleImageMobile
+                            ? (articleImageMobile?.name as string)
+                            : ""}
+                        </p>
+                      </div>
+                    </div>
+                    <label
+                      className={buttonVariants({ variant: "filled" })}
+                      htmlFor="file1"
+                    >
+                      {articleImageMobile?.name
+                        ? `${langue.dashboard.admin.articels.forms.btn1}`
+                        : `${langue.dashboard.admin.articels.forms.btn}`}
+                    </label>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      className="w-0 h-0 opacity-0 hidden"
+                      id="file1"
+                      {...register("articleImageMobile", { required: true })}
+                    />
+                  </div>
                 </div>
-                <div
-                  className={cn(
-                    "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center ",
-                    { "border-destructive": errors?.articleImageWeb },
-                  )}
-                >
-                  <div className="flex items-center">
-                    <div className="rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
-                      <ImageIcon />
-                    </div>
-                    <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">
-                        {langue.dashboard.admin.articels.forms.banerwep}
-                      </h2>
-                      <p className="text-base">
-                        {articleImageWeb
-                          ? (articleImageWeb?.name as string)
-                          : "Выберите или перетащите обложку для курса"}
-                      </p>
-                    </div>
-                  </div>
-                  <label
-                    className={buttonVariants({ variant: "filled" })}
-                    htmlFor="file2"
+
+                <div>
+                  <span>1320 / 340</span>
+                  <div
+                    className={cn(
+                      "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center ",
+                      { "border-destructive": errors?.articleImageWeb },
+                    )}
                   >
-                    {articleImageWeb?.name
-                      ? `${langue.dashboard.admin.articels.forms.btn1}`
-                      : `${langue.dashboard.admin.articels.forms.btn}`}
-                  </label>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    className="w-0 h-0 opacity-0 hidden"
-                    {...register("articleImageWeb", { required: true })}
-                    id="file2"
-                  />
+                    <div className="flex items-center">
+                      <div className="rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
+                        <ImageIcon />
+                      </div>
+                      <div className="flex ml-3 flex-col gap-1">
+                        <h2 className="text-2xl font-normal">
+                          {langue.dashboard.admin.articels.forms.banerwep}
+                        </h2>
+                        <p className="text-base">
+                          {articleImageWeb
+                            ? (articleImageWeb?.name as string)
+                            : ""}
+                        </p>
+                      </div>
+                    </div>
+                    <label
+                      className={buttonVariants({ variant: "filled" })}
+                      htmlFor="file2"
+                    >
+                      {articleImageWeb?.name
+                        ? `${langue.dashboard.admin.articels.forms.btn1}`
+                        : `${langue.dashboard.admin.articels.forms.btn}`}
+                    </label>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      className="w-0 h-0 opacity-0 hidden"
+                      {...register("articleImageWeb", { required: true })}
+                      id="file2"
+                    />
+                  </div>
                 </div>
 
                 <DialogClose asChild>
@@ -266,79 +273,85 @@ const FormPostArticle: FC<Props> = ({ accessToken, lang, langue }) => {
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-[650px] p-10">
-                <div
-                  className={cn(
-                    "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
-                    { "border-destructive": errors?.imageMobile },
-                  )}
-                >
-                  <div className="flex items-center">
-                    <div className=" rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
-                      <ImageIcon />
-                    </div>
-                    <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">
-                        {langue.dashboard.admin.articels.forms.banertel}
-                      </h2>
-                      <p className="text-base">
-                        {imageMobile
-                          ? (imageMobile?.name as string)
-                          : "Выберите или перетащите обложку для курса"}
-                      </p>
-                    </div>
-                  </div>
-                  <label
-                    className={buttonVariants({ variant: "filled" })}
-                    htmlFor="file1"
+                <div>
+                  <span>344 / 140</span>
+                  <div
+                    className={cn(
+                      "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center  mb-4",
+                      { "border-destructive": errors?.imageMobile },
+                    )}
                   >
-                    {imageMobile?.name
-                      ? `${langue.dashboard.admin.articels.forms.btn1}`
-                      : `${langue.dashboard.admin.articels.forms.btn}`}
-                  </label>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    className="w-0 h-0 opacity-0 hidden"
-                    id="file1"
-                    {...register("imageMobile", { required: true })}
-                  />
+                    <div className="flex items-center">
+                      <div className=" rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
+                        <ImageIcon />
+                      </div>
+                      <div className="flex ml-3 flex-col gap-1">
+                        <h2 className="text-2xl font-normal">
+                          {langue.dashboard.admin.articels.forms.banertel}
+                        </h2>
+                        <p className="text-base">
+                          {imageMobile
+                            ? (imageMobile?.name as string)
+                            : "Выберите или перетащите обложку для курса"}
+                        </p>
+                      </div>
+                    </div>
+                    <label
+                      className={buttonVariants({ variant: "filled" })}
+                      htmlFor="file1"
+                    >
+                      {imageMobile?.name
+                        ? `${langue.dashboard.admin.articels.forms.btn1}`
+                        : `${langue.dashboard.admin.articels.forms.btn}`}
+                    </label>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      className="w-0 h-0 opacity-0 hidden"
+                      id="file1"
+                      {...register("imageMobile", { required: true })}
+                    />
+                  </div>
                 </div>
-                <div
-                  className={cn(
-                    "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center ",
-                    { "border-destructive": errors?.imageWeb },
-                  )}
-                >
-                  <div className="flex items-center">
-                    <div className="rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
-                      <ImageIcon />
-                    </div>
-                    <div className="flex ml-3 flex-col gap-1">
-                      <h2 className="text-2xl font-normal">
-                        {langue.dashboard.admin.articels.forms.banerwep}
-                      </h2>
-                      <p className="text-base">
-                        {imageWeb
-                          ? (imageWeb?.name as string)
-                          : "Выберите или перетащите обложку для курса"}
-                      </p>
-                    </div>
-                  </div>
-                  <label
-                    className={buttonVariants({ variant: "filled" })}
-                    htmlFor="file2"
+                <div>
+                  <span>424 / 620</span>
+                  <div
+                    className={cn(
+                      "border-dashed border-[2px] rounded-2xl p-4 flex justify-between items-center ",
+                      { "border-destructive": errors?.imageWeb },
+                    )}
                   >
-                    {imageWeb?.name
-                      ? `${langue.dashboard.admin.articels.forms.btn1}`
-                      : `${langue.dashboard.admin.articels.forms.btn}`}
-                  </label>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    className="w-0 h-0 opacity-0 hidden"
-                    {...register("imageWeb", { required: true })}
-                    id="file2"
-                  />
+                    <div className="flex items-center">
+                      <div className="rounded-xl flex items-center justify-center w-14 h-14 bg-slate-500">
+                        <ImageIcon />
+                      </div>
+                      <div className="flex ml-3 flex-col gap-1">
+                        <h2 className="text-2xl font-normal">
+                          {langue.dashboard.admin.articels.forms.banerwep}
+                        </h2>
+                        <p className="text-base">
+                          {imageWeb
+                            ? (imageWeb?.name as string)
+                            : "Выберите или перетащите обложку для курса"}
+                        </p>
+                      </div>
+                    </div>
+                    <label
+                      className={buttonVariants({ variant: "filled" })}
+                      htmlFor="file2"
+                    >
+                      {imageWeb?.name
+                        ? `${langue.dashboard.admin.articels.forms.btn1}`
+                        : `${langue.dashboard.admin.articels.forms.btn}`}
+                    </label>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      className="w-0 h-0 opacity-0 hidden"
+                      {...register("imageWeb", { required: true })}
+                      id="file2"
+                    />
+                  </div>
                 </div>
                 <div className="relative">
                   <Link className="absolute top-[1.5rem] left-3" />
