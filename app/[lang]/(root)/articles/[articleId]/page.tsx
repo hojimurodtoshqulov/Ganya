@@ -1,10 +1,3 @@
-import Heading from "@/components/ui/heading";
-import Image from "next/image";
-import Link from "next/link";
-import { format } from "date-fns";
-import { useEffect, useState } from "react";
-import { Articlsall } from "@/types/auth";
-import CardStatya from "@/components/shared/stati/card-stati";
 import DeteleArticle from "./detelpage";
 import { getDictionary } from "@/lib/get-dictionary";
 
