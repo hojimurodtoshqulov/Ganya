@@ -12,7 +12,7 @@ interface CardProps {
 function CardStatya(props: CardProps) {
   return (
     <div
-      className={`flex flex-wrap flex-col gap-4 rounded-[40px] p-6 ${!props.width ? "max-w-[424px]" : "w-full bg-gray-950"} ${!props.hight ? "h-[375px]" : "h-auto"} justify-between ${!props.bacraund ? "bg-white" : "bg-[#F4F5F5]"}`}
+      className={`flex flex-wrap flex-col gap-4 rounded-[40px] p-6 ${!props.width ? "max-w-[424px]" : "w-full bg-gray-950"} ${!props.hight ? "h-auto" : "h-auto"} justify-between ${!props.bacraund ? "bg-white" : "bg-[#F4F5F5]"}`}
     >
       <div className="flex flex-col gap-3">
         <h2 className="text-[28px] leading-[44px] font-comfortaa text-csneutral-600">
