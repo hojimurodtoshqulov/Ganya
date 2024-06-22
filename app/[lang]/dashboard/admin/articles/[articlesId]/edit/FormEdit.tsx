@@ -20,10 +20,11 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { FaChevronLeft } from "react-icons/fa";
 import BackLink from "@/components/dashboard/back-link";
+import { Articlsall } from "@/types/auth";
 
 interface Props {
   articleId?: string;
-  defaultValues?: any;
+  defaultValues?: Articlsall;
   accessToken?: string;
   langue: any;
   lang: "uz" | "ru";

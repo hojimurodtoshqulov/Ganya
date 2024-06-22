@@ -32,6 +32,15 @@ export default async function SingleArticle({
   const detel = await getData(articleId);
   const articlsall = await getDetel();
   const langue = await getDictionary(lang);
+
+  if (detel instanceof Error) {
+    return <h2>Failed to fetch data.</h2>;
+  }
+
+  if (articlsall instanceof Error) {
+    return <h2>Failed to fetch data.</h2>;
+  }
+
   return (
     <DeteleArticle
       detel={detel}

@@ -13,7 +13,28 @@ interface InfoProps {
   lang: "uz" | "ru";
 }
 
+async function getData() {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/statics/idx/about`,
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    return new Error("Failed to fetch data");
+  }
+
+  return response.json();
+}
+
 async function Info(props: InfoProps) {
+  const data = await getData();
+
+  if (data instanceof Error) {
+    return <h2>Failed to fetch data.</h2>;
+  }
+
   return (
     <>
       {/* <div
@@ -46,17 +67,27 @@ async function Info(props: InfoProps) {
       <div
         className={`flex ${props.sort ? "flex-row-reverse" : "flex-row"} w-full justify-center max-[900px]:-mb-10 gap-8 max-[900px]:gap-0  max-[900px]:items-center max-[900px]:flex-col-reverse about`}
       >
-        <div className={`w-3/5 min-[900px]:min-h-[600px] min-[900px]:max-w-[760px] flex flex-col justify-between gap-5 max-[900px]:w-full bg-main-100 sm:px-12 sm:py-6 p-5 min-[900px]:rounded-[40px] rounded-[20px] min-[900px]:py-14 relative z-10 max-[900px]:-top-10`}>
+        <div
+          className={`w-3/5 min-[900px]:min-h-[600px] min-[900px]:max-w-[760px] flex flex-col justify-between gap-5 max-[900px]:w-full bg-main-100 sm:px-12 sm:py-6 p-5 min-[900px]:rounded-[40px] rounded-[20px] min-[900px]:py-14 relative z-10 max-[900px]:-top-10`}
+        >
           <div className="flex flex-col gap-2 md:gap-4">
-            <h2 className="text-h2 leading-normal">{props.data.title}</h2>
+            <h2 className="text-h2 leading-normal">
+              {props.sort
+                ? props.data.title
+                : props.lang === "ru"
+                  ? data[0]?.titleRu
+                  : data[0]?.titleUz}
+            </h2>
             <p className="text-base md:text-[22px] md:leading-8 text-main-200 font-roboto">
-              {props.data.text}
+              {props.sort
+                ? props.data.text
+                : props.lang === "ru"
+                  ? data[0]?.textRu
+                  : data[0]?.textUz}
             </p>
           </div>
 
-          {props.data.tags && (
-              <Media />
-          )}
+          {props.data.tags && <Media />}
         </div>
 
         <div className="min-[900px]:w-2/5 w-full max-[900px]:h-[400px] min-[900px]:max-w-[576px] relative">
@@ -64,7 +95,7 @@ async function Info(props: InfoProps) {
             className="object-cover min-[900px]:rounded-[40px] rounded-[20px]"
             priority
             fill
-            src={props.sort ? userImage2 : userImage1}
+            src={props.sort ? userImage2 : data[0]?.file}
             alt="Picture of the author"
           />
         </div>

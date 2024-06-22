@@ -25,6 +25,10 @@ export default async function DetelPage({
   params: { lang, articlesId },
 }: propstype) {
   const data = await getData(articlesId);
+
+  if (data instanceof Error) {
+    return <h2>Failed to fetch data.</h2>;
+  }
   const langue = await getDictionary(lang);
 
   return (

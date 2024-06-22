@@ -1,19 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import date from "date-and-time";
 import { Articlsall } from "@/types/auth";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import CardStatya from "@/components/shared/stati/card-stati";
 import Heading from "@/components/ui/heading";
-import Image from "next/image";
-import images from "@/images/showcase-hero1.png";
 import Link from "next/link";
 import { format } from "date-fns";
 
 interface props {
-  articls?: any;
+  articls?: Articlsall[] | any;
   lang: string;
   langue: any;
 }
@@ -28,7 +25,7 @@ export default function ArticlesPage({ articls, lang, langue }: props) {
   return (
     <div className="container pt-24">
       <div className="flex lg:flex-row mt-10 flex-col gap-2 items-center justify-between">
-        <Heading text={langue.articles.title} />
+        <Heading text={langue?.articles?.title} />
         <div className="relative w-[350px] ">
           <Search className="absolute top-[10px] left-2" />
           <Input
@@ -40,7 +37,7 @@ export default function ArticlesPage({ articls, lang, langue }: props) {
         </div>
       </div>
       <div className="grid lg:grid-cols-3 gap-6 mt-10 md:grid-cols-2 grid-cols-1">
-        {filteredData?.map((element: Articlsall, i: number) => (
+        {filteredData?.map((element: Articlsall) => (
           <Link key={element.id} href={`/articles/${element.id}`}>
             <CardStatya
               title={lang === "ru" ? element.titleRu : element?.titleUz}
@@ -49,7 +46,7 @@ export default function ArticlesPage({ articls, lang, langue }: props) {
                   ? element.textRu.slice(0, 80)
                   : element.textUz.slice(0, 80)
               }
-              time={format(new Date(element.updatedAt), "MMMM dd, yyyy")}
+              time={format(new Date(element?.updatedAt), "MMMM dd, yyyy")}
               bacraund
             />
           </Link>

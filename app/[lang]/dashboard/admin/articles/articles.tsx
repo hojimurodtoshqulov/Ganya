@@ -12,7 +12,7 @@ import { format } from "date-fns";
 
 interface dataProps {
   lang: string;
-  data?: any;
+  data?: Articlsall[] | any;
   langue: any;
 }
 

@@ -16,7 +16,6 @@ import { getDictionary } from "@/lib/get-dictionary";
 import MainVideo from "@/components/shared/main-video";
 import Banner from "@/components/shared/banner";
 import { Toaster } from "react-hot-toast";
-
 import Reviews from "@/components/shared/review/reviews";
 import Partners from "@/components/shared/Partners";
 
@@ -78,47 +77,37 @@ export default async function Home({
       <div id="about">
         <Showcase dict={dcitionary.home} lang={lang} />
       </div>
-
       <div className="container">
         <MainVideo />
       </div>
-
       <div className="container">
         <Info lang={lang} data={dcitionary.home.abaut} />
       </div>
-
       <div className="container">
         <div className="my-10 md:my-20">
           <Banner />
         </div>
       </div>
-
       <div className="container">
         <Info sort={true} lang={lang} data={dcitionary.home.Lure} />
       </div>
-
       <div className=" mt-10 md:mt-20">
         <CurseHelp help={dcitionary.home.help} />
       </div>
-
       <div className="container">
         <div className="my-10 md:my-20">
           <Banner />
         </div>
       </div>
-
       <Fits fits={dcitionary.home.whocurse} />
-
       <div className="container my-10 md:my-20" id="courses">
         <Accordion type="multiple" defaultValue={[courceId]}>
           <CourceCard id={courceId} lang={lang} />
         </Accordion>
       </div>
-
       <div className="container my-10 md:my-20">
         <Reviews lang={lang} />
       </div>
-
       <div className="container my-10 md:my-20" id="team">
         <Carousel
           title={dcitionary.home.team.title}
@@ -127,26 +116,21 @@ export default async function Home({
           ))}
         />
       </div>
-
       <div className="container">
         <div className="my-10 md:my-20">
           <Banner />
         </div>
       </div>
-
       <div className="container my-10 md:my-20">
         <Tariflar id={courceId} lang={lang} />
       </div>
-
       <div id="contacts" className="my-10 md:my-20">
         <SubscribtionForm dict={dcitionary.home} />
       </div>
-
       <FAQ
         title={dcitionary.home.answear.title}
         cards={dcitionary.home.answear.cards}
       />
-
       <div id="articles">
         <Stati
           container="container"
