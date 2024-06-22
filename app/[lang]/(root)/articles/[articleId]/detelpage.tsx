@@ -6,8 +6,8 @@ import { Articlsall } from "@/types/auth";
 import CardStatya from "@/components/shared/stati/card-stati";
 
 interface Props {
-  detel?: any;
-  articlsall?: any;
+  detel?: Articlsall;
+  articlsall?: Articlsall[];
   lang: string;
   langue: any;
 }
@@ -18,7 +18,6 @@ export default function DeteleArticle({
   lang,
   langue,
 }: Props) {
-  // console.log(detel, "<<<<<<<<<<<<<<<<<<<<<<");
   return (
     <div>
       <div className="pt-24 ">
@@ -42,12 +41,12 @@ export default function DeteleArticle({
       <div className="py-10 lg:py28">
         <div className="flex lg:flex-row flex-col-reverse  justify-between container w-full gap-6">
           <div className="bg-csneutral-100 w-full p-10 rounded-[40px]">
-            <Heading text={lang === "ru" ? detel?.titleRu : detel.titleUz} />
+            <Heading text={lang === "ru" ? detel?.titleRu : detel?.titleUz} />
             <h2 className="font-normal  text-[20px] md:text-[32px] leading-8 md:leading-[44px] mb-4 font-comfortaa mt-8">
-              {lang === "ru" ? detel.headlineRu : detel.headlineUz}
+              {lang === "ru" ? detel?.headlineRu : detel?.headlineUz}
             </h2>
             <p className="font-normal w-full text-xl md:text-2xl text-[#585D65] leading-9">
-              {lang === "ru" ? detel?.textRu : detel.textUz}
+              {lang === "ru" ? detel?.textRu : detel?.textUz}
             </p>
           </div>
           <Link

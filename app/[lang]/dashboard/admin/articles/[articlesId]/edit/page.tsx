@@ -7,7 +7,7 @@ import { getDictionary } from "@/lib/get-dictionary";
 interface Props {
   params: {
     articlesId: string;
-    lang: any;
+    lang: "ru" | "uz";
   };
 }
 
@@ -29,7 +29,8 @@ async function getData(id: string) {
 export default async function Post({ params: { articlesId, lang } }: Props) {
   const data = await getData(articlesId);
 
-  if (data instanceof Error) return <div>{data.message}</div>;
+  if (data instanceof Error) return <h2>Failed to fetch data.</h2>;
+
   const accessToken = cookies().get("accessToken")?.value;
   const langue = await getDictionary(lang);
 
