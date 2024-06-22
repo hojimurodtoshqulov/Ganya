@@ -4,6 +4,7 @@ import Banner from "@/components/dashboard/kontent";
 import Sharhlar from "@/components/dashboard/comments";
 import MainVideo from "./main-video";
 import About from "./about";
+import Course from "./course";
 
 const Content: FC<{ params: { lang: "uz" | "ru" } }> = ({
   params: { lang },
@@ -28,6 +29,9 @@ const Content: FC<{ params: { lang: "uz" | "ru" } }> = ({
           <TabsTrigger value="about">
             {lang === "ru" ? "О нас" : "Biz haqimizda"}
           </TabsTrigger>
+          <TabsTrigger value="course">
+            {lang === "ru" ? "Курс" : "Kurs"}
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="banners">
           <Banner lang={lang} />
@@ -40,6 +44,9 @@ const Content: FC<{ params: { lang: "uz" | "ru" } }> = ({
         </TabsContent>
         <TabsContent value="about">
           <About lang={lang} />
+        </TabsContent>
+        <TabsContent value="course">
+          <Course lang={lang} />
         </TabsContent>
       </Tabs>
     </div>
