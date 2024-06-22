@@ -11,6 +11,7 @@ interface PageProps {
 export default async function Page({ params: { lang } }: PageProps) {
   const accessToken = cookies().get("accessToken")?.value;
   const langue = await getDictionary(lang);
+
   return (
     <>
       <FormPostArticle lang={lang} langue={langue} accessToken={accessToken} />

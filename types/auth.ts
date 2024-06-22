@@ -67,6 +67,8 @@ export interface Articlsall {
   textRu: string;
   imageWeb: any;
   imageMobile: any;
+  articleImageWeb?: string;
+  articleImageMobile?: string;
   link: string;
   articleImage: any;
   isPublished: boolean;

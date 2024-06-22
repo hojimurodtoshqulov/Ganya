@@ -20,5 +20,9 @@ interface propstype {
 export default async function Articles({ params: { lang } }: propstype) {
   const data = await getData();
   const langue = await getDictionary(lang);
+
+  if (data instanceof Error) {
+    return <h2>Failed to fetch data.</h2>;
+  }
   return <ArticlesPage data={data} lang={lang} langue={langue} />;
 }
