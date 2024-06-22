@@ -3,15 +3,18 @@ import Image from "next/image";
 import { FC } from "react";
 import HomeCourseDataForm from "../form";
 import CourseHelpForm from "../form2";
+import CurseHelp from "@/components/shared/curs-helped";
+import Banner from "@/components/shared/banner";
+import Fits from "@/components/shared/fits";
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/statics/idx/home_course`,
     {
       cache: "no-store",
-      headers: {
-        Authorization: `Bearer ${JSON.parse(cookies().get("accessToken")?.value ?? "")}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${JSON.parse(cookies().get("accessToken")?.value ?? "")}`,
+      // },
     },
   );
 
@@ -40,6 +43,34 @@ const Info2: FC<{ lang: "uz" | "ru"; editable?: boolean }> = async ({
   if (data instanceof Error || data.length === 0) {
     return <h2>Something went wrong</h2>;
   }
+
+  const heads =
+    lang === "ru"
+      ? data?.[1]?.titleRu.split("/")
+      : data?.[1]?.titleUz.split("/");
+  const subHeads =
+    lang === "ru"
+      ? data?.[1]?.subTitleRu.split("/")
+      : data?.[1]?.subTitleUz.split("/");
+  const text =
+    lang === "ru" ? data?.[1]?.textRu.split("/") : data?.[1]?.textUz.split("/");
+
+  const helpData = {
+    title: lang === "ru" ? "Курс поможет" : "Kurs yordam beradi",
+    cards: heads.map((e, i) => ({
+      heading: `${i + 1}. ${e}`,
+      desc: subHeads?.[i],
+    })),
+  };
+
+  const fitsData = {
+    title: lang === "ru" ? "Курс поможет" : "Kurs kimga mos keladi?",
+    cards: text.map((e, i) => ({
+      id: i + 1,
+      text: e,
+    })),
+  };
+
   return (
     <div>
       <div
@@ -78,6 +109,16 @@ const Info2: FC<{ lang: "uz" | "ru"; editable?: boolean }> = async ({
           accessToken={cookies().get("accessToken")?.value}
         />
       )}
+      <div className="mt-10 md:mt-20">
+        <CurseHelp help={helpData} />
+      </div>
+      {!editable && (
+        <div className="my-10 md:my-20">
+          <Banner />
+        </div>
+      )}
+      <Fits fits={fitsData} />
+
       {editable && (
         <CourseHelpForm
           method="PATCH"
