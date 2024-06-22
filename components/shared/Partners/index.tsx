@@ -80,14 +80,12 @@ const Partners = ({ dcitionary }: partners) => {
       >
         {data.map((element) => (
           <SwiperSlide key={element.id} className="h-full flex justify-center">
-            <Link href={"/"}>
-              <div className=" bg-main-100 rounded-3xl">
-                <Image
-                  className=" aspect-[2/1] w-full bg-main-100 rounded-3xl object-cover"
-                  src={element.file}
-                  alt="Partners images logo"
-                />
-              </div>
+            <Link href={"/"} className="block">
+              <Image
+                className=" aspect-[2/1] w-full bg-main-100 object-cover"
+                src={element.file}
+                alt="Partners images logo"
+              />
             </Link>
           </SwiperSlide>
         ))}

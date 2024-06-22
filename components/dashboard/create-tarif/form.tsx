@@ -56,6 +56,7 @@ const schema = z.object({
   price: z.number().min(1),
   discount: z.number().optional(),
   discountExpiredAt: z.string().optional(),
+  package: z.string().min(1),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -103,6 +104,7 @@ const CreateTarifForm: React.FC<Props> = ({
             detailsRu: "",
             descriptionUz: "",
             descriptionRu: "",
+            package: "",
           },
   });
 
@@ -192,18 +194,34 @@ const CreateTarifForm: React.FC<Props> = ({
             {...register("titleRu")}
           />
         </div>
-        <div className="grid w-full  items-center gap-1.5">
-          <Label htmlFor="load">
-            {lang === "ru" ? "Длительность" : "Davomiyligi"}
-          </Label>
-          <Input
-            type="number"
-            id="load"
-            placeholder="Kurs davomiyligi"
-            {...register("availablePeriod", {
-              setValueAs: (value) => Number(value),
-            })}
-          />
+        <div className="grid grid-cols-2 w-full gap-1.5">
+          <div>
+            <Label htmlFor="load">
+              {lang === "ru" ? "Длительность" : "Davomiyligi"}
+            </Label>
+            <Input
+              type="number"
+              id="load"
+              placeholder={lang === "ru" ? "Длительность" : "Kurs davomiyligi"}
+              {...register("availablePeriod", {
+                setValueAs: (value) => Number(value),
+              })}
+            />
+          </div>
+
+          <div className="flex flex-col justify-end gap-0.5">
+            <Label htmlFor="package" className="flex gap-1 items-center">
+              {lang === "ru" ? "Тип" : "Paket turi"}
+              <p className="text-xs font-normal">
+                (basic | standard | premium)
+              </p>
+            </Label>
+            <Input
+              id="package"
+              placeholder={lang === "ru" ? "Тип" : "Paket turi"}
+              {...register("package")}
+            />
+          </div>
         </div>
         <div className="flex items-center space-x-2">
           <Checkbox

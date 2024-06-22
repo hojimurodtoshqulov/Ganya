@@ -9,6 +9,10 @@ export const UserButton: FC<{
 }> = async ({ lang }): Promise<JSX.Element> => {
   const user = await getUserData();
 
+  if (user instanceof Error) {
+    return <h2>Something went wrong</h2>;
+  }
+
   return (
     <Link
       href={`/${lang}/dashboard/profile`}

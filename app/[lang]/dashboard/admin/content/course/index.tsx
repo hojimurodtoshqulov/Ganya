@@ -1,47 +1,10 @@
 import { FC } from "react";
-import Form from "./form";
-import { cookies } from "next/headers";
+import Info2 from "./info2";
 
-async function getData<T>(): Promise<T[] | Error> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/statics/idx/home_course_p1`,
-    {
-      cache: "no-store",
-      headers: {
-        Authorization: `Bearer ${JSON.parse(cookies().get("accessToken")?.value ?? "")}`,
-      },
-    },
-  );
-
-  if (!res.ok) {
-    return new Error("Failed to fetch data");
-  }
-  return res.json();
-}
-const Course: FC<{ lang: "uz" | "ru" }> = async ({
-  lang,
-}): Promise<JSX.Element> => {
-  const data = await getData<{
-    id: string;
-    idx: string;
-    titleUz: string;
-    titleRu: string;
-    textUz: string;
-    textRu: string;
-    file: string;
-  }>();
-  console.log(data, "data");
-  if (data instanceof Error) {
-    return <h2>Failed to fetch data.</h2>;
-  }
-
+const Course: FC<{ lang: "uz" | "ru" }> = ({ lang }): JSX.Element => {
   return (
     <div>
-      <Form
-        method="POST"
-        lang={lang}
-        accessToken={cookies().get("accessToken")?.value}
-      />
+      <Info2 lang={lang} editable />
     </div>
   );
 };

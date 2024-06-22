@@ -1,5 +1,4 @@
 import Loader from "@/components/shared/loader";
-import { getAccessToken } from "@/lib/actions/token";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -12,19 +11,9 @@ const Dashboard = async () => {
         Authorization: `Bearer ${JSON.parse(accessToken)}`,
       },
     });
-    // if (res.status === 401) {
-    //   const json = await getAccessToken();
-    //   res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/users/profile", {
-    //     cache: "no-store",
-    //     headers: {
-    //       Authorization: `Bearer ${JSON.parse(accessToken)}`,
-    //     },
-    //   });
-    // }
-
-    // if (!res.ok) {
-    //   redirect("/auth/sign-in");
-    // }
+    if (!res.ok) {
+      redirect("/auth/sign-in");
+    }
     const json = await res.json();
     if (json.role === "admin") {
       redirect("/dashboard/admin/courses");
@@ -34,7 +23,7 @@ const Dashboard = async () => {
   }
 
   return (
-    <div className="w-full h-full min-h-52 flex items-center justify-center">
+    <div className="w-full h-full min-h-52">
       <Loader />
     </div>
   );

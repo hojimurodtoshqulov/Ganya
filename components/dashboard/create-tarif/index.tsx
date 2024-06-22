@@ -43,10 +43,12 @@ const CreateTarif: FC<Props> = async ({
     detailsRu: string;
     descriptionUz: string;
     descriptionRu: string;
+    package: string;
   }>(courseId);
   if (response instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
   }
+  console.log(response, "response");
   const dict = await getDictionary(lang);
   return (
     <>

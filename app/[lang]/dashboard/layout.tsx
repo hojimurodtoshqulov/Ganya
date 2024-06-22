@@ -15,6 +15,7 @@ const Layout: FC<Props> = async ({
   params: { lang },
 }): Promise<JSX.Element> => {
   const user = await getUserData();
+  if (user instanceof Error) return <div>Something went wrong</div>;
   const dictionary = await getDictionary(lang);
 
   return (

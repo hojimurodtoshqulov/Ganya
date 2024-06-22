@@ -1,7 +1,6 @@
 "use client";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { getAccessToken } from "@/lib/actions/token";
@@ -17,36 +16,36 @@ const formSchema = z.object({
   titleRu: z.string().min(1),
   textUz: z.string().min(1),
   textRu: z.string().min(1),
-  file: z.union([z.string(), z.instanceof(FileList)]),
+  subTitleUz: z.string().min(1),
+  subTitleRu: z.string().min(1),
 });
 
 interface Props {
   method: "POST" | "PATCH";
-  accessToken?: string;
   lang: "uz" | "ru";
   id?: string;
+  accessToken?: string;
   defaultValues?: {
     titleUz: string;
     titleRu: string;
     textUz: string;
     textRu: string;
-    file: string;
+    subTitleUz: string;
+    subTitleRu: string;
   };
 }
-
-const HomeCourseDataForm: FC<Props> = ({
-  defaultValues,
+const CourseHelpForm: FC<Props> = ({
+  id,
   lang,
   method,
   accessToken,
-  id,
+  defaultValues,
 }): JSX.Element => {
   const {
     handleSubmit,
     register,
-    watch,
+
     formState: { errors: inputErrors, isSubmitting },
-    reset,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues ?? {},
@@ -54,19 +53,17 @@ const HomeCourseDataForm: FC<Props> = ({
   const router = useRouter();
   const { toast } = useToast();
 
-  const imageWeb: any = watch("file") && (watch("file")[0] ?? "");
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData = new FormData();
 
-    if (typeof values.file !== "string") {
-      formData.append("file", values?.file?.[0], values?.file?.[0]?.name);
-    }
     formData.append("idx", "home_course");
     formData.append("titleUz", values.titleUz);
     formData.append("titleRu", values.titleRu);
     formData.append("textUz", values.textUz);
     formData.append("textRu", values.textRu);
+
+    formData.append("subTitleUz", values.subTitleUz);
+    formData.append("subTitleRu", values.subTitleRu);
 
     let res = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL +
@@ -106,31 +103,16 @@ const HomeCourseDataForm: FC<Props> = ({
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <div className="w-full">
             <div className="space-y-2.5">
-              <div className="w-full p-2.5 rounded-xl border-dashed border-2 flex items-center justify-between">
-                <h2 className="pl-2 text-xl">
-                  {lang === "uz" ? "Rasm" : "Картина"}
-                </h2>
-                <label
-                  className={buttonVariants({ variant: "filled" })}
-                  htmlFor="fayl"
-                >
-                  {imageWeb?.name ? "редактировать" : "Выбрать"}
-                </label>
-                <Input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  id="fayl"
-                  {...register("file")}
-                />
-              </div>
-              <Input
+              {/* <label> */}
+              {/* <p></p>  */}
+              <Textarea
                 {...register("titleUz")}
                 name="titleUz"
                 placeholder={lang === "ru" ? "Заголовок UZ" : "Sarlavha UZ"}
                 className={cn({ "border-destructive": inputErrors.titleUz })}
               />
-              <Input
+              {/* </label> */}
+              <Textarea
                 {...register("titleRu")}
                 name="titleRu"
                 placeholder={lang === "ru" ? "Заголовок RU" : "Sarlavha RU"}
@@ -148,6 +130,22 @@ const HomeCourseDataForm: FC<Props> = ({
                 placeholder={lang === "ru" ? "Текст RU" : "Matn RU"}
                 className={cn({ "border-destructive": inputErrors.textRu })}
               />
+              <Textarea
+                {...register("subTitleUz")}
+                name="subTitleUz"
+                placeholder={
+                  lang === "ru" ? "Подзаголовок UZ" : "Alt sarlavha UZ"
+                }
+                className={cn({ "border-destructive": inputErrors.subTitleUz })}
+              />
+              <Textarea
+                {...register("subTitleRu")}
+                name="subTitleRu"
+                placeholder={
+                  lang === "ru" ? "Подзаголовок RU" : "Alt sarlavha RU"
+                }
+                className={cn({ "border-destructive": inputErrors.subTitleRu })}
+              />
             </div>
           </div>
           <Button
@@ -163,4 +161,4 @@ const HomeCourseDataForm: FC<Props> = ({
   );
 };
 
-export default HomeCourseDataForm;
+export default CourseHelpForm;
