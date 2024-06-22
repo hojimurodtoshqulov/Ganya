@@ -26,7 +26,7 @@ const Header: FC<{
   const activePath = sidebarLinks.find((i) => paths.includes(i.path));
 
   return (
-    <header className="w-full bg-white border-b border-csneutral-200 px-8 h-[68px] flex items-center justify-between">
+    <header className="w-full bg-white border-b border-csneutral-200 px-8 h-[68px] flex items-center justify-between relative z-50">
       <div className="flex items-center gap-4">
         <AlignJustify
           width={20}
@@ -36,7 +36,7 @@ const Header: FC<{
         />
         {activePath?.label}
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 relative z-[99999999] ">
         <LocaleSwitcher />
 
         {UserButton}

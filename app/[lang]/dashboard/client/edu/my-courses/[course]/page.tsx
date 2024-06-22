@@ -54,17 +54,17 @@ const OneOfMyCourses: FC<Props> = async ({
       />
 
       <div className="mt-3 md:mt-5 grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {data.Module.map(({ id, titleRu, titleUz }, i) => (
+        {data?.Module?.map((d, i) => (
           <LinkById
-            href={id}
-            key={id}
+            href={d?.id}
+            key={d?.id}
             className="px-5 py-4 bg-white rounded-2xl"
           >
             <span className="block mb-2 text-base">
               {lang === "ru" ? `Модуль ${i + 1}` : `${i + 1}-modul`}
             </span>
             <h4 className="font-normal text-[22px] leading-8">
-              {lang === "ru" ? titleRu : titleUz}
+              {lang === "ru" ? d?.titleRu : d?.titleUz}
             </h4>
           </LinkById>
         ))}

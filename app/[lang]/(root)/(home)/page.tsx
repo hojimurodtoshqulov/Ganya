@@ -18,6 +18,7 @@ import Banner from "@/components/shared/banner";
 import { Toaster } from "react-hot-toast";
 import Reviews from "@/components/shared/review/reviews";
 import Partners from "@/components/shared/Partners";
+import Info2 from "../../dashboard/admin/content/course/info2";
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch(
@@ -89,7 +90,8 @@ export default async function Home({
         </div>
       </div>
       <div className="container">
-        <Info sort={true} lang={lang} data={dcitionary.home.Lure} />
+        {/* <Info sort={true} lang={lang} data={dcitionary.home.Lure} /> */}
+        <Info2 lang={lang} />
       </div>
       <div className=" mt-10 md:mt-20">
         <CurseHelp help={dcitionary.home.help} />

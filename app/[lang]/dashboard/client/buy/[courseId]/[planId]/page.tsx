@@ -109,7 +109,7 @@ export default async function BuyCourse({
   }
 
   const userData = await getUserData();
-
+  if (userData instanceof Error) return <h2>Failed to fetch user data.</h2>;
   const userId = userData?.id;
 
   return (
