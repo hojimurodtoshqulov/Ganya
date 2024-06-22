@@ -1,6 +1,6 @@
 import Heading from "@/components/ui/heading";
-import { helpcurs } from "@/constants/help-curse";
 import React from "react";
+
 interface Help {
   title: string;
   cards: { heading: string; desc: string }[];

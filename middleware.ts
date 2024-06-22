@@ -73,6 +73,12 @@ export async function middleware(request: NextRequest) {
       },
     });
 
+    if (!res.ok) {
+      return NextResponse.redirect(
+        new URL(`/${lang}/auth/sign-in`, request.url),
+      );
+    }
+
     const json = await res.json();
     if (pathname.includes("/admin") && json?.role === "admin") {
       return NextResponse.next();
@@ -85,12 +91,6 @@ export async function middleware(request: NextRequest) {
     } else if (pathname.includes("/admin") && json?.role !== "admin") {
       return NextResponse.redirect(
         new URL(`/${lang}/auth/sign-in`, request.url),
-      );
-    }
-
-    if (!res.ok) {
-      return NextResponse.redirect(
-        new URL(`${lang}/auth/sign-in`, request.url),
       );
     }
   }

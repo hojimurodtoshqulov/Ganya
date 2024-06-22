@@ -119,18 +119,6 @@ const CourseHelpForm: FC<Props> = ({
                 className={cn({ "border-destructive": inputErrors.titleRu })}
               />
               <Textarea
-                {...register("textUz")}
-                name="textUz"
-                placeholder={lang === "ru" ? "Текст UZ" : "Matn UZ"}
-                className={cn({ "border-destructive": inputErrors.textUz })}
-              />
-              <Textarea
-                {...register("textRu")}
-                name="textRu"
-                placeholder={lang === "ru" ? "Текст RU" : "Matn RU"}
-                className={cn({ "border-destructive": inputErrors.textRu })}
-              />
-              <Textarea
                 {...register("subTitleUz")}
                 name="subTitleUz"
                 placeholder={
@@ -145,6 +133,18 @@ const CourseHelpForm: FC<Props> = ({
                   lang === "ru" ? "Подзаголовок RU" : "Alt sarlavha RU"
                 }
                 className={cn({ "border-destructive": inputErrors.subTitleRu })}
+              />
+              <Textarea
+                {...register("textUz")}
+                name="textUz"
+                placeholder={lang === "ru" ? "Текст UZ" : "Matn UZ"}
+                className={cn({ "border-destructive": inputErrors.textUz })}
+              />
+              <Textarea
+                {...register("textRu")}
+                name="textRu"
+                placeholder={lang === "ru" ? "Текст RU" : "Matn RU"}
+                className={cn({ "border-destructive": inputErrors.textRu })}
               />
             </div>
           </div>
