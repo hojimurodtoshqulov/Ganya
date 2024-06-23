@@ -18,6 +18,10 @@ async function getData(paramsId: string) {
     },
   );
 
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+
   return res.json();
 }
 

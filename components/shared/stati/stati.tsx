@@ -10,6 +10,9 @@ async function getPost() {
     `${process.env.NEXT_PUBLIC_BASE_URL}/articles/all`,
     { method: "GET" },
   );
+  if (!response.ok) {
+    return new Error("Failed to fetch data");
+  }
 
   return response.json();
 }

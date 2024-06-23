@@ -1,21 +1,26 @@
-"use client";
 import { FC } from "react";
-import VideoLink from "@/videos/ganyaVideo.mp4";
-import images from "../../../public/images/videoimage.jpg";
+import Video from "./video";
 
-const MainVideo: FC = (): JSX.Element => {
-  return (
-    <div className="my-10 md:my-20 bg-csneutral-100 rounded-2xl md:rounded-[40px] flex items-center justify-center w-full h-[90vh] max-lg:h-[80vh] max-md:h-[60vh] max-sm:h-[25vh]  relative overflow-hidden">
-      <video
-        className="rounded-2xl md:rounded-[40px] w-full h-full object-fill absolute top-0 left-0"
-        controls
-        preload="auto"
-        poster={images.src}
-      >
-        <source src={VideoLink} type="video/mp4" />
-      </video>
-    </div>
+async function getVideo<T>(): Promise<T[] | Error> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/statics/idx/main_video`,
+    {
+      cache: "no-store",
+    },
   );
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
+const MainVideo: FC = async (): Promise<JSX.Element> => {
+  const data = await getVideo<{
+    file: string;
+  }>();
+
+  if (data instanceof Error) return <h2>Failed to fetch data</h2>;
+  return <Video videoLink={data?.[0]?.file} />;
 };
 
 export default MainVideo;

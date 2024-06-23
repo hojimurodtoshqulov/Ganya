@@ -48,7 +48,7 @@ const CreateTarif: FC<Props> = async ({
   if (response instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
   }
-  console.log(response, "response");
+  // console.log(response, "response");
   const dict = await getDictionary(lang);
   return (
     <>

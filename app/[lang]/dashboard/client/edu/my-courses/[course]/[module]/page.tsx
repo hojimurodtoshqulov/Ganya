@@ -41,7 +41,7 @@ const SingleModule: FC<Props> = async ({
     Lesson: any[];
   }>(module);
 
-  if (moduleData instanceof Error) return <div>Module not found</div>;
+  if (moduleData instanceof Error) return <div>Something went wrong</div>;
   return (
     <div>
       <BackLink

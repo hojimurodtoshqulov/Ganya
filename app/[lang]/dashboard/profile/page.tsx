@@ -5,7 +5,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { User2Icon } from "lucide-react";
 
-const getUser = async () => {
+async function getUser<T>(): Promise<T | Error> {
   const api = process.env.NEXT_PUBLIC_BASE_URL + "/users/profile";
   const accessToken = cookies().get("accessToken")?.value;
   try {
@@ -20,17 +20,24 @@ const getUser = async () => {
 
     const res = await req.json();
     return res;
-  } catch (error: any) {
-    console.log(error.message);
+  } catch (e) {
+    return new Error("Не удалось получить");
   }
-};
+}
 
 export default async function Profile({
   params: { lang },
 }: {
   params: { lang: "ru" | "uz" };
 }) {
-  const user = await getUser();
+  const user = await getUser<{
+    name: string;
+    surname: string;
+    avatar: string;
+    email: string | null;
+    phone: string | null;
+  }>();
+  if (user instanceof Error) return <div>Something went wrong</div>;
   return (
     <div className="w-full">
       <h1 className="text-2xl md:text-5xl font-bold text-main-300 font-comfortaa">
@@ -43,7 +50,7 @@ export default async function Profile({
             <div className="relative w-20 h-20 rounded-2xl">
               <Image
                 className="bg-slate-600  object-contain rounded-2xl"
-                src={user.avatar}
+                src={user?.avatar}
                 fill={true}
                 alt="Profile image"
               />
@@ -56,7 +63,7 @@ export default async function Profile({
           <Link href={`/${lang}/dashboard/profile/edit`}>
             <div>
               <h3 className="text-3xl font-normal text-[#585D65]">
-                {user.name} {user.surname}
+                {user?.name} {user?.surname}
               </h3>
               <div className="flex md:py-3 md:px-5 py-1 px-3 bg-main-100 items-center rounded-[8px] mt-1 md:mt-3 cursor-pointer">
                 <HiOutlinePencilSquare />
@@ -75,13 +82,13 @@ export default async function Profile({
             <div className="w-full sm:w-[500px]">
               <p className="text-sm text-[#585D65] mb-1">Email</p>
               <h5 className="text-lg font-normal text-main-300">
-                {user.email}
+                {user?.email}
               </h5>
             </div>
             <div className="w-full sm:w-[500px]">
               <p className="text-sm text-[#585D65] mb-1">Телефон</p>
               <h5 className="text-lg font-normal text-main-300">
-                {user.phone}
+                {user?.phone}
               </h5>
             </div>
           </div>

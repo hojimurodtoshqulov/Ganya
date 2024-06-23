@@ -74,7 +74,7 @@ async function getData<T>(): Promise<T[] | Error> {
 export default async function BuyCourse({
   params: { lang, planId, courseId },
 }: Props) {
-  console.log("payment page refreshed");
+  // console.log("payment page refreshed");
   const data = await getData<FullCourses>();
 
   if (data instanceof Error) {

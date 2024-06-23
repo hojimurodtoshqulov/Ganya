@@ -60,6 +60,7 @@ const MyCourses: FC<{ lang: "uz" | "ru" }> = async ({
       </h2>
     );
   }
+  console.log(data, "nu baa");
   return (
     <div className="space-y-2.5">
       {data.map(({ course: c }) => (
