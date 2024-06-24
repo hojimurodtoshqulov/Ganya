@@ -16,6 +16,7 @@ import Reviews from "@/components/shared/review/reviews";
 import Partners from "@/components/shared/Partners";
 import Info2 from "../../dashboard/admin/content/course/info2";
 import CourseMini from "./course-mini";
+import CourseBig from "./course-big";
 
 async function getData<T>(): Promise<T[] | Error> {
   const res = await fetch(
@@ -88,9 +89,7 @@ export default async function Home({
             ))}
           </div>
         ) : (
-          <Accordion type="multiple" defaultValue={[courceId]}>
-            <CourceCard id={courceId} lang={lang} />
-          </Accordion>
+          <CourseBig singleCourseId={courceId} lang={lang} />
         )}
       </div>
       <div className="container my-10 md:my-20">

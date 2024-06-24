@@ -20,36 +20,38 @@ interface Props {
   id?: string;
   type?: string;
   lang: string;
+  data?: any;
 }
 
-const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
+const CourceCard: React.FC<Props> = ({ id, gridData, type, lang, data }) => {
   const [toggle, setToggle] = useState(true);
-  const [data, setData] = useState<any>([]);
+  // const [data, setData] = useState<any>([]);
   const [error, setError] = useState(false);
   const totalModules = data?.Module?.length;
   const gridDataModules = gridData?.Module?.length;
+  console.log(data);
+  // useEffect(() => {
+  //   async function getData() {
+  //     const res = await fetch(
+  //       `${process.env.NEXT_PUBLIC_BASE_URL}/courses/single/${id}`,
+  //       {
+  //         cache: "no-store",
+  //       },
+  //     );
 
-  useEffect(() => {
-    async function getData() {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/courses/single/${id}`,
-        {
-          cache: "no-store",
-        },
-      );
+  //     if (!res.ok) {
+  //       return new Error("Failed to fetch data");
+  //     }
+  //     const a = await res.json();
+  //     console.log(a, "a");
+  //     setData(a);
+  //   }
 
-      if (!res.ok) {
-        return new Error("Failed to fetch data");
-      }
-      const a = await res.json();
-      setData(a);
-    }
-
-    const d = async () => await getData();
-    if (d instanceof Error) {
-      setError(true);
-    }
-  }, [id]);
+  //   const d = async () => await getData();
+  //   if (d instanceof Error) {
+  //     setError(true);
+  //   }
+  // }, [id]);
 
   if (type === "grid") {
     return (
