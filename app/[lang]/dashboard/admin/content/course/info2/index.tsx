@@ -64,7 +64,7 @@ const Info2: FC<{ lang: "uz" | "ru"; editable?: boolean }> = async ({
   };
 
   const fitsData = {
-    title: lang === "ru" ? "Курс поможет" : "Kurs kimga mos keladi?",
+    title: lang === "ru" ? "Кому подходит курс" : "Kurs kimga mos keladi?",
     cards: text.map((e, i) => ({
       id: i + 1,
       text: e,
