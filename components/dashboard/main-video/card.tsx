@@ -59,7 +59,7 @@ const VideoCard = ({
 
   async function onSubmit(value: z.infer<typeof schema>) {
     if (method === "DELETE") {
-      console.log("DELETE");
+      // console.log("DELETE");
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/statics/${data.id}`,
         {

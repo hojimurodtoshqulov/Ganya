@@ -29,7 +29,7 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang, data }) => {
   const [error, setError] = useState(false);
   const totalModules = data?.Module?.length;
   const gridDataModules = gridData?.Module?.length;
-  console.log(data);
+  // console.log(data);
   // useEffect(() => {
   //   async function getData() {
   //     const res = await fetch(
