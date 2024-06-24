@@ -22,6 +22,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang={lang}>
+      <head>
+        <meta
+          name="instagram"
+          content="https://academiaroditeley.com/ru?utm_source=instagram&utm_medium=cpc&utm_campaign=promo"
+        />
+        <meta
+          name="google"
+          content="https://academiaroditeley.com/ru?utm_source=google&utm_medium=cpc&utm_campaign=promo"
+        />
+        <meta
+          name="facebook"
+          content="https://academiaroditeley.com/ru?utm_source=facebook&utm_medium=cpc&utm_campaign=promo"
+        />
+        <meta
+          name="telegram"
+          content="https://academiaroditeley.com/ru?utm_source=telegram&utm_medium=cpc&utm_campaign=promo"
+        />
+      </head>
       <body className={`${roboto.variable} ${comfortaa.variable} bg-[#f9f9f9]`}>
         {children}
         <Toaster />

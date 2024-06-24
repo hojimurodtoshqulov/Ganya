@@ -15,6 +15,10 @@ async function getData(id: string) {
     },
   );
 
+  if (!response.ok) {
+    return new Error("Failed to fetch data");
+  }
+
   return response.json();
 }
 
@@ -22,6 +26,7 @@ export default async function SingleArticle({
   params: { lang, articlesId },
 }: propstype) {
   const detel = await getData(articlesId);
+  if (detel instanceof Error) return <h2>Failed to fetch data.</h2>;
   const langue = await getDictionary(lang);
 
   return <DeteleArticle detel={detel} langue={langue} lang={lang} />;

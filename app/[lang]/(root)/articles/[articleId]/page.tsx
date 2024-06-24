@@ -15,6 +15,10 @@ async function getData(articlesId: string) {
     },
   );
 
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+
   return res.json();
 }
 
@@ -22,6 +26,10 @@ async function getDetel() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/articles/all`, {
     cache: "no-store",
   });
+
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
 
   return res.json();
 }
@@ -33,11 +41,7 @@ export default async function SingleArticle({
   const articlsall = await getDetel();
   const langue = await getDictionary(lang);
 
-  if (detel instanceof Error) {
-    return <h2>Failed to fetch data.</h2>;
-  }
-
-  if (articlsall instanceof Error) {
+  if (detel instanceof Error || articlsall instanceof Error) {
     return <h2>Failed to fetch data.</h2>;
   }
 

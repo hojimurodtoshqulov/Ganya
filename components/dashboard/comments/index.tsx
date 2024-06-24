@@ -23,6 +23,10 @@ const Sharhlar = async ({
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comments/all`, {
     cache: "no-store",
   });
+
+  if (!res.ok) {
+    return <div>Something went wrong</div>;
+  }
   const data = await res.json();
 
   return (

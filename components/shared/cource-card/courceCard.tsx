@@ -25,6 +25,7 @@ interface Props {
 const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
   const [toggle, setToggle] = useState(true);
   const [data, setData] = useState<any>([]);
+  const [error, setError] = useState(false);
   const totalModules = data?.Module?.length;
   const gridDataModules = gridData?.Module?.length;
 
@@ -44,7 +45,10 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
       setData(a);
     }
 
-    getData();
+    const d = async () => await getData();
+    if (d instanceof Error) {
+      setError(true);
+    }
   }, [id]);
 
   if (type === "grid") {
@@ -90,6 +94,10 @@ const CourceCard: React.FC<Props> = ({ id, gridData, type, lang }) => {
         </div>
       </div>
     );
+  }
+
+  if (error) {
+    return <h2>Failed to fetch data.</h2>;
   }
 
   return (
