@@ -35,7 +35,7 @@ const AllCourses: FC<{ lang: "uz" | "ru" }> = async ({
     return <h2>Failed to fetch data.</h2>;
   }
   if (data.length === 0) {
-    return <h2>No data</h2>;
+    return <h2>No courses</h2>;
   }
   // console.log(data, "nu baa");
   return (

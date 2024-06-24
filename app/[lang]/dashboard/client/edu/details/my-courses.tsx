@@ -14,7 +14,7 @@ interface ICard {
   courseStatus: string;
 }
 
-interface FullCourses {
+interface MyCourses {
   id: string;
   courseId: string;
   planId: string;
@@ -23,9 +23,8 @@ interface FullCourses {
   expirationDate: string;
   createdAt: string;
   updatedAt: string;
-  course: ICard;
 }
-async function getData<T>(): Promise<T[] | Error> {
+async function getMyCourses<T>(): Promise<T[] | Error> {
   const res = await fetch(
     process.env.NEXT_PUBLIC_BASE_URL + "/courses/my-courses",
     {
@@ -43,15 +42,29 @@ async function getData<T>(): Promise<T[] | Error> {
   return res.json();
 }
 
+async function getAllCourses<T>(): Promise<T[] | Error> {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/courses/all?status=completed",
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    return new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
 const MyCourses: FC<{ lang: "uz" | "ru" }> = async ({
   lang,
 }): Promise<JSX.Element> => {
-  const data = await getData<FullCourses>();
-  // console.log(data, "my coruse");
-  if (data instanceof Error) {
+  const myCourses = await getMyCourses<MyCourses>();
+  if (myCourses instanceof Error) {
     return <h2>Something went wrong</h2>;
   }
-  if (data.length === 0) {
+  if (myCourses.length === 0) {
     return (
       <h2>
         {lang === "uz"
@@ -60,10 +73,18 @@ const MyCourses: FC<{ lang: "uz" | "ru" }> = async ({
       </h2>
     );
   }
-  console.log(data, "nu baa");
+
+  const allCourses = await getAllCourses<ICard>();
+  if (allCourses instanceof Error) {
+    return <h2>Something went wrong</h2>;
+  }
+  const data = allCourses.filter((c) =>
+    myCourses.some((m) => m?.courseId === c?.id),
+  );
+
   return (
     <div className="space-y-2.5">
-      {data.map(({ course: c }) => (
+      {data.map((c) => (
         <Trening
           key={c?.id}
           title={lang === "uz" ? c?.titleUz : c?.titleRu}
