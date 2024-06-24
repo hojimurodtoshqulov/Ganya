@@ -56,7 +56,7 @@ const SingleCourse: FC<{
         <BackLink title={lang === "ru" ? "Назад" : "Orqaga"} heading="" />
       </div>
       <Accordion type="multiple" defaultValue={[singleCourseId]}>
-        <CourceCard id={singleCourseId} lang={lang} />
+        <CourceCard id={singleCourseId} lang={lang} data={course} />
       </Accordion>
 
       <div className="bg-white rounded-2xl pt-6 mt-10">
