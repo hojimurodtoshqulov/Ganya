@@ -26,7 +26,7 @@ export default function ArticlesPage({ articls, lang, langue }: props) {
     <div className="container pt-24">
       <div className="flex lg:flex-row mt-10 flex-col gap-2 items-center justify-between">
         <Heading text={langue?.articles?.title} />
-        <div className="relative w-[350px] ">
+        <div className="relative w-full sm:w-[350px] ">
           <Search className="absolute top-0 h-full left-2" />
           <Input
             placeholder="Поиск статьей"
