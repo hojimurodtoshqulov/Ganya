@@ -28,7 +28,7 @@ export default function Showcase({
           },
         }}
       />
-      <div className="container pt-40 md:pt-40 pb-6 md:pb-16 h-full">
+      <div className="container pt-28 md:pt-40 pb-6 md:pb-16 h-full">
         <div className="w-1/2 flex flex-col justify-between h-full">
           <div>
             <h1 className="font-bold capitalize w-[22rem] sm:w-96 md:text-[67px] font-comfortaa text-[38px] md:leading-[70px] leading-[48px] text-white">
