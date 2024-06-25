@@ -31,7 +31,7 @@ export async function fetchSendMessage(data: FormSchemaType) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: chatId,
-        text: `Name: ${data.fullName}. \nPhone: ${data.number}`,
+        text: `Name: ${data.fullName}. \nPhone: ${data.number} . \nIzoh: ${data.text}`,
       }),
     });
     const res = await req.json();

@@ -7,6 +7,9 @@ export const FormSchema = z.object({
   number: z.string().min(10, {
     message: "Please use your real phone number ",
   }),
+  text: z.string().min(10, {
+    message: "Please use your question",
+  }),
 });
 
 export type FormSchemaType = z.infer<typeof FormSchema>;

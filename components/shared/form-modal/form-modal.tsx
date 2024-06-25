@@ -18,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSchema, FormSchemaType } from "@/lib/types";
 import { fetchSendMessage } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { Textarea } from "@/components/ui/textarea";
 
 function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -90,7 +91,7 @@ function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
     <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
       <DialogTrigger asChild>
         <Button
-          className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8 text-main-300"
+          className="text-lg font-normal py-3 px-6 md:py-5 md:px-8 text-main-300"
           variant={"filled"}
           onChange={() => setIsSuccess((p) => !p)}
         >
@@ -128,6 +129,26 @@ function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
               {...register("number", { required: true })}
             />
             {errors.number && (
+              <span className="text-red-500">
+                {lang === "ru" ? "Неправильный номер" : "Noto'g'ri raqam"}
+              </span>
+            )}
+          </div>
+          <div className=" space-y-1">
+            <Label htmlFor="text" className="text-right">
+              {lang === "ru" ? "Объяснение" : "Izoh"}
+            </Label>
+            <Textarea
+              id="text"
+              placeholder={
+                lang === "ru"
+                  ? "Оставьте свой вопрос"
+                  : "Savolingizni qoldiring"
+              }
+              className="col-span-3"
+              {...register("text", { required: true })}
+            />
+            {errors.text && (
               <span className="text-red-500">
                 {lang === "ru" ? "Неправильный номер" : "Noto'g'ri raqam"}
               </span>
