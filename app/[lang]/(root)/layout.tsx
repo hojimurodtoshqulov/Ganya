@@ -13,6 +13,14 @@ interface Props {
 export const metadata: Metadata = {
   title: "Академия родителей",
   description: "Первая обучающая платформа для родителей в Узбекистане",
+  openGraph: {
+    title: "Академия родителей",
+    description: "Первая обучающая платформа для родителей в Узбекистане",
+    url: "https://academiaroditeley.com/",
+    siteName: "Академия родителей",
+    locale: "ru",
+    type: "website",
+  },
 };
 
 const Layout: FC<Props> = async ({ children, params: { lang } }) => {

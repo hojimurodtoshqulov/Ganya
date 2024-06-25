@@ -83,7 +83,21 @@ export default async function BuyCourse({
 
   const isBuyed = data.some((course) => course.courseId === courseId);
   if (isBuyed) {
-    redirect(`/${lang}/dashboard/client/edu`);
+    // redirect(`/${lang}/dashboard/client/edu`);
+    return (
+      <div className="w-full max-w-[650px] mx-auto h-[calc(100vh-200px)] flex flex-col justify-center items-center gap-2.5">
+        <h3 className=" font-medium text-2xl text-center">
+          {lang === "ru"
+            ? "Что делать после оплаты курса?"
+            : "Kurs uchun pul to'lagandan keyin nima qilish kerak?"}
+        </h3>
+        <p className="text-center">
+          {lang === "ru"
+            ? `После оплаты на вашу почту или телефон придет письмо/SMS с инструкциями. Доступ к курсу сразу появится в личном кабинете. Если письмо не пришло, проверьте "Спам" или свяжитесь с поддержкой в Телеграм: +998 99 768 66 00`
+            : "To'lovdan so'ng, elektron pochta yoki telefoningizga ko'rsatmalar bilan elektron pochta / SMS yuboriladi. Kursga kirish darhol shaxsiy hisobingizda paydo bo'ladi. Agar xat kelmagan bo'lsa, Spamni tekshiring yoki Telegramda qo'llab-quvvatlash xizmatiga murojaat qiling: +998 99 768 66 00"}
+        </p>
+      </div>
+    );
   }
 
   const langue = await getDictionary(lang);

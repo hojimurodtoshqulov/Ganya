@@ -27,10 +27,10 @@ export default function ArticlesPage({ articls, lang, langue }: props) {
       <div className="flex lg:flex-row mt-10 flex-col gap-2 items-center justify-between">
         <Heading text={langue?.articles?.title} />
         <div className="relative w-[350px] ">
-          <Search className="absolute top-[10px] left-2" />
+          <Search className="absolute top-0 h-full left-2" />
           <Input
             placeholder="Поиск статьей"
-            className="w-full pl-[35px]"
+            className="w-full pl-9"
             value={searchText}
             onChange={(e) => setSearchText(e?.target?.value)}
           />
