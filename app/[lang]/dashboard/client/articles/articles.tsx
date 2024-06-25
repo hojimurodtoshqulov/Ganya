@@ -30,11 +30,11 @@ const ArticlesPage = ({ data, lang, langue }: dataProps): JSX.Element => {
           {langue.home.articlesHome.title}
         </h2>
         <div className="relative w-[350px] ">
-          <Search className="absolute top-[10px] left-2" />
+          <Search className="absolute top-0 h-full left-2" />
           <Input
             onChange={(e) => setSearchText(e.target.value)}
             placeholder={langue.dashboard.admin.articels?.home?.search}
-            className="w-full pl-[35px]"
+            className="w-full pl-9"
           />
         </div>
       </div>
