@@ -4,11 +4,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "@/lib/hooks";
 import { Swiper as SwiperType } from "swiper";
 import "swiper/css";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import image1 from "@/images/Partners1.jpg";
 import image2 from "@/images/Partners2.jpg";
+import image3 from "@/images/partners3.png";
 import Image from "next/image";
 
 interface Props {
@@ -28,8 +28,8 @@ const Partners = ({ dcitionary }: partners) => {
   const { width } = useWindowSize();
 
   useEffect(() => {
-    if (width < 660) {
-      setSliderPerView(1.2);
+    if (width < 600) {
+      setSliderPerView(1);
     } else if (width < 820) {
       setSliderPerView(2.2);
     } else if (width < 1020) {
@@ -46,24 +46,32 @@ const Partners = ({ dcitionary }: partners) => {
     },
     {
       id: 2,
-      file: image2,
+      file: image3,
     },
-    {
-      id: 3,
-      file: image1,
-    },
-    {
-      id: 4,
-      file: image2,
-    },
+    // {
+    //   id: 3,
+    //   file: image2,
+    // },
+    // {
+    //   id: 4,
+    //   file: image3,
+    // },
     {
       id: 5,
       file: image1,
     },
     {
       id: 6,
-      file: image2,
+      file: image3,
     },
+    // {
+    //   id: 7,
+    //   file: image2,
+    // },
+    // {
+    //   id: 8,
+    //   file: image3,
+    // },
   ];
 
   return (
@@ -72,18 +80,22 @@ const Partners = ({ dcitionary }: partners) => {
         {dcitionary.home.Partners}
       </h2>
       <Swiper
-        spaceBetween={"24px"}
+        spaceBetween={"20px"}
         slidesPerView={sliderPerView}
         loop
         autoplay
         onSwiper={(swiper) => (swiperRef.current = swiper)}
       >
-        {data.map((element) => (
-          <SwiperSlide key={element.id} className="h-full flex justify-center">
-            <Link href={"/"} className="block">
+        {[...data, ...data].map((element) => (
+          <SwiperSlide
+            key={element.id}
+            className="aspect-[3/2] flex justify-center"
+          >
+            <Link href={"/"} className="block relative w-full h-full">
               <Image
-                className=" aspect-[2/1] w-full bg-main-100 object-cover"
+                className="w-full object-cover"
                 src={element.file}
+                fill
                 alt="Partners images logo"
               />
             </Link>
