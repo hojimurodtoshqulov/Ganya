@@ -7,8 +7,8 @@ export const FormSchema = z.object({
   number: z.string().min(10, {
     message: "Please use your real phone number ",
   }),
-  message: z.string().min(10, {
-    message: "Please add a message",
+  text: z.string().min(10, {
+    message: "Please use your question",
   }),
 });
 

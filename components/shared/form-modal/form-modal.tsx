@@ -91,7 +91,7 @@ function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
     <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
       <DialogTrigger asChild>
         <Button
-          className="text-lg font-normal mt-8 py-3 px-6 md:py-5 md:px-8 text-main-300"
+          className="text-lg font-normal py-3 px-6 md:py-5 md:px-8 text-main-300"
           variant={"filled"}
           onChange={() => setIsSuccess((p) => !p)}
         >
@@ -134,17 +134,23 @@ function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
               </span>
             )}
           </div>
-          <div>
-            <Label htmlFor="message">
-              {lang === "ru" ? "Ваш вопрос:" : "Sizning so'rovingiz:"}
+          <div className=" space-y-1">
+            <Label htmlFor="text" className="text-right">
+              {lang === "ru" ? "Объяснение" : "Izoh"}
             </Label>
             <Textarea
-              placeholder={lang === "ru" ? "Вопрос" : "Savol"}
-              {...register("message", { required: true })}
+              id="text"
+              placeholder={
+                lang === "ru"
+                  ? "Оставьте свой вопрос"
+                  : "Savolingizni qoldiring"
+              }
+              className="col-span-3"
+              {...register("text", { required: true })}
             />
-            {errors.message && (
+            {errors.text && (
               <span className="text-red-500">
-                {lang === "ru" ? "Неправильное вопрос" : "Noto'g'ri savol"}
+                {lang === "ru" ? "Неправильный номер" : "Noto'g'ri raqam"}
               </span>
             )}
           </div>

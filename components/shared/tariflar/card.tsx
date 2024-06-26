@@ -51,6 +51,7 @@ function PlanCard(props: PlanCardProps): JSX.Element {
 
   return (
     <div
+      id="information"
       onMouseEnter={() => setPro(true)}
       onMouseLeave={() => setPro(false)}
       className={cn(
