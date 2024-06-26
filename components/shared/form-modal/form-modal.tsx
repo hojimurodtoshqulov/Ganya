@@ -18,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSchema, FormSchemaType } from "@/lib/types";
 import { fetchSendMessage } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { Textarea } from "@/components/ui/textarea";
 
 function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -130,6 +131,20 @@ function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
             {errors.number && (
               <span className="text-red-500">
                 {lang === "ru" ? "Неправильный номер" : "Noto'g'ri raqam"}
+              </span>
+            )}
+          </div>
+          <div>
+            <Label htmlFor="message">
+              {lang === "ru" ? "Ваш вопрос:" : "Sizning so'rovingiz:"}
+            </Label>
+            <Textarea
+              placeholder={lang === "ru" ? "Вопрос" : "Savol"}
+              {...register("message", { required: true })}
+            />
+            {errors.message && (
+              <span className="text-red-500">
+                {lang === "ru" ? "Неправильное вопрос" : "Noto'g'ri savol"}
               </span>
             )}
           </div>
