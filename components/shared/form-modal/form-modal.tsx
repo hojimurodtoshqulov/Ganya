@@ -91,7 +91,7 @@ function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
     <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
       <DialogTrigger asChild>
         <Button
-          // className="text-lg font-normal py-3 px-6 md:py-5 md:px-8 text-main-300"
+          className="w-1/2 sm:w-auto"
           variant={"filled"}
           onChange={() => setIsSuccess((p) => !p)}
         >

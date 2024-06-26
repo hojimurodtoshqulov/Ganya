@@ -29,20 +29,21 @@ export default function Showcase({
         }}
       />
       <div className="container pt-28 md:pt-40 pb-6 md:pb-16 h-full">
-        <div className="w-1/2 flex flex-col justify-between h-full">
+        <div className="w-full sm:w-1/2 flex flex-col justify-between h-full">
           <div>
             <h1 className="font-bold capitalize w-[22rem] sm:w-96 md:text-[67px] font-comfortaa text-[38px] md:leading-[70px] leading-[48px] text-white">
               {dict.showcase.title}
             </h1>
-            <div className="flex  items-start gap-4  mt-8">
+            <div className="flex items-start gap-4 mt-8 w-full">
               <FormModal dict={dict} lang={lang} />
-              <Link href={"#information"}>
-                <Button
-                  variant={"filled"}
-                  // className="text-lg font-normal py-3 px-6 md:py-5 md:px-8 text-main-300"
-                >
-                  {lang === "ru" ? "Посмотреть курс" : "Kursni ko’rish"}
-                </Button>
+              <Link
+                className={buttonVariants({
+                  variant: "filled",
+                  className: "w-1/2 sm:w-auto",
+                })}
+                href={"#information"}
+              >
+                {lang === "ru" ? "Посмотреть курс" : "Kursni ko’rish"}
               </Link>
             </div>
           </div>
