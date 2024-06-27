@@ -48,10 +48,12 @@ const Info2: FC<{ lang: "uz" | "ru"; editable?: boolean }> = async ({
     lang === "ru"
       ? data?.[1]?.titleRu.split("/")
       : data?.[1]?.titleUz.split("/");
+
   const subHeads =
     lang === "ru"
       ? data?.[1]?.subTitleRu.split("/")
       : data?.[1]?.subTitleUz.split("/");
+
   const text =
     lang === "ru" ? data?.[1]?.textRu.split("/") : data?.[1]?.textUz.split("/");
 
