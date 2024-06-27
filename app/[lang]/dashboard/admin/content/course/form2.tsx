@@ -99,53 +99,97 @@ const CourseHelpForm: FC<Props> = ({
           {lang === "uz" ? "Ma'lumotlarni o'zgartirish" : "Изменить данные"}
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-4xl">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-          <div className="w-full">
-            <div className="space-y-2.5">
-              {/* <label> */}
-              {/* <p></p>  */}
-              <Textarea
-                {...register("titleUz")}
-                name="titleUz"
-                placeholder={lang === "ru" ? "Заголовок UZ" : "Sarlavha UZ"}
-                className={cn({ "border-destructive": inputErrors.titleUz })}
-              />
-              {/* </label> */}
-              <Textarea
-                {...register("titleRu")}
-                name="titleRu"
-                placeholder={lang === "ru" ? "Заголовок RU" : "Sarlavha RU"}
-                className={cn({ "border-destructive": inputErrors.titleRu })}
-              />
-              <Textarea
-                {...register("subTitleUz")}
-                name="subTitleUz"
-                placeholder={
-                  lang === "ru" ? "Подзаголовок UZ" : "Alt sarlavha UZ"
-                }
-                className={cn({ "border-destructive": inputErrors.subTitleUz })}
-              />
-              <Textarea
-                {...register("subTitleRu")}
-                name="subTitleRu"
-                placeholder={
-                  lang === "ru" ? "Подзаголовок RU" : "Alt sarlavha RU"
-                }
-                className={cn({ "border-destructive": inputErrors.subTitleRu })}
-              />
-              <Textarea
-                {...register("textUz")}
-                name="textUz"
-                placeholder={lang === "ru" ? "Текст UZ" : "Matn UZ"}
-                className={cn({ "border-destructive": inputErrors.textUz })}
-              />
-              <Textarea
-                {...register("textRu")}
-                name="textRu"
-                placeholder={lang === "ru" ? "Текст RU" : "Matn RU"}
-                className={cn({ "border-destructive": inputErrors.textRu })}
-              />
+          <div className="w-full space-y-3">
+            <div className="grid grid-cols-2 gap-2.5">
+              <div>
+                <h4>
+                  {lang === "ru"
+                    ? "Название, Курс помогает Uz "
+                    : "Sarlavha, Kurs yordam beradi UZ"}
+                </h4>
+                <Textarea
+                  {...register("titleUz")}
+                  name="titleUz"
+                  className={cn({
+                    "border-destructive": inputErrors.titleUz,
+                  })}
+                />
+              </div>
+              <div>
+                <h4>
+                  {lang === "ru"
+                    ? "Название, Курс помогает RU"
+                    : "Sarlavha, Kurs yordam beradi RU"}
+                </h4>
+                <Textarea
+                  {...register("titleRu")}
+                  name="titleRu"
+                  className={cn({
+                    "border-destructive": inputErrors.titleRu,
+                  })}
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2.5">
+              <div>
+                <h4>
+                  {lang === "ru"
+                    ? "Описание, Курс поможет UZ"
+                    : "Tavsif, Kurs yordam beradi UZ"}
+                </h4>
+                <Textarea
+                  {...register("subTitleUz")}
+                  name="subTitleUz"
+                  className={cn({
+                    "border-destructive": inputErrors.subTitleUz,
+                  })}
+                />
+              </div>
+              <div>
+                <h4>
+                  {lang === "ru"
+                    ? "Описание, Курс поможет RU"
+                    : "Tavsif, Kurs yordam beradi RU"}
+                </h4>
+                <Textarea
+                  {...register("subTitleRu")}
+                  name="subTitleRu"
+                  placeholder={
+                    lang === "ru" ? "Подзаголовок RU" : "Alt sarlavha RU"
+                  }
+                  className={cn({
+                    "border-destructive": inputErrors.subTitleRu,
+                  })}
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2.5">
+              <div>
+                <h4>
+                  {lang === "ru"
+                    ? "Текст, Кому подходит курс UZ"
+                    : "Text, Kurs kimga mos keladi UZ"}
+                </h4>
+                <Textarea
+                  {...register("textUz")}
+                  name="textUz"
+                  className={cn({ "border-destructive": inputErrors.textUz })}
+                />
+              </div>
+              <div>
+                <h4>
+                  {lang === "ru"
+                    ? "Текст, Кому подходит курс RU"
+                    : "Text, Kurs kimga mos keladi RU"}
+                </h4>
+                <Textarea
+                  {...register("textRu")}
+                  name="textRu"
+                  className={cn({ "border-destructive": inputErrors.textRu })}
+                />
+              </div>
             </div>
           </div>
           <Button
