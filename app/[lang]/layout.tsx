@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { comfortaa, roboto } from "@/lib/fonts";
-import "../globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import appleTouchIcon from "../icons/apple-touch-icon.png";
 import favicon32 from "../icons/favicon-32x32.png";
 import favicon16 from "../icons/favicon-16x16.png";
 import Script from "next/script";
+
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: "Академия родителей",
