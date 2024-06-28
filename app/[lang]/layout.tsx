@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import appleTouchIcon from "../icons/apple-touch-icon.png";
 import favicon32 from "../icons/favicon-32x32.png";
 import favicon16 from "../icons/favicon-16x16.png";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Академия родителей",
@@ -29,6 +30,15 @@ export default function RootLayout({
   return (
     <html lang={lang}>
       <head>
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-TWVPFKX4');
+          `}
+        </Script>
         <meta
           name="instagram"
           content="https://academiaroditeley.com/ru?utm_source=instagram&utm_medium=cpc&utm_campaign=promo"
@@ -56,6 +66,14 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`${roboto.variable} ${comfortaa.variable} bg-[#f9f9f9]`}>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-TWVPFKX4"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
         {children}
         <Toaster />
       </body>
