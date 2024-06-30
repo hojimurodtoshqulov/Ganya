@@ -9,6 +9,7 @@ import { getUserData } from "@/lib/actions/user";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import DelCookie from "./delCookie";
+import Refresh from "./refresh";
 
 interface Props {
   params: {
@@ -86,6 +87,7 @@ export default async function BuyCourse({
     // redirect(`/${lang}/dashboard/client/edu`);
     return (
       <div className="w-full max-w-[650px] mx-auto h-[calc(100vh-200px)] flex flex-col justify-center items-center gap-2.5">
+        <Refresh />
         <h3 className=" font-medium text-2xl text-center">
           {lang === "ru"
             ? "Что делать после оплаты курса?"
@@ -136,6 +138,7 @@ export default async function BuyCourse({
         },
       )}
     >
+      <Refresh />
       <DelCookie />
       <div className="bg-white p-10 rounded-2xl w-[650px]">
         <h1 className="text-main-300 text-[32px] font-bold leading-[44px] font-comfortaa mb-8">
