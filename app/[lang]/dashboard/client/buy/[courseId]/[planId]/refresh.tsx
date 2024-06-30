@@ -1,10 +1,10 @@
 "use client";
 import { FC, useEffect } from "react";
 
-let count = 0;
+// let count = 0;
 const Refresh: FC = (): JSX.Element => {
-  count++;
-  console.log(`refresh page: ${count}`);
+  // count++;
+  // console.log(`refresh page: ${count}`);
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
