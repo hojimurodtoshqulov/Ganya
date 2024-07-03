@@ -140,7 +140,7 @@ export default async function BuyCourse({
     >
       <Refresh />
       <DelCookie />
-      <div className="bg-white p-10 rounded-2xl w-[650px]">
+      <div className="bg-white p-5 md:p-10 rounded-2xl w-[650px]">
         <h1 className="text-main-300 text-[32px] font-bold leading-[44px] font-comfortaa mb-8">
           {langue.pay.heading}
         </h1>
@@ -182,6 +182,17 @@ export default async function BuyCourse({
           >
             <Image src={pay3} width={100} height={100} alt="Pay with Uzum" />
           </a>
+        </div>
+        <div className="mt-2.5 text-center text-sm">
+          <p>
+            {lang === "ru"
+              ? `После успешной оплаты доступ к курсу сразу же появится в вашем личном кабинете в разделе "Обучение" на сайте. Если у вас возникли вопросы по оплате или вы хотите оплатить курс иностранной картой, пожалуйста, свяжитесь с нашей поддержкой:`
+              : `Muvaffaqiyatli to'lovdan so'ng, kursga kirish darhol veb-saytning "Ta'lim" bo'limidagi shaxsiy kabinetingizda paydo bo'ladi. Agar sizda toʻlov boʻyicha savollaringiz boʻlsa yoki kursni xorijiy karta orqali toʻlashni istasangiz, bizning qoʻllab-quvvatlash xizmatiga murojaat qiling:`}
+          </p>
+          <div className="flex items-center justify-center gap-2">
+            <p>{lang === "ru" ? "Телеграм:" : "Telegram:"}</p>
+            <span className="whitespace-nowrap">+998 99 768 66 00</span>
+          </div>
         </div>
       </div>
     </div>
