@@ -6,7 +6,7 @@ import pay3 from "@/icons/pay-3.png";
 import { getDictionary } from "@/lib/get-dictionary";
 import { cn } from "@/lib/utils";
 import { getUserData } from "@/lib/actions/user";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import DelCookie from "./delCookie";
 import Refresh from "./refresh";
@@ -75,7 +75,6 @@ async function getData<T>(): Promise<T[] | Error> {
 export default async function BuyCourse({
   params: { lang, planId, courseId },
 }: Props) {
-  // console.log("payment page refreshed");
   const data = await getData<FullCourses>();
 
   if (data instanceof Error) {
@@ -128,6 +127,11 @@ export default async function BuyCourse({
   if (userData instanceof Error) return <h2>Failed to fetch user data.</h2>;
   const userId = userData?.id;
 
+  const headerList = headers();
+  const pathname = headerList.get("x-current-path");
+  const returnLink = "https://academiaroditeley.com" + (pathname ?? "");
+
+  // console.log(returnLink);
   return (
     <div
       className={cn(
@@ -162,21 +166,18 @@ export default async function BuyCourse({
         </div>
         <div className="flex flex-col md:flex-row justify-center gap-4 items-center">
           <a
-            // target="_blank"
-            href={`https://my.click.uz/services/pay?service_id=33448&merchant_id=25047&amount=${plan?.discount ? plan?.discount : plan.price}&transaction_param=${planId}&additional_param3=${userId}`}
+            href={`https://my.click.uz/services/pay?service_id=33448&merchant_id=25047&amount=${plan?.discount ? plan?.discount : plan.price}&transaction_param=${planId}&additional_param3=${userId}&return_url=${returnLink}`}
             className="border rounded-xl px-6 py-4 w-full flex justify-center md:w-[180px]"
           >
             <Image src={pay1} width={100} height={100} alt="Pay with Click" />
           </a>
           <a
-            // target="_blank"
-            href={`https://checkout.paycom.uz/${btoa(`m=6628f4dc2eb76ec81b6969eb;ac.user_id=${userId};ac.planId=${planId};a=${(plan?.discount ? plan?.discount : plan.price) * 100}`)}`}
+            href={`https://checkout.paycom.uz/${btoa(`m=6628f4dc2eb76ec81b6969eb;ac.user_id=${userId};ac.planId=${planId};a=${(plan?.discount ? plan?.discount : plan.price) * 100};c=${returnLink}`)}`}
             className="border rounded-xl px-6 py-4 w-full flex justify-center md:w-[180px]"
           >
             <Image src={pay2} width={100} height={100} alt="Pay with Payme" />
           </a>
           <a
-            // target="_blank"
             href={`https://www.apelsin.uz/open-service?serviceId=498615742&planId=${planId}&userId=${userId}&amount=${(plan?.discount ? plan.discount : plan?.price) * 100}`}
             className="border rounded-xl px-6 py-4 w-full flex justify-center md:w-[180px]"
           >

@@ -83,7 +83,11 @@ export async function middleware(request: NextRequest) {
     if (pathname.includes("/admin") && json?.role === "admin") {
       return NextResponse.next();
     } else if (pathname.includes("/client") && json?.role === "user") {
-      return NextResponse.next();
+      // Adding the pathname to the response headers
+      const headers = new Headers(request.headers);
+      headers.set("x-current-path", request.nextUrl.pathname);
+      return NextResponse.next({ headers });
+      // return NextResponse.next();
     } else if (pathname.includes("/client") && json?.role !== "user") {
       return NextResponse.redirect(
         new URL(`/${lang}/auth/sign-in`, request.url),

@@ -19,10 +19,11 @@ import { FormSchema, FormSchemaType } from "@/lib/types";
 import { fetchSendMessage } from "@/lib/utils";
 import toast from "react-hot-toast";
 import { Textarea } from "@/components/ui/textarea";
+import { useRouter } from "next/navigation";
 
 function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
   const [isSuccess, setIsSuccess] = useState(false);
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -35,18 +36,18 @@ function FormModal({ dict, lang }: { dict: any; lang: "uz" | "ru" }) {
   const onSubmit = async (data: FormSchemaType) => {
     fetchSendMessage(data)
       .then((d) => {
-        if (d.ok) setIsSuccess(false);
+        // if (d.ok) setIsSuccess(false);
         toast.success(dict.showcase.showcasModul.success.title);
-        if (window) {
-          window.location.href = "https://t.me/academia_prikorm";
-        }
+        // if (window) {
+        //   window.location.href = "https://t.me/academia_prikorm";
+        // }
+        router.push(`/${lang}/thankyou`);
+        reset();
       })
       .catch((e) => {
         toast.error(dict.showcase.showcasModul.success.error);
         console.log(e);
       });
-
-    reset();
   };
 
   // if (false)
