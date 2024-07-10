@@ -131,7 +131,7 @@
         },
         {
           "title": "Kursning vaqt chegarasi bormi?",
-          "text": "Kursni sotib olganingizdan so'ng, siz unga umrbod kirish huquqiga ega bo'lasiz, bu esa uni o'z tezligingizda yakunlash imkonini beradi."
+          "text": "Kursga kirish tanlangan tarifga qarab ma'lum vaqtga taqdim etiladi. Biroq, retseptlar kitobiga, xizmat ko'rsatish ko'rsatmalariga va boshqa foydali fayllarga kirish cheksiz va abadiy sizniki bo'lib qoladi."
         },
         {
           "title": "O'qituvchilar yoki boshqa kurs ishtirokchilari bilan suhbatlashsam bo'ladimi?",
@@ -142,15 +142,12 @@
           "text": "Kursni muvaffaqiyatli tugatgandan so'ng, har bir ishtirokchiga olingan bilimlarni tasdiqlovchi sertifikat beriladi."
         },
         {
-          "title": "Kurs materiali qanchalik tez-tez yangilanadi?"
+          "title": "Kurs materiali qanchalik tez-tez yangilanadi?",
+          "text": "Biz talabalarga eng so'nggi va foydali ma'lumotlarni taqdim etish uchun kurslarni, jumladan, eng so'nggi ilmiy ma'lumotlar va tegishli amaliyotlarni muntazam yangilab turamiz."
         },
         {
           "title": "Kelajak kursi uchun mavzu taklif qila olamanmi?",
           "text": "Biz har doim takliflarga ochiqmiz va yangi kurslar bo'yicha g'oyalaringizni ko'rib chiqishdan mamnunmiz. Iltimos, taklifingizni veb-saytimizdagi fikr-mulohaza shakli orqali yuboring."
-        },
-        {
-          "title": "Kursni tugatgandan so'ng sertifikatlar berasizmi?",
-          "text": "Javob"
         }
       ]
     },
