@@ -56,16 +56,25 @@ const SignInForm: FC<Props> = ({ action, lang }): JSX.Element => {
       }}
       className="flex flex-col justify-center gap-6"
     >
-      <Input
-        type="text"
-        name="emailOrPhone"
-        placeholder={
-          lang === "uz" ? "Telefon yoki E-mail" : "Телефон или E-mail"
-        }
-        className={cn({
-          "border-destructive": emailOrPhoneErr,
-        })}
-      />
+      <div>
+        <Input
+          type="text"
+          name="emailOrPhone"
+          placeholder={
+            lang === "uz" ? "Telefon yoki E-mail" : "Телефон или E-mail"
+          }
+          className={cn({
+            "border-destructive": emailOrPhoneErr,
+          })}
+        />
+        {emailOrPhoneErr && (
+          <label className="text-red-500 text-sm mt-1">
+            {lang === "uz"
+              ? "Telefon yoki E-mail noto'g'ri kiritildi"
+              : "Неверный телефон или E-mail"}
+          </label>
+        )}
+      </div>
       <div>
         <PasswordInput
           name="password"
@@ -74,6 +83,11 @@ const SignInForm: FC<Props> = ({ action, lang }): JSX.Element => {
             "border-destructive": passwordErr,
           })}
         />
+        {passwordErr && (
+          <label className="text-red-500 text-sm mt-1">
+            {lang === "uz" ? "Parol noto'g'ri kiritildi" : "Неверный пароль"}
+          </label>
+        )}
         <Link
           href={`/${lang}/auth/forgot-password`}
           className="block text-sm text-main-200 font-normal px-1 mt-2"
